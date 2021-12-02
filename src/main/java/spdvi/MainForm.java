@@ -57,6 +57,11 @@ public class MainForm extends javax.swing.JFrame {
         mn.setText("CRUD");
 
         jMenuItem1.setText("Insert");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         mn.add(jMenuItem1);
 
         jMenuItem2.setText("Modify");
@@ -98,6 +103,10 @@ public class MainForm extends javax.swing.JFrame {
         Login l = new Login(this, true);
         l.setVisible(true);
     }//GEN-LAST:event_formWindowOpened
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
