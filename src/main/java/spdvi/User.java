@@ -12,10 +12,11 @@ package spdvi;
 public class User {
     int id;
 
-    public User(String userName, String email, String password) {
+    public User(String userName, String email, String password, boolean admin) {
         this.userName = userName;
         this.email = email;
         this.password = password;
+        this.admin = admin;
     }
 
     public int getId() {
@@ -49,9 +50,20 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+    
+    
     String userName;
     String email;
     String password;
+    boolean admin;
 
     @Override
     public String toString() {
