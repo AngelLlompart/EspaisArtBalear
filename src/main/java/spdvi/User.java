@@ -10,7 +10,7 @@ package spdvi;
  * @author angel
  */
 public class User {
-    int id;
+    private int id;
 
     public User(String userName, String email, String password, boolean admin) {
         this.userName = userName;
@@ -60,10 +60,10 @@ public class User {
     }
     
     
-    String userName;
-    String email;
-    String password;
-    boolean admin;
+    private String userName;
+    private String email;
+    private String password;
+    private boolean admin;
 
     @Override
     public String toString() {
