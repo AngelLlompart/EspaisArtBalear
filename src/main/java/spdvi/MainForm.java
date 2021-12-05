@@ -29,7 +29,7 @@ public class MainForm extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        mn = new javax.swing.JMenu();
+        mnuCRUD = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -54,7 +54,7 @@ public class MainForm extends javax.swing.JFrame {
             .addGap(0, 245, Short.MAX_VALUE)
         );
 
-        mn.setText("CRUD");
+        mnuCRUD.setText("CRUD");
 
         jMenuItem1.setText("Insert");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -62,7 +62,7 @@ public class MainForm extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        mn.add(jMenuItem1);
+        mnuCRUD.add(jMenuItem1);
 
         jMenuItem2.setText("Modify");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -70,12 +70,12 @@ public class MainForm extends javax.swing.JFrame {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        mn.add(jMenuItem2);
+        mnuCRUD.add(jMenuItem2);
 
         jMenuItem3.setText("Show/Hide");
-        mn.add(jMenuItem3);
+        mnuCRUD.add(jMenuItem3);
 
-        jMenuBar1.add(mn);
+        jMenuBar1.add(mnuCRUD);
 
         setJMenuBar(jMenuBar1);
 
@@ -102,6 +102,9 @@ public class MainForm extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         Login l = new Login(this, true);
         l.setVisible(true);
+        if(!l.getLoginUser().isAdmin()){
+            mnuCRUD.setVisible(false);
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -149,6 +152,6 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JMenu mn;
+    private javax.swing.JMenu mnuCRUD;
     // End of variables declaration//GEN-END:variables
 }
