@@ -226,8 +226,6 @@ public class Login extends javax.swing.JDialog {
                     loginUser = u;
                     setVisible(false);
                 }else{
-                    System.out.println(u.getPassword());
-                    System.out.println(txtPassword.getPassword());
                     System.err.println("Incorrect password");
                     JOptionPane.showMessageDialog(null,
                     "Incorrect password",
