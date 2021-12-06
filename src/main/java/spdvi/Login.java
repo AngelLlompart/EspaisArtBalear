@@ -222,10 +222,12 @@ public class Login extends javax.swing.JDialog {
         ArrayList<User> users = da.getUsers();
         for(User u: users){
             if(u.getUserName().equals(txtUserName.getText())){
-                if(u.getPassword().equals(txtPassword.getPassword())){
+                if(u.getPassword().equals(new String (txtPassword.getPassword()))){
                     loginUser = u;
                     setVisible(false);
                 }else{
+                    System.out.println(u.getPassword());
+                    System.out.println(txtPassword.getPassword());
                     System.err.println("Incorrect password");
                     JOptionPane.showMessageDialog(null,
                     "Incorrect password",
