@@ -49,7 +49,7 @@ public class DataAccess {
                     resultSet.getString("Password"),
                     resultSet.getBoolean("Admin")
                 );
-                user.setId(resultSet.getInt("id"));
+                //user.setId(resultSet.getInt("id"));
                 users.add(user);
             }
         } catch (SQLException ex) {
