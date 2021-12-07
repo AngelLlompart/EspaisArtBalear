@@ -220,8 +220,10 @@ public class Login extends javax.swing.JDialog {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         DataAccess da = new DataAccess();
         ArrayList<User> users = da.getUsers();
+        boolean userExists = false;
         for(User u: users){
             if(u.getUserName().equals(txtUserName.getText())){
+                userExists = true;
                 if(u.getPassword().equals(new String (txtPassword.getPassword()))){
                     loginUser = u;
                     setVisible(false);
@@ -232,13 +234,14 @@ public class Login extends javax.swing.JDialog {
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
                 }
-            }else{
-                System.err.println("This user does not exist");
-                JOptionPane.showMessageDialog(null,
-                "This user does not exist",
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
             }
+        }
+        if(!userExists){
+            System.err.println("This user does not exist");
+            JOptionPane.showMessageDialog(null,
+            "This user does not exist",
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
