@@ -27,7 +27,10 @@ public class MainForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        tabCRUD = new javax.swing.JTabbedPane();
+        pnlRead = new javax.swing.JPanel();
+        pnlInsert = new javax.swing.JPanel();
+        pnlModify = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuCRUD = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -41,18 +44,48 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Read"));
+        pnlRead.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 388, Short.MAX_VALUE)
+        javax.swing.GroupLayout pnlReadLayout = new javax.swing.GroupLayout(pnlRead);
+        pnlRead.setLayout(pnlReadLayout);
+        pnlReadLayout.setHorizontalGroup(
+            pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 619, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 245, Short.MAX_VALUE)
+        pnlReadLayout.setVerticalGroup(
+            pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 374, Short.MAX_VALUE)
         );
+
+        tabCRUD.addTab("Read", pnlRead);
+
+        pnlInsert.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        javax.swing.GroupLayout pnlInsertLayout = new javax.swing.GroupLayout(pnlInsert);
+        pnlInsert.setLayout(pnlInsertLayout);
+        pnlInsertLayout.setHorizontalGroup(
+            pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 619, Short.MAX_VALUE)
+        );
+        pnlInsertLayout.setVerticalGroup(
+            pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 374, Short.MAX_VALUE)
+        );
+
+        tabCRUD.addTab("Insert", pnlInsert);
+
+        javax.swing.GroupLayout pnlModifyLayout = new javax.swing.GroupLayout(pnlModify);
+        pnlModify.setLayout(pnlModifyLayout);
+        pnlModifyLayout.setHorizontalGroup(
+            pnlModifyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 623, Short.MAX_VALUE)
+        );
+        pnlModifyLayout.setVerticalGroup(
+            pnlModifyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 378, Short.MAX_VALUE)
+        );
+
+        tabCRUD.addTab("Modify", pnlModify);
 
         mnuCRUD.setText("CRUD");
 
@@ -83,13 +116,11 @@ public class MainForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(tabCRUD)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(tabCRUD)
         );
 
         pack();
@@ -104,6 +135,8 @@ public class MainForm extends javax.swing.JFrame {
         l.setVisible(true);
         if(!l.getLoginUser().isAdmin()){
             mnuCRUD.setVisible(false);
+            pnlInsert.setVisible(false);
+            pnlModify.setVisible(false);
         }
     }//GEN-LAST:event_formWindowOpened
 
@@ -151,7 +184,10 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JMenu mnuCRUD;
+    private javax.swing.JPanel pnlInsert;
+    private javax.swing.JPanel pnlModify;
+    private javax.swing.JPanel pnlRead;
+    private javax.swing.JTabbedPane tabCRUD;
     // End of variables declaration//GEN-END:variables
 }
