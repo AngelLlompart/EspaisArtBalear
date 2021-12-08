@@ -10,21 +10,12 @@ package spdvi;
  * @author angel
  */
 public class User {
-    private int id;
 
     public User(String userName, String email, String password, boolean admin) {
         this.userName = userName;
         this.email = email;
         this.password = password;
         this.admin = admin;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getUserName() {
@@ -67,7 +58,7 @@ public class User {
 
     @Override
     public String toString() {
-        return  id + ", " + userName + ", " + email + ", " + password ;
+        return userName + ", " + email + ", " + password ;
     }
     
 }
