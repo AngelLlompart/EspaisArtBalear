@@ -5,17 +5,22 @@
  */
 package spdvi;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+
 /**
  *
  * @author angel
  */
 public class MainForm extends javax.swing.JFrame {
-
+    private JList<Espai> lstEspais;
     /**
      * Creates new form MainForm
      */
     public MainForm() {
         initComponents();
+        lstEspais = new JList<Espai>();
+        scrEspais.setViewportView(lstEspais);
     }
 
     /**
@@ -29,6 +34,8 @@ public class MainForm extends javax.swing.JFrame {
 
         tabCRUD = new javax.swing.JTabbedPane();
         pnlRead = new javax.swing.JPanel();
+        scrEspais = new javax.swing.JScrollPane();
+        btnRead = new javax.swing.JButton();
         pnlInsert = new javax.swing.JPanel();
         pnlModify = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -46,15 +53,34 @@ public class MainForm extends javax.swing.JFrame {
 
         pnlRead.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        btnRead.setText("Read");
+        btnRead.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlReadLayout = new javax.swing.GroupLayout(pnlRead);
         pnlRead.setLayout(pnlReadLayout);
         pnlReadLayout.setHorizontalGroup(
             pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 619, Short.MAX_VALUE)
+            .addGroup(pnlReadLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrEspais)
+                    .addGroup(pnlReadLayout.createSequentialGroup()
+                        .addGap(0, 542, Short.MAX_VALUE)
+                        .addComponent(btnRead)))
+                .addContainerGap())
         );
         pnlReadLayout.setVerticalGroup(
             pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 374, Short.MAX_VALUE)
+            .addGroup(pnlReadLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(scrEspais, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+                .addGap(7, 7, 7)
+                .addComponent(btnRead)
+                .addContainerGap())
         );
 
         tabCRUD.addTab("Read", pnlRead);
@@ -135,14 +161,23 @@ public class MainForm extends javax.swing.JFrame {
         l.setVisible(true);
         if(!l.getLoginUser().isAdmin()){
             mnuCRUD.setVisible(false);
-            pnlInsert.setVisible(false);
-            pnlModify.setVisible(false);
+            tabCRUD.setEnabledAt(1, false);
+            tabCRUD.setEnabledAt(2, false);
         }
     }//GEN-LAST:event_formWindowOpened
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void btnReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadActionPerformed
+        DataAccess da = new DataAccess();
+        DefaultListModel<Espai> defaultListModel = new DefaultListModel<>();
+        for(Espai e: da.getEspais()){
+            defaultListModel.addElement(e);
+        }
+        lstEspais.setModel(defaultListModel);
+    }//GEN-LAST:event_btnReadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,7 +191,7 @@ public class MainForm extends javax.swing.JFrame {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
                     break;
                 }
             }
@@ -180,6 +215,7 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRead;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -188,6 +224,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JPanel pnlInsert;
     private javax.swing.JPanel pnlModify;
     private javax.swing.JPanel pnlRead;
+    private javax.swing.JScrollPane scrEspais;
     private javax.swing.JTabbedPane tabCRUD;
     // End of variables declaration//GEN-END:variables
 }

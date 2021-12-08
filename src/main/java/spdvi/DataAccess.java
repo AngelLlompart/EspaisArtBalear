@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
 /**
@@ -56,5 +57,43 @@ public class DataAccess {
             ex.printStackTrace();
         }
         return users;
+    }
+    
+    public ArrayList<Espai> getEspais() {
+        ArrayList<Espai> espais = new ArrayList<Espai>();
+         try(Connection connection = getConnection()) {
+            PreparedStatement selectStatement = connection.prepareStatement(
+                    "Select * FROM dbo.[Espai]"
+            );
+            ResultSet resultSet = selectStatement.executeQuery();
+            while (resultSet.next()) {
+               String desc = resultSet.getString("Descripcions");
+               String[] pairs = desc.split("\",");
+               HashMap<String,String> mapDesc = new HashMap<>();
+               for(String pair : pairs){
+                   String[] entry = pair.split(":");
+                   mapDesc.put(entry[0].trim(), entry[1].trim());
+               }
+                Espai espai = new Espai(
+                    resultSet.getString ("Nom"),
+                    resultSet.getString ("Registre"),
+                    mapDesc,
+                    resultSet.getString("Municipi"),
+                    resultSet.getString("Adreça"),
+                    resultSet.getString("Email"),
+                    resultSet.getString("Web"),
+                    resultSet.getInt("Telefon"),
+                    resultSet.getString("Tipus"),
+                    resultSet.getString("Modalitats"),
+                    resultSet.getString("Gestor"),
+                    resultSet.getString("Serveis")
+                );
+                //user.setId(resultSet.getInt("id"));
+                espais.add(espai);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return espais;
     }
 }
