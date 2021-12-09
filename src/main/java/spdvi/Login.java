@@ -66,6 +66,11 @@ public class Login extends javax.swing.JDialog {
                 formWindowClosing(evt);
             }
         });
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         lblUserName.setText("UserName:");
 
@@ -74,8 +79,19 @@ public class Login extends javax.swing.JDialog {
                 txtUserNameActionPerformed(evt);
             }
         });
+        txtUserName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUserNameKeyPressed(evt);
+            }
+        });
 
         lblPassword.setText("Password:");
+
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
+            }
+        });
 
         lblForgotPassword.setForeground(new java.awt.Color(0, 0, 255));
         lblForgotPassword.setText("Forgot Password?");
@@ -245,6 +261,23 @@ public class Login extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    private void txtUserNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserNameKeyPressed
+        enterKey(evt);
+    }//GEN-LAST:event_txtUserNameKeyPressed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+      
+    }//GEN-LAST:event_formKeyPressed
+
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+        enterKey(evt);
+    }//GEN-LAST:event_txtPasswordKeyPressed
+
+    private void enterKey(java.awt.event.KeyEvent evt){
+        if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER){
+              btnLogin.doClick();
+        }
+    }
     public User getLoginUser() {
         return loginUser;
     }
