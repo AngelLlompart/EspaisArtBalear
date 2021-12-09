@@ -88,7 +88,6 @@ public class DataAccess {
                     resultSet.getString("Gestor"),
                     resultSet.getString("Serveis")
                 );
-                //user.setId(resultSet.getInt("id"));
                 espais.add(espai);
             }
         } catch (SQLException ex) {

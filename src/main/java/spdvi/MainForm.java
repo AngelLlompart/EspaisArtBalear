@@ -38,11 +38,6 @@ public class MainForm extends javax.swing.JFrame {
         btnRead = new javax.swing.JButton();
         pnlInsert = new javax.swing.JPanel();
         pnlModify = new javax.swing.JPanel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        mnuCRUD = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -77,7 +72,7 @@ public class MainForm extends javax.swing.JFrame {
             pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlReadLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(scrEspais, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+                .addComponent(scrEspais, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
                 .addGap(7, 7, 7)
                 .addComponent(btnRead)
                 .addContainerGap())
@@ -95,7 +90,7 @@ public class MainForm extends javax.swing.JFrame {
         );
         pnlInsertLayout.setVerticalGroup(
             pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 374, Short.MAX_VALUE)
+            .addGap(0, 396, Short.MAX_VALUE)
         );
 
         tabCRUD.addTab("Insert", pnlInsert);
@@ -108,35 +103,10 @@ public class MainForm extends javax.swing.JFrame {
         );
         pnlModifyLayout.setVerticalGroup(
             pnlModifyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
 
         tabCRUD.addTab("Modify", pnlModify);
-
-        mnuCRUD.setText("CRUD");
-
-        jMenuItem1.setText("Insert");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        mnuCRUD.add(jMenuItem1);
-
-        jMenuItem2.setText("Modify");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        mnuCRUD.add(jMenuItem2);
-
-        jMenuItem3.setText("Show/Hide");
-        mnuCRUD.add(jMenuItem3);
-
-        jMenuBar1.add(mnuCRUD);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -152,23 +122,14 @@ public class MainForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         Login l = new Login(this, true);
         l.setVisible(true);
         if(!l.getLoginUser().isAdmin()){
-            mnuCRUD.setVisible(false);
             tabCRUD.setEnabledAt(1, false);
             tabCRUD.setEnabledAt(2, false);
         }
     }//GEN-LAST:event_formWindowOpened
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void btnReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadActionPerformed
         DataAccess da = new DataAccess();
@@ -216,11 +177,6 @@ public class MainForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRead;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenu mnuCRUD;
     private javax.swing.JPanel pnlInsert;
     private javax.swing.JPanel pnlModify;
     private javax.swing.JPanel pnlRead;

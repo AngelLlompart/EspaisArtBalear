@@ -5,6 +5,7 @@
  */
 package spdvi;
 
+import com.fasterxml.jackson.databind.util.TypeKey;
 import java.util.HashMap;
 
 /**
@@ -138,10 +139,19 @@ public class Espai {
     public void setServeis(String serveis) {
         this.serveis = serveis;
     }
-
+    
+    private String desc(){
+        String desc = "";
+        for (String name: descripcions.keySet()) {
+            String value = descripcions.get(name).toString();
+            desc += (name + ": " + value + ", ");
+        }  
+        return desc;
+    }
+    
     @Override
     public String toString() {
-        return  nom + ", " + registre + ", " + descripcions + ", " + municipi + ", " + adreca + ", " + email + ", " + web + ", " + telefon + ", " + tipus + ", " + modalitat + ", " + gestor + ", " + serveis;
+        return  nom + ", " + registre + ", " + desc() + " " + municipi + ", " + adreca + ", " + email + ", " + web + ", " + telefon + ", " + tipus + ", " + modalitat + ", " + gestor + ", " + serveis;
     }
     
     
