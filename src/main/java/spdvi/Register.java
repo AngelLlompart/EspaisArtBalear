@@ -7,13 +7,16 @@ package spdvi;
 
 import java.awt.Frame;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
  * @author angel
  */
 public class Register extends javax.swing.JDialog {
-    private ArrayList<User> userlist = new ArrayList<>();
+
+    static ArrayList<User> userlist = new ArrayList<>();
 
     public Register(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -101,33 +104,61 @@ public class Register extends javax.swing.JDialog {
                 + PasswordGenerator.ESPECIALES, 10);
 
         // Comprovar username i email no es repeteixen, en cas de que si apareix un JDialog que avisi a l'usuari
-        String usernameCorrecte = "";
-        String emailCorrecte = "";
         
-        for (User u : userlist) {
-            if (u.getUserName().equals(txtUsername.getText())) {
-//            Register r = new Register((Frame) this.getParent(), true);
-//            r.setVisible(true);
-              txtUsername.setText("Aquest usuari ja existeix, introduesqui un diferent");
+//        
+//        String usernameCorrecte = "";
+//        String emailCorrecte = "";
+//        
+//        for (User u : userlist) {
+//            if (da.getUsers().equals((txtUsername.getText())) || u.getEmail().equals((txtEmail.getText()))) {
+//                if (u.getUserName().equals((txtUsername.getText()))) 
+//                    txtUsername.setText("Aquest usuari ja existeix, introduesqui un diferent");
+//                if (u.getEmail().equals((txtEmail.getText())))
+//                    txtEmail.setText("Aquest email ja existeix, introduesqui un diferent");
+//            } else {
+//                usernameCorrecte = txtUsername.getText();
+//                emailCorrecte = txtEmail.getText();
+//            }
+//        }
+
+        ArrayList<User> userlistFinal = new ArrayList<>();
+        boolean repetit = false;
+        
+        DataAccess da = new DataAccess();
+        da.getUsers();
+
+        for (int u = 0; u < userlist.size(); u++) {
+            if (userlistFinal.size() <= 0) {
+                userlistFinal.add(userlist.get(u));
             } else {
-                usernameCorrecte = txtUsername.getText();
-            }
-            
-            if (u.getEmail().equals(txtEmail.getText())) {
-                txtEmail.setText("Aquest email ja existeix, introduesqui un diferent");
-            }
-            else {
-                emailCorrecte = txtEmail.getText();
+                for (int y = 0; y < userlistFinal.size(); y++) {
+                    if (txtUsername.getText().equals(userlistFinal.get(y).getUserName())) {
+                        repetit = true;
+                        txtUsername.setText("Aquest usuari ja existeix, introduesqui un diferent");
+                    }
+                }
+                if (repetit == false) {
+                    userlistFinal.add(userlist.get(u));
+                }
             }
         }
+        for (User u : userlistFinal) {
+            System.out.println(u.getUserName());
+        }
+
+        Set<User> HashSet = new HashSet<>(userlist);
+        //ArrayList<User> userlistFinal = new ArrayList<>(HashSet);
+        
+        String usernameCorrecte = txtUsername.getText();
+        String emailCorrecte = txtEmail.getText();
 
         User newUser = new User(usernameCorrecte, emailCorrecte, password, false);
         userlist.add(newUser);
-        
+
         System.out.println(userlist);
         // Afegir JLabel perque l'usuari canvii la contrasenya predeterminada
-        
-        
+
+
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**
