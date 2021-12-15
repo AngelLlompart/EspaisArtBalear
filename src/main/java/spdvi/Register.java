@@ -7,13 +7,15 @@ package spdvi;
 
 import java.awt.Frame;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author angel
  */
 public class Register extends javax.swing.JDialog {
-    private ArrayList<User> userlist = new ArrayList<>();
+
+    private static ArrayList<User> userlist = new ArrayList<>();
 
     public Register(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -101,33 +103,40 @@ public class Register extends javax.swing.JDialog {
                 + PasswordGenerator.ESPECIALES, 10);
 
         // Comprovar username i email no es repeteixen, en cas de que si apareix un JDialog que avisi a l'usuari
-        String usernameCorrecte = "";
-        String emailCorrecte = "";
-        
+        boolean insertarUsuari = true;
+
         for (User u : userlist) {
-            if (u.getUserName().equals(txtUsername.getText())) {
-//            Register r = new Register((Frame) this.getParent(), true);
-//            r.setVisible(true);
-              txtUsername.setText("Aquest usuari ja existeix, introduesqui un diferent");
+            if (u.getUserName().equals(txtUsername.getText()) || u.getEmail().equals(txtEmail.getText())) {
+                insertarUsuari = false;
+                if (u.getUserName().equals(txtUsername.getText())) {
+                    System.err.println("Incorrect user");
+                    JOptionPane.showMessageDialog(null,
+                            "Aquest usuari ja existeix, introduesqui un diferent",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+
+                if (u.getEmail().equals(txtEmail.getText())) {
+                    System.err.println("Incorrect email");
+                    JOptionPane.showMessageDialog(null,
+                            "Aquest email ja existeix, introduesqui un diferent",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
             } else {
-                usernameCorrecte = txtUsername.getText();
-            }
-            
-            if (u.getEmail().equals(txtEmail.getText())) {
-                txtEmail.setText("Aquest email ja existeix, introduesqui un diferent");
-            }
-            else {
-                emailCorrecte = txtEmail.getText();
+                insertarUsuari = true;
             }
         }
 
-        User newUser = new User(usernameCorrecte, emailCorrecte, password, false);
-        userlist.add(newUser);
-        
+        if (insertarUsuari) {
+            User newUser = new User(txtUsername.getText(), txtEmail.getText(), password, false);
+            userlist.add(newUser);
+        }
+
         System.out.println(userlist);
         // Afegir JLabel perque l'usuari canvii la contrasenya predeterminada
-        
-        
+
+
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**
