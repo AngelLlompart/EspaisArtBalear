@@ -104,6 +104,7 @@ public class Register extends javax.swing.JDialog {
                 + PasswordGenerator.ESPECIALES, 10);
 
         // Comprovar username i email no es repeteixen, en cas de que si apareix un JDialog que avisi a l'usuari
+
         
 //        
 //        String usernameCorrecte = "";
@@ -151,9 +152,6 @@ public class Register extends javax.swing.JDialog {
         
         String usernameCorrecte = txtUsername.getText();
         String emailCorrecte = txtEmail.getText();
-
-        User newUser = new User(usernameCorrecte, emailCorrecte, password, false);
-        userlist.add(newUser);
 
         System.out.println(userlist);
         // Afegir JLabel perque l'usuari canvii la contrasenya predeterminada
