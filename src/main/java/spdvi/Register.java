@@ -9,6 +9,7 @@ import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -103,60 +104,40 @@ public class Register extends javax.swing.JDialog {
                 + PasswordGenerator.MAYUSCULAS
                 + PasswordGenerator.ESPECIALES, 10);
 
-        // Comprovar username i email no es repeteixen, en cas de que si apareix un JDialog que avisi a l'usuari
+        boolean insertarUsuari = true;
 
-        
-//        
-//        String usernameCorrecte = "";
-//        String emailCorrecte = "";
-//        
-//        for (User u : userlist) {
-//            if (da.getUsers().equals((txtUsername.getText())) || u.getEmail().equals((txtEmail.getText()))) {
-//                if (u.getUserName().equals((txtUsername.getText()))) 
-//                    txtUsername.setText("Aquest usuari ja existeix, introduesqui un diferent");
-//                if (u.getEmail().equals((txtEmail.getText())))
-//                    txtEmail.setText("Aquest email ja existeix, introduesqui un diferent");
-//            } else {
-//                usernameCorrecte = txtUsername.getText();
-//                emailCorrecte = txtEmail.getText();
-//            }
-//        }
-
-        ArrayList<User> userlistFinal = new ArrayList<>();
-        boolean repetit = false;
-        
-        DataAccess da = new DataAccess();
-        da.getUsers();
-
-        for (int u = 0; u < userlist.size(); u++) {
-            if (userlistFinal.size() <= 0) {
-                userlistFinal.add(userlist.get(u));
+        // Afegir DataAccess.getUsers a l'arraylist per validar completament, mostrar al JDialog la contrasenya del seu usuari
+        for (User u : userlist) {
+            if (u.getUserName().equals(txtUsername.getText()) || u.getEmail().equals(txtEmail.getText())) {
+                insertarUsuari = false;
+                if (u.getUserName().equals(txtUsername.getText())) {
+                    System.err.println("Incorrect user");
+                    JOptionPane.showMessageDialog(null,
+                            "Aquest usuari ja existeix, introduesqui un diferent",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+                if (u.getEmail().equals(txtEmail.getText())) {
+                    System.err.println("Incorrect email");
+                    JOptionPane.showMessageDialog(null,
+                            "Aquest email ja existeix, introduesqui un diferent",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
             } else {
-                for (int y = 0; y < userlistFinal.size(); y++) {
-                    if (txtUsername.getText().equals(userlistFinal.get(y).getUserName())) {
-                        repetit = true;
-                        txtUsername.setText("Aquest usuari ja existeix, introduesqui un diferent");
-                    }
-                }
-                if (repetit == false) {
-                    userlistFinal.add(userlist.get(u));
-                }
+                insertarUsuari = true;
             }
         }
-        for (User u : userlistFinal) {
-            System.out.println(u.getUserName());
+
+        if (insertarUsuari) {
+            User newUser = new User(txtUsername.getText(), txtEmail.getText(), password, false);
+            userlist.add(newUser);
+
+            DataAccess da = new DataAccess();
+            da.insertUser(userlist);
         }
-
-        Set<User> HashSet = new HashSet<>(userlist);
-        //ArrayList<User> userlistFinal = new ArrayList<>(HashSet);
         
-        String usernameCorrecte = txtUsername.getText();
-        String emailCorrecte = txtEmail.getText();
-
         System.out.println(userlist);
-        // Afegir JLabel perque l'usuari canvii la contrasenya predeterminada
-
-
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**
