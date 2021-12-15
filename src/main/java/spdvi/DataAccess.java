@@ -21,34 +21,57 @@ import java.util.Properties;
  * @author angel
  */
 public class DataAccess {
-    private Connection getConnection(){
+
+    private Connection getConnection() {
         Connection connection = null;
         Properties properties = new Properties();
-        
-        try{
+
+        try {
             properties.load(DataAccess.class.getClassLoader().getResourceAsStream("application.properties"));
             connection = DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("user"), properties.getProperty("password"));
-        }catch(IOException ioe){
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return connection;
-    } 
-    
+    }
+
+    public int insertUser(ArrayList<User> userlist) {
+        try ( Connection connection = getConnection();) {
+            PreparedStatement insertStatement = connection.prepareStatement(
+                    "INSERT INTO dbo.[User] (Username, Password, Email, Admin) "
+                    + "VALUES (?,?,?,?)");
+
+            for (User u : userlist) {
+                insertStatement.setString(1, u.getUserName());
+                insertStatement.setString(2, u.getPassword());
+                insertStatement.setString(3, u.getEmail());
+                insertStatement.setBoolean(4, u.isAdmin());
+
+                insertStatement.executeUpdate();
+                insertStatement.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
     public ArrayList<User> getUsers() {
         ArrayList<User> users = new ArrayList<User>();
-         try(Connection connection = getConnection()) {
+        try ( Connection connection = getConnection()) {
             PreparedStatement selectStatement = connection.prepareStatement(
                     "Select * FROM dbo.[User]"
             );
             ResultSet resultSet = selectStatement.executeQuery();
             while (resultSet.next()) {
                 User user = new User(
-                    resultSet.getString ("Username"),
-                    resultSet.getString ("Email"),
-                    resultSet.getString("Password"),
-                    resultSet.getBoolean("Admin")
+                        resultSet.getString("Username"),
+                        resultSet.getString("Email"),
+                        resultSet.getString("Password"),
+                        resultSet.getBoolean("Admin")
                 );
                 //user.setId(resultSet.getInt("id"));
                 users.add(user);
@@ -58,35 +81,35 @@ public class DataAccess {
         }
         return users;
     }
-    
+
     public ArrayList<Espai> getEspais() {
         ArrayList<Espai> espais = new ArrayList<Espai>();
-         try(Connection connection = getConnection()) {
+        try ( Connection connection = getConnection()) {
             PreparedStatement selectStatement = connection.prepareStatement(
                     "Select * FROM dbo.[Espai]"
             );
             ResultSet resultSet = selectStatement.executeQuery();
             while (resultSet.next()) {
-               String desc = resultSet.getString("Descripcions");
-               String[] pairs = desc.split("\",");
-               HashMap<String,String> mapDesc = new HashMap<>();
-               for(String pair : pairs){
-                   String[] entry = pair.split(":");
-                   mapDesc.put(entry[0].trim(), entry[1].trim());
-               }
+                String desc = resultSet.getString("Descripcions");
+                String[] pairs = desc.split("\",");
+                HashMap<String, String> mapDesc = new HashMap<>();
+                for (String pair : pairs) {
+                    String[] entry = pair.split(":");
+                    mapDesc.put(entry[0].trim(), entry[1].trim());
+                }
                 Espai espai = new Espai(
-                    resultSet.getString ("Nom"),
-                    resultSet.getString ("Registre"),
-                    mapDesc,
-                    resultSet.getString("Municipi"),
-                    resultSet.getString("Adreça"),
-                    resultSet.getString("Email"),
-                    resultSet.getString("Web"),
-                    resultSet.getInt("Telefon"),
-                    resultSet.getString("Tipus"),
-                    resultSet.getString("Modalitats"),
-                    resultSet.getString("Gestor"),
-                    resultSet.getString("Serveis")
+                        resultSet.getString("Nom"),
+                        resultSet.getString("Registre"),
+                        mapDesc,
+                        resultSet.getString("Municipi"),
+                        resultSet.getString("Adreça"),
+                        resultSet.getString("Email"),
+                        resultSet.getString("Web"),
+                        resultSet.getInt("Telefon"),
+                        resultSet.getString("Tipus"),
+                        resultSet.getString("Modalitats"),
+                        resultSet.getString("Gestor"),
+                        resultSet.getString("Serveis")
                 );
                 espais.add(espai);
             }

@@ -131,6 +131,9 @@ public class Register extends javax.swing.JDialog {
         if (insertarUsuari) {
             User newUser = new User(txtUsername.getText(), txtEmail.getText(), password, false);
             userlist.add(newUser);
+            
+            DataAccess da = new DataAccess();
+            da.insertUser(userlist);
         }
 
         System.out.println(userlist);
