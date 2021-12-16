@@ -135,43 +135,58 @@ public class Register extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        String password = PasswordGenerator.getPassword(
-                PasswordGenerator.MINUSCULAS
-                + PasswordGenerator.MAYUSCULAS
-                + PasswordGenerator.ESPECIALES, 10);
-
         boolean insertarUsuari = true;
+        String password = "";
 
-        // Afegir DataAccess.getUsers a l'arraylist per validar completament, mostrar al JDialog la contrasenya del seu usuari
         for (User u : userlist) {
             if (u.getUserName().equals(txtUsername.getText()) || u.getEmail().equals(txtEmail.getText())) {
                 insertarUsuari = false;
                 if (u.getUserName().equals(txtUsername.getText())) {
-                    System.err.println("Incorrect user");
-                    JOptionPane.showMessageDialog(null,
-                            "Aquest usuari ja existeix, introduesqui un diferent",
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE);
+                    incorrectUsername();
                 }
                 if (u.getEmail().equals(txtEmail.getText())) {
-                    System.err.println("Incorrect email");
-                    JOptionPane.showMessageDialog(null,
-                            "Aquest email ja existeix, introduesqui un diferent",
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE);
+                    incorrectEmail();
                 }
             } else {
                 insertarUsuari = true;
             }
         }
 
-        if (insertarUsuari) {
-            User newUser = new User(txtUsername.getText(), txtEmail.getText(), password, false);
-            userlist.add(newUser);
-            da.insertUser(userlist);
-            txtGeneratedPassword.setText(newUser.getPassword());
+        try {
+            if (insertarUsuari == false) {
+                password = "";
+                txtGeneratedPassword.setText("");
+            } else if (insertarUsuari) {
+                password = PasswordGenerator.getPassword(
+                        PasswordGenerator.MINUSCULAS
+                        + PasswordGenerator.MAYUSCULAS
+                        + PasswordGenerator.ESPECIALES, 10);
+
+                User newUser = new User(txtUsername.getText(), txtEmail.getText(), password, false);
+                userlist.add(newUser);
+                da.insertUser(userlist);
+                txtGeneratedPassword.setText(newUser.getPassword());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void incorrectUsername() {
+        System.err.println("Incorrect user");
+        JOptionPane.showMessageDialog(null,
+                "Aquest usuari ja existeix, introduesqui un diferent",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void incorrectEmail() {
+        System.err.println("Incorrect email");
+        JOptionPane.showMessageDialog(null,
+                "Aquest email ja existeix, introduesqui un diferent",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+    }
 
     private void txtGeneratedPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGeneratedPasswordActionPerformed
         // TODO add your handling code here:
