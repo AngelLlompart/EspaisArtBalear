@@ -5,6 +5,7 @@
  */
 package spdvi;
 
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -102,41 +103,38 @@ public class ForgotPassword extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            String correoRemitente = "joanandreu99@gmail.com";
-            String passwordRemitente = "joan002900";
+            DataAccess contra = new DataAccess();
         
-        try {
-            Properties props = new Properties();
-            // props.put("mail.smtp.host", "smtp.gmail.com");
-            props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-            props.put("mail.smtp.starttls.enable", "true");
-            props.put("mail.smtp.port", "587");
-            props.put("mail.smtp.auth", "true");
-            
-            
-            Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(correoRemitente, passwordRemitente);
-                }
-            });
-
-            
-            
+            String correoRemitente = "interficies99@gmail.com";
+            String passwordRemitente = "1234joan";
             String correoReceptor = jTextField1.getText();
-            String asunto = "El meu primer missatge";
-            String missatge = "Hola que tal estas";
-
-            MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(correoRemitente));
+            String asunto = "La teva contrasenya es:";
+            String missatge = "Contrasenya";
+        
+   
+            Properties props = System.getProperties();
+            props.put("mail.smtp.ssl.trust", "smtp.gmail.com");  //El servidor SMTP de Google
+            props.put("mail.smtp.user", correoRemitente);
+            props.put("mail.smtp.clave", passwordRemitente);  //La clave de la cuenta
+            props.put("mail.smtp.auth", "true");    //Usar autenticación mediante usuario y clave
+            props.put("mail.smtp.starttls.enable", "true"); //Para conectar de manera segura al servidor SMTP
+            props.put("mail.smtp.port", "587"); //El puerto SMTP seguro de Google
+            System.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
             
+            Session session = Session.getDefaultInstance(props);
+            MimeMessage message = new MimeMessage(session);
+            
+        try {
+        
+            message.setFrom(new InternetAddress(correoRemitente));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(correoReceptor));
             message.setSubject(asunto);
             message.setText(missatge);
             
-             Transport t = session.getTransport("smtp");
-            t.connect("smtp.gmail.com", correoRemitente, passwordRemitente);
-            t.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
-            t.close();
+            Transport transport = session.getTransport("smtp");
+            transport.connect("smtp.gmail.com", correoRemitente, passwordRemitente);
+            transport.sendMessage(message, message.getAllRecipients());
+            transport.close();
             
             JOptionPane.showMessageDialog(null, "Correo Electronico Enviado");
            
