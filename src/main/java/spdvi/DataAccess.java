@@ -117,4 +117,34 @@ public class DataAccess {
         }
         return espais;
     }
+    
+    public int insertEspais(Espai es){
+        int result = 0;
+        try ( Connection connection = getConnection();) {
+            PreparedStatement insertStatement = connection.prepareStatement(
+                    "INSERT INTO dbo.[Espai] (Registre, Nom, Descripcions, Municipi, Adreça, Email, Web, Telefon, Tipus, Modalitats, Gestor, Serveis)"
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+            
+            insertStatement.setString(1, es.getRegistre());
+            insertStatement.setString(2, es.getNom());
+            insertStatement.setString(3, es.getDescripcions().toString());
+            insertStatement.setString(4, es.getMunicipi());
+            insertStatement.setString(5, es.getAdreca());
+            insertStatement.setString(6, es.getEmail());
+            insertStatement.setString(7, es.getWeb());
+            insertStatement.setInt(8, es.getTelefon());
+            insertStatement.setString(9, es.getTipus());
+            insertStatement.setString(10, es.getModalitat());
+            insertStatement.setString(11, es.getGestor());
+            insertStatement.setString(12, es.getServeis());
+            
+            
+            result = insertStatement.executeUpdate();
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

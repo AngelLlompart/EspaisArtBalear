@@ -28,6 +28,7 @@ public class Espai {
     private String gestor;
     private String serveis;
     //igual que amb modalitats
+    private boolean visible;
 
     public Espai(String nom, String registre, HashMap<String, String> descripcions, String municipi, String adreca, String email, String web, int telefon, String tipus, String modalitat, String gestor, String serveis) {
         this.nom = nom;
@@ -139,6 +140,15 @@ public class Espai {
     public void setServeis(String serveis) {
         this.serveis = serveis;
     }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+    
     
     private String desc(){
         String desc = "";
