@@ -5,6 +5,22 @@
  */
 package spdvi;
 
+import java.util.ArrayList;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.Transport;
+import javax.mail.Address;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
+import javax.mail.Session;
+
 /**
  *
  * @author angel
@@ -13,6 +29,8 @@ public class ForgotPassword extends javax.swing.JDialog {
 
     /**
      * Creates new form ForgotPassword
+     * @param parent
+     * @param modal
      */
     public ForgotPassword(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -43,6 +61,11 @@ public class ForgotPassword extends javax.swing.JDialog {
         jLabel1.setText("Introduce your Email");
 
         jButton1.setText("Send Password");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -78,6 +101,49 @@ public class ForgotPassword extends javax.swing.JDialog {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            DataAccess contra = new DataAccess();
+        
+            String correoRemitente = "interficies99@gmail.com";
+            String passwordRemitente = "1234joan";
+            String correoReceptor = jTextField1.getText();
+            String asunto = "La teva contrasenya es:";
+            String missatge = "Contrasenya";
+        
+   
+            Properties props = System.getProperties();
+            props.put("mail.smtp.ssl.trust", "smtp.gmail.com");  //El servidor SMTP de Google
+            props.put("mail.smtp.user", correoRemitente);
+            props.put("mail.smtp.clave", passwordRemitente);  //La clave de la cuenta
+            props.put("mail.smtp.auth", "true");    //Usar autenticación mediante usuario y clave
+            props.put("mail.smtp.starttls.enable", "true"); //Para conectar de manera segura al servidor SMTP
+            props.put("mail.smtp.port", "587"); //El puerto SMTP seguro de Google
+            System.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
+            
+            Session session = Session.getDefaultInstance(props);
+            MimeMessage message = new MimeMessage(session);
+            
+        try {
+        
+            message.setFrom(new InternetAddress(correoRemitente));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(correoReceptor));
+            message.setSubject(asunto);
+            message.setText(missatge);
+            
+            Transport transport = session.getTransport("smtp");
+            transport.connect("smtp.gmail.com", correoRemitente, passwordRemitente);
+            transport.sendMessage(message, message.getAllRecipients());
+            transport.close();
+            
+            JOptionPane.showMessageDialog(null, "Correo Electronico Enviado");
+           
+        } catch (AddressException ex) {
+            Logger.getLogger(ForgotPassword.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MessagingException ex) {
+            Logger.getLogger(ForgotPassword.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
