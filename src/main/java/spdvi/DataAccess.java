@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Properties;
 
 /**
@@ -91,7 +92,7 @@ public class DataAccess {
             while (resultSet.next()) {
                 String desc = resultSet.getString("Descripcions");
                 String[] pairs = desc.split("\",");
-                HashMap<String, String> mapDesc = new HashMap<>();
+                LinkedHashMap<String, String> mapDesc = new LinkedHashMap<>();
                 for (String pair : pairs) {
                     String[] entry = pair.split(":");
                     mapDesc.put(entry[0].trim(), entry[1].trim());
@@ -127,7 +128,7 @@ public class DataAccess {
             
             insertStatement.setString(1, es.getRegistre());
             insertStatement.setString(2, es.getNom());
-            insertStatement.setString(3, es.getDescripcions().toString());
+            insertStatement.setString(3, es.desc());
             insertStatement.setString(4, es.getMunicipi());
             insertStatement.setString(5, es.getAdreca());
             insertStatement.setString(6, es.getEmail());
