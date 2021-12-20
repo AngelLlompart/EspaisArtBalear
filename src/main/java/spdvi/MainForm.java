@@ -37,6 +37,7 @@ public class MainForm extends javax.swing.JFrame {
         scrEspais = new javax.swing.JScrollPane();
         btnRead = new javax.swing.JButton();
         pnlInsert = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
         pnlModify = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -82,15 +83,23 @@ public class MainForm extends javax.swing.JFrame {
 
         pnlInsert.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        jTextField1.setText("jTextField1");
+
         javax.swing.GroupLayout pnlInsertLayout = new javax.swing.GroupLayout(pnlInsert);
         pnlInsert.setLayout(pnlInsertLayout);
         pnlInsertLayout.setHorizontalGroup(
             pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 619, Short.MAX_VALUE)
+            .addGroup(pnlInsertLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(510, Short.MAX_VALUE))
         );
         pnlInsertLayout.setVerticalGroup(
             pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 396, Short.MAX_VALUE)
+            .addGroup(pnlInsertLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(365, Short.MAX_VALUE))
         );
 
         tabCRUD.addTab("Insert", pnlInsert);
@@ -177,6 +186,7 @@ public class MainForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRead;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel pnlInsert;
     private javax.swing.JPanel pnlModify;
     private javax.swing.JPanel pnlRead;
