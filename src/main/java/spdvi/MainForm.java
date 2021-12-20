@@ -7,6 +7,8 @@ package spdvi;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.stream.Collectors;
 import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JList;
@@ -152,7 +154,7 @@ public class MainForm extends javax.swing.JFrame {
 
         lblDescripcions.setText("Descripcions");
 
-        cmbDesc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Català", "Castellano", "English" }));
+        cmbDesc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Català", "Español", "English" }));
         cmbDesc.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbDescItemStateChanged(evt);
@@ -702,7 +704,7 @@ public class MainForm extends javax.swing.JFrame {
                pnlCast.setVisible(false);
                pnlEng.setVisible(false);
            }
-           case "Castellano" -> {
+           case "Español" -> {
                pnlCast.setVisible(true);
                pnlEng.setVisible(false);
            }
@@ -799,10 +801,11 @@ public class MainForm extends javax.swing.JFrame {
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         //String descripcions = "Cat: " + txaCat.getText() + ";" + " Cast: " + txaCast.getText() + ";" + " Eng: " + txaEng.getText() + ";";
-        HashMap<String, String> descripcions = new HashMap<>();
-        descripcions.put("Cat", txaCat.getText());
-        descripcions.put("Cast", txaCast.getText());
-        descripcions.put("Eng", txaEng.getText());
+        LinkedHashMap<String, String> descripcions = new LinkedHashMap<>();
+        descripcions.put("cat", txaCat.getText());
+        descripcions.put("esp", txaCast.getText());
+        descripcions.put("eng", txaEng.getText());
+        
         
         String modalitats = "";
         String serveis = "";
@@ -825,6 +828,7 @@ public class MainForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnInsertActionPerformed
 
+   
     /**
      * @param args the command line arguments
      */
@@ -871,19 +875,14 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JCheckBox chkConcerts;
     private javax.swing.JCheckBox chkConferencies;
     private javax.swing.JCheckBox chkEscultura;
-    private javax.swing.JCheckBox chkEscultura1;
     private javax.swing.JCheckBox chkFotografia;
-    private javax.swing.JCheckBox chkFotografia1;
     private javax.swing.JCheckBox chkJardins;
     private javax.swing.JCheckBox chkPintura;
-    private javax.swing.JCheckBox chkPintura1;
     private javax.swing.JCheckBox chkSelectAllMod;
     private javax.swing.JCheckBox chkSelectAllServ;
     private javax.swing.JCheckBox chkTallers;
     private javax.swing.JCheckBox chkVideo;
-    private javax.swing.JCheckBox chkVideo1;
     private javax.swing.JCheckBox chkVidre;
-    private javax.swing.JCheckBox chkVidre1;
     private javax.swing.JCheckBox chkVisites;
     private javax.swing.JCheckBox chkWifi;
     private javax.swing.JComboBox<String> cmbDesc;
@@ -907,7 +906,6 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JPanel pnlEng;
     private javax.swing.JPanel pnlInsert;
     private javax.swing.JPanel pnlModalitats;
-    private javax.swing.JPanel pnlModalitats1;
     private javax.swing.JPanel pnlModify;
     private javax.swing.JPanel pnlRead;
     private javax.swing.JPanel pnlServeis;
