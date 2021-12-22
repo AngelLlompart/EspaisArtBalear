@@ -278,6 +278,7 @@ public class Login extends javax.swing.JDialog {
               btnLogin.doClick();
         }
     }
+    
     public User getLoginUser() {
         return loginUser;
     }
