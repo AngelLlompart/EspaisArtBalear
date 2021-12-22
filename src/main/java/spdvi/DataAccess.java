@@ -155,4 +155,14 @@ public class DataAccess {
         }
         return result;
     }
+    
+    public int updatePassword(String password, String user ) throws SQLException {    
+     try (Connection connection = getConnection();) {
+         PreparedStatement updateStatement = connection.prepareStatement("UPDATE dbo.[User] SET Password=? where Username=?"); 
+      updateStatement.setString(1, password);
+      updateStatement.setString(2, user);
+      int i = updateStatement.executeUpdate();
+      return i;
+    }
+  }
 }

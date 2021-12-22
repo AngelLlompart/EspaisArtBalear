@@ -50,9 +50,9 @@ public class ForgotPassword extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        txtEmail = new javax.swing.JTextField();
+        lblEmail = new javax.swing.JLabel();
+        btnSendPassword = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -61,23 +61,23 @@ public class ForgotPassword extends javax.swing.JDialog {
             }
         });
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtEmailActionPerformed(evt);
             }
         });
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField1KeyPressed(evt);
+                txtEmailKeyPressed(evt);
             }
         });
 
-        jLabel1.setText("Introduce your Email");
+        lblEmail.setText("Introduce your Email");
 
-        jButton1.setText("Send Password");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSendPassword.setText("Send Password");
+        btnSendPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSendPasswordActionPerformed(evt);
             }
         });
 
@@ -89,50 +89,49 @@ public class ForgotPassword extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(lblEmail)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(btnSendPassword)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addComponent(jLabel1)
+                .addComponent(lblEmail)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSendPassword))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
 
-    
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_txtEmailActionPerformed
+
+
+    private void btnSendPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendPasswordActionPerformed
         DataAccess contra = new DataAccess();
-        
+
         String password = PasswordGenerator.getPassword(
                 PasswordGenerator.MINUSCULAS
                 + PasswordGenerator.MAYUSCULAS
                 + PasswordGenerator.ESPECIALES, 10);
-        
+
         String correoRemitente = "interficies99@gmail.com";
         String passwordRemitente = "1234joan";
-        String correoReceptor = jTextField1.getText();
+        String correoReceptor = txtEmail.getText();
         String asunto = "El codi es:";
         String missatge = password;
 
         Pattern emailRegEx = Pattern.compile("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
-        //comparam si la pagina web introduida compleix la expresio regular, si la compleix s'executa el menu, si no printa URL incorrecta i atura el programa
         if (emailRegEx.matcher(correoReceptor).matches()) {
 
             Properties props = System.getProperties();
@@ -162,33 +161,35 @@ public class ForgotPassword extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null, "Correo Electronico Enviado");
                 setVisible(false);
                 ConfirmPassword cP = new ConfirmPassword((Frame) this.getParent(), true);
+                cP.setCodi(password);
+                cP.setEmail(correoReceptor);
                 cP.setVisible(true);
-                
-                
-                
 
             } catch (AddressException ex) {
+                ex.printStackTrace();
             } catch (MessagingException ex) {
+                ex.printStackTrace();
             }
-        } else if(!emailRegEx.matcher(correoReceptor).matches()) {
+        } else if (!emailRegEx.matcher(correoReceptor).matches()) {
             JOptionPane.showMessageDialog(null, "El correo electonico introducido esta mal");
         }
-       
-    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+    }//GEN-LAST:event_btnSendPasswordActionPerformed
+
+    private void txtEmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyPressed
         enterKey(evt);
-    }//GEN-LAST:event_jTextField1KeyPressed
+    }//GEN-LAST:event_txtEmailKeyPressed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        
+
     }//GEN-LAST:event_formWindowClosing
 
-        private void enterKey(java.awt.event.KeyEvent evt){
-        if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER){
-              jButton1.doClick();
+    private void enterKey(java.awt.event.KeyEvent evt) {
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            btnSendPassword.doClick();
         }
     }
+
     /**
      * @param args the command line arguments
      */
@@ -232,8 +233,8 @@ public class ForgotPassword extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton btnSendPassword;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JTextField txtEmail;
     // End of variables declaration//GEN-END:variables
 }
