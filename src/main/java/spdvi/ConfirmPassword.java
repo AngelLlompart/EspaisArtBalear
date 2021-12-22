@@ -4,10 +4,19 @@
  */
 package spdvi;
 
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -51,21 +60,43 @@ public class ConfirmPassword extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         lblCodi = new javax.swing.JLabel();
-        txtCodi = new javax.swing.JTextField();
         lblContrasenya = new javax.swing.JLabel();
         lblConfirmContrasenya = new javax.swing.JLabel();
         btnCodi = new javax.swing.JButton();
         txtContrasenya = new javax.swing.JPasswordField();
         txtConfirmContrasenya = new javax.swing.JPasswordField();
+        txtCodi = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         lblCodi.setText("Introdueix codi:");
+        lblCodi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblCodiMouseExited(evt);
+            }
+        });
+        jPanel1.add(lblCodi, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
         lblContrasenya.setText("Introdueix nova contrasenya:");
+        lblContrasenya.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblContrasenyaMouseExited(evt);
+            }
+        });
+        jPanel1.add(lblContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
 
         lblConfirmContrasenya.setText("Confirma la contrasenya:");
+        lblConfirmContrasenya.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblConfirmContrasenyaMouseExited(evt);
+            }
+        });
+        jPanel1.add(lblConfirmContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
 
         btnCodi.setText("Cofirmar Codi");
         btnCodi.addActionListener(new java.awt.event.ActionListener() {
@@ -73,48 +104,23 @@ public class ConfirmPassword extends javax.swing.JDialog {
                 btnCodiActionPerformed(evt);
             }
         });
+        jPanel1.add(btnCodi, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 120, 30));
+        jPanel1.add(txtContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 190, -1));
+        jPanel1.add(txtConfirmContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 190, -1));
+        jPanel1.add(txtCodi, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 190, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/azul.jpg"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 290));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblCodi, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtConfirmContrasenya, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtContrasenya, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCodi, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(lblConfirmContrasenya, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(lblContrasenya, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(76, 76, 76)
-                        .addComponent(btnCodi)
-                        .addGap(62, 62, 62))))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblCodi)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCodi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCodi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblContrasenya)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtContrasenya, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(lblConfirmContrasenya)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtConfirmContrasenya, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -139,12 +145,19 @@ public class ConfirmPassword extends javax.swing.JDialog {
         if(!new String(txtContrasenya.getPassword()).equals(new String(txtConfirmContrasenya.getPassword()))) {
             JOptionPane.showMessageDialog(null, "La contrasenya no coincideix");
         }
-
+        
         for (User u : users) {
             if (u.getEmail().equals(email)) {
-                u.setPassword(new String(txtContrasenya.getPassword()));
+                try {
+                    da.updatePassword(new String(txtContrasenya.getPassword()), u.getUserName());
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         }
+        
+        setVisible(false);
+        
         } else if (!passwordRegEx.matcher(password).matches()) {
             JOptionPane.showMessageDialog(null, "La contrasenya no cumpleix els minims requerits: " +
                     "\n" +
@@ -157,6 +170,21 @@ public class ConfirmPassword extends javax.swing.JDialog {
                     "No conte espais, tabulacións, etc.");
         }
     }//GEN-LAST:event_btnCodiActionPerformed
+
+    private void lblCodiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCodiMouseExited
+        lblCodi.setForeground(Color.black);
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_lblCodiMouseExited
+
+    private void lblContrasenyaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblContrasenyaMouseExited
+        lblContrasenya.setForeground(Color.black);
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_lblContrasenyaMouseExited
+
+    private void lblConfirmContrasenyaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblConfirmContrasenyaMouseExited
+        lblContrasenya.setForeground(Color.black);
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_lblConfirmContrasenyaMouseExited
 
     /**
      * @param args the command line arguments
@@ -202,6 +230,8 @@ public class ConfirmPassword extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCodi;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCodi;
     private javax.swing.JLabel lblConfirmContrasenya;
     private javax.swing.JLabel lblContrasenya;
@@ -209,4 +239,5 @@ public class ConfirmPassword extends javax.swing.JDialog {
     private javax.swing.JPasswordField txtConfirmContrasenya;
     private javax.swing.JPasswordField txtContrasenya;
     // End of variables declaration//GEN-END:variables
+
 }

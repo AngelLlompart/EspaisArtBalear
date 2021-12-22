@@ -166,7 +166,9 @@ public class ForgotPassword extends javax.swing.JDialog {
                 cP.setVisible(true);
 
             } catch (AddressException ex) {
+                ex.printStackTrace();
             } catch (MessagingException ex) {
+                ex.printStackTrace();
             }
         } else if (!emailRegEx.matcher(correoReceptor).matches()) {
             JOptionPane.showMessageDialog(null, "El correo electonico introducido esta mal");
