@@ -120,12 +120,13 @@ public class Register extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        boolean insertarUsuari = true;
+        boolean createUser = true;
         String password = "";
 
         for (User u : userlist) {
             if (u.getUserName().equals(txtUsername.getText()) || u.getEmail().equals(txtEmail.getText())) {
                 password = "";
+                createUser = false;
                 if (u.getUserName().equals(txtUsername.getText())) {
                     incorrectUsername();
                 }
@@ -134,18 +135,27 @@ public class Register extends javax.swing.JDialog {
                 }
                 break;
             } else {
+                createUser = true;
+            }
+            
+            if (createUser) {
                 password = PasswordGenerator.getPassword(
                         PasswordGenerator.MINUSCULAS
                         + PasswordGenerator.MAYUSCULAS
                         + PasswordGenerator.ESPECIALES, 10);
-
-                String encriptMD5 = DigestUtils.md5Hex(password);
-
-                User newUser = new User(txtUsername.getText(), txtEmail.getText(), encriptMD5, false);
+                //String encriptMD5 = DigestUtils.md5Hex(password);
+                User newUser = new User(txtUsername.getText(), txtEmail.getText(), password, false);
                 da.insertUser(newUser);
+                
+                System.out.println(newUser.getPassword());
                 
                 SendEmail sendEmail = new SendEmail();
                 sendEmail.sendEmail(txtEmail);
+                
+                setVisible(false);
+                ConfirmPassword cP = new ConfirmPassword((Frame) this.getParent(), true);
+                cP.setVisible(true);
+                break;
             }
         }
     }//GEN-LAST:event_btnRegisterActionPerformed

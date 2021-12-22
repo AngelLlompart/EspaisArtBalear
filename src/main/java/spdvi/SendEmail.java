@@ -59,10 +59,7 @@ public class SendEmail {
                 transport.sendMessage(message, message.getAllRecipients());
                 transport.close();
 
-                JOptionPane.showMessageDialog(null, "Correo Electronico Enviado");
-                //setVisible(false);
-                //ConfirmPassword cP = new ConfirmPassword((Frame) this.getParent(), true);
-                //cP.setVisible(true);
+                JOptionPane.showMessageDialog(null, "Correo enviado");
             } catch (AddressException ex) {
             } catch (MessagingException ex) {
             }
