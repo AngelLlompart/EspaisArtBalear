@@ -907,7 +907,6 @@ public class MainForm extends javax.swing.JFrame {
                     modalitats,
                     txtGestor.getText(),
                     serveis);
-            DataAccess da = new DataAccess();
             int res = da.insertEspais(espai);
             if (res != 0){
                 txtRegistreEspai.setText("");
