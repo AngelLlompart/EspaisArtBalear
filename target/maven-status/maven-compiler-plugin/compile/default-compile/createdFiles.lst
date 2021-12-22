@@ -18,6 +18,7 @@ spdvi\Register$5.class
 spdvi\Login$1.class
 spdvi\Login$11$1.class
 spdvi\Login$3.class
+spdvi\ArgumentNullException.class
 spdvi\ForgotPassword$1.class
 spdvi\MainForm$21.class
 spdvi\MainForm$3.class

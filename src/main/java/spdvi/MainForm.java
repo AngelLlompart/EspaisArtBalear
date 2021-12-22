@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,7 +20,10 @@ import javax.swing.JList;
  */
 public class MainForm extends javax.swing.JFrame {
     private JList<Espai> lstEspais;
-    private ArrayList<JCheckBox> chkModalitats;
+    private ArrayList<JCheckBox> chkListModalitats;
+    private ArrayList<JCheckBox> chkListServeis;
+    private boolean insert = true;
+           
     /**
      * Creates new form MainForm
      */
@@ -27,12 +31,25 @@ public class MainForm extends javax.swing.JFrame {
         initComponents();
         lstEspais = new JList<Espai>();
         scrEspais.setViewportView(lstEspais);
-        chkModalitats = new ArrayList<>();
-        chkModalitats.add(chkEscultura);
-        chkModalitats.add(chkFotografia);
-        chkModalitats.add(chkPintura);
-        chkModalitats.add(chkVidre);
-        chkModalitats.add(chkVideo);
+        chkListModalitats = new ArrayList<>();
+        chkListModalitats.add(chkEscultura);
+        chkListModalitats.add(chkFotografia);
+        chkListModalitats.add(chkPintura);
+        chkListModalitats.add(chkVidre);
+        chkListModalitats.add(chkVideo);
+        
+        chkListServeis = new ArrayList<>();
+        chkListServeis.add(chkAcces);
+        chkListServeis.add(chkAparcament);
+        chkListServeis.add(chkArxiu);
+        chkListServeis.add(chkBiblioteca);
+        chkListServeis.add(chkCafeteria);
+        chkListServeis.add(chkConcerts);
+        chkListServeis.add(chkConferencies);
+        chkListServeis.add(chkTallers);
+        chkListServeis.add(chkVisites);
+        chkListServeis.add(chkJardins);
+        chkListServeis.add(chkWifi);        
     }
 
     /**
@@ -526,16 +543,20 @@ public class MainForm extends javax.swing.JFrame {
                         .addComponent(lblDescripcions)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cmbDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(layeredDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(layeredDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(lblTipus)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbTipus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlInsertLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnInsert)
-                        .addGap(64, 64, 64)
-                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(220, 220, 220))
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(chkSelectAllMod))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pnlInsertLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(pnlInsertLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
@@ -569,15 +590,13 @@ public class MainForm extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtGestor, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlInsertLayout.createSequentialGroup()
-                                .addComponent(lblTipus)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cmbTipus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2)
-                            .addComponent(pnlModalitats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(chkSelectAllMod))
-                        .addGap(195, 195, 195))))
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(220, 220, 220))
+                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                        .addComponent(pnlModalitats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(86, 86, 86)
+                        .addComponent(btnInsert)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         pnlInsertLayout.setVerticalGroup(
             pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -585,68 +604,67 @@ public class MainForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlInsertLayout.createSequentialGroup()
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblRegistreEspai)
+                            .addComponent(txtRegistreEspai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblMunicipi)
+                            .addComponent(txtMunicipi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblAdreca)
+                            .addComponent(txtAdreca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblEmail)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblWeb)
+                            .addComponent(txtWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTelefon)
+                            .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblGestor)
+                            .addComponent(txtGestor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(chkSelectAllMod)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pnlModalitats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInsertLayout.createSequentialGroup()
+                                .addComponent(btnInsert)
+                                .addGap(63, 63, 63))))
+                    .addGroup(pnlInsertLayout.createSequentialGroup()
                         .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlInsertLayout.createSequentialGroup()
                                 .addGap(70, 70, 70)
-                                .addComponent(layeredDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(layeredDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(pnlInsertLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblTipus)
-                                    .addComponent(cmbTipus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(50, 50, 50)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(chkSelectAllMod)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(pnlModalitats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlInsertLayout.createSequentialGroup()
+                                    .addComponent(lblNomEspai)
+                                    .addComponent(txtNomEspai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(24, 24, 24)
                                 .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblRegistreEspai)
-                                    .addComponent(txtRegistreEspai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblMunicipi)
-                                    .addComponent(txtMunicipi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(12, 12, 12)
-                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblAdreca)
-                                    .addComponent(txtAdreca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblEmail)
-                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblWeb)
-                                    .addComponent(txtWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblTelefon)
-                                    .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblGestor)
-                                    .addComponent(txtGestor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblDescripcions)
+                                    .addComponent(cmbDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(143, 143, 143)))
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTipus)
+                            .addComponent(cmbTipus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlInsertLayout.createSequentialGroup()
-                                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInsertLayout.createSequentialGroup()
-                                .addGap(104, 104, 104)
-                                .addComponent(btnInsert)
-                                .addGap(76, 76, 76))))
-                    .addGroup(pnlInsertLayout.createSequentialGroup()
-                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblNomEspai)
-                            .addComponent(txtNomEspai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
-                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblDescripcions)
-                            .addComponent(cmbDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(174, 174, 174)
-                        .addComponent(pnlServeis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(filler1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlServeis, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         tabCRUD.addTab("Insert", pnlInsert);
@@ -733,11 +751,11 @@ public class MainForm extends javax.swing.JFrame {
 
     private void chkSelectAllModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkSelectAllModActionPerformed
         if(chkSelectAllMod.isSelected()){
-            for(JCheckBox chkBox : chkModalitats){
+            for(JCheckBox chkBox : chkListModalitats){
                 chkBox.setSelected(true);
             }
         }else{
-          for(JCheckBox chkBox : chkModalitats){
+          for(JCheckBox chkBox : chkListModalitats){
                 chkBox.setSelected(false);
           }  
         }
@@ -768,7 +786,15 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtGestorActionPerformed
 
     private void chkSelectAllServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkSelectAllServActionPerformed
-        // TODO add your handling code here:
+        if(chkSelectAllServ.isSelected()){
+            for(JCheckBox chkBox : chkListServeis){
+                chkBox.setSelected(true);
+            }
+        }else{
+          for(JCheckBox chkBox : chkListServeis){
+                chkBox.setSelected(false);
+          }  
+        }
     }//GEN-LAST:event_chkSelectAllServActionPerformed
 
     private void chkAccesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAccesActionPerformed
@@ -800,31 +826,92 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_chkArxiuActionPerformed
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+        DataAccess da = new DataAccess();
         //String descripcions = "Cat: " + txaCat.getText() + ";" + " Cast: " + txaCast.getText() + ";" + " Eng: " + txaEng.getText() + ";";
         LinkedHashMap<String, String> descripcions = new LinkedHashMap<>();
         descripcions.put("cat", txaCat.getText());
         descripcions.put("esp", txaCast.getText());
         descripcions.put("eng", txaEng.getText());
         
-        
         String modalitats = "";
+        String error = "El telefon ha de ser un número vàlid";
+        try{
+            if(txtRegistreEspai.getText() == null || txtRegistreEspai.getText().isBlank() || txtRegistreEspai.getText().isEmpty() ||
+               txtAdreca.getText() == null || txtAdreca.getText().isBlank() || txtAdreca.getText().isEmpty() ||
+               txtEmail.getText() == null || txtEmail.getText().isBlank() || txtEmail.getText().isEmpty() ||
+               txtGestor.getText() == null || txtGestor.getText().isBlank() || txtGestor.getText().isEmpty() ||
+               txtMunicipi.getText() == null || txtMunicipi.getText().isBlank() || txtMunicipi.getText().isEmpty() ||
+               txtNomEspai.getText() == null || txtNomEspai.getText().isBlank() || txtNomEspai.getText().isEmpty() ||
+               txtWeb.getText() == null || txtWeb.getText().isBlank() || txtWeb.getText().isEmpty() ||
+               txtTelefon.getText() == null || txtTelefon.getText().isBlank() || txtTelefon.getText().isEmpty()) {
+                error = "Els atributs no poden ser nulls o buits";
+                throw new ArgumentNullException(error);
+            }
+            
+            if(txaCast.getText() == null || txaCast.getText().isBlank() || txaCast.getText().isEmpty() ||
+               txaCat.getText() == null || txaCat.getText().isBlank() || txaCat.getText().isEmpty() ||
+               txaEng.getText() == null || txaEng.getText().isBlank() || txaEng.getText().isEmpty()) {
+                error = "S'han d'omplir les descripcions en els 3 idiomes";
+                throw new ArgumentNullException(error);
+            }
+            for(Espai espai : da.getEspais()){
+                if(txtRegistreEspai.getText().equals(espai.getRegistre())){
+                    error = "No es pot repetir un nombre de registre";
+                    throw new ArgumentNullException(error);
+                }
+            }
+            Integer.parseInt(txtTelefon.getText());
+            if(txtTelefon.getText().length() != 9){
+                error = "Ha de ser un número de telefon valid";
+                throw new ArgumentNullException(error);
+            }
+            for(JCheckBox checkBox : chkListModalitats){
+                if(checkBox.isSelected()){
+                    modalitats += checkBox.getText() + ",";
+                }
+            }
+            if(modalitats.isBlank() || modalitats.isBlank() || modalitats == null){
+                error = "Al menys una modalitat ha de ser seleccionada";
+                throw new ArgumentNullException(error);
+            }
+            modalitats = modalitats.substring(0, modalitats.length() - 1);
+        } catch (Exception e){
+            insert = false;
+            System.err.println(error);
+            JOptionPane.showMessageDialog(null,
+            error,
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
+        }
+        
         String serveis = "";
-        Espai espai = new Espai(txtNomEspai.getText(),
-                txtRegistreEspai.getText(),
-                descripcions,
-                txtMunicipi.getText(),
-                txtAdreca.getText(),
-                txtEmail.getText(),
-                txtWeb.getText(),
-                Integer.parseInt(txtTelefon.getText()),
-                cmbTipus.getSelectedItem().toString(),
-                modalitats,
-                txtGestor.getText(),
-                serveis);
-        DataAccess da = new DataAccess();
-        int res = da.insertEspais(espai);
-        if (res != 0){
-            txtRegistreEspai.setText("");
+        for(JCheckBox checkBox : chkListServeis){
+            if(checkBox.isSelected()){
+                serveis += checkBox.getText() + ",";
+            }
+        }
+        if(!(serveis.isBlank() || serveis.isEmpty() || serveis == null)) {
+            serveis = serveis.substring(0, serveis.length() - 1);
+        }
+
+        if(insert){
+            Espai espai = new Espai(txtNomEspai.getText(),
+                    txtRegistreEspai.getText(),
+                    descripcions,
+                    txtMunicipi.getText(),
+                    txtAdreca.getText(),
+                    txtEmail.getText(),
+                    txtWeb.getText(),
+                    Integer.parseInt(txtTelefon.getText()),
+                    cmbTipus.getSelectedItem().toString(),
+                    modalitats,
+                    txtGestor.getText(),
+                    serveis);
+            DataAccess da = new DataAccess();
+            int res = da.insertEspais(espai);
+            if (res != 0){
+                txtRegistreEspai.setText("");
+            }
         }
     }//GEN-LAST:event_btnInsertActionPerformed
 
