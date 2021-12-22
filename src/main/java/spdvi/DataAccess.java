@@ -5,6 +5,7 @@
  */
 package spdvi;
 
+import java.awt.Frame;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,6 +17,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Properties;
+import java.util.regex.Pattern;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,22 +49,22 @@ public class DataAccess {
     }
 
     public int insertUser(User user) {
-        try (Connection connection = getConnection();) {
+        try ( Connection connection = getConnection();) {
             PreparedStatement insertStatement = connection.prepareStatement(
                     "INSERT INTO dbo.[User] (Username, Password, Email, Admin) "
                     + "VALUES (?,?,?,?)");
 
-                insertStatement.setString(1, user.getUserName());
-                insertStatement.setString(2, user.getPassword());
-                insertStatement.setString(3, user.getEmail());
-                insertStatement.setBoolean(4, user.isAdmin());
-                insertStatement.executeUpdate();
-                
-                int result = insertStatement.executeUpdate();
-                return result;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            insertStatement.setString(1, user.getUserName());
+            insertStatement.setString(2, user.getPassword());
+            insertStatement.setString(3, user.getEmail());
+            insertStatement.setBoolean(4, user.isAdmin());
+            insertStatement.executeUpdate();
+
+            int result = insertStatement.executeUpdate();
+            return result;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
@@ -117,14 +127,14 @@ public class DataAccess {
         }
         return espais;
     }
-    
-    public int insertEspais(Espai es){
+
+    public int insertEspais(Espai es) {
         int result = 0;
         try ( Connection connection = getConnection();) {
             PreparedStatement insertStatement = connection.prepareStatement(
                     "INSERT INTO dbo.[Espai] (Registre, Nom, Descripcions, Municipi, Adreça, Email, Web, Telefon, Tipus, Modalitats, Gestor, Serveis)"
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
-            
+
             insertStatement.setString(1, es.getRegistre());
             insertStatement.setString(2, es.getNom());
             insertStatement.setString(3, es.desc());
@@ -137,11 +147,9 @@ public class DataAccess {
             insertStatement.setString(10, es.getModalitat());
             insertStatement.setString(11, es.getGestor());
             insertStatement.setString(12, es.getServeis());
-            
-            
+
             result = insertStatement.executeUpdate();
-            
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
