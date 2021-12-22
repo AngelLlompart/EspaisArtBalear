@@ -59,7 +59,7 @@ public class SendEmail {
                 transport.sendMessage(message, message.getAllRecipients());
                 transport.close();
 
-                JOptionPane.showMessageDialog(null, "Correo enviado");
+                JOptionPane.showMessageDialog(null, "Correu de confirmació enviat");
             } catch (AddressException ex) {
             } catch (MessagingException ex) {
             }
