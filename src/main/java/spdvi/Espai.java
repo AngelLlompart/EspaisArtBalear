@@ -7,6 +7,8 @@ package spdvi;
 
 import com.fasterxml.jackson.databind.util.TypeKey;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -15,7 +17,7 @@ import java.util.HashMap;
 public class Espai {
     private String nom;
     private String registre;
-    private HashMap<String,String> descripcions;
+    private LinkedHashMap<String,String> descripcions;
     private String municipi;
     private String adreca;
     private String email;
@@ -28,8 +30,9 @@ public class Espai {
     private String gestor;
     private String serveis;
     //igual que amb modalitats
+    private boolean visible;
 
-    public Espai(String nom, String registre, HashMap<String, String> descripcions, String municipi, String adreca, String email, String web, int telefon, String tipus, String modalitat, String gestor, String serveis) {
+    public Espai(String nom, String registre, LinkedHashMap<String, String> descripcions, String municipi, String adreca, String email, String web, int telefon, String tipus, String modalitat, String gestor, String serveis) {
         this.nom = nom;
         this.registre = registre;
         this.descripcions = descripcions;
@@ -60,11 +63,11 @@ public class Espai {
         this.registre = registre;
     }
 
-    public HashMap<String, String> getDescripcions() {
+    public LinkedHashMap<String, String> getDescripcions() {
         return descripcions;
     }
 
-    public void setDescripcions(HashMap<String, String> descripcions) {
+    public void setDescripcions(LinkedHashMap<String, String> descripcions) {
         this.descripcions = descripcions;
     }
 
@@ -139,13 +142,23 @@ public class Espai {
     public void setServeis(String serveis) {
         this.serveis = serveis;
     }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
     
-    private String desc(){
+    
+    public String desc(){
         String desc = "";
         for (String name: descripcions.keySet()) {
             String value = descripcions.get(name).toString();
-            desc += (name + ": " + value + ", ");
+            desc += ("\"" + name + "\"" + ": \"" + value + "\",     ");
         }  
+        desc = desc.substring(0,desc.length() - 6);
         return desc;
     }
     

@@ -5,8 +5,14 @@
  */
 package spdvi;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.stream.Collectors;
 import javax.swing.DefaultListModel;
+import javax.swing.JCheckBox;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,6 +20,10 @@ import javax.swing.JList;
  */
 public class MainForm extends javax.swing.JFrame {
     private JList<Espai> lstEspais;
+    private ArrayList<JCheckBox> chkListModalitats;
+    private ArrayList<JCheckBox> chkListServeis;
+    private boolean insert = true;
+           
     /**
      * Creates new form MainForm
      */
@@ -21,6 +31,25 @@ public class MainForm extends javax.swing.JFrame {
         initComponents();
         lstEspais = new JList<Espai>();
         scrEspais.setViewportView(lstEspais);
+        chkListModalitats = new ArrayList<>();
+        chkListModalitats.add(chkEscultura);
+        chkListModalitats.add(chkFotografia);
+        chkListModalitats.add(chkPintura);
+        chkListModalitats.add(chkVidre);
+        chkListModalitats.add(chkVideo);
+        
+        chkListServeis = new ArrayList<>();
+        chkListServeis.add(chkAcces);
+        chkListServeis.add(chkAparcament);
+        chkListServeis.add(chkArxiu);
+        chkListServeis.add(chkBiblioteca);
+        chkListServeis.add(chkCafeteria);
+        chkListServeis.add(chkConcerts);
+        chkListServeis.add(chkConferencies);
+        chkListServeis.add(chkTallers);
+        chkListServeis.add(chkVisites);
+        chkListServeis.add(chkJardins);
+        chkListServeis.add(chkWifi);        
     }
 
     /**
@@ -37,6 +66,60 @@ public class MainForm extends javax.swing.JFrame {
         scrEspais = new javax.swing.JScrollPane();
         btnRead = new javax.swing.JButton();
         pnlInsert = new javax.swing.JPanel();
+        lblNomEspai = new javax.swing.JLabel();
+        txtNomEspai = new javax.swing.JTextField();
+        lblRegistreEspai = new javax.swing.JLabel();
+        txtRegistreEspai = new javax.swing.JTextField();
+        lblDescripcions = new javax.swing.JLabel();
+        cmbDesc = new javax.swing.JComboBox<>();
+        layeredDesc = new javax.swing.JLayeredPane();
+        pnlCat = new javax.swing.JPanel();
+        scrCat = new javax.swing.JScrollPane();
+        txaCat = new javax.swing.JTextArea();
+        pnlCast = new javax.swing.JPanel();
+        scrCast = new javax.swing.JScrollPane();
+        txaCast = new javax.swing.JTextArea();
+        pnlEng = new javax.swing.JPanel();
+        scrEng = new javax.swing.JScrollPane();
+        txaEng = new javax.swing.JTextArea();
+        lblMunicipi = new javax.swing.JLabel();
+        txtMunicipi = new javax.swing.JTextField();
+        lblAdreca = new javax.swing.JLabel();
+        txtAdreca = new javax.swing.JTextField();
+        lblEmail = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        lblWeb = new javax.swing.JLabel();
+        txtWeb = new javax.swing.JTextField();
+        lblTelefon = new javax.swing.JLabel();
+        txtTelefon = new javax.swing.JTextField();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        lblTipus = new javax.swing.JLabel();
+        cmbTipus = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        chkSelectAllMod = new javax.swing.JCheckBox();
+        pnlModalitats = new javax.swing.JPanel();
+        chkPintura = new javax.swing.JCheckBox();
+        chkEscultura = new javax.swing.JCheckBox();
+        chkFotografia = new javax.swing.JCheckBox();
+        chkVidre = new javax.swing.JCheckBox();
+        chkVideo = new javax.swing.JCheckBox();
+        lblGestor = new javax.swing.JLabel();
+        txtGestor = new javax.swing.JTextField();
+        pnlServeis = new javax.swing.JPanel();
+        chkAcces = new javax.swing.JCheckBox();
+        chkCafeteria = new javax.swing.JCheckBox();
+        chkBiblioteca = new javax.swing.JCheckBox();
+        chkAparcament = new javax.swing.JCheckBox();
+        chkTallers = new javax.swing.JCheckBox();
+        chkVisites = new javax.swing.JCheckBox();
+        chkArxiu = new javax.swing.JCheckBox();
+        chkConcerts = new javax.swing.JCheckBox();
+        chkConferencies = new javax.swing.JCheckBox();
+        chkWifi = new javax.swing.JCheckBox();
+        chkSelectAllServ = new javax.swing.JCheckBox();
+        jLabel5 = new javax.swing.JLabel();
+        chkJardins = new javax.swing.JCheckBox();
+        btnInsert = new javax.swing.JButton();
         pnlModify = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -64,7 +147,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(scrEspais)
                     .addGroup(pnlReadLayout.createSequentialGroup()
-                        .addGap(0, 542, Short.MAX_VALUE)
+                        .addGap(0, 509, Short.MAX_VALUE)
                         .addComponent(btnRead)))
                 .addContainerGap())
         );
@@ -72,7 +155,7 @@ public class MainForm extends javax.swing.JFrame {
             pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlReadLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(scrEspais, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
+                .addComponent(scrEspais, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
                 .addGap(7, 7, 7)
                 .addComponent(btnRead)
                 .addContainerGap())
@@ -82,15 +165,506 @@ public class MainForm extends javax.swing.JFrame {
 
         pnlInsert.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        lblNomEspai.setText("Nom");
+
+        lblRegistreEspai.setText("Registre");
+
+        lblDescripcions.setText("Descripcions");
+
+        cmbDesc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Català", "Español", "English" }));
+        cmbDesc.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbDescItemStateChanged(evt);
+            }
+        });
+        cmbDesc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbDescActionPerformed(evt);
+            }
+        });
+        cmbDesc.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                cmbDescPropertyChange(evt);
+            }
+        });
+
+        txaCat.setColumns(20);
+        txaCat.setRows(5);
+        scrCat.setViewportView(txaCat);
+
+        txaCast.setColumns(20);
+        txaCast.setRows(5);
+        scrCast.setViewportView(txaCast);
+
+        txaEng.setColumns(20);
+        txaEng.setRows(5);
+        scrEng.setViewportView(txaEng);
+
+        javax.swing.GroupLayout pnlEngLayout = new javax.swing.GroupLayout(pnlEng);
+        pnlEng.setLayout(pnlEngLayout);
+        pnlEngLayout.setHorizontalGroup(
+            pnlEngLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 186, Short.MAX_VALUE)
+            .addGroup(pnlEngLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlEngLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(scrEng, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        pnlEngLayout.setVerticalGroup(
+            pnlEngLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 122, Short.MAX_VALUE)
+            .addGroup(pnlEngLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlEngLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(scrEng, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(15, Short.MAX_VALUE)))
+        );
+
+        javax.swing.GroupLayout pnlCastLayout = new javax.swing.GroupLayout(pnlCast);
+        pnlCast.setLayout(pnlCastLayout);
+        pnlCastLayout.setHorizontalGroup(
+            pnlCastLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCastLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(pnlEng, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pnlCastLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlCastLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(scrCast, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        pnlCastLayout.setVerticalGroup(
+            pnlCastLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCastLayout.createSequentialGroup()
+                .addComponent(pnlEng, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnlCastLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlCastLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(scrCast, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(26, Short.MAX_VALUE)))
+        );
+
+        javax.swing.GroupLayout pnlCatLayout = new javax.swing.GroupLayout(pnlCat);
+        pnlCat.setLayout(pnlCatLayout);
+        pnlCatLayout.setHorizontalGroup(
+            pnlCatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCatLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(pnlCast, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pnlCatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlCatLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(scrCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        pnlCatLayout.setVerticalGroup(
+            pnlCatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlCast, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(pnlCatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlCatLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(scrCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+
+        layeredDesc.setLayer(pnlCat, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout layeredDescLayout = new javax.swing.GroupLayout(layeredDesc);
+        layeredDesc.setLayout(layeredDescLayout);
+        layeredDescLayout.setHorizontalGroup(
+            layeredDescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layeredDescLayout.setVerticalGroup(
+            layeredDescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layeredDescLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlCat, javax.swing.GroupLayout.PREFERRED_SIZE, 114, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        lblMunicipi.setText("Municipi");
+
+        lblAdreca.setText("Adreça");
+
+        txtAdreca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAdrecaActionPerformed(evt);
+            }
+        });
+
+        lblEmail.setText("Email");
+
+        lblWeb.setText("Web");
+
+        lblTelefon.setText("Telefon");
+
+        txtTelefon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTelefonActionPerformed(evt);
+            }
+        });
+
+        lblTipus.setText("Tipus");
+
+        cmbTipus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Museu", "Galeria", "Centre Cultural" }));
+
+        jLabel2.setText("Modalitats (selecciona al menys 1)");
+
+        chkSelectAllMod.setText("Select all");
+        chkSelectAllMod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkSelectAllModActionPerformed(evt);
+            }
+        });
+
+        pnlModalitats.setBorder(javax.swing.BorderFactory.createTitledBorder("Modalitats"));
+
+        chkPintura.setText("Pintura");
+        chkPintura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkPinturaActionPerformed(evt);
+            }
+        });
+
+        chkEscultura.setText("Escultura");
+        chkEscultura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkEsculturaActionPerformed(evt);
+            }
+        });
+
+        chkFotografia.setText("Fotografia");
+        chkFotografia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkFotografiaActionPerformed(evt);
+            }
+        });
+
+        chkVidre.setText("Vidre");
+        chkVidre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkVidreActionPerformed(evt);
+            }
+        });
+
+        chkVideo.setText("Video");
+        chkVideo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkVideoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlModalitatsLayout = new javax.swing.GroupLayout(pnlModalitats);
+        pnlModalitats.setLayout(pnlModalitatsLayout);
+        pnlModalitatsLayout.setHorizontalGroup(
+            pnlModalitatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlModalitatsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlModalitatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(chkPintura)
+                    .addComponent(chkEscultura)
+                    .addComponent(chkFotografia)
+                    .addComponent(chkVidre)
+                    .addComponent(chkVideo))
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
+        pnlModalitatsLayout.setVerticalGroup(
+            pnlModalitatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlModalitatsLayout.createSequentialGroup()
+                .addComponent(chkPintura)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkEscultura)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkFotografia)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkVidre)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkVideo)
+                .addContainerGap(8, Short.MAX_VALUE))
+        );
+
+        lblGestor.setText("Gestor");
+
+        txtGestor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtGestorActionPerformed(evt);
+            }
+        });
+
+        pnlServeis.setBorder(javax.swing.BorderFactory.createTitledBorder("Serveis"));
+
+        chkAcces.setText("Accés discapacitats");
+        chkAcces.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkAccesActionPerformed(evt);
+            }
+        });
+
+        chkCafeteria.setText("Cafeteria");
+        chkCafeteria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkCafeteriaActionPerformed(evt);
+            }
+        });
+
+        chkBiblioteca.setText("Biblioteca");
+        chkBiblioteca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkBibliotecaActionPerformed(evt);
+            }
+        });
+
+        chkAparcament.setText("Aparcament");
+        chkAparcament.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkAparcamentActionPerformed(evt);
+            }
+        });
+
+        chkTallers.setText("Tallers");
+        chkTallers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkTallersActionPerformed(evt);
+            }
+        });
+
+        chkVisites.setText("Visites concertades");
+        chkVisites.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkVisitesActionPerformed(evt);
+            }
+        });
+
+        chkArxiu.setText("Arxiu");
+        chkArxiu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkArxiuActionPerformed(evt);
+            }
+        });
+
+        chkConcerts.setText("Concerts");
+
+        chkConferencies.setText("Conferències");
+
+        chkWifi.setText("Wifi");
+
+        chkSelectAllServ.setText("Select all");
+        chkSelectAllServ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkSelectAllServActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("_____________________________________");
+
+        chkJardins.setText("Jardins");
+
+        javax.swing.GroupLayout pnlServeisLayout = new javax.swing.GroupLayout(pnlServeis);
+        pnlServeis.setLayout(pnlServeisLayout);
+        pnlServeisLayout.setHorizontalGroup(
+            pnlServeisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlServeisLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlServeisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(chkVisites)
+                    .addGroup(pnlServeisLayout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(chkSelectAllServ))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnlServeisLayout.createSequentialGroup()
+                        .addGroup(pnlServeisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chkAcces)
+                            .addComponent(chkCafeteria)
+                            .addComponent(chkBiblioteca)
+                            .addComponent(chkAparcament)
+                            .addComponent(chkTallers))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlServeisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chkJardins)
+                            .addComponent(chkWifi)
+                            .addComponent(chkConferencies)
+                            .addComponent(chkArxiu)
+                            .addComponent(chkConcerts))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlServeisLayout.setVerticalGroup(
+            pnlServeisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlServeisLayout.createSequentialGroup()
+                .addComponent(chkSelectAllServ)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 11, Short.MAX_VALUE)
+                .addGap(7, 7, 7)
+                .addGroup(pnlServeisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chkAcces)
+                    .addComponent(chkArxiu))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlServeisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chkCafeteria)
+                    .addComponent(chkConcerts))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlServeisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chkBiblioteca)
+                    .addComponent(chkConferencies))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlServeisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chkAparcament)
+                    .addComponent(chkWifi))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlServeisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chkTallers)
+                    .addComponent(chkJardins))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkVisites))
+        );
+
+        btnInsert.setText("Insert");
+        btnInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlInsertLayout = new javax.swing.GroupLayout(pnlInsert);
         pnlInsert.setLayout(pnlInsertLayout);
         pnlInsertLayout.setHorizontalGroup(
             pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 619, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInsertLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlServeis, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                        .addComponent(lblNomEspai)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNomEspai, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                        .addComponent(lblDescripcions)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(layeredDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(lblTipus)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbTipus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(chkSelectAllMod))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pnlInsertLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                                        .addComponent(lblTelefon)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtTelefon))
+                                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                                        .addComponent(lblAdreca)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtAdreca))
+                                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                                        .addComponent(lblMunicipi)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtMunicipi))
+                                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                                        .addComponent(lblRegistreEspai)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtRegistreEspai, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                                        .addComponent(lblEmail)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtEmail))
+                                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                                        .addComponent(lblWeb)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(pnlInsertLayout.createSequentialGroup()
+                                .addComponent(lblGestor)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtGestor, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(220, 220, 220))
+                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                        .addComponent(pnlModalitats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(86, 86, 86)
+                        .addComponent(btnInsert)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         pnlInsertLayout.setVerticalGroup(
             pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 396, Short.MAX_VALUE)
+            .addGroup(pnlInsertLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblRegistreEspai)
+                            .addComponent(txtRegistreEspai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblMunicipi)
+                            .addComponent(txtMunicipi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblAdreca)
+                            .addComponent(txtAdreca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblEmail)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblWeb)
+                            .addComponent(txtWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTelefon)
+                            .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblGestor)
+                            .addComponent(txtGestor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(chkSelectAllMod)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pnlModalitats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInsertLayout.createSequentialGroup()
+                                .addComponent(btnInsert)
+                                .addGap(63, 63, 63))))
+                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlInsertLayout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addComponent(layeredDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(pnlInsertLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblNomEspai)
+                                    .addComponent(txtNomEspai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(24, 24, 24)
+                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblDescripcions)
+                                    .addComponent(cmbDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(143, 143, 143)))
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTipus)
+                            .addComponent(cmbTipus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(filler1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlServeis, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         tabCRUD.addTab("Insert", pnlInsert);
@@ -99,11 +673,11 @@ public class MainForm extends javax.swing.JFrame {
         pnlModify.setLayout(pnlModifyLayout);
         pnlModifyLayout.setHorizontalGroup(
             pnlModifyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 623, Short.MAX_VALUE)
+            .addGap(0, 590, Short.MAX_VALUE)
         );
         pnlModifyLayout.setVerticalGroup(
             pnlModifyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 485, Short.MAX_VALUE)
         );
 
         tabCRUD.addTab("Modify", pnlModify);
@@ -112,7 +686,7 @@ public class MainForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabCRUD)
+            .addComponent(tabCRUD, javax.swing.GroupLayout.PREFERRED_SIZE, 595, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,6 +703,8 @@ public class MainForm extends javax.swing.JFrame {
             tabCRUD.setEnabledAt(1, false);
             tabCRUD.setEnabledAt(2, false);
         }
+        pnlCast.setVisible(false);
+        pnlEng.setVisible(false);
     }//GEN-LAST:event_formWindowOpened
 
     private void btnReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadActionPerformed
@@ -140,6 +716,206 @@ public class MainForm extends javax.swing.JFrame {
         lstEspais.setModel(defaultListModel);
     }//GEN-LAST:event_btnReadActionPerformed
 
+    private void cmbDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDescActionPerformed
+        switch(cmbDesc.getSelectedItem().toString()){
+           case "Català" -> {
+               pnlCast.setVisible(false);
+               pnlEng.setVisible(false);
+           }
+           case "Español" -> {
+               pnlCast.setVisible(true);
+               pnlEng.setVisible(false);
+           }
+           case "English" -> {
+               pnlCast.setVisible(true);
+               pnlEng.setVisible(true);
+           }
+       }
+    }//GEN-LAST:event_cmbDescActionPerformed
+
+    private void cmbDescItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDescItemStateChanged
+       
+    }//GEN-LAST:event_cmbDescItemStateChanged
+
+    private void cmbDescPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cmbDescPropertyChange
+       
+    }//GEN-LAST:event_cmbDescPropertyChange
+
+    private void txtAdrecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAdrecaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAdrecaActionPerformed
+
+    private void txtTelefonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTelefonActionPerformed
+
+    private void chkSelectAllModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkSelectAllModActionPerformed
+        if(chkSelectAllMod.isSelected()){
+            for(JCheckBox chkBox : chkListModalitats){
+                chkBox.setSelected(true);
+            }
+        }else{
+          for(JCheckBox chkBox : chkListModalitats){
+                chkBox.setSelected(false);
+          }  
+        }
+    }//GEN-LAST:event_chkSelectAllModActionPerformed
+
+    private void chkPinturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPinturaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkPinturaActionPerformed
+
+    private void chkEsculturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkEsculturaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkEsculturaActionPerformed
+
+    private void chkFotografiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkFotografiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkFotografiaActionPerformed
+
+    private void chkVidreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkVidreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkVidreActionPerformed
+
+    private void chkVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkVideoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkVideoActionPerformed
+
+    private void txtGestorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGestorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtGestorActionPerformed
+
+    private void chkSelectAllServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkSelectAllServActionPerformed
+        if(chkSelectAllServ.isSelected()){
+            for(JCheckBox chkBox : chkListServeis){
+                chkBox.setSelected(true);
+            }
+        }else{
+          for(JCheckBox chkBox : chkListServeis){
+                chkBox.setSelected(false);
+          }  
+        }
+    }//GEN-LAST:event_chkSelectAllServActionPerformed
+
+    private void chkAccesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAccesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkAccesActionPerformed
+
+    private void chkCafeteriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkCafeteriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkCafeteriaActionPerformed
+
+    private void chkBibliotecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkBibliotecaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkBibliotecaActionPerformed
+
+    private void chkAparcamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAparcamentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkAparcamentActionPerformed
+
+    private void chkTallersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkTallersActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkTallersActionPerformed
+
+    private void chkVisitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkVisitesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkVisitesActionPerformed
+
+    private void chkArxiuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkArxiuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkArxiuActionPerformed
+
+    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+        DataAccess da = new DataAccess();
+        //String descripcions = "Cat: " + txaCat.getText() + ";" + " Cast: " + txaCast.getText() + ";" + " Eng: " + txaEng.getText() + ";";
+        LinkedHashMap<String, String> descripcions = new LinkedHashMap<>();
+        descripcions.put("cat", txaCat.getText());
+        descripcions.put("esp", txaCast.getText());
+        descripcions.put("eng", txaEng.getText());
+        
+        String modalitats = "";
+        String error = "El telefon ha de ser un número vàlid";
+        try{
+            if(txtRegistreEspai.getText() == null || txtRegistreEspai.getText().isBlank() || txtRegistreEspai.getText().isEmpty() ||
+               txtAdreca.getText() == null || txtAdreca.getText().isBlank() || txtAdreca.getText().isEmpty() ||
+               txtEmail.getText() == null || txtEmail.getText().isBlank() || txtEmail.getText().isEmpty() ||
+               txtGestor.getText() == null || txtGestor.getText().isBlank() || txtGestor.getText().isEmpty() ||
+               txtMunicipi.getText() == null || txtMunicipi.getText().isBlank() || txtMunicipi.getText().isEmpty() ||
+               txtNomEspai.getText() == null || txtNomEspai.getText().isBlank() || txtNomEspai.getText().isEmpty() ||
+               txtWeb.getText() == null || txtWeb.getText().isBlank() || txtWeb.getText().isEmpty() ||
+               txtTelefon.getText() == null || txtTelefon.getText().isBlank() || txtTelefon.getText().isEmpty()) {
+                error = "Els atributs no poden ser nulls o buits";
+                throw new ArgumentNullException(error);
+            }
+            
+            if(txaCast.getText() == null || txaCast.getText().isBlank() || txaCast.getText().isEmpty() ||
+               txaCat.getText() == null || txaCat.getText().isBlank() || txaCat.getText().isEmpty() ||
+               txaEng.getText() == null || txaEng.getText().isBlank() || txaEng.getText().isEmpty()) {
+                error = "S'han d'omplir les descripcions en els 3 idiomes";
+                throw new ArgumentNullException(error);
+            }
+            for(Espai espai : da.getEspais()){
+                if(txtRegistreEspai.getText().equals(espai.getRegistre())){
+                    error = "No es pot repetir un nombre de registre";
+                    throw new ArgumentNullException(error);
+                }
+            }
+            Integer.parseInt(txtTelefon.getText());
+            if(txtTelefon.getText().length() != 9){
+                error = "Ha de ser un número de telefon valid";
+                throw new ArgumentNullException(error);
+            }
+            for(JCheckBox checkBox : chkListModalitats){
+                if(checkBox.isSelected()){
+                    modalitats += checkBox.getText() + ",";
+                }
+            }
+            if(modalitats.isBlank() || modalitats.isBlank() || modalitats == null){
+                error = "Al menys una modalitat ha de ser seleccionada";
+                throw new ArgumentNullException(error);
+            }
+            modalitats = modalitats.substring(0, modalitats.length() - 1);
+        } catch (Exception e){
+            insert = false;
+            System.err.println(error);
+            JOptionPane.showMessageDialog(null,
+            error,
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
+        }
+        
+        String serveis = "";
+        for(JCheckBox checkBox : chkListServeis){
+            if(checkBox.isSelected()){
+                serveis += checkBox.getText() + ",";
+            }
+        }
+        if(!(serveis.isBlank() || serveis.isEmpty() || serveis == null)) {
+            serveis = serveis.substring(0, serveis.length() - 1);
+        }
+
+        if(insert){
+            Espai espai = new Espai(txtNomEspai.getText(),
+                    txtRegistreEspai.getText(),
+                    descripcions,
+                    txtMunicipi.getText(),
+                    txtAdreca.getText(),
+                    txtEmail.getText(),
+                    txtWeb.getText(),
+                    Integer.parseInt(txtTelefon.getText()),
+                    cmbTipus.getSelectedItem().toString(),
+                    modalitats,
+                    txtGestor.getText(),
+                    serveis);
+            DataAccess da = new DataAccess();
+            int res = da.insertEspais(espai);
+            if (res != 0){
+                txtRegistreEspai.setText("");
+            }
+        }
+    }//GEN-LAST:event_btnInsertActionPerformed
+
+   
     /**
      * @param args the command line arguments
      */
@@ -176,11 +952,65 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnInsert;
     private javax.swing.JButton btnRead;
+    private javax.swing.JCheckBox chkAcces;
+    private javax.swing.JCheckBox chkAparcament;
+    private javax.swing.JCheckBox chkArxiu;
+    private javax.swing.JCheckBox chkBiblioteca;
+    private javax.swing.JCheckBox chkCafeteria;
+    private javax.swing.JCheckBox chkConcerts;
+    private javax.swing.JCheckBox chkConferencies;
+    private javax.swing.JCheckBox chkEscultura;
+    private javax.swing.JCheckBox chkFotografia;
+    private javax.swing.JCheckBox chkJardins;
+    private javax.swing.JCheckBox chkPintura;
+    private javax.swing.JCheckBox chkSelectAllMod;
+    private javax.swing.JCheckBox chkSelectAllServ;
+    private javax.swing.JCheckBox chkTallers;
+    private javax.swing.JCheckBox chkVideo;
+    private javax.swing.JCheckBox chkVidre;
+    private javax.swing.JCheckBox chkVisites;
+    private javax.swing.JCheckBox chkWifi;
+    private javax.swing.JComboBox<String> cmbDesc;
+    private javax.swing.JComboBox<String> cmbTipus;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLayeredPane layeredDesc;
+    private javax.swing.JLabel lblAdreca;
+    private javax.swing.JLabel lblDescripcions;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblGestor;
+    private javax.swing.JLabel lblMunicipi;
+    private javax.swing.JLabel lblNomEspai;
+    private javax.swing.JLabel lblRegistreEspai;
+    private javax.swing.JLabel lblTelefon;
+    private javax.swing.JLabel lblTipus;
+    private javax.swing.JLabel lblWeb;
+    private javax.swing.JPanel pnlCast;
+    private javax.swing.JPanel pnlCat;
+    private javax.swing.JPanel pnlEng;
     private javax.swing.JPanel pnlInsert;
+    private javax.swing.JPanel pnlModalitats;
     private javax.swing.JPanel pnlModify;
     private javax.swing.JPanel pnlRead;
+    private javax.swing.JPanel pnlServeis;
+    private javax.swing.JScrollPane scrCast;
+    private javax.swing.JScrollPane scrCat;
+    private javax.swing.JScrollPane scrEng;
     private javax.swing.JScrollPane scrEspais;
     private javax.swing.JTabbedPane tabCRUD;
+    private javax.swing.JTextArea txaCast;
+    private javax.swing.JTextArea txaCat;
+    private javax.swing.JTextArea txaEng;
+    private javax.swing.JTextField txtAdreca;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtGestor;
+    private javax.swing.JTextField txtMunicipi;
+    private javax.swing.JTextField txtNomEspai;
+    private javax.swing.JTextField txtRegistreEspai;
+    private javax.swing.JTextField txtTelefon;
+    private javax.swing.JTextField txtWeb;
     // End of variables declaration//GEN-END:variables
 }
