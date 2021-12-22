@@ -6,10 +6,12 @@
 package spdvi;
 
 import java.awt.Frame;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JOptionPane;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -140,35 +142,27 @@ public class Register extends javax.swing.JDialog {
 
         for (User u : userlist) {
             if (u.getUserName().equals(txtUsername.getText()) || u.getEmail().equals(txtEmail.getText())) {
-                insertarUsuari = false;
+                password = "";
+                txtGeneratedPassword.setText("");
                 if (u.getUserName().equals(txtUsername.getText())) {
                     incorrectUsername();
                 }
                 if (u.getEmail().equals(txtEmail.getText())) {
                     incorrectEmail();
                 }
+                break;
             } else {
-                insertarUsuari = true;
-            }
-        }
-
-        try {
-            if (insertarUsuari == false) {
-                password = "";
-                txtGeneratedPassword.setText("");
-            } else if (insertarUsuari) {
                 password = PasswordGenerator.getPassword(
                         PasswordGenerator.MINUSCULAS
                         + PasswordGenerator.MAYUSCULAS
                         + PasswordGenerator.ESPECIALES, 10);
 
-                User newUser = new User(txtUsername.getText(), txtEmail.getText(), password, false);
-                userlist.add(newUser);
-                da.insertUser(userlist);
+                String encriptMD5 = DigestUtils.md5Hex(password);
+
+                User newUser = new User(txtUsername.getText(), txtEmail.getText(), encriptMD5, false);
+                da.insertUser(newUser);
                 txtGeneratedPassword.setText(newUser.getPassword());
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }//GEN-LAST:event_btnRegisterActionPerformed
 
@@ -193,7 +187,7 @@ public class Register extends javax.swing.JDialog {
     }//GEN-LAST:event_txtGeneratedPasswordActionPerformed
 
     private void btnShowUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowUsersActionPerformed
-        System.out.println(userlist);
+        System.out.println(da.getUsers());
     }//GEN-LAST:event_btnShowUsersActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
