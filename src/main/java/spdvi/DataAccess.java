@@ -37,24 +37,23 @@ public class DataAccess {
         return connection;
     }
 
-    public int insertUser(ArrayList<User> userlist) {
-        try ( Connection connection = getConnection();) {
+    public int insertUser(User user) {
+        try (Connection connection = getConnection();) {
             PreparedStatement insertStatement = connection.prepareStatement(
                     "INSERT INTO dbo.[User] (Username, Password, Email, Admin) "
                     + "VALUES (?,?,?,?)");
 
-            for (User u : userlist) {
-                insertStatement.setString(1, u.getUserName());
-                insertStatement.setString(2, u.getPassword());
-                insertStatement.setString(3, u.getEmail());
-                insertStatement.setBoolean(4, u.isAdmin());
-
+                insertStatement.setString(1, user.getUserName());
+                insertStatement.setString(2, user.getPassword());
+                insertStatement.setString(3, user.getEmail());
+                insertStatement.setBoolean(4, user.isAdmin());
                 insertStatement.executeUpdate();
-                insertStatement.close();
+                
+                int result = insertStatement.executeUpdate();
+                return result;
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return 0;
     }
 
