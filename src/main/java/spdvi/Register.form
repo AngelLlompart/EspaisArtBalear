@@ -26,15 +26,6 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="txtGeneratedPassword" min="-2" pref="190" max="-2" attributes="0"/>
-                      <EmptySpace pref="85" max="32767" attributes="0"/>
-                      <Component id="btnShowUsers" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="lblGeneratedPassword" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblUsername" min="-2" max="-2" attributes="0"/>
@@ -42,11 +33,15 @@
                           <Component id="txtEmail" min="-2" pref="190" max="-2" attributes="0"/>
                           <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="85" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btnRegister" pref="89" max="32767" attributes="0"/>
                           <Component id="btnCancel" alignment="1" max="32767" attributes="0"/>
                       </Group>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="btnShowUsers" min="-2" pref="119" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="48" pref="48" max="-2" attributes="0"/>
@@ -74,10 +69,7 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="txtEmail" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                      <Component id="lblGeneratedPassword" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="txtGeneratedPassword" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                   </Group>
                   <Component id="btnShowUsers" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -115,16 +107,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblGeneratedPassword">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Generated Password"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtGeneratedPassword">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtGeneratedPasswordActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnShowUsers">
