@@ -17,6 +17,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Properties;
+import java.util.regex.Pattern;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,22 +48,21 @@ public class DataAccess {
         return connection;
     }
 
-    public int insertUser(ArrayList<User> userlist) {
+    public int insertUser(User user) {
         try ( Connection connection = getConnection();) {
             PreparedStatement insertStatement = connection.prepareStatement(
                     "INSERT INTO dbo.[User] (Username, Password, Email, Admin) "
                     + "VALUES (?,?,?,?)");
 
-            for (User u : userlist) {
-                insertStatement.setString(1, u.getUserName());
-                insertStatement.setString(2, u.getPassword());
-                insertStatement.setString(3, u.getEmail());
-                insertStatement.setBoolean(4, u.isAdmin());
+            insertStatement.setString(1, user.getUserName());
+            insertStatement.setString(2, user.getPassword());
+            insertStatement.setString(3, user.getEmail());
+            insertStatement.setBoolean(4, user.isAdmin());
+            insertStatement.executeUpdate();
 
-                insertStatement.executeUpdate();
-                insertStatement.close();
-            }
-        } catch (Exception e) {
+            int result = insertStatement.executeUpdate();
+            return result;
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return 0;
@@ -119,14 +127,14 @@ public class DataAccess {
         }
         return espais;
     }
-    
-    public int insertEspais(Espai es){
+
+    public int insertEspais(Espai es) {
         int result = 0;
         try ( Connection connection = getConnection();) {
             PreparedStatement insertStatement = connection.prepareStatement(
                     "INSERT INTO dbo.[Espai] (Registre, Nom, Descripcions, Municipi, Adreça, Email, Web, Telefon, Tipus, Modalitats, Gestor, Serveis)"
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
-            
+
             insertStatement.setString(1, es.getRegistre());
             insertStatement.setString(2, es.getNom());
             insertStatement.setString(3, es.desc());
@@ -139,11 +147,9 @@ public class DataAccess {
             insertStatement.setString(10, es.getModalitat());
             insertStatement.setString(11, es.getGestor());
             insertStatement.setString(12, es.getServeis());
-            
-            
+
             result = insertStatement.executeUpdate();
-            
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }

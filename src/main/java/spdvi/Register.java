@@ -6,10 +6,12 @@
 package spdvi;
 
 import java.awt.Frame;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JOptionPane;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -40,8 +42,6 @@ public class Register extends javax.swing.JDialog {
         txtEmail = new javax.swing.JTextField();
         btnRegister = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
-        lblGeneratedPassword = new javax.swing.JLabel();
-        txtGeneratedPassword = new javax.swing.JTextField();
         btnShowUsers = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -64,14 +64,6 @@ public class Register extends javax.swing.JDialog {
             }
         });
 
-        lblGeneratedPassword.setText("Generated Password");
-
-        txtGeneratedPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGeneratedPasswordActionPerformed(evt);
-            }
-        });
-
         btnShowUsers.setText("Show Users");
         btnShowUsers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,23 +78,19 @@ public class Register extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtGeneratedPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
-                        .addComponent(btnShowUsers))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblGeneratedPassword)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblUsername)
                             .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblEmail))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnRegister, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-                            .addComponent(btnCancel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnCancel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnShowUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(48, 48, 48))
         );
         layout.setVerticalGroup(
@@ -123,10 +111,7 @@ public class Register extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(lblGeneratedPassword)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtGeneratedPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(86, 86, 86))
                     .addComponent(btnShowUsers))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
@@ -140,35 +125,28 @@ public class Register extends javax.swing.JDialog {
 
         for (User u : userlist) {
             if (u.getUserName().equals(txtUsername.getText()) || u.getEmail().equals(txtEmail.getText())) {
-                insertarUsuari = false;
+                password = "";
                 if (u.getUserName().equals(txtUsername.getText())) {
                     incorrectUsername();
                 }
                 if (u.getEmail().equals(txtEmail.getText())) {
                     incorrectEmail();
                 }
+                break;
             } else {
-                insertarUsuari = true;
-            }
-        }
-
-        try {
-            if (insertarUsuari == false) {
-                password = "";
-                txtGeneratedPassword.setText("");
-            } else if (insertarUsuari) {
                 password = PasswordGenerator.getPassword(
                         PasswordGenerator.MINUSCULAS
                         + PasswordGenerator.MAYUSCULAS
                         + PasswordGenerator.ESPECIALES, 10);
 
-                User newUser = new User(txtUsername.getText(), txtEmail.getText(), password, false);
-                userlist.add(newUser);
-                da.insertUser(userlist);
-                txtGeneratedPassword.setText(newUser.getPassword());
+                String encriptMD5 = DigestUtils.md5Hex(password);
+
+                User newUser = new User(txtUsername.getText(), txtEmail.getText(), encriptMD5, false);
+                da.insertUser(newUser);
+                
+                SendEmail sendEmail = new SendEmail();
+                sendEmail.sendEmail(txtEmail);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }//GEN-LAST:event_btnRegisterActionPerformed
 
@@ -188,12 +166,8 @@ public class Register extends javax.swing.JDialog {
                 JOptionPane.ERROR_MESSAGE);
     }
 
-    private void txtGeneratedPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGeneratedPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtGeneratedPasswordActionPerformed
-
     private void btnShowUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowUsersActionPerformed
-        System.out.println(userlist);
+        System.out.println(da.getUsers());
     }//GEN-LAST:event_btnShowUsersActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -247,10 +221,8 @@ public class Register extends javax.swing.JDialog {
     private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnShowUsers;
     private javax.swing.JLabel lblEmail;
-    private javax.swing.JLabel lblGeneratedPassword;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtGeneratedPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }
