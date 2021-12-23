@@ -1,14 +1,13 @@
+package spdvi;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package spdvi;
 
 import spdvi.dialogs.Login;
 import spdvi.dialogs.Visualitzar;
-import spdvi.helpers.ArgumentNullException;
-import spdvi.helpers.DataAccess;
 import spdvi.pojos.Espai;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,6 +17,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import spdvi.helpers.ArgumentNullException;
+import spdvi.helpers.DataAccess;
 
 /**
  *
@@ -290,7 +291,7 @@ public class MainForm extends javax.swing.JFrame {
         );
         pnlCatLayout.setVerticalGroup(
             pnlCatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlCast, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(pnlCast, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
             .addGroup(pnlCatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlCatLayout.createSequentialGroup()
                     .addContainerGap()
@@ -310,7 +311,7 @@ public class MainForm extends javax.swing.JFrame {
             layeredDescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layeredDescLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlCat, javax.swing.GroupLayout.PREFERRED_SIZE, 114, Short.MAX_VALUE)
+                .addComponent(pnlCat, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

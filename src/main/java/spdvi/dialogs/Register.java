@@ -5,10 +5,8 @@
  */
 package spdvi.dialogs;
 
-import spdvi.helpers.DataAccess;
-import spdvi.helpers.PasswordGenerator;
-import spdvi.helpers.SendEmail;
 import spdvi.pojos.User;
+import spdvi.dialogs.ConfirmPassword;
 import java.awt.Frame;
 import java.security.MessageDigest;
 import java.util.ArrayList;
@@ -16,6 +14,9 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import org.apache.commons.codec.digest.DigestUtils;
+import spdvi.helpers.DataAccess;
+import spdvi.helpers.PasswordGenerator;
+import spdvi.helpers.SendEmail;
 
 /**
  *

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 spdvi\MainForm$14.class
 spdvi\MainForm$6.class
 spdvi\MainForm$24.class
@@ -5,10 +6,25 @@ spdvi\dialogs\Register$2.class
 spdvi\dialogs\Visualitzar$2.class
 spdvi\dialogs\ConfirmPassword$4.class
 spdvi\dialogs\ForgotPassword$3.class
+=======
+spdvi\EncriptarPassword.class
+spdvi\Login$7.class
+spdvi\MainForm$14.class
+spdvi\MainForm$6.class
+spdvi\MainForm$24.class
+spdvi\ConfirmPassword$3.class
+spdvi\Login$11.class
+spdvi\Register$4.class
+spdvi\DataAccess.class
+spdvi\Login.class
+spdvi\User.class
+spdvi\Login$4.class
+>>>>>>> 34101bab9957eb6380deee68b0a950ef9f5ae827
 spdvi\MainForm$11.class
 spdvi\MainForm$17.class
 spdvi\MainForm$9.class
 spdvi\MainForm$2.class
+<<<<<<< HEAD
 spdvi\dialogs\Login$3.class
 spdvi\dialogs\Login$6.class
 spdvi\pojos\User.class
@@ -25,9 +41,23 @@ spdvi\MainForm$21.class
 spdvi\MainForm$3.class
 spdvi\dialogs\ConfirmPassword$5.class
 spdvi\dialogs\Login$5.class
+=======
+spdvi\Login$1.class
+spdvi\Login$11$1.class
+spdvi\SendEmail.class
+spdvi\Login$3.class
+spdvi\ArgumentNullException.class
+spdvi\ForgotPassword$1.class
+spdvi\MainForm$21.class
+spdvi\MainForm$3.class
+spdvi\ForgotPassword$4.class
+spdvi\ConfirmPassword$5.class
+spdvi\Register.class
+>>>>>>> 34101bab9957eb6380deee68b0a950ef9f5ae827
 spdvi\MainForm$10.class
 spdvi\dialogs\ConfirmPassword.class
 spdvi\MainForm$13.class
+<<<<<<< HEAD
 spdvi\dialogs\ConfirmPassword$2.class
 spdvi\dialogs\Login$2.class
 spdvi\dialogs\ForgotPassword$5.class
@@ -35,6 +65,12 @@ spdvi\helpers\DataAccess.class
 spdvi\dialogs\Login$8.class
 spdvi\dialogs\Register$4.class
 spdvi\dialogs\Login$1.class
+=======
+spdvi\ConfirmPassword$2.class
+spdvi\Imatges.class
+spdvi\Comentari.class
+spdvi\ForgotPassword.class
+>>>>>>> 34101bab9957eb6380deee68b0a950ef9f5ae827
 spdvi\MainForm$19.class
 spdvi\helpers\SendEmail.class
 spdvi\dialogs\Register.class
@@ -42,6 +78,7 @@ spdvi\MainForm$22.class
 spdvi\pojos\Imatges.class
 spdvi\MainForm$1.class
 spdvi\MainForm$16.class
+<<<<<<< HEAD
 spdvi\dialogs\ForgotPassword$2.class
 spdvi\dialogs\Visualitzar$4$1.class
 spdvi\pojos\Espai.class
@@ -54,6 +91,25 @@ spdvi\dialogs\Login$7.class
 spdvi\dialogs\ConfirmPassword$3.class
 spdvi\dialogs\ConfirmPassword$1.class
 spdvi\helpers\ArgumentNullException.class
+=======
+spdvi\ConfirmPassword$5$1.class
+spdvi\Espai.class
+spdvi\ForgotPassword$5.class
+spdvi\PasswordGenerator.class
+spdvi\Register$2.class
+spdvi\Login$9.class
+spdvi\MainForm$12.class
+spdvi\MainForm$4.class
+spdvi\ConfirmPassword$1.class
+spdvi\ConfirmPassword.class
+spdvi\ForgotPassword$5$1.class
+spdvi\Register$4$1.class
+spdvi\Login$10.class
+.netbeans_automatic_build
+spdvi\Login$6.class
+spdvi\MainForm$7.class
+spdvi\ConfirmPassword$4.class
+>>>>>>> 34101bab9957eb6380deee68b0a950ef9f5ae827
 spdvi\MainForm$15.class
 spdvi\pojos\Comentari.class
 spdvi\dialogs\ForgotPassword$4.class

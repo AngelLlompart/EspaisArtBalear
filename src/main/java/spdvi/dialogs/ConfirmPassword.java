@@ -4,7 +4,6 @@
  */
 package spdvi.dialogs;
 
-import spdvi.helpers.DataAccess;
 import spdvi.pojos.User;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -19,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import spdvi.helpers.DataAccess;
 
 /**
  *
