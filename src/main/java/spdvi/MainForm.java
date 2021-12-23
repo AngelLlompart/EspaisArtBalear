@@ -5,6 +5,11 @@
  */
 package spdvi;
 
+import spdvi.dialogs.Login;
+import spdvi.dialogs.Visualitzar;
+import spdvi.helpers.ArgumentNullException;
+import spdvi.helpers.DataAccess;
+import spdvi.pojos.Espai;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
