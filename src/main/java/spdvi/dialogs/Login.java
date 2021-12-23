@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package spdvi;
+package spdvi.dialogs;
 
+import spdvi.pojos.User;
+import spdvi.dialogs.ForgotPassword;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -13,6 +15,7 @@ import java.awt.font.TextAttribute;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import spdvi.helpers.DataAccess;
 
 /**
  *

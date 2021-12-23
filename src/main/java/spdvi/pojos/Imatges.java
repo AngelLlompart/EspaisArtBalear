@@ -1,4 +1,4 @@
-package spdvi;
+package spdvi.pojos;
 
 import java.awt.image.BufferedImage;
 

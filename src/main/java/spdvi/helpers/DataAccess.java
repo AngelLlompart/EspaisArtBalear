@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package spdvi;
+package spdvi.helpers;
 
+import spdvi.pojos.Espai;
+import spdvi.pojos.User;
 import java.awt.Frame;
 import java.io.IOException;
 import java.sql.Connection;
