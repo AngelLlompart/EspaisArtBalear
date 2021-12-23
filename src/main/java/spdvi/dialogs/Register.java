@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package spdvi;
+package spdvi.dialogs;
 
+import spdvi.pojos.User;
+import spdvi.dialogs.ConfirmPassword;
 import java.awt.Frame;
 import java.security.MessageDigest;
 import java.util.ArrayList;
@@ -12,6 +14,9 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import org.apache.commons.codec.digest.DigestUtils;
+import spdvi.helpers.DataAccess;
+import spdvi.helpers.PasswordGenerator;
+import spdvi.helpers.SendEmail;
 
 /**
  *
