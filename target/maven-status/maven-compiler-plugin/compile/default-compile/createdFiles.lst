@@ -50,6 +50,7 @@ spdvi\ConfirmPassword.class
 spdvi\ForgotPassword$5$1.class
 spdvi\Register$4$1.class
 spdvi\Login$10.class
+.netbeans_automatic_build
 spdvi\Login$6.class
 spdvi\MainForm$7.class
 spdvi\ConfirmPassword$4.class
