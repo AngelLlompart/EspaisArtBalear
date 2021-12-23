@@ -152,13 +152,15 @@ public class Register extends javax.swing.JDialog {
                 User newUser = new User(txtUsername.getText(), txtEmail.getText(), password, false);
                 da.insertUser(newUser);
                 
-                System.out.println(newUser.getPassword());
+                //System.out.println(newUser.getPassword());
                 
                 SendEmail sendEmail = new SendEmail();
-                sendEmail.sendEmail(txtEmail);
+                String missatge = sendEmail.sendEmail(txtEmail);
                 
                 setVisible(false);
                 ConfirmPassword cP = new ConfirmPassword((Frame) this.getParent(), true);
+                cP.setEmail(txtEmail.getText());
+                cP.setCodi(missatge);
                 cP.setVisible(true);
                 break;
             }
