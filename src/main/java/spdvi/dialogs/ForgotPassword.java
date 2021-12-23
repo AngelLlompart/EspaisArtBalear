@@ -5,7 +5,6 @@
  */
 package spdvi.dialogs;
 
-import spdvi.dialogs.ConfirmPassword;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -26,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.mail.Session;
 import spdvi.helpers.DataAccess;
 import spdvi.helpers.PasswordGenerator;
+import spdvi.dialogs.ConfirmPassword;
 
 /**
  *

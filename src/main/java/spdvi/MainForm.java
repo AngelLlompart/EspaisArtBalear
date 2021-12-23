@@ -6,8 +6,8 @@ package spdvi;
  * and open the template in the editor.
  */
 
-
 import spdvi.dialogs.Login;
+import spdvi.dialogs.Visualitzar;
 import spdvi.pojos.Espai;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -67,10 +67,13 @@ public class MainForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton4 = new javax.swing.JButton();
         tabCRUD = new javax.swing.JTabbedPane();
         pnlRead = new javax.swing.JPanel();
         scrEspais = new javax.swing.JScrollPane();
         btnRead = new javax.swing.JButton();
+        btnVisualitzar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         pnlInsert = new javax.swing.JPanel();
         lblNomEspai = new javax.swing.JLabel();
         txtNomEspai = new javax.swing.JTextField();
@@ -128,6 +131,8 @@ public class MainForm extends javax.swing.JFrame {
         btnInsert = new javax.swing.JButton();
         pnlModify = new javax.swing.JPanel();
 
+        jButton4.setText("jButton4");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -144,27 +149,46 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
+        btnVisualitzar.setText("Visualitzar");
+        btnVisualitzar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisualitzarActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Cercar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlReadLayout = new javax.swing.GroupLayout(pnlRead);
         pnlRead.setLayout(pnlReadLayout);
         pnlReadLayout.setHorizontalGroup(
             pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlReadLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrEspais)
-                    .addGroup(pnlReadLayout.createSequentialGroup()
-                        .addGap(0, 509, Short.MAX_VALUE)
-                        .addComponent(btnRead)))
-                .addContainerGap())
+                .addComponent(scrEspais, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnVisualitzar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRead, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         pnlReadLayout.setVerticalGroup(
             pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlReadLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(scrEspais, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
-                .addGap(7, 7, 7)
                 .addComponent(btnRead)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(btnVisualitzar)
+                .addGap(17, 17, 17)
+                .addComponent(jButton2)
+                .addContainerGap(357, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlReadLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scrEspais))
         );
 
         tabCRUD.addTab("Read", pnlRead);
@@ -679,7 +703,7 @@ public class MainForm extends javax.swing.JFrame {
         pnlModify.setLayout(pnlModifyLayout);
         pnlModifyLayout.setHorizontalGroup(
             pnlModifyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
+            .addGap(0, 619, Short.MAX_VALUE)
         );
         pnlModifyLayout.setVerticalGroup(
             pnlModifyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -692,7 +716,7 @@ public class MainForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabCRUD, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
+            .addComponent(tabCRUD, javax.swing.GroupLayout.PREFERRED_SIZE, 624, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -920,6 +944,15 @@ public class MainForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnInsertActionPerformed
 
+    private void btnVisualitzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualitzarActionPerformed
+        Visualitzar visualitzar = new Visualitzar(this, true);
+        visualitzar.setVisible(true);
+    }//GEN-LAST:event_btnVisualitzarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
    
     /**
      * @param args the command line arguments
@@ -959,6 +992,7 @@ public class MainForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInsert;
     private javax.swing.JButton btnRead;
+    private javax.swing.JButton btnVisualitzar;
     private javax.swing.JCheckBox chkAcces;
     private javax.swing.JCheckBox chkAparcament;
     private javax.swing.JCheckBox chkArxiu;
@@ -980,6 +1014,8 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbDesc;
     private javax.swing.JComboBox<String> cmbTipus;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLayeredPane layeredDesc;
