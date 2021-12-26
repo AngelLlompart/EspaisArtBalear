@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -28,6 +30,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
+import spdvi.pojos.Imatge;
 
 /**
  *
@@ -159,12 +162,52 @@ public class DataAccess {
     }
     
     public int updatePassword(String password, String user ) throws SQLException {    
-     try (Connection connection = getConnection();) {
-         PreparedStatement updateStatement = connection.prepareStatement("UPDATE dbo.[User] SET Password=? where Username=?"); 
-      updateStatement.setString(1, password);
-      updateStatement.setString(2, user);
-      int i = updateStatement.executeUpdate();
-      return i;
+        try (Connection connection = getConnection();) {
+            PreparedStatement updateStatement = connection.prepareStatement("UPDATE dbo.[User] SET Password=? where Username=?"); 
+            updateStatement.setString(1, password);
+            updateStatement.setString(2, user);
+            int i = updateStatement.executeUpdate();
+            return i;
+        }
     }
-  }
+    
+    public ArrayList<Imatge> getImatgesEspai(Espai espai){
+        ArrayList<Imatge> imatges = new ArrayList<>();
+         try ( Connection connection = getConnection()) {
+            PreparedStatement selectStatement = connection.prepareStatement(
+                    "Select * FROM dbo.[Imatge] where Espai=?"
+            );
+            selectStatement.setString(1, espai.getRegistre());
+            ResultSet resultSet = selectStatement.executeQuery();
+            while (resultSet.next()) {
+                Imatge imatge = new Imatge(
+                      resultSet.getString("ImatgeId"),
+                      resultSet.getString("Imatge"),
+                      resultSet.getString("Espai")
+                );
+                imatges.add(imatge);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return imatges;
+    }
+    
+    public int insertImage(Imatge imatge){
+        int result = 0;
+        try ( Connection connection = getConnection();) {
+            PreparedStatement insertStatement = connection.prepareStatement(
+                    "INSERT INTO dbo.[Imatge] (ImatgeId, Imatge, Espai)"
+                    + "VALUES (?,?,?)");
+            
+            insertStatement.setString(1, imatge.getId());
+            insertStatement.setString(2, imatge.getImatge());
+            insertStatement.setString(3, imatge.getEspai());
+            result = insertStatement.executeUpdate();
+
+        } catch (SQLException ex) {
+           ex.printStackTrace();
+        }
+        return result;
+    }
 }

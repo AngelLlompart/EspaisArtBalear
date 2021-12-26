@@ -6,6 +6,18 @@ package spdvi;
  * and open the template in the editor.
  */
 
+import com.azure.core.util.Context;
+import com.azure.storage.blob.BlobClient;
+import com.azure.storage.blob.models.BlobHttpHeaders;
+import com.azure.storage.blob.models.BlobRange;
+import com.azure.storage.blob.models.DownloadRetryOptions;
+import com.azure.storage.blob.specialized.BlockBlobClient;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.time.Duration;
 import spdvi.dialogs.Login;
 import spdvi.dialogs.Visualitzar;
 import spdvi.pojos.Espai;
@@ -13,22 +25,29 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.stream.Collectors;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import spdvi.dialogs.MyProfile;
 import spdvi.helpers.ArgumentNullException;
 import spdvi.helpers.DataAccess;
+import spdvi.helpers.ImageHelper;
+import spdvi.pojos.Imatge;
 
 /**
  *
  * @author angel
  */
-public class MainForm extends javax.swing.JFrame {
+public class MainForm extends javax.swing.JFrame implements Runnable{
     private JList<Espai> lstEspais;
     private ArrayList<JCheckBox> chkListModalitats;
     private ArrayList<JCheckBox> chkListServeis;
-    private boolean insert = true;
+    private Thread downloadThread;
+    private ArrayList<String> images = new ArrayList<>();
            
     /**
      * Creates new form MainForm
@@ -73,7 +92,8 @@ public class MainForm extends javax.swing.JFrame {
         scrEspais = new javax.swing.JScrollPane();
         btnRead = new javax.swing.JButton();
         btnVisualitzar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnCercar = new javax.swing.JButton();
+        btnMyProfile = new javax.swing.JButton();
         pnlInsert = new javax.swing.JPanel();
         lblNomEspai = new javax.swing.JLabel();
         txtNomEspai = new javax.swing.JTextField();
@@ -129,6 +149,13 @@ public class MainForm extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         chkJardins = new javax.swing.JCheckBox();
         btnInsert = new javax.swing.JButton();
+        lblImageIcon = new javax.swing.JLabel();
+        btnUpload = new javax.swing.JButton();
+        lblimages = new javax.swing.JLabel();
+        txtImage = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstImages = new javax.swing.JList<>();
+        jProgressBar1 = new javax.swing.JProgressBar();
         pnlModify = new javax.swing.JPanel();
 
         jButton4.setText("jButton4");
@@ -156,10 +183,17 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Cercar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnCercar.setText("Cercar");
+        btnCercar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnCercarActionPerformed(evt);
+            }
+        });
+
+        btnMyProfile.setText("My Profile");
+        btnMyProfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMyProfileActionPerformed(evt);
             }
         });
 
@@ -168,27 +202,38 @@ public class MainForm extends javax.swing.JFrame {
         pnlReadLayout.setHorizontalGroup(
             pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlReadLayout.createSequentialGroup()
-                .addComponent(scrEspais, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnVisualitzar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRead, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnVisualitzar)
+                    .addGroup(pnlReadLayout.createSequentialGroup()
+                        .addComponent(scrEspais, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlReadLayout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(btnRead, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlReadLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCercar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(18, 18, 18)
+                .addComponent(btnMyProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                .addGap(18, 18, 18))
         );
         pnlReadLayout.setVerticalGroup(
             pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlReadLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(btnRead)
-                .addGap(18, 18, 18)
-                .addComponent(btnVisualitzar)
-                .addGap(17, 17, 17)
-                .addComponent(jButton2)
-                .addContainerGap(357, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlReadLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrEspais))
+                .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlReadLayout.createSequentialGroup()
+                        .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnRead)
+                            .addComponent(btnMyProfile))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnVisualitzar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCercar)
+                        .addGap(0, 439, Short.MAX_VALUE))
+                    .addComponent(scrEspais))
+                .addContainerGap())
         );
 
         tabCRUD.addTab("Read", pnlRead);
@@ -291,7 +336,7 @@ public class MainForm extends javax.swing.JFrame {
         );
         pnlCatLayout.setVerticalGroup(
             pnlCatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlCast, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(pnlCast, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, Short.MAX_VALUE)
             .addGroup(pnlCatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlCatLayout.createSequentialGroup()
                     .addContainerGap()
@@ -311,7 +356,7 @@ public class MainForm extends javax.swing.JFrame {
             layeredDescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layeredDescLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlCat, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                .addComponent(pnlCat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -557,6 +602,31 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
+        btnUpload.setText("Upload");
+        btnUpload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUploadActionPerformed(evt);
+            }
+        });
+
+        lblimages.setText("Images");
+
+        txtImage.setText("jTextField1");
+
+        lstImages.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        lstImages.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstImagesValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(lstImages);
+
+        jProgressBar1.setStringPainted(true);
+
         javax.swing.GroupLayout pnlInsertLayout = new javax.swing.GroupLayout(pnlInsert);
         pnlInsert.setLayout(pnlInsertLayout);
         pnlInsertLayout.setHorizontalGroup(
@@ -586,6 +656,11 @@ public class MainForm extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(chkSelectAllMod))
                         .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                        .addComponent(pnlModalitats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(79, 79, 79)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(pnlInsertLayout.createSequentialGroup()
                         .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(pnlInsertLayout.createSequentialGroup()
@@ -619,21 +694,39 @@ public class MainForm extends javax.swing.JFrame {
                                 .addComponent(lblGestor)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtGestor, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(220, 220, 220))
-                    .addGroup(pnlInsertLayout.createSequentialGroup()
-                        .addComponent(pnlModalitats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(86, 86, 86)
-                        .addComponent(btnInsert)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlInsertLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(220, 220, 220))
+                            .addGroup(pnlInsertLayout.createSequentialGroup()
+                                .addGap(142, 142, 142)
+                                .addComponent(lblimages)
+                                .addContainerGap())
+                            .addGroup(pnlInsertLayout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                                        .addComponent(lblImageIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap(83, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInsertLayout.createSequentialGroup()
+                                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtImage)
+                                            .addComponent(jScrollPane1))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnUpload)
+                                        .addGap(51, 51, 51))))))))
+            .addGroup(pnlInsertLayout.createSequentialGroup()
+                .addGap(153, 153, 153)
+                .addComponent(btnInsert)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pnlInsertLayout.setVerticalGroup(
             pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlInsertLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlInsertLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblRegistreEspai)
                             .addComponent(txtRegistreEspai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -666,35 +759,49 @@ public class MainForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(chkSelectAllMod)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnlModalitats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInsertLayout.createSequentialGroup()
-                                .addComponent(btnInsert)
-                                .addGap(63, 63, 63))))
+                        .addComponent(pnlModalitats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlInsertLayout.createSequentialGroup()
                         .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlInsertLayout.createSequentialGroup()
-                                .addGap(70, 70, 70)
-                                .addComponent(layeredDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                                        .addGap(70, 70, 70)
+                                        .addComponent(layeredDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 11, Short.MAX_VALUE))
+                                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(lblNomEspai)
+                                            .addComponent(txtNomEspai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(24, 24, 24)
+                                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(lblDescripcions)
+                                            .addComponent(cmbDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(143, 143, 143)))
+                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblTipus)
+                                    .addComponent(cmbTipus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(pnlInsertLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGap(23, 23, 23)
+                                .addComponent(lblimages)
+                                .addGap(16, 16, 16)
                                 .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblNomEspai)
-                                    .addComponent(txtNomEspai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(24, 24, 24)
-                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblDescripcions)
-                                    .addComponent(cmbDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(143, 143, 143)))
-                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTipus)
-                            .addComponent(cmbTipus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnUpload))
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(filler1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInsertLayout.createSequentialGroup()
+                                .addComponent(lblImageIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(pnlServeis, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(btnInsert)
+                .addGap(60, 60, 60))
         );
 
         tabCRUD.addTab("Insert", pnlInsert);
@@ -703,11 +810,11 @@ public class MainForm extends javax.swing.JFrame {
         pnlModify.setLayout(pnlModifyLayout);
         pnlModifyLayout.setHorizontalGroup(
             pnlModifyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 619, Short.MAX_VALUE)
+            .addGap(0, 749, Short.MAX_VALUE)
         );
         pnlModifyLayout.setVerticalGroup(
             pnlModifyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 485, Short.MAX_VALUE)
+            .addGap(0, 570, Short.MAX_VALUE)
         );
 
         tabCRUD.addTab("Modify", pnlModify);
@@ -716,7 +823,7 @@ public class MainForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabCRUD, javax.swing.GroupLayout.PREFERRED_SIZE, 624, Short.MAX_VALUE)
+            .addComponent(tabCRUD)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -724,6 +831,7 @@ public class MainForm extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -857,6 +965,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         DataAccess da = new DataAccess();
+        boolean insert = true;
         //String descripcions = "Cat: " + txaCat.getText() + ";" + " Cast: " + txaCast.getText() + ";" + " Eng: " + txaEng.getText() + ";";
         LinkedHashMap<String, String> descripcions = new LinkedHashMap<>();
         descripcions.put("cat", txaCat.getText());
@@ -938,6 +1047,11 @@ public class MainForm extends javax.swing.JFrame {
                     txtGestor.getText(),
                     serveis);
             int res = da.insertEspais(espai);
+            for(String imatge : images){
+                String id = imatge.substring(0, imatge.length() - 4);
+                Imatge newImage = new Imatge(id, imatge, espai.getRegistre());
+                da.insertImage(newImage);
+            };
             if (res != 0){
                 txtRegistreEspai.setText("");
             }
@@ -945,15 +1059,116 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void btnVisualitzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualitzarActionPerformed
-        Visualitzar visualitzar = new Visualitzar(this, true);
-        visualitzar.setVisible(true);
+        if(!(lstEspais.getSelectedValue() == null)){
+            Visualitzar visualitzar = new Visualitzar(this, true);
+            visualitzar.setSelectedEspai(lstEspais.getSelectedValue());
+            visualitzar.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null,
+            "No s'ha seleccionat cap espai per a visualitzar",
+            "Info",
+            JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnVisualitzarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnCercarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarActionPerformed
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnCercarActionPerformed
 
-   
+    private void btnMyProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMyProfileActionPerformed
+        MyProfile mp = new MyProfile(this, true);
+        mp.setVisible(true);
+    }//GEN-LAST:event_btnMyProfileActionPerformed
+
+    private void btnUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadActionPerformed
+        DefaultListModel listModel = new DefaultListModel();
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(this);
+        if (returnValue == JFileChooser.APPROVE_OPTION){
+            BlobClient blobClient = ImageHelper.getContainerClient().getBlobClient(fileChooser.getSelectedFile().getName());
+            txtImage.setText(fileChooser.getSelectedFile().getAbsolutePath());
+            try {
+                BufferedImage bufferedImage = ImageIO.read(fileChooser.getSelectedFile().getAbsoluteFile());
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.write(bufferedImage, "jpg", baos);
+                ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+                blobClient.upload(bais, baos.size());
+                BlobHttpHeaders headers = new BlobHttpHeaders();
+                headers.setContentType("image/jpeg");
+                blobClient.setHttpHeaders(headers);
+                baos.close();
+                bais.close();
+                images.add(fileChooser.getSelectedFile().getName());
+                for(String image : images){
+                    listModel.addElement(image);
+                }
+                lstImages.setModel(listModel);
+            } catch (IOException ios) {
+                ios.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_btnUploadActionPerformed
+
+    
+    
+    private void lstImagesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstImagesValueChanged
+        if (!evt.getValueIsAdjusting()) {  //This line prevents double events when selecting by click
+            downloadThread = new Thread(this);
+            downloadThread.start();
+            lblImageIcon.setIcon(new ImageIcon(Visualitzar.class.getClassLoader().getResource("resizedloader.gif")));
+        }
+    }//GEN-LAST:event_lstImagesValueChanged
+
+    @Override
+    public void run() {
+        System.out.println(Thread.currentThread().getName());
+        downloadImage();
+    }
+    
+    private void downloadImage() {
+    // Downloading big images in chunks of 1kB might be very slow because of the request overhead to azure. Modify the algorithm to donwload eavery image in, for instance 20 chunks.
+
+        ByteArrayOutputStream outputStream;
+        BufferedImage originalImage;
+        try {
+            BlockBlobClient blobClient = ImageHelper.getContainerClient().getBlobClient(lstImages.getSelectedValue()).getBlockBlobClient();
+            int dataSize = (int) blobClient.getProperties().getBlobSize();
+            int numberOfBlocks = 20;
+            int numberOfBPerBlock = dataSize / numberOfBlocks;  // Split every image in 20 blocks. That is, make 20 requests to Azure.
+            System.out.println("Starting download of " + dataSize + " bytes in " + numberOfBlocks + " " + numberOfBPerBlock/1024 + "kB chunks");
+
+            
+            int i = 0;
+            outputStream = new ByteArrayOutputStream(dataSize);
+
+            while (i < numberOfBlocks) {
+                BlobRange range = new BlobRange(i * numberOfBPerBlock, (long)numberOfBPerBlock);
+                DownloadRetryOptions options = new DownloadRetryOptions().setMaxRetryRequests(5);
+
+                System.out.println(i + ": Downloading bytes " + range.getOffset() + " to " + (range.getOffset() + range.getCount()) + " with status "
+                        + blobClient.downloadStreamWithResponse(outputStream, range, options, null, false,
+                                Duration.ofSeconds(30), Context.NONE));
+                i++;
+                jProgressBar1.setValue(i * jProgressBar1.getMaximum() / (numberOfBlocks + 1));
+            }
+
+            // Download the last bytes of the image
+            BlobRange range = new BlobRange(i * numberOfBPerBlock);
+            DownloadRetryOptions options = new DownloadRetryOptions().setMaxRetryRequests(5);
+            System.out.println(i + ": Downloading bytes " + range.getOffset() + " to " + dataSize + " with status "
+                    + blobClient.downloadStreamWithResponse(outputStream, range, options, null, false,
+                            Duration.ofSeconds(30), Context.NONE));
+            i++;
+            jProgressBar1.setValue(i * jProgressBar1.getMaximum() / (numberOfBlocks + 1));
+            
+            originalImage = ImageIO.read(new ByteArrayInputStream(outputStream.toByteArray()));
+            ImageIcon icon = ImageHelper.resizeImageIcon(originalImage, lblImageIcon.getWidth(), lblImageIcon.getHeight());
+            lblImageIcon.setIcon(icon);
+            outputStream.close();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -990,8 +1205,11 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCercar;
     private javax.swing.JButton btnInsert;
+    private javax.swing.JButton btnMyProfile;
     private javax.swing.JButton btnRead;
+    private javax.swing.JButton btnUpload;
     private javax.swing.JButton btnVisualitzar;
     private javax.swing.JCheckBox chkAcces;
     private javax.swing.JCheckBox chkAparcament;
@@ -1014,21 +1232,25 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbDesc;
     private javax.swing.JComboBox<String> cmbTipus;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLayeredPane layeredDesc;
     private javax.swing.JLabel lblAdreca;
     private javax.swing.JLabel lblDescripcions;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblGestor;
+    private javax.swing.JLabel lblImageIcon;
     private javax.swing.JLabel lblMunicipi;
     private javax.swing.JLabel lblNomEspai;
     private javax.swing.JLabel lblRegistreEspai;
     private javax.swing.JLabel lblTelefon;
     private javax.swing.JLabel lblTipus;
     private javax.swing.JLabel lblWeb;
+    private javax.swing.JLabel lblimages;
+    private javax.swing.JList<String> lstImages;
     private javax.swing.JPanel pnlCast;
     private javax.swing.JPanel pnlCat;
     private javax.swing.JPanel pnlEng;
@@ -1048,6 +1270,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JTextField txtAdreca;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtGestor;
+    private javax.swing.JTextField txtImage;
     private javax.swing.JTextField txtMunicipi;
     private javax.swing.JTextField txtNomEspai;
     private javax.swing.JTextField txtRegistreEspai;
