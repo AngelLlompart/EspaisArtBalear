@@ -124,58 +124,50 @@ public class Register extends javax.swing.JDialog {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         boolean createUser = true;
-        String email = txtEmail.getText();
 
         for (User u : userlist) {
             if (u.getUserName().equals(txtUsername.getText()) || u.getEmail().equals(txtEmail.getText())) {
-                //createUser = false;
-                if (u.getUserName().equals(txtUsername.getText())) {
-                    incorrectUsername();
-                }
-                if (u.getEmail().equals(txtEmail.getText())) {
-                    incorrectEmail();
-                }
+                createUser = false;
+                
+                if (u.getUserName().equals(txtUsername.getText())) incorrectUsername();
+                if (u.getEmail().equals(txtEmail.getText())) incorrectEmail();
+                
                 break;
-            } else {
-                //createUser = true;
-                Pattern emailRegEx = Pattern.compile("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
-
-                if (emailRegEx.matcher(email).matches()) {
-                    User newUser = new User(txtUsername.getText(), email, "defaultpassword", false);
-                    da.insertUser(newUser);
-
-                    System.out.println(newUser.getPassword());
-
-                    SendEmail sendEmail = new SendEmail();
-                    String missatge = sendEmail.sendEmail(txtEmail);
-
-                    setVisible(false);
-                    ConfirmPassword cp = new ConfirmPassword((Frame) this.getParent(), true);
-                    cp.setEmail(txtEmail.getText());
-                    cp.setCodi(missatge);
-                    cp.setVisible(true);
-
-                    break;
-                } else {
-                    incorrectFormatEmail();
-                    break;
-                }
-            }
-
-            //if (createUser) {
-//                String password = PasswordGenerator.getPassword(
-//                        PasswordGenerator.MINUSCULAS
-//                        + PasswordGenerator.MAYUSCULAS
-//                        + PasswordGenerator.ESPECIALES, 10);
-
-            //String encriptMD5 = DigestUtils.md5Hex(password);
+            } else createUser = true;
         }
+
+        if (createUser) insertUser();
     }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void insertUser() {
+        String email = txtEmail.getText();
+        String username = txtUsername.getText();
+
+        Pattern emailRegEx = Pattern.compile("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
+
+        if (emailRegEx.matcher(email).matches()) {
+            User newUser = new User(username, email, "defaultpassword", false);
+            da.insertUser(newUser);
+
+            this.setVisible(false);
+
+            SendEmail sendEmail = new SendEmail();
+            String missatge = sendEmail.sendEmail(txtEmail);
+
+            ConfirmPassword cp = new ConfirmPassword((Frame) this.getParent(), true);
+            cp.setEmail(txtEmail.getText());
+            cp.setCodi(missatge);
+            cp.setVisible(true);
+        } else {
+            incorrectFormatEmail();
+        }
+    }
 
     private void incorrectUsername() {
         System.err.println("Incorrect user");
         JOptionPane.showMessageDialog(null,
-                "Aquest usuari ja existeix, introduesqui un diferent",
+                "   Aquest usuari ja existeix \n"
+                + "   Introduesqui un diferent",
                 "Error",
                 JOptionPane.ERROR_MESSAGE);
     }
@@ -183,13 +175,14 @@ public class Register extends javax.swing.JDialog {
     private void incorrectEmail() {
         System.err.println("Incorrect email");
         JOptionPane.showMessageDialog(null,
-                "Aquest email ja existeix, introduesqui un diferent",
+                "   Aquest email ja existeix \n"
+                + "   Introduesqui un diferent",
                 "Error",
                 JOptionPane.ERROR_MESSAGE);
     }
 
     private void incorrectFormatEmail() {
-        System.err.println("Incorrect email");
+        System.err.println("Incorrect format email");
         JOptionPane.showMessageDialog(null,
                 "L'email ha de tenir el següent format: \n"
                 + "            aaaa@gmail.com",
