@@ -51,6 +51,8 @@ public class Register extends javax.swing.JDialog {
         btnShowUsers = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setSize(new java.awt.Dimension(450, 250));
 
         lblUsername.setText("Username");
 
@@ -82,55 +84,51 @@ public class Register extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblUsername)
-                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEmail))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnRegister, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-                            .addComponent(btnCancel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnShowUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblUsername)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEmail))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnRegister, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCancel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnShowUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(48, 48, 48))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(30, 30, 30)
                 .addComponent(lblUsername)
-                .addGap(11, 11, 11)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnRegister))
-                        .addGap(27, 27, 27)
+                        .addGap(18, 18, 18)
                         .addComponent(lblEmail))
                     .addComponent(btnCancel))
-                .addGap(3, 3, 3)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(86, 86, 86))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnShowUsers))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         boolean createUser = true;
+        String email = txtEmail.getText();
 
         for (User u : userlist) {
             if (u.getUserName().equals(txtUsername.getText()) || u.getEmail().equals(txtEmail.getText())) {
-                createUser = false;
+                //createUser = false;
                 if (u.getUserName().equals(txtUsername.getText())) {
                     incorrectUsername();
                 }
@@ -139,47 +137,38 @@ public class Register extends javax.swing.JDialog {
                 }
                 break;
             } else {
-                createUser = true;
-            }
-
-            if (createUser) {
-                String password = PasswordGenerator.getPassword(
-                        PasswordGenerator.MINUSCULAS
-                        + PasswordGenerator.MAYUSCULAS
-                        + PasswordGenerator.ESPECIALES, 10);
-                
-                //String encriptMD5 = DigestUtils.md5Hex(password);
-                String email = txtEmail.getText();
+                //createUser = true;
                 Pattern emailRegEx = Pattern.compile("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
-                
+
                 if (emailRegEx.matcher(email).matches()) {
-                    User newUser = new User(txtUsername.getText(), email, password, false);
+                    User newUser = new User(txtUsername.getText(), email, "defaultpassword", false);
                     da.insertUser(newUser);
 
                     System.out.println(newUser.getPassword());
 
                     SendEmail sendEmail = new SendEmail();
-                    sendEmail.sendEmail(txtEmail);
+                    String missatge = sendEmail.sendEmail(txtEmail);
 
                     setVisible(false);
-                    ConfirmPassword cP = new ConfirmPassword((Frame) this.getParent(), true);
-                    cP.setVisible(true);
+                    ConfirmPassword cp = new ConfirmPassword((Frame) this.getParent(), true);
+                    cp.setEmail(txtEmail.getText());
+                    cp.setCodi(missatge);
+                    cp.setVisible(true);
+
                     break;
                 } else {
                     incorrectFormatEmail();
+                    break;
                 }
-                //System.out.println(newUser.getPassword());
-                
-                SendEmail sendEmail = new SendEmail();
-                String missatge = sendEmail.sendEmail(txtEmail);
-                
-                setVisible(false);
-                ConfirmPassword cP = new ConfirmPassword((Frame) this.getParent(), true);
-                cP.setEmail(txtEmail.getText());
-                cP.setCodi(missatge);
-                cP.setVisible(true);
-                break;
             }
+
+            //if (createUser) {
+//                String password = PasswordGenerator.getPassword(
+//                        PasswordGenerator.MINUSCULAS
+//                        + PasswordGenerator.MAYUSCULAS
+//                        + PasswordGenerator.ESPECIALES, 10);
+
+            //String encriptMD5 = DigestUtils.md5Hex(password);
         }
     }//GEN-LAST:event_btnRegisterActionPerformed
 

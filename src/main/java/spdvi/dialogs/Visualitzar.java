@@ -135,6 +135,7 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     
