@@ -156,7 +156,7 @@ public class Espai {
         String desc = "";
         for (String name: descripcions.keySet()) {
             String value = descripcions.get(name).toString();
-            desc += ("\"" + name + "\"" + ": \"" + value + "\",     ");
+            desc += (name  + ": " + value + ",     ");
         }  
         desc = desc.substring(0,desc.length() - 6);
         return desc;
