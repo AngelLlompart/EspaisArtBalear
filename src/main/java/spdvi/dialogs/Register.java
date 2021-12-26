@@ -12,6 +12,7 @@ import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import org.apache.commons.codec.digest.DigestUtils;
 import spdvi.helpers.DataAccess;
@@ -126,11 +127,9 @@ public class Register extends javax.swing.JDialog {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         boolean createUser = true;
-        String password = "";
 
         for (User u : userlist) {
             if (u.getUserName().equals(txtUsername.getText()) || u.getEmail().equals(txtEmail.getText())) {
-                password = "";
                 createUser = false;
                 if (u.getUserName().equals(txtUsername.getText())) {
                     incorrectUsername();
@@ -142,16 +141,33 @@ public class Register extends javax.swing.JDialog {
             } else {
                 createUser = true;
             }
-            
+
             if (createUser) {
-                password = PasswordGenerator.getPassword(
+                String password = PasswordGenerator.getPassword(
                         PasswordGenerator.MINUSCULAS
                         + PasswordGenerator.MAYUSCULAS
                         + PasswordGenerator.ESPECIALES, 10);
-                //String encriptMD5 = DigestUtils.md5Hex(password);
-                User newUser = new User(txtUsername.getText(), txtEmail.getText(), password, false);
-                da.insertUser(newUser);
                 
+                //String encriptMD5 = DigestUtils.md5Hex(password);
+                String email = txtEmail.getText();
+                Pattern emailRegEx = Pattern.compile("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
+                
+                if (emailRegEx.matcher(email).matches()) {
+                    User newUser = new User(txtUsername.getText(), email, password, false);
+                    da.insertUser(newUser);
+
+                    System.out.println(newUser.getPassword());
+
+                    SendEmail sendEmail = new SendEmail();
+                    sendEmail.sendEmail(txtEmail);
+
+                    setVisible(false);
+                    ConfirmPassword cP = new ConfirmPassword((Frame) this.getParent(), true);
+                    cP.setVisible(true);
+                    break;
+                } else {
+                    incorrectFormatEmail();
+                }
                 //System.out.println(newUser.getPassword());
                 
                 SendEmail sendEmail = new SendEmail();
@@ -179,6 +195,15 @@ public class Register extends javax.swing.JDialog {
         System.err.println("Incorrect email");
         JOptionPane.showMessageDialog(null,
                 "Aquest email ja existeix, introduesqui un diferent",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void incorrectFormatEmail() {
+        System.err.println("Incorrect email");
+        JOptionPane.showMessageDialog(null,
+                "L'email ha de tenir el següent format: \n"
+                + "            aaaa@gmail.com",
                 "Error",
                 JOptionPane.ERROR_MESSAGE);
     }
