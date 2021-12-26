@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package spdvi;
+package spdvi.pojos;
 
 /**
  *
@@ -19,6 +19,10 @@ public class User {
     }
     
     public User(String password) {
+        
+    }
+    
+    public User() {
         
     }
 

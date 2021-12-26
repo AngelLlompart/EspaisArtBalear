@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package spdvi;
+package spdvi.helpers;
 
 import java.awt.Frame;
 import java.util.Properties;
@@ -22,8 +22,8 @@ import javax.swing.JOptionPane;
  * @author Alumne
  */
 public class SendEmail {
-    public void sendEmail(javax.swing.JTextField textField) {
-        String password = PasswordGenerator.getPassword(
+    public String sendEmail(javax.swing.JTextField textField) {
+        String missatge = PasswordGenerator.getPassword(
                 PasswordGenerator.MINUSCULAS
                 + PasswordGenerator.MAYUSCULAS
                 + PasswordGenerator.ESPECIALES, 10);
@@ -32,7 +32,6 @@ public class SendEmail {
         String passwordRemitente = "1234joan";
         String correoReceptor = textField.getText();
         String asunto = "El codi es:";
-        String missatge = password;
 
         Pattern emailRegEx = Pattern.compile("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
         //comparam si la pagina web introduida compleix la expresio regular, si la compleix s'executa el menu, si no printa URL incorrecta i atura el programa
@@ -66,6 +65,7 @@ public class SendEmail {
         } else if(!emailRegEx.matcher(correoReceptor).matches()) {
             JOptionPane.showMessageDialog(null, "El correo electonico introducido esta mal");
         }
+        return missatge;
     }
     
 }

@@ -1,10 +1,14 @@
+package spdvi;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package spdvi;
 
+import spdvi.dialogs.Login;
+import spdvi.dialogs.Visualitzar;
+import spdvi.pojos.Espai;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -13,6 +17,9 @@ import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import spdvi.dialogs.MyProfile;
+import spdvi.helpers.ArgumentNullException;
+import spdvi.helpers.DataAccess;
 
 /**
  *
@@ -67,7 +74,8 @@ public class MainForm extends javax.swing.JFrame {
         scrEspais = new javax.swing.JScrollPane();
         btnRead = new javax.swing.JButton();
         btnVisualitzar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnCercar = new javax.swing.JButton();
+        btnMyProfile = new javax.swing.JButton();
         pnlInsert = new javax.swing.JPanel();
         lblNomEspai = new javax.swing.JLabel();
         txtNomEspai = new javax.swing.JTextField();
@@ -150,10 +158,17 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Cercar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnCercar.setText("Cercar");
+        btnCercar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnCercarActionPerformed(evt);
+            }
+        });
+
+        btnMyProfile.setText("My Profile");
+        btnMyProfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMyProfileActionPerformed(evt);
             }
         });
 
@@ -162,27 +177,38 @@ public class MainForm extends javax.swing.JFrame {
         pnlReadLayout.setHorizontalGroup(
             pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlReadLayout.createSequentialGroup()
-                .addComponent(scrEspais, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnVisualitzar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRead, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnVisualitzar)
+                    .addGroup(pnlReadLayout.createSequentialGroup()
+                        .addComponent(scrEspais, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlReadLayout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(btnRead, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlReadLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCercar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(18, 18, 18)
+                .addComponent(btnMyProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                .addGap(18, 18, 18))
         );
         pnlReadLayout.setVerticalGroup(
             pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlReadLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(btnRead)
-                .addGap(18, 18, 18)
-                .addComponent(btnVisualitzar)
-                .addGap(17, 17, 17)
-                .addComponent(jButton2)
-                .addContainerGap(357, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlReadLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrEspais))
+                .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlReadLayout.createSequentialGroup()
+                        .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnRead)
+                            .addComponent(btnMyProfile))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnVisualitzar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCercar)
+                        .addGap(0, 437, Short.MAX_VALUE))
+                    .addComponent(scrEspais))
+                .addContainerGap())
         );
 
         tabCRUD.addTab("Read", pnlRead);
@@ -285,7 +311,7 @@ public class MainForm extends javax.swing.JFrame {
         );
         pnlCatLayout.setVerticalGroup(
             pnlCatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlCast, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(pnlCast, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, Short.MAX_VALUE)
             .addGroup(pnlCatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlCatLayout.createSequentialGroup()
                     .addContainerGap()
@@ -305,7 +331,7 @@ public class MainForm extends javax.swing.JFrame {
             layeredDescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layeredDescLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlCat, javax.swing.GroupLayout.PREFERRED_SIZE, 114, Short.MAX_VALUE)
+                .addComponent(pnlCat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -688,7 +714,7 @@ public class MainForm extends javax.swing.JFrame {
                         .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(filler1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pnlServeis, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         tabCRUD.addTab("Insert", pnlInsert);
@@ -697,11 +723,11 @@ public class MainForm extends javax.swing.JFrame {
         pnlModify.setLayout(pnlModifyLayout);
         pnlModifyLayout.setHorizontalGroup(
             pnlModifyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 619, Short.MAX_VALUE)
+            .addGap(0, 734, Short.MAX_VALUE)
         );
         pnlModifyLayout.setVerticalGroup(
             pnlModifyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 485, Short.MAX_VALUE)
+            .addGap(0, 568, Short.MAX_VALUE)
         );
 
         tabCRUD.addTab("Modify", pnlModify);
@@ -710,7 +736,7 @@ public class MainForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabCRUD, javax.swing.GroupLayout.PREFERRED_SIZE, 624, Short.MAX_VALUE)
+            .addComponent(tabCRUD)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -718,6 +744,7 @@ public class MainForm extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -943,9 +970,14 @@ public class MainForm extends javax.swing.JFrame {
         visualitzar.setVisible(true);
     }//GEN-LAST:event_btnVisualitzarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnCercarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarActionPerformed
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnCercarActionPerformed
+
+    private void btnMyProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMyProfileActionPerformed
+        MyProfile mp = new MyProfile(this, true);
+        mp.setVisible(true);
+    }//GEN-LAST:event_btnMyProfileActionPerformed
 
    
     /**
@@ -984,7 +1016,9 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCercar;
     private javax.swing.JButton btnInsert;
+    private javax.swing.JButton btnMyProfile;
     private javax.swing.JButton btnRead;
     private javax.swing.JButton btnVisualitzar;
     private javax.swing.JCheckBox chkAcces;
@@ -1008,7 +1042,6 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbDesc;
     private javax.swing.JComboBox<String> cmbTipus;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
