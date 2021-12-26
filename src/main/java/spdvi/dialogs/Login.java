@@ -5,8 +5,9 @@
  */
 package spdvi.dialogs;
 
+import spdvi.dialogs.Register;
+import spdvi.helpers.DataAccess;
 import spdvi.pojos.User;
-import spdvi.dialogs.ForgotPassword;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -15,7 +16,8 @@ import java.awt.font.TextAttribute;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.JOptionPane;
-import spdvi.helpers.DataAccess;
+import org.apache.commons.codec.digest.DigestUtils;
+import spdvi.dialogs.ForgotPassword;
 
 /**
  *
@@ -240,6 +242,7 @@ public class Login extends javax.swing.JDialog {
         DataAccess da = new DataAccess();
         ArrayList<User> users = da.getUsers();
         boolean userExists = false;
+        String encriptMD5 = DigestUtils.md5Hex(new String (txtPassword.getPassword()));
         for(User u: users){
             if(u.getUserName().equals(txtUserName.getText())){
                 userExists = true;

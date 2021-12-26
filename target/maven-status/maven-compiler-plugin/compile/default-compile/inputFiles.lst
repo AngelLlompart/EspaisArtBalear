@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\dialogs\ConfirmPassword.java
 C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\MainForm.java
 C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\helpers\DataAccess.java
@@ -12,3 +13,20 @@ C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\dia
 C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\helpers\SendEmail.java
 C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\helpers\ArgumentNullException.java
 C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\pojos\Comentari.java
+=======
+D:\Clases2\Interf\EspaisArtsBalear\src\main\java\spdvi\helpers\ArgumentNullException.java
+D:\Clases2\Interf\EspaisArtsBalear\src\main\java\spdvi\dialogs\ForgotPassword.java
+D:\Clases2\Interf\EspaisArtsBalear\src\main\java\spdvi\pojos\Comentari.java
+D:\Clases2\Interf\EspaisArtsBalear\src\main\java\spdvi\pojos\User.java
+D:\Clases2\Interf\EspaisArtsBalear\src\main\java\spdvi\MainForm.java
+D:\Clases2\Interf\EspaisArtsBalear\src\main\java\spdvi\helpers\DataAccess.java
+D:\Clases2\Interf\EspaisArtsBalear\src\main\java\spdvi\dialogs\Visualitzar.java
+D:\Clases2\Interf\EspaisArtsBalear\src\main\java\spdvi\dialogs\Login.java
+D:\Clases2\Interf\EspaisArtsBalear\src\main\java\spdvi\helpers\PasswordGenerator.java
+D:\Clases2\Interf\EspaisArtsBalear\src\main\java\spdvi\pojos\Imatges.java
+D:\Clases2\Interf\EspaisArtsBalear\src\main\java\spdvi\dialogs\ConfirmPassword.java
+D:\Clases2\Interf\EspaisArtsBalear\src\main\java\spdvi\helpers\EncriptarPassword.java
+D:\Clases2\Interf\EspaisArtsBalear\src\main\java\spdvi\dialogs\Register.java
+D:\Clases2\Interf\EspaisArtsBalear\src\main\java\spdvi\helpers\SendEmail.java
+D:\Clases2\Interf\EspaisArtsBalear\src\main\java\spdvi\pojos\Espai.java
+>>>>>>> 1fda00a2e44d7813ddf53f9f0ea16bfd31c99239

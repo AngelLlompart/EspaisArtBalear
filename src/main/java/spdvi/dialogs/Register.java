@@ -149,7 +149,6 @@ public class Register extends javax.swing.JDialog {
                         + PasswordGenerator.ESPECIALES, 10);
                 
                 //String encriptMD5 = DigestUtils.md5Hex(password);
-                
                 String email = txtEmail.getText();
                 Pattern emailRegEx = Pattern.compile("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
                 
@@ -169,6 +168,17 @@ public class Register extends javax.swing.JDialog {
                 } else {
                     incorrectFormatEmail();
                 }
+                //System.out.println(newUser.getPassword());
+                
+                SendEmail sendEmail = new SendEmail();
+                String missatge = sendEmail.sendEmail(txtEmail);
+                
+                setVisible(false);
+                ConfirmPassword cP = new ConfirmPassword((Frame) this.getParent(), true);
+                cP.setEmail(txtEmail.getText());
+                cP.setCodi(missatge);
+                cP.setVisible(true);
+                break;
             }
         }
     }//GEN-LAST:event_btnRegisterActionPerformed

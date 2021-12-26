@@ -107,9 +107,9 @@ public class ConfirmPassword extends javax.swing.JDialog {
             }
         });
         jPanel1.add(btnCodi, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 120, 30));
-        jPanel1.add(txtContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 190, -1));
+        jPanel1.add(txtContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 190, -1));
         jPanel1.add(txtConfirmContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 190, -1));
-        jPanel1.add(txtCodi, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 190, -1));
+        jPanel1.add(txtCodi, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 190, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/azul.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 290));
@@ -132,44 +132,40 @@ public class ConfirmPassword extends javax.swing.JDialog {
         String password = new String(txtContrasenya.getPassword());
         
         Pattern passwordRegEx = Pattern.compile("^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z]).*$");
-        if (passwordRegEx.matcher(password).matches()) {
-        
-        DataAccess da = new DataAccess();
-        ArrayList<User> users = da.getUsers();
-        boolean userExists = false;
-
         if (codi.equals(txtCodi.getText())) {
             JOptionPane.showMessageDialog(null, "El codi introduit es correcte"); 
+            if (passwordRegEx.matcher(password).matches()) {
+                DataAccess da = new DataAccess();
+                ArrayList<User> users = da.getUsers();
+                boolean userExists = false;
+
+                if(!new String(txtContrasenya.getPassword()).equals(new String(txtConfirmContrasenya.getPassword()))) {
+                    JOptionPane.showMessageDialog(null, "La contrasenya no coincideix");
+                }else{
+                    for (User u : users) {
+                        if (u.getEmail().equals(email)) {
+                            try {
+                                da.updatePassword(new String(txtContrasenya.getPassword()), u.getUserName());
+                            } catch (SQLException ex) {
+                                ex.printStackTrace();
+                            }
+                        }
+                    }
+                    setVisible(false);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "La contrasenya no cumpleix els minims requerits: " +
+                        "\n" +
+                        "Al menys 8 caracters\n" +
+                        "\n" +
+                        "Conte al menys un dígit\n" +
+                        "\n" +
+                        "Conte una Minuscula i una Mayuscula\n" +
+                        "\n" +
+                        "No conte espais, tabulacións, etc.");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "El codi introduit esta malement");
-        }
-        
-        if(!new String(txtContrasenya.getPassword()).equals(new String(txtConfirmContrasenya.getPassword()))) {
-            JOptionPane.showMessageDialog(null, "La contrasenya no coincideix");
-        }
-        
-        for (User u : users) {
-            if (u.getEmail().equals(email)) {
-                try {
-                    da.updatePassword(new String(txtContrasenya.getPassword()), u.getUserName());
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        }
-        
-        setVisible(false);
-        
-        } else if (!passwordRegEx.matcher(password).matches()) {
-            JOptionPane.showMessageDialog(null, "La contrasenya no cumpleix els minims requerits: " +
-                    "\n" +
-                    "Al menys 8 caracters\n" +
-                    "\n" +
-                    "Conte al menys un dígit\n" +
-                    "\n" +
-                    "Conte una Minuscula i una Mayuscula\n" +
-                    "\n" +
-                    "No conte espais, tabulacións, etc.");
         }
     }//GEN-LAST:event_btnCodiActionPerformed
 
