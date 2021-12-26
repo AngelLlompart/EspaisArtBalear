@@ -26,39 +26,27 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import spdvi.helpers.ImageHelper;
+import spdvi.pojos.Espai;
+import spdvi.pojos.Imatge;
 
 /**
  *
  * @author angel
  */
 public class Visualitzar extends javax.swing.JDialog implements Runnable{
-    Properties properties = new Properties();
-    private ArrayList<String> blobNames = new ArrayList<>();
+    //private ArrayList<String> blobNames = new ArrayList<>();
+    private ArrayList<Imatge> imatges = new ArrayList<>();
     private int contador = 0;
+    private Espai selectedEspai;
     private Thread downloadThread;
     private String gif = "resizedloader.gif";
-    private static String connectionString;
-    private BlobServiceClient blobServiceClient;
-    private BlobContainerClient containerClient;
-    //Create a unique name for the container
-    private final static String containerName = "espaiarts";
     /**
      * Creates new form Visualitzar
      */
     public Visualitzar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        try {
-            properties.load(DataAccess.class.getClassLoader().getResourceAsStream("application.properties"));
-            connectionString = properties.getProperty("azureconnection");
-            //Create a BlobServiceClient object which will be used to create a container client
-            blobServiceClient = new BlobServiceClientBuilder().connectionString(connectionString).buildClient();
-            //Create the container and return a container client object
-            containerClient = blobServiceClient.getBlobContainerClient(containerName);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        
 
     }
 
@@ -142,7 +130,7 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         lblImage.setIcon(new ImageIcon(Visualitzar.class.getClassLoader().getResource(gif)));
         contador++;
-        if(contador == blobNames.size() - 1){
+        if(contador == imatges.size() - 1){
             btnNext.setEnabled(false);
         }
         btnPrevious.setEnabled(true);
@@ -153,8 +141,13 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         lblImage.setIcon(new ImageIcon(Visualitzar.class.getClassLoader().getResource(gif)));
         btnPrevious.setEnabled(false);
-        for (BlobItem blobItem : containerClient.listBlobs()) {
+        /*for (BlobItem blobItem : containerClient.listBlobs()) {
             blobNames.add(blobItem.getName());
+        }*/
+        DataAccess da = new DataAccess();
+        imatges = da.getImatgesEspai(selectedEspai);
+        if(imatges.size() == 1){
+            btnNext.setEnabled(false);
         }
         downloadThread = new Thread(this);
         downloadThread.start();
@@ -184,9 +177,8 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
         ByteArrayOutputStream outputStream;
         BufferedImage originalImage;
         try {
-            BlockBlobClient blobClient = containerClient.getBlobClient(blobNames.get(contador)).getBlockBlobClient();
+            BlockBlobClient blobClient = ImageHelper.getContainerClient().getBlobClient(imatges.get(contador).getImatge()).getBlockBlobClient();
             int dataSize = (int) blobClient.getProperties().getBlobSize();
-//            int numberOfBlocks = dataSize / 1024;
             int numberOfBlocks = 20;
             int numberOfBPerBlock = dataSize / numberOfBlocks;  // Split every image in 20 blocks. That is, make 20 requests to Azure.
             System.out.println("Starting download of " + dataSize + " bytes in " + numberOfBlocks + " " + numberOfBPerBlock/1024 + "kB chunks");
@@ -215,9 +207,8 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
             i++;
             jProgressBar1.setValue(i * jProgressBar1.getMaximum() / (numberOfBlocks + 1));
             
-//            blobClient.downloadStream(outputStream);  // Thread Blocking
             originalImage = ImageIO.read(new ByteArrayInputStream(outputStream.toByteArray()));
-            ImageIcon icon = resizeImageIcon(originalImage, lblImage.getWidth(), lblImage.getHeight());
+            ImageIcon icon = ImageHelper.resizeImageIcon(originalImage, lblImage.getWidth(), lblImage.getHeight());
             lblImage.setIcon(icon);
             outputStream.close();
         } catch (IOException ioe) {
@@ -225,24 +216,17 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
         }
     }
     
-    private ImageIcon resizeImageIcon(BufferedImage originalImage, int desiredWidth, int desiredHeight) {
-        int newHeight = 0;
-        int newWidth = 0;
-        float aspectRatio = (float) originalImage.getWidth() / originalImage.getHeight();
-        if (originalImage.getWidth() > originalImage.getHeight()) {
-            newWidth = desiredWidth;
-            newHeight = Math.round(desiredWidth / aspectRatio);
-        } else {
-            newHeight = desiredHeight;
-            newWidth = Math.round(desiredHeight * aspectRatio);
-        }
-        BufferedImage resultingImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
-        Graphics2D graphics2D = resultingImage.createGraphics();
-        graphics2D.drawImage(originalImage, 0, 0, newWidth, newHeight, null);
-        graphics2D.dispose();
-        ImageIcon imageIcon = new ImageIcon(resultingImage);
-        return imageIcon;
+    
+
+    public Espai getSelectedEspai() {
+        return selectedEspai;
     }
+
+    public void setSelectedEspai(Espai selectedEspai) {
+        this.selectedEspai = selectedEspai;
+    }
+    
+    
     /**
      * @param args the command line arguments
      */

@@ -163,7 +163,7 @@ public class ConfirmPassword extends javax.swing.JDialog {
             if (passwordRegEx.matcher(password).matches()) {
                 DataAccess da = new DataAccess();
                 ArrayList<User> users = da.getUsers();
-                boolean userExists = false;
+                //boolean userExists = false;
 
                 if(!new String(txtContrasenya.getPassword()).equals(new String(txtConfirmContrasenya.getPassword()))) {
                     JOptionPane.showMessageDialog(null, "La contrasenya no coincideix");
