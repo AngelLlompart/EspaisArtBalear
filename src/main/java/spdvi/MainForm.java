@@ -8,6 +8,7 @@ package spdvi;
 
 import com.azure.core.util.Context;
 import com.azure.storage.blob.BlobClient;
+import com.azure.storage.blob.BlobContainerClient;
 import com.azure.storage.blob.models.BlobHttpHeaders;
 import com.azure.storage.blob.models.BlobRange;
 import com.azure.storage.blob.models.DownloadRetryOptions;
@@ -16,6 +17,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import spdvi.dialogs.Login;
@@ -24,6 +26,9 @@ import spdvi.pojos.Espai;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
@@ -48,6 +53,8 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     private ArrayList<JCheckBox> chkListServeis;
     private Thread downloadThread;
     private ArrayList<String> images = new ArrayList<>();
+    private DefaultListModel imageListModel = new DefaultListModel();
+    private boolean inserted = false;
            
     /**
      * Creates new form MainForm
@@ -156,12 +163,16 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         jScrollPane1 = new javax.swing.JScrollPane();
         lstImages = new javax.swing.JList<>();
         jProgressBar1 = new javax.swing.JProgressBar();
+        btnBorrar = new javax.swing.JButton();
         pnlModify = new javax.swing.JPanel();
 
         jButton4.setText("jButton4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -627,6 +638,13 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
 
         jProgressBar1.setStringPainted(true);
 
+        btnBorrar.setText("Borrar");
+        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlInsertLayout = new javax.swing.GroupLayout(pnlInsert);
         pnlInsert.setLayout(pnlInsertLayout);
         pnlInsertLayout.setHorizontalGroup(
@@ -714,8 +732,10 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                                             .addComponent(txtImage)
                                             .addComponent(jScrollPane1))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnUpload)
-                                        .addGap(51, 51, 51))))))))
+                                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnUpload)
+                                            .addComponent(btnBorrar))
+                                        .addGap(43, 43, 43))))))))
             .addGroup(pnlInsertLayout.createSequentialGroup()
                 .addGap(153, 153, 153)
                 .addComponent(btnInsert)
@@ -789,7 +809,11 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                                     .addComponent(txtImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnUpload))
                                 .addGap(18, 18, 18)
-                                .addComponent(jScrollPane1)))
+                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1)
+                                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                                        .addComponent(btnBorrar)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInsertLayout.createSequentialGroup()
@@ -972,8 +996,10 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         descripcions.put("esp", txaCast.getText());
         descripcions.put("eng", txaEng.getText());
         
+        Pattern emailRegEx = Pattern.compile("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
+        Pattern webRegEx = Pattern.compile("(www\\.)[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,4}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)|(www\\.)?(?!ww)[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,4}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)");
         String modalitats = "";
-        String error = "El telefon ha de ser un número vàlid";
+        String error = "";
         try{
             if(txtRegistreEspai.getText() == null || txtRegistreEspai.getText().isBlank() || txtRegistreEspai.getText().isEmpty() ||
                txtAdreca.getText() == null || txtAdreca.getText().isBlank() || txtAdreca.getText().isEmpty() ||
@@ -983,37 +1009,62 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                txtNomEspai.getText() == null || txtNomEspai.getText().isBlank() || txtNomEspai.getText().isEmpty() ||
                txtWeb.getText() == null || txtWeb.getText().isBlank() || txtWeb.getText().isEmpty() ||
                txtTelefon.getText() == null || txtTelefon.getText().isBlank() || txtTelefon.getText().isEmpty()) {
-                error = "Els atributs no poden ser nulls o buits";
-                throw new ArgumentNullException(error);
+                error += "Els atributs no poden ser nulls o buits" + System.lineSeparator();
+                //throw new ArgumentNullException(error);
             }
             
             if(txaCast.getText() == null || txaCast.getText().isBlank() || txaCast.getText().isEmpty() ||
                txaCat.getText() == null || txaCat.getText().isBlank() || txaCat.getText().isEmpty() ||
                txaEng.getText() == null || txaEng.getText().isBlank() || txaEng.getText().isEmpty()) {
-                error = "S'han d'omplir les descripcions en els 3 idiomes";
-                throw new ArgumentNullException(error);
+                error += "S'han d'omplir les descripcions en els 3 idiomes" + System.lineSeparator();
+                //throw new ArgumentNullException(error);
             }
+            
             for(Espai espai : da.getEspais()){
                 if(txtRegistreEspai.getText().equals(espai.getRegistre())){
-                    error = "No es pot repetir un nombre de registre";
-                    throw new ArgumentNullException(error);
+                    error += "No es pot repetir un nombre de registre" + System.lineSeparator();
+                    //throw new ArgumentNullException(error);
                 }
             }
-            Integer.parseInt(txtTelefon.getText());
-            if(txtTelefon.getText().length() != 9){
-                error = "Ha de ser un número de telefon valid";
-                throw new ArgumentNullException(error);
+            
+            if(images.isEmpty()){
+                error += "Has d'introduïr 1 imatge com a mínim"  + System.lineSeparator();
+                //throw new ArgumentNullException(error);
             }
+            
+            try{
+                Integer.parseInt(txtTelefon.getText());
+                if(txtTelefon.getText().length() != 9){
+                    error += "El telèfon ha de ser un número vàlid" + System.lineSeparator();
+                    //throw new ArgumentNullException(error);
+                }
+            }catch(Exception e){
+                error += "El telèfon ha de ser un número vàlid" + System.lineSeparator();
+            }
+            
             for(JCheckBox checkBox : chkListModalitats){
                 if(checkBox.isSelected()){
                     modalitats += checkBox.getText() + ",";
                 }
             }
+            
             if(modalitats.isBlank() || modalitats.isBlank() || modalitats == null){
-                error = "Al menys una modalitat ha de ser seleccionada";
-                throw new ArgumentNullException(error);
+                error += "Al menys una modalitat ha de ser seleccionada"  + System.lineSeparator();
+                //throw new ArgumentNullException(error);
             }
             modalitats = modalitats.substring(0, modalitats.length() - 1);
+            
+            if(!(emailRegEx.matcher(txtEmail.getText()).matches()) || !(emailRegEx.matcher(txtGestor.getText()).matches())){
+                error += "Tant email com gestor han d'estar en un format d'email correcte";
+            }
+            
+            if(!(webRegEx.matcher(txtWeb.getText()).matches())){
+                error += "Web ha d'estar en el següent format: www.text.com";
+            }
+            
+            if(!(error.isEmpty() || error.isBlank() || error == null)){
+                throw new ArgumentNullException(error);
+            }
         } catch (Exception e){
             insert = false;
             System.err.println(error);
@@ -1047,13 +1098,24 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                     txtGestor.getText(),
                     serveis);
             int res = da.insertEspais(espai);
-            for(String imatge : images){
-                String id = imatge.substring(0, imatge.length() - 4);
-                Imatge newImage = new Imatge(id, imatge, espai.getRegistre());
+            String espaiImg = espai.getRegistre();
+            int contador = 1;
+            for(String imatge : images) {
+                String id = espaiImg + "_" + contador;
+                Imatge newImage = new Imatge(id, imatge, espaiImg);
                 da.insertImage(newImage);
+                contador++;
             };
             if (res != 0){
+                inserted = true;
+                JOptionPane.showMessageDialog(null,
+                "S'ha introduït el espai correctament",
+                "Info",
+                JOptionPane.INFORMATION_MESSAGE);
                 txtRegistreEspai.setText("");
+                images.clear();
+                imageListModel.clear();
+                lstImages.setModel(imageListModel);
             }
         }
     }//GEN-LAST:event_btnInsertActionPerformed
@@ -1081,30 +1143,54 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_btnMyProfileActionPerformed
 
     private void btnUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadActionPerformed
-        DefaultListModel listModel = new DefaultListModel();
+        //DefaultListModel imageListModel = new DefaultListModel();
         JFileChooser fileChooser = new JFileChooser();
+        Boolean status = true;
+        BlobContainerClient blobContainerClient = ImageHelper.getContainerClient();
         int returnValue = fileChooser.showOpenDialog(this);
         if (returnValue == JFileChooser.APPROVE_OPTION){
-            BlobClient blobClient = ImageHelper.getContainerClient().getBlobClient(fileChooser.getSelectedFile().getName());
-            txtImage.setText(fileChooser.getSelectedFile().getAbsolutePath());
             try {
-                BufferedImage bufferedImage = ImageIO.read(fileChooser.getSelectedFile().getAbsoluteFile());
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                ImageIO.write(bufferedImage, "jpg", baos);
-                ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-                blobClient.upload(bais, baos.size());
-                BlobHttpHeaders headers = new BlobHttpHeaders();
-                headers.setContentType("image/jpeg");
-                blobClient.setHttpHeaders(headers);
-                baos.close();
-                bais.close();
-                images.add(fileChooser.getSelectedFile().getName());
-                for(String image : images){
-                    listModel.addElement(image);
+                status = ImageHelper.isJPEG(fileChooser.getSelectedFile().getAbsoluteFile());
+            } catch (Exception ex) {
+               ex.printStackTrace();
+            }
+            if(status){
+                if(!(blobContainerClient.getBlobClient(fileChooser.getSelectedFile().getName()).exists())) {
+                    BlobClient blobClient = blobContainerClient.getBlobClient(fileChooser.getSelectedFile().getName());
+                    txtImage.setText(fileChooser.getSelectedFile().getAbsolutePath());
+                    try {
+                        BufferedImage bufferedImage = ImageIO.read(fileChooser.getSelectedFile().getAbsoluteFile());
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        ImageIO.write(bufferedImage, "jpg", baos);
+                        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+                        blobClient.upload(bais, baos.size());
+                        BlobHttpHeaders headers = new BlobHttpHeaders();
+                        headers.setContentType("image/jpeg");
+                        blobClient.setHttpHeaders(headers);
+                        baos.close();
+                        bais.close();
+                        images.add(fileChooser.getSelectedFile().getName());
+                        /*
+                        for(String image : images){
+                            imageListModel.addElement(image);
+                        }
+                        */
+                        imageListModel.addElement(fileChooser.getSelectedFile().getName());
+                        lstImages.setModel(imageListModel);
+                    } catch (IOException ios) {
+                        ios.printStackTrace();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                    "La imatge que es vol introduïr ja existeix",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
                 }
-                lstImages.setModel(listModel);
-            } catch (IOException ios) {
-                ios.printStackTrace();
+            } else {
+                JOptionPane.showMessageDialog(null,
+                "La imatge que es vol introduïr ha d'estar en format jpg",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnUploadActionPerformed
@@ -1118,6 +1204,25 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
             lblImageIcon.setIcon(new ImageIcon(Visualitzar.class.getClassLoader().getResource("resizedloader.gif")));
         }
     }//GEN-LAST:event_lstImagesValueChanged
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if(!inserted){
+            BlobContainerClient container =  ImageHelper.getContainerClient();
+            for(String image : images){
+                container.getBlobClient(image).delete();
+            }
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+        String selectedImage = lstImages.getSelectedValue();
+        if(!(lstImages.getSelectedValue() == null)){
+            ImageHelper.getContainerClient().getBlobClient(selectedImage).delete();
+            images.remove(selectedImage);
+            imageListModel.remove(lstImages.getSelectedIndex());
+            lstImages.setModel(imageListModel);
+        }
+    }//GEN-LAST:event_btnBorrarActionPerformed
 
     @Override
     public void run() {
@@ -1205,6 +1310,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnCercar;
     private javax.swing.JButton btnInsert;
     private javax.swing.JButton btnMyProfile;

@@ -62,6 +62,8 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
         btnNext = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
         btnPrevious = new javax.swing.JButton();
+        lblTitol = new javax.swing.JLabel();
+        lblRegister = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -86,12 +88,20 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
             }
         });
 
+        lblTitol.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        lblTitol.setText("Titol");
+
+        lblRegister.setText("Registre");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(116, 116, 116)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -100,14 +110,20 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(116, 116, 116)
-                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(303, Short.MAX_VALUE))
+                        .addGap(63, 63, 63)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblRegister)
+                            .addComponent(lblTitol, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(228, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
+                .addComponent(lblRegister)
+                .addGap(18, 18, 18)
+                .addComponent(lblTitol, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(76, 76, 76)
@@ -143,6 +159,8 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
         /*for (BlobItem blobItem : containerClient.listBlobs()) {
             blobNames.add(blobItem.getName());
         }*/
+        lblRegister.setText(selectedEspai.getRegistre());
+        lblTitol.setText(selectedEspai.getNom());
         DataAccess da = new DataAccess();
         imatges = da.getImatgesEspai(selectedEspai);
         if(imatges.size() == 1){
@@ -273,5 +291,7 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
     private javax.swing.JButton btnPrevious;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JLabel lblImage;
+    private javax.swing.JLabel lblRegister;
+    private javax.swing.JLabel lblTitol;
     // End of variables declaration//GEN-END:variables
 }

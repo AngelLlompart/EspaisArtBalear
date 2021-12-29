@@ -10,6 +10,10 @@ import com.azure.storage.blob.BlobServiceClient;
 import com.azure.storage.blob.BlobServiceClientBuilder;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 import javax.swing.ImageIcon;
@@ -60,5 +64,17 @@ public class ImageHelper {
         return containerClient;
     }
     
-    
+    public static Boolean isJPEG(File filename) throws Exception {
+    DataInputStream ins = new DataInputStream(new BufferedInputStream(new FileInputStream(filename)));
+    try {
+        if (ins.readInt() == 0xffd8ffe0) {
+            return true;
+        } else {
+            return false;
+
+        }
+    } finally {
+        ins.close();
+    }
+}
 }
