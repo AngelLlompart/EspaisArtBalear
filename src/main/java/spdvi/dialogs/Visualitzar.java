@@ -19,14 +19,23 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import spdvi.helpers.ImageHelper;
+import spdvi.pojos.Comentari;
 import spdvi.pojos.Espai;
 import spdvi.pojos.Imatge;
 
@@ -36,17 +45,21 @@ import spdvi.pojos.Imatge;
  */
 public class Visualitzar extends javax.swing.JDialog implements Runnable{
     //private ArrayList<String> blobNames = new ArrayList<>();
+    private JList<Comentari> lstComents;
     private ArrayList<Imatge> imatges = new ArrayList<>();
     private int contador = 0;
     private Espai selectedEspai;
     private Thread downloadThread;
     private String gif = "resizedloader.gif";
+    private String currentUser;
     /**
      * Creates new form Visualitzar
      */
     public Visualitzar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        lstComents = new JList<Comentari>();
+        scrComents.setViewportView(lstComents);
     }
 
     /**
@@ -60,10 +73,19 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
 
         lblImage = new javax.swing.JLabel();
         btnNext = new javax.swing.JButton();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        prgImage = new javax.swing.JProgressBar();
         btnPrevious = new javax.swing.JButton();
         lblTitol = new javax.swing.JLabel();
         lblRegister = new javax.swing.JLabel();
+        lblComentaris = new javax.swing.JLabel();
+        scrComents = new javax.swing.JScrollPane();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtComentari = new javax.swing.JTextField();
+        btnComentar = new javax.swing.JButton();
+        lblUser = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -79,7 +101,7 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
             }
         });
 
-        jProgressBar1.setStringPainted(true);
+        prgImage.setStringPainted(true);
 
         btnPrevious.setText("Previous");
         btnPrevious.addActionListener(new java.awt.event.ActionListener() {
@@ -93,48 +115,132 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
 
         lblRegister.setText("Registre");
 
+        lblComentaris.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblComentaris.setText("Comentaris");
+
+        jLabel1.setText("Descripcions: ");
+
+        jLabel2.setText("Català");
+
+        jLabel3.setText("Español");
+
+        jLabel4.setText("English");
+
+        txtComentari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtComentariActionPerformed(evt);
+            }
+        });
+        txtComentari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtComentariKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtComentariKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtComentariKeyTyped(evt);
+            }
+        });
+
+        btnComentar.setText("Comentar");
+        btnComentar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComentarActionPerformed(evt);
+            }
+        });
+
+        lblUser.setText("Usuari:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(116, 116, 116)
-                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(60, 60, 60)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblRegister)
+                                    .addComponent(lblTitol, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(106, 106, 106)
+                                .addComponent(prgImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblComentaris)
+                        .addGap(631, 631, 631)))
+                .addGap(83, 83, 83))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(scrComents, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtComentari, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblRegister)
-                            .addComponent(lblTitol, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(98, Short.MAX_VALUE))
+                        .addComponent(btnComentar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(lblRegister)
-                .addGap(18, 18, 18)
-                .addComponent(lblTitol, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(btnNext))
-                    .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(85, 85, 85)
+                                    .addComponent(btnPrevious)))
+                            .addComponent(btnNext, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(prgImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(btnPrevious)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addGap(18, 18, 18)
+                        .addComponent(lblTitol, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1)
+                        .addGap(13, 13, 13)
+                        .addComponent(jLabel2)
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblComentaris)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrComents, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtComentari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnComentar)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lblUser)))
+                .addGap(22, 22, 22))
         );
 
         pack();
@@ -154,14 +260,21 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        DataAccess da = new DataAccess();
         lblImage.setIcon(new ImageIcon(Visualitzar.class.getClassLoader().getResource(gif)));
         btnPrevious.setEnabled(false);
+        btnComentar.setEnabled(false);
         /*for (BlobItem blobItem : containerClient.listBlobs()) {
             blobNames.add(blobItem.getName());
         }*/
+        /*
         lblRegister.setText(selectedEspai.getRegistre());
         lblTitol.setText(selectedEspai.getNom());
-        DataAccess da = new DataAccess();
+        lblComentaris.setText();
+        */
+        
+        updateComentarisView(da);
+
         imatges = da.getImatgesEspai(selectedEspai);
         if(imatges.size() == 1){
             btnNext.setEnabled(false);
@@ -182,59 +295,49 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
         downloadThread.start();
     }//GEN-LAST:event_btnPreviousActionPerformed
 
+    private void txtComentariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtComentariActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtComentariActionPerformed
+
+    private void btnComentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComentarActionPerformed
+        Comentari comentari = new Comentari(currentUser, selectedEspai.getRegistre(), txtComentari.getText(), LocalDate.now(), LocalTime.now());
+        DataAccess da = new DataAccess();
+        da.insertComentari(comentari);
+        updateComentarisView(da);
+        txtComentari.setText("");
+        btnComentar.setEnabled(false);
+    }//GEN-LAST:event_btnComentarActionPerformed
+
+    private void txtComentariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtComentariKeyPressed
+        
+    }//GEN-LAST:event_txtComentariKeyPressed
+
+    private void txtComentariKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtComentariKeyTyped
+        
+    }//GEN-LAST:event_txtComentariKeyTyped
+
+    private void txtComentariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtComentariKeyReleased
+        if(txtComentari.getText() == null || txtComentari.getText().isBlank() || txtComentari.getText().isEmpty()){
+           btnComentar.setEnabled(false);
+        }else{
+            btnComentar.setEnabled(true);
+        }
+    }//GEN-LAST:event_txtComentariKeyReleased
+
     @Override
     public void run() {
         System.out.println(Thread.currentThread().getName());
-        downloadImage();
+        ImageHelper.downloadImage(lblImage, prgImage, imatges.get(contador).getImatge());
+        //downloadImage();
     }
-    
-    private void downloadImage() {
-    // Downloading big images in chunks of 1kB might be very slow because of the request overhead to azure. Modify the algorithm to donwload eavery image in, for instance 20 chunks.
 
-        ByteArrayOutputStream outputStream;
-        BufferedImage originalImage;
-        try {
-            BlockBlobClient blobClient = ImageHelper.getContainerClient().getBlobClient(imatges.get(contador).getImatge()).getBlockBlobClient();
-            int dataSize = (int) blobClient.getProperties().getBlobSize();
-            int numberOfBlocks = 20;
-            int numberOfBPerBlock = dataSize / numberOfBlocks;  // Split every image in 20 blocks. That is, make 20 requests to Azure.
-            System.out.println("Starting download of " + dataSize + " bytes in " + numberOfBlocks + " " + numberOfBPerBlock/1024 + "kB chunks");
-
-            
-            int i = 0;
-            outputStream = new ByteArrayOutputStream(dataSize);
-
-            while (i < numberOfBlocks) {
-                BlobRange range = new BlobRange(i * numberOfBPerBlock, (long)numberOfBPerBlock);
-                DownloadRetryOptions options = new DownloadRetryOptions().setMaxRetryRequests(5);
-
-                System.out.println(i + ": Downloading bytes " + range.getOffset() + " to " + (range.getOffset() + range.getCount()) + " with status "
-                        + blobClient.downloadStreamWithResponse(outputStream, range, options, null, false,
-                                Duration.ofSeconds(30), Context.NONE));
-                i++;
-                jProgressBar1.setValue(i * jProgressBar1.getMaximum() / (numberOfBlocks + 1));
-            }
-
-            // Download the last bytes of the image
-            BlobRange range = new BlobRange(i * numberOfBPerBlock);
-            DownloadRetryOptions options = new DownloadRetryOptions().setMaxRetryRequests(5);
-            System.out.println(i + ": Downloading bytes " + range.getOffset() + " to " + dataSize + " with status "
-                    + blobClient.downloadStreamWithResponse(outputStream, range, options, null, false,
-                            Duration.ofSeconds(30), Context.NONE));
-            i++;
-            jProgressBar1.setValue(i * jProgressBar1.getMaximum() / (numberOfBlocks + 1));
-            
-            originalImage = ImageIO.read(new ByteArrayInputStream(outputStream.toByteArray()));
-            ImageIcon icon = ImageHelper.resizeImageIcon(originalImage, lblImage.getWidth(), lblImage.getHeight());
-            lblImage.setIcon(icon);
-            outputStream.close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
+    private void updateComentarisView(DataAccess da){
+        DefaultListModel<Comentari> defaultListModel = new DefaultListModel<>();
+        for(Comentari co: da.getComentaris(selectedEspai)){
+            defaultListModel.addElement(co);
         }
+        lstComents.setModel(defaultListModel);
     }
-    
-    
-
     public Espai getSelectedEspai() {
         return selectedEspai;
     }
@@ -242,8 +345,47 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
     public void setSelectedEspai(Espai selectedEspai) {
         this.selectedEspai = selectedEspai;
     }
+
+    public JLabel getLblComentaris() {
+        return lblComentaris;
+    }
+
+    public void setLblComentaris(JLabel lblComentaris) {
+        this.lblComentaris = lblComentaris;
+    }
+
+    public JLabel getLblRegister() {
+        return lblRegister;
+    }
+
+    public void setLblRegister(JLabel lblRegister) {
+        this.lblRegister = lblRegister;
+    }
+
+    public JLabel getLblTitol() {
+        return lblTitol;
+    }
+
+    public void setLblTitol(JLabel lblTitol) {
+        this.lblTitol = lblTitol;
+    }
+
+    public JLabel getLblUser() {
+        return lblUser;
+    }
+
+    public void setLblUser(JLabel lblUser) {
+        this.lblUser = lblUser;
+    }
     
-    
+    public String getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(String currentUser) {
+        this.currentUser = currentUser;
+    }
+   
     /**
      * @param args the command line arguments
      */
@@ -287,11 +429,20 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnComentar;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPrevious;
-    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel lblComentaris;
     private javax.swing.JLabel lblImage;
     private javax.swing.JLabel lblRegister;
     private javax.swing.JLabel lblTitol;
+    private javax.swing.JLabel lblUser;
+    private javax.swing.JProgressBar prgImage;
+    private javax.swing.JScrollPane scrComents;
+    private javax.swing.JTextField txtComentari;
     // End of variables declaration//GEN-END:variables
 }

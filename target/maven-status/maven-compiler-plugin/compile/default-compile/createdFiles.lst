@@ -1,11 +1,14 @@
 spdvi\MainForm$14.class
 spdvi\MainForm$24.class
+spdvi\MainForm$34.class
 spdvi\dialogs\Register$2.class
 spdvi\dialogs\Visualitzar$2.class
+spdvi\dialogs\Visualitzar$5.class
 spdvi\MainForm$11.class
 spdvi\MainForm$17.class
 spdvi\MainForm$27.class
 spdvi\MainForm$2.class
+spdvi\dialogs\Visualitzar$7$1.class
 spdvi\dialogs\ConfirmPassword$12$1.class
 spdvi\dialogs\ConfirmPassword$8.class
 spdvi\dialogs\MyProfile$1.class
@@ -17,6 +20,8 @@ spdvi\dialogs\ConfirmPassword$2.class
 spdvi\dialogs\Login$2.class
 spdvi\helpers\DataAccess.class
 spdvi\pojos\Imatge.class
+spdvi\dialogs\Visualitzar$7.class
+spdvi\MainForm$32.class
 spdvi\dialogs\Register.class
 spdvi\MainForm$1.class
 spdvi\MainForm$16.class
@@ -29,6 +34,7 @@ spdvi\dialogs\MyProfile$6.class
 spdvi\MainForm$15.class
 spdvi\pojos\Comentari.class
 spdvi\dialogs\Login$4.class
+spdvi\dialogs\Visualitzar$6.class
 spdvi\MainForm$31.class
 spdvi\MainForm$26.class
 spdvi\MainForm$8.class
@@ -44,6 +50,7 @@ spdvi\dialogs\Login$3.class
 spdvi\dialogs\Login$6.class
 spdvi\pojos\User.class
 spdvi\dialogs\Login$10.class
+spdvi\MainForm$33.class
 spdvi\dialogs\Visualitzar$1.class
 spdvi\helpers\PasswordGenerator.class
 spdvi\dialogs\Login$9.class
@@ -70,7 +77,6 @@ spdvi\MainForm$22.class
 spdvi\dialogs\ConfirmPassword$12.class
 spdvi\dialogs\MyProfile$4.class
 spdvi\dialogs\ConfirmPassword$6.class
-spdvi\dialogs\Visualitzar$4$1.class
 spdvi\pojos\Espai.class
 spdvi\MainForm$12.class
 spdvi\MainForm$4.class
