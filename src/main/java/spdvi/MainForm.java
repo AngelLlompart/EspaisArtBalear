@@ -13,6 +13,7 @@ import com.azure.storage.blob.models.BlobHttpHeaders;
 import com.azure.storage.blob.models.BlobRange;
 import com.azure.storage.blob.models.DownloadRetryOptions;
 import com.azure.storage.blob.specialized.BlockBlobClient;
+import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -227,6 +228,10 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                 btnMyProfileActionPerformed(evt);
             }
         });
+
+        lblImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblImage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         lblRegistre.setText("Registre");
 
@@ -674,6 +679,10 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
             }
         });
 
+        lblImageIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImageIcon.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblImageIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         btnUpload.setText("Upload");
         btnUpload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -804,7 +813,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                                         .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(btnClear)
                                             .addComponent(lblImageIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addContainerGap(78, Short.MAX_VALUE))))))))
+                                        .addContainerGap(80, Short.MAX_VALUE))))))))
             .addGroup(pnlInsertLayout.createSequentialGroup()
                 .addGap(153, 153, 153)
                 .addComponent(btnInsert)
@@ -1037,11 +1046,10 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         DataAccess da = new DataAccess();
         boolean insert = true;
-        //String descripcions = "Cat: " + txaCat.getText() + ";" + " Cast: " + txaCast.getText() + ";" + " Eng: " + txaEng.getText() + ";";
         LinkedHashMap<String, String> descripcions = new LinkedHashMap<>();
-        descripcions.put("cat", txaCat.getText());
-        descripcions.put("esp", txaCast.getText());
-        descripcions.put("eng", txaEng.getText());
+        descripcions.put("\"cat\"", "\"" + txaCat.getText() + "\"");
+        descripcions.put("\"esp\"", "\"" + txaCast.getText() + "\"");
+        descripcions.put("\"eng\"", "\"" + txaEng.getText() + "\"");
         
         Pattern emailRegEx = Pattern.compile("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
         Pattern webRegEx = Pattern.compile("(www\\.)[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,4}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)|(www\\.)?(?!ww)[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,4}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)");
@@ -1174,6 +1182,21 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
             visualitzar.getLblRegister().setText(espai.getRegistre());
             visualitzar.getLblTitol().setText(espai.getNom());
             visualitzar.getLblComentaris().setText("Comentaris: " + numComentaris(espai));
+            visualitzar.getLblAdreca().setText(espai.getMunicipi() + ", " + espai.getAdreca());
+            visualitzar.getLblWeb().setText(espai.getWeb());
+            visualitzar.getLblEmail().setText(espai.getEmail());
+            visualitzar.getLblGestor().setText(espai.getGestor());
+            visualitzar.getLblTelefon().setText(Integer.toString(espai.getTelefon()));
+            visualitzar.getLblModalitats().setText(espai.getModalitat());
+            visualitzar.getLblTipus().setText(espai.getTipus());
+            String serveis = espai.getServeis();
+            visualitzar.getLblServeis().setText(serveis);
+            if(serveis == null || serveis.isBlank() || serveis.isEmpty()){
+                visualitzar.getLblServeis().setText("Aquest espai no proporciona cap servei");
+            }
+            visualitzar.getTxaCat().setText(espai.getDescripcions().get("\"cat\""));
+            visualitzar.getTxaEsp().setText(espai.getDescripcions().get("\"esp\""));
+            visualitzar.getTxaEn().setText(espai.getDescripcions().get("\"eng\""));
             visualitzar.getLblUser().setText(currentUser.getUserName() + " :");
             visualitzar.setCurrentUser(currentUser.getUserName());
             visualitzar.setVisible(true);
@@ -1207,6 +1230,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                ex.printStackTrace();
             }
             if(status){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 if(!(blobContainerClient.getBlobClient(fileChooser.getSelectedFile().getName()).exists())) {
                     BlobClient blobClient = blobContainerClient.getBlobClient(fileChooser.getSelectedFile().getName());
                     txtImage.setText(fileChooser.getSelectedFile().getAbsolutePath());
@@ -1238,6 +1262,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
                 }
+                this.setCursor(Cursor.getDefaultCursor());
             } else {
                 JOptionPane.showMessageDialog(null,
                 "La imatge que es vol introduïr ha d'estar en format jpg",

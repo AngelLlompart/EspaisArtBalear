@@ -111,9 +111,16 @@ public class DataAccess {
                 String desc = resultSet.getString("Descripcions");
                 String[] pairs = desc.split("\",");
                 LinkedHashMap<String, String> mapDesc = new LinkedHashMap<>();
+                int max = pairs.length - 1;
+                int contador = 0;
                 for (String pair : pairs) {
-                    String[] entry = pair.split(":");
-                    mapDesc.put(entry[0].trim(), entry[1].trim());
+                    String[] entry = pair.split("\":");
+                    if(contador == max){
+                        mapDesc.put(entry[0].trim() + "\"", entry[1].trim());
+                    }else{
+                        mapDesc.put(entry[0].trim() + "\"", entry[1].trim() + "\"");
+                    }
+                    contador++;
                 }
                 Espai espai = new Espai(
                         resultSet.getString("Nom"),

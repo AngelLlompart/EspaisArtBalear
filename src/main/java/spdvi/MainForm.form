@@ -197,6 +197,15 @@
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblImage">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder/>
+                  </Border>
+                </Property>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblRegistre">
               <Properties>
@@ -350,7 +359,7 @@
                                                   <Component id="btnClear" min="-2" max="-2" attributes="0"/>
                                                   <Component id="lblImageIcon" min="-2" pref="204" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace pref="78" max="32767" attributes="0"/>
+                                              <EmptySpace pref="80" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -1047,6 +1056,15 @@
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblImageIcon">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder/>
+                  </Border>
+                </Property>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnUpload">
               <Properties>
