@@ -5,18 +5,28 @@
  */
 package spdvi.helpers;
 
+import com.azure.core.util.Context;
 import com.azure.storage.blob.BlobContainerClient;
 import com.azure.storage.blob.BlobServiceClient;
 import com.azure.storage.blob.BlobServiceClientBuilder;
+import com.azure.storage.blob.models.BlobRange;
+import com.azure.storage.blob.models.DownloadRetryOptions;
+import com.azure.storage.blob.specialized.BlockBlobClient;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Properties;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JProgressBar;
 
 /**
  *
@@ -65,16 +75,61 @@ public class ImageHelper {
     }
     
     public static Boolean isJPEG(File filename) throws Exception {
-    DataInputStream ins = new DataInputStream(new BufferedInputStream(new FileInputStream(filename)));
-    try {
-        if (ins.readInt() == 0xffd8ffe0) {
-            return true;
-        } else {
-            return false;
+        DataInputStream ins = new DataInputStream(new BufferedInputStream(new FileInputStream(filename)));
+        try {
+            if (ins.readInt() == 0xffd8ffe0) {
+                return true;
+            } else {
+                return false;
 
+            }
+        } finally {
+            ins.close();
         }
-    } finally {
-        ins.close();
     }
-}
+    
+    public static void downloadImage(JLabel lblImage, JProgressBar prgImage, String blobName) {
+    // Downloading big images in chunks of 1kB might be very slow because of the request overhead to azure. Modify the algorithm to donwload eavery image in, for instance 20 chunks.
+
+        ByteArrayOutputStream outputStream;
+        BufferedImage originalImage;
+        try {
+            BlockBlobClient blobClient = ImageHelper.getContainerClient().getBlobClient(blobName).getBlockBlobClient();
+            int dataSize = (int) blobClient.getProperties().getBlobSize();
+            int numberOfBlocks = 20;
+            int numberOfBPerBlock = dataSize / numberOfBlocks;  // Split every image in 20 blocks. That is, make 20 requests to Azure.
+            System.out.println("Starting download of " + dataSize + " bytes in " + numberOfBlocks + " " + numberOfBPerBlock/1024 + "kB chunks");
+
+            
+            int i = 0;
+            outputStream = new ByteArrayOutputStream(dataSize);
+
+            while (i < numberOfBlocks) {
+                BlobRange range = new BlobRange(i * numberOfBPerBlock, (long)numberOfBPerBlock);
+                DownloadRetryOptions options = new DownloadRetryOptions().setMaxRetryRequests(5);
+
+                System.out.println(i + ": Downloading bytes " + range.getOffset() + " to " + (range.getOffset() + range.getCount()) + " with status "
+                        + blobClient.downloadStreamWithResponse(outputStream, range, options, null, false,
+                                Duration.ofSeconds(30), Context.NONE));
+                i++;
+                prgImage.setValue(i * prgImage.getMaximum() / (numberOfBlocks + 1));
+            }
+
+            // Download the last bytes of the image
+            BlobRange range = new BlobRange(i * numberOfBPerBlock);
+            DownloadRetryOptions options = new DownloadRetryOptions().setMaxRetryRequests(5);
+            System.out.println(i + ": Downloading bytes " + range.getOffset() + " to " + dataSize + " with status "
+                    + blobClient.downloadStreamWithResponse(outputStream, range, options, null, false,
+                            Duration.ofSeconds(30), Context.NONE));
+            i++;
+            prgImage.setValue(i * prgImage.getMaximum() / (numberOfBlocks + 1));
+            
+            originalImage = ImageIO.read(new ByteArrayInputStream(outputStream.toByteArray()));
+            ImageIcon icon = ImageHelper.resizeImageIcon(originalImage, lblImage.getWidth(), lblImage.getHeight());
+            lblImage.setIcon(icon);
+            outputStream.close();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
 }

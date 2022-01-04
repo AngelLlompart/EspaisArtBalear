@@ -10,11 +10,14 @@ import spdvi.pojos.User;
 import java.awt.Frame;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -30,6 +33,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
+import spdvi.pojos.Comentari;
 import spdvi.pojos.Imatge;
 
 /**
@@ -107,9 +111,16 @@ public class DataAccess {
                 String desc = resultSet.getString("Descripcions");
                 String[] pairs = desc.split("\",");
                 LinkedHashMap<String, String> mapDesc = new LinkedHashMap<>();
+                int max = pairs.length - 1;
+                int contador = 0;
                 for (String pair : pairs) {
-                    String[] entry = pair.split(":");
-                    mapDesc.put(entry[0].trim(), entry[1].trim());
+                    String[] entry = pair.split("\":");
+                    if(contador == max){
+                        mapDesc.put(entry[0].trim() + "\"", entry[1].trim());
+                    }else{
+                        mapDesc.put(entry[0].trim() + "\"", entry[1].trim() + "\"");
+                    }
+                    contador++;
                 }
                 Espai espai = new Espai(
                         resultSet.getString("Nom"),
@@ -209,5 +220,87 @@ public class DataAccess {
            ex.printStackTrace();
         }
         return result;
+    }
+    
+    public int getNumComentaris(Espai espai){
+        int result = 0;
+        try ( Connection connection = getConnection()) {
+            PreparedStatement selectStatement = connection.prepareStatement(
+                    "select count(dbo.Comentari.Espai) from dbo.Espai join dbo.Comentari on (dbo.Comentari.Espai = dbo.Espai.Registre) where Registre=?;"
+            );
+            selectStatement.setString(1, espai.getRegistre());
+            ResultSet resultSet = selectStatement.executeQuery();
+            while (resultSet.next()) {
+                result = resultSet.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+    
+    public ArrayList<Comentari> getComentaris(Espai espai){
+        ArrayList<Comentari> comentaris = new ArrayList<>();
+        try ( Connection connection = getConnection()) {
+            PreparedStatement selectStatement = connection.prepareStatement(
+                    "Select * FROM dbo.[Comentari] where Espai=?"
+            );
+            selectStatement.setString(1, espai.getRegistre());
+            ResultSet resultSet = selectStatement.executeQuery();
+            while (resultSet.next()) {
+                Comentari comentari = new Comentari(
+                        resultSet.getString("Usuari"), 
+                        resultSet.getString("Espai"), 
+                        resultSet.getString("Text"), 
+                        LocalDate.parse(resultSet.getString("Data")), 
+                        resultSet.getTime("Hora").toLocalTime());
+                comentaris.add(comentari);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return comentaris;
+    }
+    
+    public int insertComentari(Comentari comentari){
+        int result = 0;
+        try ( Connection connection = getConnection();) {
+            PreparedStatement insertStatement = connection.prepareStatement(
+                    "INSERT INTO dbo.[Comentari] (Usuari, Espai, Text, Data, Hora)"
+                    + "VALUES (?,?,?,?,?)");
+            
+            insertStatement.setString(1, comentari.getUsuari());
+            insertStatement.setString(2, comentari.getEspai());
+            insertStatement.setString(3, comentari.getText());
+            insertStatement.setDate(4, Date.valueOf(comentari.getData()));
+            insertStatement.setTime(5, Time.valueOf(comentari.getHora()));
+            result = insertStatement.executeUpdate();
+
+        } catch (SQLException ex) {
+           ex.printStackTrace();
+        }
+        return result;
+    }
+    
+    public Imatge firstImatge(Espai espai){
+        Imatge imatge = null;
+        try ( Connection connection = getConnection()) {
+            
+            PreparedStatement selectStatement = connection.prepareStatement(
+                    "Select * FROM dbo.[Imatge] where Espai=?"
+            );
+            selectStatement.setString(1, espai.getRegistre());
+            ResultSet resultSet = selectStatement.executeQuery();
+            resultSet.next();
+                imatge = new Imatge(
+                      resultSet.getString("ImatgeId"),
+                      resultSet.getString("Imatge"),
+                      resultSet.getString("Espai")
+                );
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return imatge;
     }
 }
