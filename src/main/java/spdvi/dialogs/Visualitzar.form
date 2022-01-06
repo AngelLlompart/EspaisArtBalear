@@ -26,11 +26,6 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="prgImage" min="-2" pref="201" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="373" max="-2" attributes="0"/>
-          </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -54,60 +49,52 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lblEmailTitle" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="lblEmail" min="-2" pref="202" max="-2" attributes="0"/>
-                                  </Group>
+                              <Component id="lblServeis" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="818" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lblTelefonTitle" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lblTelefon" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lblWebTitle" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblServeisTitle" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="lblWeb" min="-2" pref="202" max="-2" attributes="0"/>
+                                      <Component id="btnPrevious" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblServeisTitle" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblModalitats" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblServeis" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="lblModalitatsTitle" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Component id="lblGestorTitle" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="lblGestor" min="-2" pref="204" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="lblModalitats" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Component id="lblImage" min="-2" pref="305" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnNext" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblRegister" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblTitol" min="-2" pref="285" max="-2" attributes="0"/>
+                                  <Component id="lblComentaris" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                      <Component id="scrComents" alignment="1" min="-2" pref="648" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="lblUser" min="-2" pref="34" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="txtComentari" min="-2" pref="512" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="btnComentar" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="prgImage" min="-2" pref="201" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
+                                  <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnPrevious" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="lblImage" min="-2" pref="305" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnNext" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                              <Component id="lblContacte" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="lblRegister" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblTitol" min="-2" pref="285" max="-2" attributes="0"/>
-                          <Component id="lblComentaris" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Component id="scrComents" alignment="1" min="-2" pref="648" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="lblUser" min="-2" pref="34" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="txtComentari" min="-2" pref="512" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnComentar" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -155,61 +142,47 @@
                   </Group>
                   <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblContacte" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblEmailTitle" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblEmail" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblTelefonTitle" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblTelefon" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblWebTitle" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblWeb" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblGestorTitle" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblGestor" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                       <Component id="lblModalitatsTitle" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                       <Component id="lblModalitats" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="lblServeisTitle" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblServeis" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="btnNext" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="lblServeisTitle" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="btnPrevious" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
+                      </Group>
+                      <Component id="lblServeis" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="lblImage" min="-2" pref="200" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="257" max="-2" attributes="0"/>
+                              <Component id="btnNext" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="prgImage" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" pref="132" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                      <Component id="lblComentaris" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <Component id="lblComentaris" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
               <Component id="scrComents" min="-2" pref="229" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
@@ -349,21 +322,6 @@
         <Property name="text" type="java.lang.String" value="Usuari:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblContacte">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Contacte"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblEmailTitle">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Email: "/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblWebTitle">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Web: "/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="lblServeisTitle">
       <Properties>
         <Property name="text" type="java.lang.String" value="Serveis:"/>
@@ -374,11 +332,6 @@
         <Property name="text" type="java.lang.String" value="Adre&#xe7;a"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblTelefonTitle">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Telefon: "/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="lblTipus">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tipus"/>
@@ -387,31 +340,6 @@
     <Component class="javax.swing.JLabel" name="lblModalitatsTitle">
       <Properties>
         <Property name="text" type="java.lang.String" value="Modalitats: "/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblGestorTitle">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Gestor: "/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblEmail">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="email"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblWeb">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="web"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblGestor">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="gestor"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblTelefon">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="telefon"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblModalitats">
@@ -433,6 +361,7 @@
       <SubComponents>
         <Component class="javax.swing.JTextArea" name="txaEsp">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="columns" type="int" value="20"/>
             <Property name="lineWrap" type="boolean" value="true"/>
             <Property name="rows" type="int" value="5"/>
@@ -450,6 +379,7 @@
       <SubComponents>
         <Component class="javax.swing.JTextArea" name="txaCat">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="columns" type="int" value="20"/>
             <Property name="lineWrap" type="boolean" value="true"/>
             <Property name="rows" type="int" value="5"/>
@@ -467,10 +397,129 @@
       <SubComponents>
         <Component class="javax.swing.JTextArea" name="txaEn">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="columns" type="int" value="20"/>
             <Property name="lineWrap" type="boolean" value="true"/>
             <Property name="rows" type="int" value="5"/>
             <Property name="wrapStyleWord" type="boolean" value="true"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                          <Component id="lblContacte" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                          <Component id="lblGestorTitle" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblGestor" min="-2" pref="204" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="lblEmailTitle" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="lblEmail" min="-2" pref="202" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblTelefonTitle" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lblTelefon" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="lblWebTitle" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="lblWeb" min="-2" pref="202" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="lblContacte" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblEmailTitle" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblTelefonTitle" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblTelefon" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblWebTitle" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblWeb" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblGestorTitle" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblGestor" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="22" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="lblContacte">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Contacte"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblEmailTitle">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Email: "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblWebTitle">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Web: "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblTelefonTitle">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Telefon: "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblGestorTitle">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Gestor: "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblEmail">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="email"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblWeb">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="web"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblGestor">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="gestor"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblTelefon">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="telefon"/>
           </Properties>
         </Component>
       </SubComponents>

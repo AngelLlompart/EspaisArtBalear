@@ -143,6 +143,51 @@ public class DataAccess {
         }
         return espais;
     }
+    
+    public ArrayList<Espai> getEspaisVisibleOrHidden(boolean visible) {
+        ArrayList<Espai> espais = new ArrayList<Espai>();
+        try ( Connection connection = getConnection()) {
+            PreparedStatement selectStatement = connection.prepareStatement(
+                    "Select * FROM dbo.[Espai] where Visible =?"
+            );
+            selectStatement.setBoolean(1, visible);
+            ResultSet resultSet = selectStatement.executeQuery();
+            while (resultSet.next()) {
+                String desc = resultSet.getString("Descripcions");
+                String[] pairs = desc.split("\",");
+                LinkedHashMap<String, String> mapDesc = new LinkedHashMap<>();
+                int max = pairs.length - 1;
+                int contador = 0;
+                for (String pair : pairs) {
+                    String[] entry = pair.split("\":");
+                    if(contador == max){
+                        mapDesc.put(entry[0].trim() + "\"", entry[1].trim());
+                    }else{
+                        mapDesc.put(entry[0].trim() + "\"", entry[1].trim() + "\"");
+                    }
+                    contador++;
+                }
+                Espai espai = new Espai(
+                        resultSet.getString("Nom"),
+                        resultSet.getString("Registre"),
+                        mapDesc,
+                        resultSet.getString("Municipi"),
+                        resultSet.getString("Adreça"),
+                        resultSet.getString("Email"),
+                        resultSet.getString("Web"),
+                        resultSet.getInt("Telefon"),
+                        resultSet.getString("Tipus"),
+                        resultSet.getString("Modalitats"),
+                        resultSet.getString("Gestor"),
+                        resultSet.getString("Serveis")
+                );
+                espais.add(espai);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return espais;
+    }
 
     public int insertEspais(Espai es) {
         int result = 0;
@@ -302,5 +347,48 @@ public class DataAccess {
             ex.printStackTrace();
         }
         return imatge;
+    }
+    
+    public int deleteImatge(String imageName){
+        int result = 0;
+        try ( Connection connection = getConnection();) {
+            PreparedStatement deleteStatement = connection.prepareStatement(
+                    "Delete from dbo.[Imatge] where Imatge=?");
+            
+            deleteStatement.setString(1, imageName);
+            result = deleteStatement.executeUpdate();
+
+        } catch (SQLException ex) {
+           ex.printStackTrace();
+        }
+        return result;
+    }
+    
+    public int updateEspai(Espai es){
+        int result = 0;
+        try ( Connection connection = getConnection();) {
+            PreparedStatement updateStatement = connection.prepareStatement(
+                    "UPDATE dbo.[Espai] SET Nom=?, Descripcions=?, Municipi=?, Adreça=?, Email=?, Web=?, Telefon=?, Tipus=?, Modalitats=?, Gestor=?, Serveis=?, Visible=? where Registre=?");
+
+            updateStatement.setString(1, es.getNom());
+            updateStatement.setString(2, es.desc());
+            updateStatement.setString(3, es.getMunicipi());
+            updateStatement.setString(4, es.getAdreca());
+            updateStatement.setString(5, es.getEmail());
+            updateStatement.setString(6, es.getWeb());
+            updateStatement.setInt(7, es.getTelefon());
+            updateStatement.setString(8, es.getTipus());
+            updateStatement.setString(9, es.getModalitat());
+            updateStatement.setString(10, es.getGestor());
+            updateStatement.setString(11, es.getServeis());
+            updateStatement.setBoolean(12, es.isVisible());
+            updateStatement.setString(13, es.getRegistre());
+
+            result = updateStatement.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

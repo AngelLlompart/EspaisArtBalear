@@ -59,13 +59,17 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     private Thread downloadThread;
     private ArrayList<String> images = new ArrayList<>();
     private DefaultListModel imageListModel = new DefaultListModel();
+    private ArrayList<String> oldImagesModify = new ArrayList<>();
     private ArrayList<String> imagesModify = new ArrayList<>();
     private DefaultListModel imageListModelModify = new DefaultListModel();
     private boolean inserted = false;
+    private boolean modified = false;
     private User currentUser;
     private boolean threadFromInsert = false;
     private boolean threadFromRead = false;
     private boolean threadFromModify = false;
+    private ArrayList<String> deletedImages = new ArrayList<>();
+    private Espai espaiToModify;
            
     /**
      * Creates new form MainForm
@@ -151,6 +155,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         lblNom = new javax.swing.JLabel();
         prgImatgeRead = new javax.swing.JProgressBar();
         btnModifyInsert = new javax.swing.JButton();
+        btnReadHidden = new javax.swing.JButton();
         pnlInsert = new javax.swing.JPanel();
         lblNomEspai = new javax.swing.JLabel();
         txtNomEspai = new javax.swing.JTextField();
@@ -258,7 +263,6 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         sprModify = new javax.swing.JSeparator();
         btnBorrarModify = new javax.swing.JButton();
         lblAdrecaModify = new javax.swing.JLabel();
-        btnClearModify = new javax.swing.JButton();
         txtAdrecaModify = new javax.swing.JTextField();
         lblEmailModify = new javax.swing.JLabel();
         txtEmailModify = new javax.swing.JTextField();
@@ -281,6 +285,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         txaEngModify = new javax.swing.JTextArea();
         cmbTipusModify = new javax.swing.JComboBox<>();
         chkVisible = new javax.swing.JCheckBox();
+        btnCancelModify = new javax.swing.JButton();
 
         jButton4.setText("jButton4");
 
@@ -343,6 +348,13 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
             }
         });
 
+        btnReadHidden.setText("Read Hidden");
+        btnReadHidden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReadHiddenActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlReadLayout = new javax.swing.GroupLayout(pnlRead);
         pnlRead.setLayout(pnlReadLayout);
         pnlReadLayout.setHorizontalGroup(
@@ -373,21 +385,27 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                                     .addGroup(pnlReadLayout.createSequentialGroup()
                                         .addGap(27, 27, 27)
                                         .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnRead, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(pnlReadLayout.createSequentialGroup()
                                                 .addComponent(btnCercar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(btnModifyInsert)))))
+                                                .addComponent(btnModifyInsert))
+                                            .addGroup(pnlReadLayout.createSequentialGroup()
+                                                .addComponent(btnRead, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE)))))
                                 .addGap(35, 35, 35))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlReadLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                            .addGroup(pnlReadLayout.createSequentialGroup()
+                                .addGap(18, 18, Short.MAX_VALUE)
                                 .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlReadLayout.createSequentialGroup()
                                         .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addContainerGap())
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlReadLayout.createSequentialGroup()
                                         .addComponent(prgImatgeRead, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(48, 48, 48))))))))
+                                        .addGap(48, 48, 48))))
+                            .addGroup(pnlReadLayout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(btnReadHidden)
+                                .addGap(0, 0, Short.MAX_VALUE))))))
         );
         pnlReadLayout.setVerticalGroup(
             pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -401,7 +419,9 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                         .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnRead)
                             .addComponent(btnMyProfile))
-                        .addGap(73, 73, 73)
+                        .addGap(5, 5, 5)
+                        .addComponent(btnReadHidden)
+                        .addGap(45, 45, 45)
                         .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnCercar)
                             .addComponent(btnModifyInsert))
@@ -932,7 +952,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInsertLayout.createSequentialGroup()
                                         .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(txtImage)
-                                            .addComponent(scrImages, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
+                                            .addComponent(scrImages, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(btnUpload)
@@ -942,7 +962,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                                         .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(btnClear)
                                             .addComponent(lblImageIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addContainerGap(84, Short.MAX_VALUE))))))))
+                                        .addContainerGap(92, Short.MAX_VALUE))))))))
             .addGroup(pnlInsertLayout.createSequentialGroup()
                 .addGap(153, 153, 153)
                 .addComponent(btnInsert)
@@ -1314,13 +1334,6 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
 
         lblAdrecaModify.setText("Adreça");
 
-        btnClearModify.setText("Clear");
-        btnClearModify.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearModifyActionPerformed(evt);
-            }
-        });
-
         txtAdrecaModify.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAdrecaModifyActionPerformed(evt);
@@ -1439,7 +1452,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         );
         pnlCatModifyLayout.setVerticalGroup(
             pnlCatModifyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlEspModify, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+            .addComponent(pnlEspModify, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlCatModifyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlCatModifyLayout.createSequentialGroup()
                     .addContainerGap()
@@ -1471,6 +1484,13 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         });
 
         chkVisible.setText("Visible");
+
+        btnCancelModify.setText("Cancel");
+        btnCancelModify.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelModifyActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlModifyVisibleLayout = new javax.swing.GroupLayout(pnlModifyVisible);
         pnlModifyVisible.setLayout(pnlModifyVisibleLayout);
@@ -1515,14 +1535,14 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtGestorModify, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(scrImagesModify, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                        .addComponent(scrImagesModify, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
                         .addGap(90, 90, 90))
                     .addGroup(pnlModifyVisibleLayout.createSequentialGroup()
                         .addComponent(btnModify)
+                        .addGap(53, 53, 53)
+                        .addComponent(btnCancelModify)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(pnlModifyVisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chkVisible, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnClearModify, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(chkVisible)
                         .addGap(146, 146, 146))))
             .addGroup(pnlModifyVisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlModifyVisibleLayout.createSequentialGroup()
@@ -1610,10 +1630,11 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                 .addGroup(pnlModifyVisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlModifyVisibleLayout.createSequentialGroup()
                         .addComponent(chkVisible)
-                        .addGap(16, 16, 16)
-                        .addComponent(btnClearModify))
+                        .addGap(39, 39, 39))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlModifyVisibleLayout.createSequentialGroup()
-                        .addComponent(btnModify)
+                        .addGroup(pnlModifyVisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnModify)
+                            .addComponent(btnCancelModify))
                         .addGap(22, 22, 22))))
             .addGroup(pnlModifyVisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlModifyVisibleLayout.createSequentialGroup()
@@ -1652,7 +1673,6 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                                     .addGap(18, 18, 18)
                                     .addComponent(btnBorrarModify)
                                     .addGap(0, 0, Short.MAX_VALUE)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(pnlModifyVisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlModifyVisibleLayout.createSequentialGroup()
                                     .addComponent(lblImageIconModify, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1718,6 +1738,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
             tabCRUD.setEnabledAt(1, false);
             tabCRUD.setEnabledAt(2, false);
             btnModifyInsert.setVisible(false);
+            btnReadHidden.setVisible(false);
         }
         pnlCast.setVisible(false);
         pnlEng.setVisible(false);
@@ -1729,7 +1750,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     private void btnReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadActionPerformed
         DataAccess da = new DataAccess();
         DefaultListModel<Espai> defaultListModel = new DefaultListModel<>();
-        for(Espai e: da.getEspais()){
+        for(Espai e: da.getEspaisVisibleOrHidden(true)){
             defaultListModel.addElement(e);
         }
         lstEspais.setModel(defaultListModel);
@@ -2014,6 +2035,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         deleteImages();
+        deleteImagesModify();
     }//GEN-LAST:event_formWindowClosing
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
@@ -2098,11 +2120,13 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
 
     private void btnConfirmModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmModifyActionPerformed
         DataAccess da = new DataAccess();
-        boolean existeix = false;
+        boolean exists = false;
         for(Espai espai : da.getEspais()){
             if(txtRegistreModify.getText().equals(espai.getRegistre())){
-                existeix = true;
+                exists = true;
+                espaiToModify = espai;
                 pnlModifyVisible.setVisible(true);
+                txtRegistreModify.setEnabled(false);
                 txtNomModify.setText(espai.getNom());
                 txtMunicipiModify.setText(espai.getMunicipi());
                 txtAdrecaModify.setText(espai.getAdreca());
@@ -2110,6 +2134,11 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                 txtWebModify.setText(espai.getWeb());
                 txtTelefonModify.setText(Integer.toString(espai.getTelefon()));
                 txtGestorModify.setText(espai.getGestor());
+                if(espai.isVisible()){
+                    chkVisible.setSelected(true);
+                } else {
+                    chkVisible.setSelected(false);
+                }
                 switch(espai.getTipus()){
                     case "Museu" -> cmbTipusModify.setSelectedItem("Museu");
                     case "Galeria" -> cmbTipusModify.setSelectedItem("Galeria");
@@ -2146,13 +2175,15 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                 txaCatModify.setText(espai.getDescripcions().get("\"cat\""));
                 txaEspModify.setText(espai.getDescripcions().get("\"esp\""));
                 txaEngModify.setText(espai.getDescripcions().get("\"eng\""));
+                
                 for (Imatge image : da.getImatgesEspai(espai)){
+                    oldImagesModify.add(image.getImatge());
                     imageListModelModify.addElement(image.getImatge());
                 }
                 lstImagesModify.setModel(imageListModelModify);
             }
         }
-        if (!existeix){
+        if (!exists){
             JOptionPane.showMessageDialog(null,
             "No existeix cap espai amb aquest registre",
             "Info",
@@ -2193,7 +2224,128 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_chkVideoModifyActionPerformed
 
     private void btnModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyActionPerformed
-        // TODO add your handling code here:
+        DataAccess da = new DataAccess();
+        boolean update = true;
+        LinkedHashMap<String, String> descripcions = new LinkedHashMap<>();
+        descripcions.put("\"cat\"", "\"" + txaCat.getText() + "\"");
+        descripcions.put("\"esp\"", "\"" + txaCast.getText() + "\"");
+        descripcions.put("\"eng\"", "\"" + txaEng.getText() + "\"");
+        
+        Pattern emailRegEx = Pattern.compile("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
+        Pattern webRegEx = Pattern.compile("(www\\.)[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,4}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)|(www\\.)?(?!ww)[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,4}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)");
+        String modalitats = "";
+        String error = "";
+        try{
+            if(txtAdrecaModify.getText() == null || txtAdrecaModify.getText().isBlank() || txtAdrecaModify.getText().isEmpty() ||
+               txtEmailModify.getText() == null || txtEmailModify.getText().isBlank() || txtEmailModify.getText().isEmpty() ||
+               txtGestorModify.getText() == null || txtGestorModify.getText().isBlank() || txtGestorModify.getText().isEmpty() ||
+               txtMunicipiModify.getText() == null || txtMunicipiModify.getText().isBlank() || txtMunicipiModify.getText().isEmpty() ||
+               txtNomModify.getText() == null || txtNomModify.getText().isBlank() || txtNomModify.getText().isEmpty() ||
+               txtWebModify.getText() == null || txtWebModify.getText().isBlank() || txtWebModify.getText().isEmpty() ||
+               txtTelefonModify.getText() == null || txtTelefonModify.getText().isBlank() || txtTelefonModify.getText().isEmpty()) {
+                error += "Els atributs no poden ser nulls o buits" + System.lineSeparator();
+            }
+            
+            if(txaEspModify.getText() == null || txaEspModify.getText().isBlank() || txaEspModify.getText().isEmpty() ||
+               txaCatModify.getText() == null || txaCatModify.getText().isBlank() || txaCatModify.getText().isEmpty() ||
+               txaEngModify.getText() == null || txaEngModify.getText().isBlank() || txaEngModify.getText().isEmpty()) {
+                error += "No es pot deixar buida la descripció en cap idioma" + System.lineSeparator();
+            }
+            
+            if(imageListModelModify.isEmpty()){
+                error += "L'espai ha de contenir al menys 1 imatge"  + System.lineSeparator();
+            }
+            
+            try{
+                Integer.parseInt(txtTelefonModify.getText());
+                if(txtTelefonModify.getText().length() != 9){
+                    error += "El telèfon ha de ser un número vàlid" + System.lineSeparator();
+                }
+            }catch(Exception e){
+                error += "El telèfon ha de ser un número vàlid" + System.lineSeparator();
+            }
+            
+            for(JCheckBox checkBox : chkListModalitatsModify){
+                if(checkBox.isSelected()){
+                    modalitats += checkBox.getText() + ", ";
+                }
+            }
+            
+            if(modalitats.isBlank() || modalitats.isBlank() || modalitats == null){
+                error += "Al menys una modalitat ha de ser seleccionada"  + System.lineSeparator();
+            }
+            modalitats = modalitats.substring(0, modalitats.length() - 1);
+            
+            if(!(emailRegEx.matcher(txtEmailModify.getText()).matches()) || !(emailRegEx.matcher(txtGestorModify.getText()).matches())){
+                error += "Tant email com gestor han d'estar en un format d'email correcte" + System.lineSeparator();
+            }
+            
+            if(!(webRegEx.matcher(txtWebModify.getText()).matches())){
+                error += "Web ha d'estar en el següent format: www.text.com" + System.lineSeparator();
+            }
+            
+            if(!(error.isEmpty() || error.isBlank() || error == null)){
+                throw new ArgumentNullException(error);
+            }
+        } catch (Exception e){
+            update = false;
+            System.err.println(error);
+            JOptionPane.showMessageDialog(null,
+            error,
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
+        }
+        
+        String serveis = "";
+        for(JCheckBox checkBox : chkListServeisModify){
+            if(checkBox.isSelected()){
+                serveis += checkBox.getText() + ", ";
+            }
+        }
+        if(!(serveis.isBlank() || serveis.isEmpty() || serveis == null)) {
+            serveis = serveis.substring(0, serveis.length() - 1);
+        }
+
+        if(update){
+            espaiToModify.setNom(txtNomModify.getText());
+            espaiToModify.setDescripcions(descripcions);
+            espaiToModify.setMunicipi(txtMunicipiModify.getText());
+            espaiToModify.setAdreca(txtAdrecaModify.getText());
+            espaiToModify.setEmail(txtEmailModify.getText());
+            espaiToModify.setWeb(txtWebModify.getText());
+            espaiToModify.setTelefon(Integer.parseInt(txtTelefonModify.getText()));
+            espaiToModify.setTipus(cmbTipusModify.getSelectedItem().toString());
+            espaiToModify.setModalitat(modalitats);
+            espaiToModify.setGestor(txtGestorModify.getText());
+            espaiToModify.setServeis(serveis);
+            espaiToModify.setVisible(chkVisible.isSelected());
+            
+            int res = da.updateEspai(espaiToModify);
+            String espaiImg = espaiToModify.getRegistre();
+            int contador = oldImagesModify.size() + 1;
+            for(String imatge : imagesModify) {
+                String id = espaiImg + "_" + contador;
+                Imatge newImage = new Imatge(id, imatge, espaiImg);
+                da.insertImage(newImage);
+                contador++;
+            };
+            if (res != 0){
+                for(String image : deletedImages){
+                    ImageHelper.getContainerClient().getBlobClient(image).delete();
+                    da.deleteImatge(image);
+                }
+                oldImagesModify.clear();
+                imagesModify.clear();
+                pnlModifyVisible.setVisible(false);
+                txtRegistreModify.setText("");
+                txtRegistreModify.setEnabled(true);
+                JOptionPane.showMessageDialog(null,
+                "S'ha modificat el espai correctament",
+                "Info",
+                JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+        
     }//GEN-LAST:event_btnModifyActionPerformed
 
     private void btnUploadModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadModifyActionPerformed
@@ -2260,12 +2412,18 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_chkSelectAllServModifyActionPerformed
 
     private void btnBorrarModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarModifyActionPerformed
-        // TODO add your handling code here:
+        String selectedImage = lstImagesModify.getSelectedValue();
+        if(!(lstImagesModify.getSelectedValue() == null)){
+            if(imagesModify.contains(selectedImage)){
+                ImageHelper.getContainerClient().getBlobClient(selectedImage).delete();
+                imagesModify.remove(selectedImage);
+            }else{
+                deletedImages.add(selectedImage);
+            }
+            imageListModelModify.remove(lstImagesModify.getSelectedIndex());
+            lstImagesModify.setModel(imageListModelModify);
+        }
     }//GEN-LAST:event_btnBorrarModifyActionPerformed
-
-    private void btnClearModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearModifyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnClearModifyActionPerformed
 
     private void txtAdrecaModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAdrecaModifyActionPerformed
         // TODO add your handling code here:
@@ -2308,6 +2466,25 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         pnlModifyVisible.setVisible(false);
     }//GEN-LAST:event_txtRegistreModifyKeyTyped
 
+    private void btnCancelModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelModifyActionPerformed
+        deleteImagesModify();
+        oldImagesModify.clear();
+        imagesModify.clear();
+        deletedImages.clear();
+        pnlModifyVisible.setVisible(false);
+        txtRegistreModify.setText("");
+        txtRegistreModify.setEnabled(true);
+    }//GEN-LAST:event_btnCancelModifyActionPerformed
+
+    private void btnReadHiddenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadHiddenActionPerformed
+        DataAccess da = new DataAccess();
+        DefaultListModel<Espai> defaultListModel = new DefaultListModel<>();
+        for(Espai e: da.getEspaisVisibleOrHidden(false)){
+            defaultListModel.addElement(e);
+        }
+        lstEspais.setModel(defaultListModel);
+    }//GEN-LAST:event_btnReadHiddenActionPerformed
+
     private void lstEspaisMouseClicked(java.awt.event.MouseEvent evt) {                                          
         if (evt.getClickCount() == 2) {
             btnVisualitzar.doClick();
@@ -2343,6 +2520,15 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         }
     }
     
+    private void deleteImagesModify(){
+        if(!(imagesModify == null || imagesModify.isEmpty())){
+            BlobContainerClient container =  ImageHelper.getContainerClient();
+            for(String image : imagesModify){
+                container.getBlobClient(image).delete();
+            }
+        }
+    }
+    
     private void uploadImage(JTextField txtImg, ArrayList<String> imageList, DefaultListModel imageListModels, JList lstImage){
         JFileChooser fileChooser = new JFileChooser();
         Boolean status = true;
@@ -2371,6 +2557,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                         baos.close();
                         bais.close();
                         imageList.add(fileChooser.getSelectedFile().getName());
+                            
                         /*
                         for(String image : images){
                             imageListModel.addElement(image);
@@ -2454,15 +2641,16 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnBorrarModify;
+    private javax.swing.JButton btnCancelModify;
     private javax.swing.JButton btnCercar;
     private javax.swing.JButton btnClear;
-    private javax.swing.JButton btnClearModify;
     private javax.swing.JButton btnConfirmModify;
     private javax.swing.JButton btnInsert;
     private javax.swing.JButton btnModify;
     private javax.swing.JButton btnModifyInsert;
     private javax.swing.JButton btnMyProfile;
     private javax.swing.JButton btnRead;
+    private javax.swing.JButton btnReadHidden;
     private javax.swing.JButton btnUpload;
     private javax.swing.JButton btnUploadModify;
     private javax.swing.JButton btnVisualitzar;

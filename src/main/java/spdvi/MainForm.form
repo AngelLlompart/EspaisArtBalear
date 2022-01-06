@@ -98,19 +98,22 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="btnRead" min="-2" pref="81" max="-2" attributes="0"/>
                                                   <Group type="102" alignment="0" attributes="0">
                                                       <Component id="btnCercar" min="-2" pref="81" max="-2" attributes="0"/>
                                                       <EmptySpace max="32767" attributes="0"/>
                                                       <Component id="btnModifyInsert" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="btnRead" min="-2" pref="81" max="-2" attributes="0"/>
+                                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                                   </Group>
                                               </Group>
                                           </Group>
                                       </Group>
                                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace pref="10" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace type="separate" max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="1" attributes="0">
                                               <Component id="lblImage" min="-2" pref="229" max="-2" attributes="0"/>
@@ -121,6 +124,11 @@
                                               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                      <Component id="btnReadHidden" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -142,7 +150,9 @@
                                   <Component id="btnRead" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="btnMyProfile" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                              <Component id="btnReadHidden" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="btnCercar" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="btnModifyInsert" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -240,6 +250,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModifyInsertActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnReadHidden">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Read Hidden"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReadHiddenActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -360,7 +378,7 @@
                                           <Group type="102" alignment="1" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="txtImage" max="32767" attributes="0"/>
-                                                  <Component id="scrImages" pref="174" max="32767" attributes="0"/>
+                                                  <Component id="scrImages" pref="182" max="32767" attributes="0"/>
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
@@ -374,7 +392,7 @@
                                                   <Component id="btnClear" min="-2" max="-2" attributes="0"/>
                                                   <Component id="lblImageIcon" min="-2" pref="204" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace pref="84" max="32767" attributes="0"/>
+                                              <EmptySpace pref="92" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -1310,16 +1328,15 @@
                                       </Group>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="scrImagesModify" pref="174" max="32767" attributes="0"/>
+                                  <Component id="scrImagesModify" pref="182" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="btnModify" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                                  <Component id="btnCancelModify" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="chkVisible" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="btnClearModify" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="chkVisible" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -1438,11 +1455,13 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="chkVisible" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                                  <Component id="btnClearModify" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="btnModify" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="btnModify" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnCancelModify" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -1494,7 +1513,6 @@
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Group type="102" alignment="1" attributes="0">
                                               <Component id="lblImageIconModify" min="-2" pref="141" max="-2" attributes="0"/>
@@ -1881,14 +1899,6 @@
                     <Property name="text" type="java.lang.String" value="Adre&#xe7;a"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnClearModify">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Clear"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnClearModifyActionPerformed"/>
-                  </Events>
-                </Component>
                 <Component class="javax.swing.JTextField" name="txtAdrecaModify">
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtAdrecaModifyActionPerformed"/>
@@ -1986,7 +1996,7 @@
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="pnlEspModify" alignment="0" pref="133" max="32767" attributes="0"/>
+                              <Component id="pnlEspModify" alignment="0" max="32767" attributes="0"/>
                               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
@@ -2142,6 +2152,14 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Visible"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnCancelModify">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Cancel"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelModifyActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
