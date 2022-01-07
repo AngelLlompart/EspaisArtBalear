@@ -15,6 +15,7 @@ spdvi\MainForm$54.class
 spdvi\dialogs\Visualitzar$7$1.class
 spdvi\MainForm$47.class
 spdvi\MainForm$57.class
+spdvi\MainForm$67.class
 spdvi\dialogs\ConfirmPassword$12$1.class
 spdvi\dialogs\ConfirmPassword$8.class
 spdvi\dialogs\MyProfile$1.class
@@ -65,6 +66,7 @@ spdvi\dialogs\Login$3.class
 spdvi\dialogs\Login$6.class
 spdvi\pojos\User.class
 spdvi\dialogs\Login$10.class
+spdvi\MainForm$68.class
 spdvi\MainForm$33.class
 spdvi\dialogs\Visualitzar$1.class
 spdvi\helpers\PasswordGenerator.class

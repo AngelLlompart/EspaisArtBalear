@@ -391,4 +391,94 @@ public class DataAccess {
         }
         return result;
     }
+    
+    public ArrayList<Espai> getEspaisSegonsRegistre(String registre) {
+        ArrayList<Espai> espais = new ArrayList<Espai>();
+        try ( Connection connection = getConnection()) {
+            PreparedStatement selectStatement = connection.prepareStatement(
+                    "Select * FROM dbo.[Espai] where Registre like ?"
+            );
+            selectStatement.setString(1,"%" + registre + "%");
+            ResultSet resultSet = selectStatement.executeQuery();
+            while (resultSet.next()) {
+                String desc = resultSet.getString("Descripcions");
+                String[] pairs = desc.split("\",");
+                LinkedHashMap<String, String> mapDesc = new LinkedHashMap<>();
+                int max = pairs.length - 1;
+                int contador = 0;
+                for (String pair : pairs) {
+                    String[] entry = pair.split("\":");
+                    if(contador == max){
+                        mapDesc.put(entry[0].trim() + "\"", entry[1].trim());
+                    }else{
+                        mapDesc.put(entry[0].trim() + "\"", entry[1].trim() + "\"");
+                    }
+                    contador++;
+                }
+                Espai espai = new Espai(
+                        resultSet.getString("Nom"),
+                        resultSet.getString("Registre"),
+                        mapDesc,
+                        resultSet.getString("Municipi"),
+                        resultSet.getString("Adreça"),
+                        resultSet.getString("Email"),
+                        resultSet.getString("Web"),
+                        resultSet.getInt("Telefon"),
+                        resultSet.getString("Tipus"),
+                        resultSet.getString("Modalitats"),
+                        resultSet.getString("Gestor"),
+                        resultSet.getString("Serveis")
+                );
+                espais.add(espai);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return espais;
+    }
+    
+    public ArrayList<Espai> getEspaisSegonsMunicipi(String municipi) {
+        ArrayList<Espai> espais = new ArrayList<Espai>();
+        try ( Connection connection = getConnection()) {
+            PreparedStatement selectStatement = connection.prepareStatement(
+                    "Select * FROM dbo.[Espai] where Municipi =?"
+            );
+            selectStatement.setString(1, municipi);
+            ResultSet resultSet = selectStatement.executeQuery();
+            while (resultSet.next()) {
+                String desc = resultSet.getString("Descripcions");
+                String[] pairs = desc.split("\",");
+                LinkedHashMap<String, String> mapDesc = new LinkedHashMap<>();
+                int max = pairs.length - 1;
+                int contador = 0;
+                for (String pair : pairs) {
+                    String[] entry = pair.split("\":");
+                    if(contador == max){
+                        mapDesc.put(entry[0].trim() + "\"", entry[1].trim());
+                    }else{
+                        mapDesc.put(entry[0].trim() + "\"", entry[1].trim() + "\"");
+                    }
+                    contador++;
+                }
+                Espai espai = new Espai(
+                        resultSet.getString("Nom"),
+                        resultSet.getString("Registre"),
+                        mapDesc,
+                        resultSet.getString("Municipi"),
+                        resultSet.getString("Adreça"),
+                        resultSet.getString("Email"),
+                        resultSet.getString("Web"),
+                        resultSet.getInt("Telefon"),
+                        resultSet.getString("Tipus"),
+                        resultSet.getString("Modalitats"),
+                        resultSet.getString("Gestor"),
+                        resultSet.getString("Serveis")
+                );
+                espais.add(espai);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return espais;
+    }
 }

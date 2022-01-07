@@ -97,22 +97,12 @@
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="btnCercar" min="-2" pref="81" max="-2" attributes="0"/>
-                                                      <EmptySpace max="32767" attributes="0"/>
-                                                      <Component id="btnModifyInsert" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" attributes="0">
-                                                      <Component id="btnRead" min="-2" pref="81" max="-2" attributes="0"/>
-                                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                                  </Group>
-                                              </Group>
+                                              <Component id="btnRead" min="-2" pref="81" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                      <EmptySpace min="35" max="32767" attributes="0"/>
                                   </Group>
-                                  <Group type="102" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace type="separate" max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="1" attributes="0">
@@ -123,12 +113,39 @@
                                               <Component id="prgImatgeRead" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                                           </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="btnCercar" min="-2" pref="75" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                                      <Component id="btnReadHidden" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="txtCercarMunicipi" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="lblCercar1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Component id="btnCercarMunicipi" min="-2" pref="75" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="btnReadHidden" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                                      <Component id="btnModifyInsert" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                                      <Component id="txtCercar" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="lblCercar" alignment="0" max="32767" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
@@ -151,13 +168,25 @@
                                   <Component id="btnMyProfile" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                              <Component id="btnReadHidden" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="btnCercar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnReadHidden" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="btnModifyInsert" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="97" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="lblCercar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="btnCercar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtCercar" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="lblCercar1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="btnCercarMunicipi" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtCercarMunicipi" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="34" max="32767" attributes="0"/>
                               <Component id="btnVisualitzar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="lblRegistre" min="-2" max="-2" attributes="0"/>
@@ -258,6 +287,31 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReadHiddenActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtCercar">
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblCercar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Introdueix el registre de l&apos;espai"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtCercarMunicipi">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCercarMunicipiActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblCercar1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Introdueix el municipi de l&apos;espai"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnCercarMunicipi">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cercar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCercarMunicipiActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -378,7 +432,7 @@
                                           <Group type="102" alignment="1" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="txtImage" max="32767" attributes="0"/>
-                                                  <Component id="scrImages" pref="182" max="32767" attributes="0"/>
+                                                  <Component id="scrImages" pref="185" max="32767" attributes="0"/>
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
@@ -392,7 +446,7 @@
                                                   <Component id="btnClear" min="-2" max="-2" attributes="0"/>
                                                   <Component id="lblImageIcon" min="-2" pref="204" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace pref="92" max="32767" attributes="0"/>
+                                              <EmptySpace pref="95" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -1328,7 +1382,7 @@
                                       </Group>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="scrImagesModify" pref="182" max="32767" attributes="0"/>
+                                  <Component id="scrImagesModify" pref="185" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">

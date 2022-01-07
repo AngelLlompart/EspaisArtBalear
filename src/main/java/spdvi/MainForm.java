@@ -156,6 +156,11 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         prgImatgeRead = new javax.swing.JProgressBar();
         btnModifyInsert = new javax.swing.JButton();
         btnReadHidden = new javax.swing.JButton();
+        txtCercar = new javax.swing.JTextField();
+        lblCercar = new javax.swing.JLabel();
+        txtCercarMunicipi = new javax.swing.JTextField();
+        lblCercar1 = new javax.swing.JLabel();
+        btnCercarMunicipi = new javax.swing.JButton();
         pnlInsert = new javax.swing.JPanel();
         lblNomEspai = new javax.swing.JLabel();
         txtNomEspai = new javax.swing.JTextField();
@@ -355,6 +360,23 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
             }
         });
 
+        lblCercar.setText("Introdueix el registre de l'espai");
+
+        txtCercarMunicipi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCercarMunicipiActionPerformed(evt);
+            }
+        });
+
+        lblCercar1.setText("Introdueix el municipi de l'espai");
+
+        btnCercarMunicipi.setText("Cercar");
+        btnCercarMunicipi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCercarMunicipiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlReadLayout = new javax.swing.GroupLayout(pnlRead);
         pnlRead.setLayout(pnlReadLayout);
         pnlReadLayout.setHorizontalGroup(
@@ -384,16 +406,9 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                                         .addComponent(lblComentaris))
                                     .addGroup(pnlReadLayout.createSequentialGroup()
                                         .addGap(27, 27, 27)
-                                        .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(pnlReadLayout.createSequentialGroup()
-                                                .addComponent(btnCercar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(btnModifyInsert))
-                                            .addGroup(pnlReadLayout.createSequentialGroup()
-                                                .addComponent(btnRead, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE)))))
-                                .addGap(35, 35, 35))
-                            .addGroup(pnlReadLayout.createSequentialGroup()
+                                        .addComponent(btnRead, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlReadLayout.createSequentialGroup()
                                 .addGap(18, 18, Short.MAX_VALUE)
                                 .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlReadLayout.createSequentialGroup()
@@ -401,11 +416,30 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                                         .addContainerGap())
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlReadLayout.createSequentialGroup()
                                         .addComponent(prgImatgeRead, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(48, 48, 48))))
+                                        .addGap(48, 48, 48))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlReadLayout.createSequentialGroup()
+                                        .addComponent(btnCercar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap())))
                             .addGroup(pnlReadLayout.createSequentialGroup()
                                 .addGap(21, 21, 21)
-                                .addComponent(btnReadHidden)
-                                .addGap(0, 0, Short.MAX_VALUE))))))
+                                .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlReadLayout.createSequentialGroup()
+                                        .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(txtCercarMunicipi, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblCercar1, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnCercarMunicipi, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap())
+                                    .addGroup(pnlReadLayout.createSequentialGroup()
+                                        .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(pnlReadLayout.createSequentialGroup()
+                                                .addComponent(btnReadHidden)
+                                                .addGap(30, 30, 30)
+                                                .addComponent(btnModifyInsert))
+                                            .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(txtCercar, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(lblCercar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addGap(0, 0, Short.MAX_VALUE))))))))
         );
         pnlReadLayout.setVerticalGroup(
             pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -420,12 +454,22 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                             .addComponent(btnRead)
                             .addComponent(btnMyProfile))
                         .addGap(5, 5, 5)
-                        .addComponent(btnReadHidden)
-                        .addGap(45, 45, 45)
+                        .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnReadHidden)
+                            .addComponent(btnModifyInsert))
+                        .addGap(27, 27, 27)
+                        .addComponent(lblCercar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnCercar)
-                            .addComponent(btnModifyInsert))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                            .addComponent(txtCercar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(lblCercar1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCercarMunicipi)
+                            .addComponent(txtCercarMunicipi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addComponent(btnVisualitzar)
                         .addGap(32, 32, 32)
                         .addComponent(lblRegistre)
@@ -952,7 +996,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInsertLayout.createSequentialGroup()
                                         .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(txtImage)
-                                            .addComponent(scrImages, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
+                                            .addComponent(scrImages, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(btnUpload)
@@ -962,7 +1006,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                                         .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(btnClear)
                                             .addComponent(lblImageIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addContainerGap(92, Short.MAX_VALUE))))))))
+                                        .addContainerGap(95, Short.MAX_VALUE))))))))
             .addGroup(pnlInsertLayout.createSequentialGroup()
                 .addGap(153, 153, 153)
                 .addComponent(btnInsert)
@@ -1535,7 +1579,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtGestorModify, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(scrImagesModify, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                        .addComponent(scrImagesModify, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
                         .addGap(90, 90, 90))
                     .addGroup(pnlModifyVisibleLayout.createSequentialGroup()
                         .addComponent(btnModify)
@@ -2007,7 +2051,13 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_btnVisualitzarActionPerformed
 
     private void btnCercarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarActionPerformed
-        
+        DataAccess da = new DataAccess();
+        txtCercarMunicipi.setText("");
+        DefaultListModel<Espai> defaultListModel = new DefaultListModel<>();
+        for(Espai e: da.getEspaisSegonsRegistre(txtCercar.getText())){
+            defaultListModel.addElement(e);
+        }
+        lstEspais.setModel(defaultListModel);
     }//GEN-LAST:event_btnCercarActionPerformed
 
     private void btnMyProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMyProfileActionPerformed
@@ -2485,6 +2535,20 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         lstEspais.setModel(defaultListModel);
     }//GEN-LAST:event_btnReadHiddenActionPerformed
 
+    private void btnCercarMunicipiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercarMunicipiActionPerformed
+        DataAccess da = new DataAccess();
+        txtCercar.setText("");
+        DefaultListModel<Espai> defaultListModel = new DefaultListModel<>();
+        for(Espai e: da.getEspaisSegonsMunicipi(txtCercarMunicipi.getText())){
+            defaultListModel.addElement(e);
+        }
+        lstEspais.setModel(defaultListModel);
+    }//GEN-LAST:event_btnCercarMunicipiActionPerformed
+
+    private void txtCercarMunicipiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCercarMunicipiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCercarMunicipiActionPerformed
+
     private void lstEspaisMouseClicked(java.awt.event.MouseEvent evt) {                                          
         if (evt.getClickCount() == 2) {
             btnVisualitzar.doClick();
@@ -2643,6 +2707,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     private javax.swing.JButton btnBorrarModify;
     private javax.swing.JButton btnCancelModify;
     private javax.swing.JButton btnCercar;
+    private javax.swing.JButton btnCercarMunicipi;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnConfirmModify;
     private javax.swing.JButton btnInsert;
@@ -2703,6 +2768,8 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     private javax.swing.JLayeredPane layeredDescModify;
     private javax.swing.JLabel lblAdreca;
     private javax.swing.JLabel lblAdrecaModify;
+    private javax.swing.JLabel lblCercar;
+    private javax.swing.JLabel lblCercar1;
     private javax.swing.JLabel lblComentaris;
     private javax.swing.JLabel lblDescripcions;
     private javax.swing.JLabel lblDescripcionsModify;
@@ -2768,6 +2835,8 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     private javax.swing.JTextArea txaEspModify;
     private javax.swing.JTextField txtAdreca;
     private javax.swing.JTextField txtAdrecaModify;
+    private javax.swing.JTextField txtCercar;
+    private javax.swing.JTextField txtCercarMunicipi;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEmailModify;
     private javax.swing.JTextField txtGestor;

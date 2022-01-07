@@ -164,7 +164,7 @@ public class Espai {
     
     @Override
     public String toString() {
-        return  registre + ": " + nom  + ", "  + tipus;
+        return  registre + ": " + nom  + ", "  + tipus + ". " + municipi;
     }
     
     
