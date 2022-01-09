@@ -286,11 +286,7 @@ public class ConfirmPassword extends javax.swing.JDialog {
                 } else {
                     for (User u : users) {
                         if (u.getEmail().equals(email)) {
-                            try {
-                                da.updatePassword(new String(txtContrasenya.getPassword()), u.getUserName());
-                            } catch (SQLException ex) {
-                                ex.printStackTrace();
-                            }
+                            da.updatePassword(new String(txtContrasenya.getPassword()), u.getUserName());
                         }
                     }
                     setVisible(false);
