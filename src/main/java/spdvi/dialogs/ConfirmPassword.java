@@ -81,7 +81,7 @@ public class ConfirmPassword extends javax.swing.JDialog {
         setSize(new java.awt.Dimension(450, 250));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblCodi.setBackground(new java.awt.Color(0, 0, 0));
@@ -286,11 +286,7 @@ public class ConfirmPassword extends javax.swing.JDialog {
                 } else {
                     for (User u : users) {
                         if (u.getEmail().equals(email)) {
-                            try {
-                                da.updatePassword(new String(txtContrasenya.getPassword()), u.getUserName());
-                            } catch (SQLException ex) {
-                                ex.printStackTrace();
-                            }
+                            da.updatePassword(new String(txtContrasenya.getPassword()), u.getUserName());
                         }
                     }
                     setVisible(false);

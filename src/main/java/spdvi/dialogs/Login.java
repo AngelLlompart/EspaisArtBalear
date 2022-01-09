@@ -82,7 +82,7 @@ public class Login extends javax.swing.JDialog {
         });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtUserName.setBackground(new java.awt.Color(255, 255, 255));
@@ -115,7 +115,6 @@ public class Login extends javax.swing.JDialog {
         jPanel1.add(lblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, -1, -1));
 
         txtPassword.setBackground(new java.awt.Color(255, 255, 255));
-        txtPassword.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
         txtPassword.setForeground(new java.awt.Color(204, 204, 204));
         txtPassword.setText("********");
         txtPassword.setToolTipText("");
@@ -272,7 +271,6 @@ public class Login extends javax.swing.JDialog {
 
     private void lblRegistreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistreMouseClicked
         Register r = new Register((Frame) this.getParent(), true);
-        //this.setVisible(false);
         r.setVisible(true);
     }//GEN-LAST:event_lblRegistreMouseClicked
 

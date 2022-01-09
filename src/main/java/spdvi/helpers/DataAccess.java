@@ -143,6 +143,51 @@ public class DataAccess {
         }
         return espais;
     }
+    
+    public ArrayList<Espai> getEspaisVisibleOrHidden(boolean visible) {
+        ArrayList<Espai> espais = new ArrayList<Espai>();
+        try ( Connection connection = getConnection()) {
+            PreparedStatement selectStatement = connection.prepareStatement(
+                    "Select * FROM dbo.[Espai] where Visible =?"
+            );
+            selectStatement.setBoolean(1, visible);
+            ResultSet resultSet = selectStatement.executeQuery();
+            while (resultSet.next()) {
+                String desc = resultSet.getString("Descripcions");
+                String[] pairs = desc.split("\",");
+                LinkedHashMap<String, String> mapDesc = new LinkedHashMap<>();
+                int max = pairs.length - 1;
+                int contador = 0;
+                for (String pair : pairs) {
+                    String[] entry = pair.split("\":");
+                    if(contador == max){
+                        mapDesc.put(entry[0].trim() + "\"", entry[1].trim());
+                    }else{
+                        mapDesc.put(entry[0].trim() + "\"", entry[1].trim() + "\"");
+                    }
+                    contador++;
+                }
+                Espai espai = new Espai(
+                        resultSet.getString("Nom"),
+                        resultSet.getString("Registre"),
+                        mapDesc,
+                        resultSet.getString("Municipi"),
+                        resultSet.getString("Adreça"),
+                        resultSet.getString("Email"),
+                        resultSet.getString("Web"),
+                        resultSet.getInt("Telefon"),
+                        resultSet.getString("Tipus"),
+                        resultSet.getString("Modalitats"),
+                        resultSet.getString("Gestor"),
+                        resultSet.getString("Serveis")
+                );
+                espais.add(espai);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return espais;
+    }
 
     public int insertEspais(Espai es) {
         int result = 0;
@@ -172,14 +217,18 @@ public class DataAccess {
         return result;
     }
     
-    public int updatePassword(String password, String user ) throws SQLException {    
+    public int updatePassword(String password, String user ){
+        int i = 0;
         try (Connection connection = getConnection();) {
             PreparedStatement updateStatement = connection.prepareStatement("UPDATE dbo.[User] SET Password=? where Username=?"); 
             updateStatement.setString(1, password);
             updateStatement.setString(2, user);
-            int i = updateStatement.executeUpdate();
-            return i;
+            i = updateStatement.executeUpdate();
+           
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
+        return i;
     }
     
     public ArrayList<Imatge> getImatgesEspai(Espai espai){
@@ -253,7 +302,8 @@ public class DataAccess {
                         resultSet.getString("Espai"), 
                         resultSet.getString("Text"), 
                         LocalDate.parse(resultSet.getString("Data")), 
-                        resultSet.getTime("Hora").toLocalTime());
+                        resultSet.getTime("Hora").toLocalTime(),
+                        resultSet.getString("NomUsuari"));
                 comentaris.add(comentari);
             }
         } catch (SQLException ex) {
@@ -266,14 +316,15 @@ public class DataAccess {
         int result = 0;
         try ( Connection connection = getConnection();) {
             PreparedStatement insertStatement = connection.prepareStatement(
-                    "INSERT INTO dbo.[Comentari] (Usuari, Espai, Text, Data, Hora)"
-                    + "VALUES (?,?,?,?,?)");
+                    "INSERT INTO dbo.[Comentari] (Usuari, Espai, Text, Data, Hora, NomUsuari)"
+                    + "VALUES (?,?,?,?,?,?)");
             
-            insertStatement.setString(1, comentari.getUsuari());
+            insertStatement.setString(1, comentari.getEmail());
             insertStatement.setString(2, comentari.getEspai());
             insertStatement.setString(3, comentari.getText());
             insertStatement.setDate(4, Date.valueOf(comentari.getData()));
             insertStatement.setTime(5, Time.valueOf(comentari.getHora()));
+            insertStatement.setString(6, comentari.getUsuari());
             result = insertStatement.executeUpdate();
 
         } catch (SQLException ex) {
@@ -302,5 +353,170 @@ public class DataAccess {
             ex.printStackTrace();
         }
         return imatge;
+    }
+    
+    public int deleteImatge(String imageName){
+        int result = 0;
+        try ( Connection connection = getConnection();) {
+            PreparedStatement deleteStatement = connection.prepareStatement(
+                    "Delete from dbo.[Imatge] where Imatge=?");
+            
+            deleteStatement.setString(1, imageName);
+            result = deleteStatement.executeUpdate();
+
+        } catch (SQLException ex) {
+           ex.printStackTrace();
+        }
+        return result;
+    }
+    
+    public int updateEspai(Espai es){
+        int result = 0;
+        try ( Connection connection = getConnection();) {
+            PreparedStatement updateStatement = connection.prepareStatement(
+                    "UPDATE dbo.[Espai] SET Nom=?, Descripcions=?, Municipi=?, Adreça=?, Email=?, Web=?, Telefon=?, Tipus=?, Modalitats=?, Gestor=?, Serveis=?, Visible=? where Registre=?");
+
+            updateStatement.setString(1, es.getNom());
+            updateStatement.setString(2, es.desc());
+            updateStatement.setString(3, es.getMunicipi());
+            updateStatement.setString(4, es.getAdreca());
+            updateStatement.setString(5, es.getEmail());
+            updateStatement.setString(6, es.getWeb());
+            updateStatement.setInt(7, es.getTelefon());
+            updateStatement.setString(8, es.getTipus());
+            updateStatement.setString(9, es.getModalitat());
+            updateStatement.setString(10, es.getGestor());
+            updateStatement.setString(11, es.getServeis());
+            updateStatement.setBoolean(12, es.isVisible());
+            updateStatement.setString(13, es.getRegistre());
+
+            result = updateStatement.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    
+    public ArrayList<Espai> getEspaisSegonsRegistre(String registre) {
+        ArrayList<Espai> espais = new ArrayList<Espai>();
+        try ( Connection connection = getConnection()) {
+            PreparedStatement selectStatement = connection.prepareStatement(
+                    "Select * FROM dbo.[Espai] where Registre like ?"
+            );
+            selectStatement.setString(1,"%" + registre + "%");
+            ResultSet resultSet = selectStatement.executeQuery();
+            while (resultSet.next()) {
+                String desc = resultSet.getString("Descripcions");
+                String[] pairs = desc.split("\",");
+                LinkedHashMap<String, String> mapDesc = new LinkedHashMap<>();
+                int max = pairs.length - 1;
+                int contador = 0;
+                for (String pair : pairs) {
+                    String[] entry = pair.split("\":");
+                    if(contador == max){
+                        mapDesc.put(entry[0].trim() + "\"", entry[1].trim());
+                    }else{
+                        mapDesc.put(entry[0].trim() + "\"", entry[1].trim() + "\"");
+                    }
+                    contador++;
+                }
+                Espai espai = new Espai(
+                        resultSet.getString("Nom"),
+                        resultSet.getString("Registre"),
+                        mapDesc,
+                        resultSet.getString("Municipi"),
+                        resultSet.getString("Adreça"),
+                        resultSet.getString("Email"),
+                        resultSet.getString("Web"),
+                        resultSet.getInt("Telefon"),
+                        resultSet.getString("Tipus"),
+                        resultSet.getString("Modalitats"),
+                        resultSet.getString("Gestor"),
+                        resultSet.getString("Serveis")
+                );
+                espais.add(espai);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return espais;
+    }
+    
+    public ArrayList<Espai> getEspaisSegonsMunicipi(String municipi) {
+        ArrayList<Espai> espais = new ArrayList<Espai>();
+        try ( Connection connection = getConnection()) {
+            PreparedStatement selectStatement = connection.prepareStatement(
+                    "Select * FROM dbo.[Espai] where Municipi =?"
+            );
+            selectStatement.setString(1, municipi);
+            ResultSet resultSet = selectStatement.executeQuery();
+            while (resultSet.next()) {
+                String desc = resultSet.getString("Descripcions");
+                String[] pairs = desc.split("\",");
+                LinkedHashMap<String, String> mapDesc = new LinkedHashMap<>();
+                int max = pairs.length - 1;
+                int contador = 0;
+                for (String pair : pairs) {
+                    String[] entry = pair.split("\":");
+                    if(contador == max){
+                        mapDesc.put(entry[0].trim() + "\"", entry[1].trim());
+                    }else{
+                        mapDesc.put(entry[0].trim() + "\"", entry[1].trim() + "\"");
+                    }
+                    contador++;
+                }
+                Espai espai = new Espai(
+                        resultSet.getString("Nom"),
+                        resultSet.getString("Registre"),
+                        mapDesc,
+                        resultSet.getString("Municipi"),
+                        resultSet.getString("Adreça"),
+                        resultSet.getString("Email"),
+                        resultSet.getString("Web"),
+                        resultSet.getInt("Telefon"),
+                        resultSet.getString("Tipus"),
+                        resultSet.getString("Modalitats"),
+                        resultSet.getString("Gestor"),
+                        resultSet.getString("Serveis")
+                );
+                espais.add(espai);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return espais;
+    }
+    
+    public int updateUsername(User user){
+        int result = 0;
+        try (Connection connection = getConnection();) {
+            PreparedStatement updateStatement2 = connection.prepareStatement("UPDATE dbo.[Comentari] set NomUsuari=? where Usuari=?");
+            updateStatement2.setString(1, user.getUserName());
+            updateStatement2.setString(2, user.getEmail());
+            updateStatement2.executeUpdate();
+            PreparedStatement updateStatement = connection.prepareStatement("UPDATE dbo.[User] SET Username=? where Email=?"); 
+            updateStatement.setString(1, user.getUserName());
+            updateStatement.setString(2, user.getEmail());
+            result = updateStatement.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+    
+    public int deleteUser(User user){
+        int result = 0;
+        try (Connection connection = getConnection();) {
+            PreparedStatement updateStatement2 = connection.prepareStatement("DELETE dbo.[Comentari] where Usuari=?");
+            updateStatement2.setString(1, user.getEmail());
+            updateStatement2.executeUpdate();
+            PreparedStatement updateStatement = connection.prepareStatement("Delete dbo.[User] where Email=?"); 
+            updateStatement.setString(1, user.getEmail());
+            result = updateStatement.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return result;
     }
 }
