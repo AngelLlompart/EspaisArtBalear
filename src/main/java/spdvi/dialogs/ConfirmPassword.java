@@ -86,6 +86,7 @@ public class ConfirmPassword extends javax.swing.JDialog {
         setSize(new java.awt.Dimension(450, 250));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblCodi.setBackground(new java.awt.Color(0, 0, 0));
@@ -135,12 +136,18 @@ public class ConfirmPassword extends javax.swing.JDialog {
         jPanel1.add(txtConfirmContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 190, -1));
 
         txtCodi.setBackground(new java.awt.Color(255, 255, 255));
+        txtCodi.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
         txtCodi.setForeground(new java.awt.Color(204, 204, 204));
         txtCodi.setText("Ingresi codi");
         txtCodi.setBorder(null);
         txtCodi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txtCodiMousePressed(evt);
+            }
+        });
+        txtCodi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodiActionPerformed(evt);
             }
         });
         jPanel1.add(txtCodi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 190, -1));
@@ -182,15 +189,17 @@ public class ConfirmPassword extends javax.swing.JDialog {
         PanelBotoLayout.setHorizontalGroup(
             PanelBotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelBotoLayout.createSequentialGroup()
-                .addComponent(lblText, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblText, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         PanelBotoLayout.setVerticalGroup(
             PanelBotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblText, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelBotoLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel1.add(PanelBoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 120, 30));
+        jPanel1.add(PanelBoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, 120, 30));
 
         Header.setBackground(new java.awt.Color(255, 255, 255));
         Header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -203,6 +212,19 @@ public class ConfirmPassword extends javax.swing.JDialog {
                 HeaderMousePressed(evt);
             }
         });
+
+        javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
+        Header.setLayout(HeaderLayout);
+        HeaderLayout.setHorizontalGroup(
+            HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 470, Short.MAX_VALUE)
+        );
+        HeaderLayout.setVerticalGroup(
+            HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(Header, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, 470, 30));
 
         exitBtn.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -227,39 +249,28 @@ public class ConfirmPassword extends javax.swing.JDialog {
         exitBtn.setLayout(exitBtnLayout);
         exitBtnLayout.setHorizontalGroup(
             exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(exitTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, exitBtnLayout.createSequentialGroup()
+                .addGap(0, 1, Short.MAX_VALUE)
+                .addComponent(exitTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         exitBtnLayout.setVerticalGroup(
             exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(exitTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
-        Header.setLayout(HeaderLayout);
-        HeaderLayout.setHorizontalGroup(
-            HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaderLayout.createSequentialGroup()
-                .addGap(0, 468, Short.MAX_VALUE)
-                .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        HeaderLayout.setVerticalGroup(
-            HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(HeaderLayout.createSequentialGroup()
-                .addComponent(exitBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, exitBtnLayout.createSequentialGroup()
+                .addComponent(exitTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel1.add(Header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, -1));
+        jPanel1.add(exitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(491, 5, 40, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
         );
 
         pack();
@@ -297,13 +308,12 @@ public class ConfirmPassword extends javax.swing.JDialog {
     }//GEN-LAST:event_HeaderMouseDragged
 
     private void exitTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseClicked
-        System.exit(0);
+        this.setVisible(false);
     }//GEN-LAST:event_exitTxtMouseClicked
 
     private void exitTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseEntered
         exitBtn.setBackground(Color.red);
         exitTxt.setForeground(Color.white);
-
     }//GEN-LAST:event_exitTxtMouseEntered
 
     private void exitTxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseExited
@@ -324,13 +334,11 @@ public class ConfirmPassword extends javax.swing.JDialog {
             txtCodi.setText("");
             txtCodi.setForeground(Color.black);
         }
-        if (String.valueOf(txtContrasenya.getPassword()).isEmpty());
-        {
+        if (String.valueOf(txtContrasenya.getPassword()).isEmpty()) {
             txtContrasenya.setText("********");
             txtContrasenya.setForeground(Color.gray);
         }
-        if (String.valueOf(txtConfirmContrasenya.getPassword()).isEmpty());
-        {
+        if (String.valueOf(txtConfirmContrasenya.getPassword()).isEmpty()) {
             txtConfirmContrasenya.setText("********");
             txtConfirmContrasenya.setForeground(Color.gray);
         }
@@ -345,8 +353,7 @@ public class ConfirmPassword extends javax.swing.JDialog {
             txtCodi.setText("Ingresi codi");
             txtCodi.setForeground(Color.gray);
         }
-        if (String.valueOf(txtConfirmContrasenya.getPassword()).isEmpty());
-        {
+        if (String.valueOf(txtConfirmContrasenya.getPassword()).isEmpty()) {
             txtConfirmContrasenya.setText("********");
             txtConfirmContrasenya.setForeground(Color.gray);
         }
@@ -404,12 +411,15 @@ public class ConfirmPassword extends javax.swing.JDialog {
             txtCodi.setText("Ingresi codi");
             txtCodi.setForeground(Color.gray);
         }
-        if (String.valueOf(txtContrasenya.getPassword()).isEmpty());
-        {
+        if (String.valueOf(txtContrasenya.getPassword()).isEmpty()) {
             txtContrasenya.setText("********");
             txtContrasenya.setForeground(Color.gray);
         }
     }//GEN-LAST:event_txtConfirmContrasenyaMousePressed
+
+    private void txtCodiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodiActionPerformed
 
     /**
      * @param args the command line arguments

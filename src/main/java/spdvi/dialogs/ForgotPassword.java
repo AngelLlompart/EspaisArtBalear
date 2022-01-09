@@ -5,6 +5,7 @@
  */
 package spdvi.dialogs;
 
+import java.awt.Color;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ import spdvi.dialogs.ConfirmPassword;
  * @author angel
  */
 public class ForgotPassword extends javax.swing.JDialog {
+    int xMouse, yMouse;
 
     /**
      * Creates new form ForgotPassword
@@ -53,11 +55,19 @@ public class ForgotPassword extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         txtEmail = new javax.swing.JTextField();
         lblEmail = new javax.swing.JLabel();
         btnSendPassword = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        Header = new javax.swing.JPanel();
+        btnExit = new javax.swing.JPanel();
+        lblExit = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setLocationByPlatform(true);
+        setUndecorated(true);
+        setResizable(false);
         setSize(new java.awt.Dimension(450, 250));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -65,6 +75,15 @@ public class ForgotPassword extends javax.swing.JDialog {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtEmail.setBackground(new java.awt.Color(255, 255, 255));
+        txtEmail.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
+        txtEmail.setForeground(new java.awt.Color(204, 204, 204));
+        txtEmail.setText("Ingresi el correu");
+        txtEmail.setBorder(null);
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailActionPerformed(evt);
@@ -75,8 +94,12 @@ public class ForgotPassword extends javax.swing.JDialog {
                 txtEmailKeyPressed(evt);
             }
         });
+        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 220, 20));
 
-        lblEmail.setText("Introduce your Email");
+        lblEmail.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblEmail.setForeground(new java.awt.Color(0, 0, 0));
+        lblEmail.setText("Introdueix el teu Correu");
+        jPanel1.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         btnSendPassword.setText("Send Password");
         btnSendPassword.addActionListener(new java.awt.event.ActionListener() {
@@ -84,34 +107,88 @@ public class ForgotPassword extends javax.swing.JDialog {
                 btnSendPasswordActionPerformed(evt);
             }
         });
+        jPanel1.add(btnSendPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, -1, -1));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 230, 10));
+
+        Header.setBackground(new java.awt.Color(255, 255, 255));
+        Header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                HeaderMouseDragged(evt);
+            }
+        });
+        Header.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                HeaderMousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
+        Header.setLayout(HeaderLayout);
+        HeaderLayout.setHorizontalGroup(
+            HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 370, Short.MAX_VALUE)
+        );
+        HeaderLayout.setVerticalGroup(
+            HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(Header, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 370, 40));
+
+        btnExit.setBackground(new java.awt.Color(255, 255, 255));
+        btnExit.setPreferredSize(new java.awt.Dimension(30, 30));
+
+        lblExit.setBackground(new java.awt.Color(255, 255, 255));
+        lblExit.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
+        lblExit.setForeground(new java.awt.Color(0, 0, 0));
+        lblExit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblExit.setText("X");
+        lblExit.setAlignmentY(0.0F);
+        lblExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblExitMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblExitMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblExitMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout btnExitLayout = new javax.swing.GroupLayout(btnExit);
+        btnExit.setLayout(btnExitLayout);
+        btnExitLayout.setHorizontalGroup(
+            btnExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 35, Short.MAX_VALUE)
+            .addGroup(btnExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(btnExitLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(lblExit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        btnExitLayout.setVerticalGroup(
+            btnExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+            .addGroup(btnExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(btnExitLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(lblExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        jPanel1.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 5, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblEmail)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                        .addComponent(btnSendPassword)
-                        .addGap(24, 24, 24))))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnSendPassword)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblEmail)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(168, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
         );
 
         pack();
@@ -190,6 +267,31 @@ public class ForgotPassword extends javax.swing.JDialog {
 
     }//GEN-LAST:event_formWindowClosing
 
+    private void HeaderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HeaderMousePressed
+        xMouse = evt.getX();
+        yMouse = evt.getY();
+    }//GEN-LAST:event_HeaderMousePressed
+
+    private void HeaderMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HeaderMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xMouse, y - yMouse);
+    }//GEN-LAST:event_HeaderMouseDragged
+
+    private void lblExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseClicked
+        this.setVisible(false);
+    }//GEN-LAST:event_lblExitMouseClicked
+
+    private void lblExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseEntered
+        btnExit.setBackground(Color.red);
+        lblExit.setForeground(Color.white);
+    }//GEN-LAST:event_lblExitMouseEntered
+
+    private void lblExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseExited
+        btnExit.setBackground(Color.white);
+        lblExit.setForeground(Color.black);
+    }//GEN-LAST:event_lblExitMouseExited
+
     private void enterKey(java.awt.event.KeyEvent evt) {
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             btnSendPassword.doClick();
@@ -239,8 +341,13 @@ public class ForgotPassword extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Header;
+    private javax.swing.JPanel btnExit;
     private javax.swing.JButton btnSendPassword;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblExit;
     private javax.swing.JTextField txtEmail;
     // End of variables declaration//GEN-END:variables
 }
