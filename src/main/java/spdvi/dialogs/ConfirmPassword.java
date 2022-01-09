@@ -75,14 +75,9 @@ public class ConfirmPassword extends javax.swing.JDialog {
         SeparatorConfirmContrasenya = new javax.swing.JSeparator();
         PanelBoto = new javax.swing.JPanel();
         lblText = new javax.swing.JLabel();
-        Header = new javax.swing.JPanel();
-        exitBtn = new javax.swing.JPanel();
-        exitTxt = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocationByPlatform(true);
-        setUndecorated(true);
-        setResizable(false);
         setSize(new java.awt.Dimension(450, 250));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -201,67 +196,6 @@ public class ConfirmPassword extends javax.swing.JDialog {
 
         jPanel1.add(PanelBoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, 120, 30));
 
-        Header.setBackground(new java.awt.Color(255, 255, 255));
-        Header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                HeaderMouseDragged(evt);
-            }
-        });
-        Header.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                HeaderMousePressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
-        Header.setLayout(HeaderLayout);
-        HeaderLayout.setHorizontalGroup(
-            HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
-        );
-        HeaderLayout.setVerticalGroup(
-            HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(Header, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, 470, 30));
-
-        exitBtn.setBackground(new java.awt.Color(255, 255, 255));
-
-        exitTxt.setFont(new java.awt.Font("Roboto Light", 0, 24)); // NOI18N
-        exitTxt.setForeground(new java.awt.Color(0, 0, 0));
-        exitTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        exitTxt.setText("X");
-        exitTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        exitTxt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                exitTxtMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                exitTxtMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                exitTxtMouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout exitBtnLayout = new javax.swing.GroupLayout(exitBtn);
-        exitBtn.setLayout(exitBtnLayout);
-        exitBtnLayout.setHorizontalGroup(
-            exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, exitBtnLayout.createSequentialGroup()
-                .addGap(0, 1, Short.MAX_VALUE)
-                .addComponent(exitTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        exitBtnLayout.setVerticalGroup(
-            exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, exitBtnLayout.createSequentialGroup()
-                .addComponent(exitTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jPanel1.add(exitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(491, 5, 40, 30));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -295,31 +229,6 @@ public class ConfirmPassword extends javax.swing.JDialog {
     private void txtConfirmContrasenyaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmContrasenyaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtConfirmContrasenyaActionPerformed
-
-    private void HeaderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HeaderMousePressed
-        xMouse = evt.getX();
-        yMouse = evt.getY();
-    }//GEN-LAST:event_HeaderMousePressed
-
-    private void HeaderMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HeaderMouseDragged
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-        this.setLocation(x - xMouse, y - yMouse);
-    }//GEN-LAST:event_HeaderMouseDragged
-
-    private void exitTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseClicked
-        this.setVisible(false);
-    }//GEN-LAST:event_exitTxtMouseClicked
-
-    private void exitTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseEntered
-        exitBtn.setBackground(Color.red);
-        exitTxt.setForeground(Color.white);
-    }//GEN-LAST:event_exitTxtMouseEntered
-
-    private void exitTxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseExited
-        exitBtn.setBackground(Color.white);
-        exitTxt.setForeground(Color.black);
-    }//GEN-LAST:event_exitTxtMouseExited
 
     private void lblTextMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTextMouseEntered
         PanelBoto.setBackground(new Color(0, 156, 223));
@@ -464,13 +373,10 @@ public class ConfirmPassword extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Header;
     private javax.swing.JPanel PanelBoto;
     private javax.swing.JSeparator SeparatorCodi;
     private javax.swing.JSeparator SeparatorConfirmContrasenya;
     private javax.swing.JSeparator SeparatorContrasenya;
-    private javax.swing.JPanel exitBtn;
-    private javax.swing.JLabel exitTxt;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCodi;
     private javax.swing.JLabel lblConfirmContrasenya;
