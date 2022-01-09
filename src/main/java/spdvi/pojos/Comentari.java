@@ -14,18 +14,28 @@ import java.time.LocalTime;
  * @author angel
  */
 public class Comentari {
-    private String usuari;
+    private String email;
     private String espai;
     private String text;
     private LocalDate data;
     private LocalTime hora;
+    private String usuari;
 
-    public Comentari(String usuari, String espai, String text, LocalDate data, LocalTime hora) {
-        this.usuari = usuari;
+    public Comentari(String email, String espai, String text, LocalDate data, LocalTime hora, String usuari) {
+        this.email = email;
         this.espai = espai;
         this.text = text;
         this.data = data;
         this.hora = hora;
+        this.usuari = usuari;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getUsuari() {
