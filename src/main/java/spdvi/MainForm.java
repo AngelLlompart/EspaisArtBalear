@@ -39,7 +39,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import spdvi.dialogs.MyProfile;
+import spdvi.dialogs.Profile;
 import spdvi.helpers.ArgumentNullException;
 import spdvi.helpers.DataAccess;
 import spdvi.helpers.ImageHelper;
@@ -161,6 +161,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         txtCercarMunicipi = new javax.swing.JTextField();
         lblCercar1 = new javax.swing.JLabel();
         btnCercarMunicipi = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
         pnlInsert = new javax.swing.JPanel();
         lblNomEspai = new javax.swing.JLabel();
         txtNomEspai = new javax.swing.JTextField();
@@ -377,6 +378,13 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
             }
         });
 
+        btnLogout.setText("Log out");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlReadLayout = new javax.swing.GroupLayout(pnlRead);
         pnlRead.setLayout(pnlReadLayout);
         pnlReadLayout.setHorizontalGroup(
@@ -391,23 +399,6 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                     .addGroup(pnlReadLayout.createSequentialGroup()
                         .addComponent(scrEspais, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlReadLayout.createSequentialGroup()
-                                .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnlReadLayout.createSequentialGroup()
-                                        .addGap(74, 74, 74)
-                                        .addComponent(btnVisualitzar))
-                                    .addGroup(pnlReadLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblNom)
-                                            .addComponent(lblRegistre)))
-                                    .addGroup(pnlReadLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblComentaris))
-                                    .addGroup(pnlReadLayout.createSequentialGroup()
-                                        .addGap(27, 27, 27)
-                                        .addComponent(btnRead, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlReadLayout.createSequentialGroup()
                                 .addGap(18, 18, Short.MAX_VALUE)
                                 .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -439,7 +430,28 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                                             .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                 .addComponent(txtCercar, javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(lblCercar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                        .addGap(0, 0, Short.MAX_VALUE))))))))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(pnlReadLayout.createSequentialGroup()
+                                .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(pnlReadLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnLogout))
+                                    .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(pnlReadLayout.createSequentialGroup()
+                                            .addGap(74, 74, 74)
+                                            .addComponent(btnVisualitzar))
+                                        .addGroup(pnlReadLayout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(lblNom)
+                                                .addComponent(lblRegistre)))
+                                        .addGroup(pnlReadLayout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(lblComentaris))
+                                        .addGroup(pnlReadLayout.createSequentialGroup()
+                                            .addGap(27, 27, 27)
+                                            .addComponent(btnRead, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addContainerGap())))))
         );
         pnlReadLayout.setVerticalGroup(
             pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -471,7 +483,9 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                             .addComponent(txtCercarMunicipi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addComponent(btnVisualitzar)
-                        .addGap(32, 32, 32)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLogout)
+                        .addGap(3, 3, 3)
                         .addComponent(lblRegistre)
                         .addGap(10, 10, 10)
                         .addComponent(lblNom)
@@ -1775,20 +1789,27 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        Login l = new Login(this, true);
-        l.setVisible(true);
-        currentUser = l.getLoginUser();
-        if(!currentUser.isAdmin()){
-            tabCRUD.setEnabledAt(1, false);
-            tabCRUD.setEnabledAt(2, false);
-            btnModifyInsert.setVisible(false);
-            btnReadHidden.setVisible(false);
-        }
+        /*tabCRUD.setEnabledAt(1, false);
+        tabCRUD.setEnabledAt(2, false);
+        btnModifyInsert.setVisible(false);
+        btnReadHidden.setVisible(false);
+        */
         pnlCast.setVisible(false);
         pnlEng.setVisible(false);
         pnlEspModify.setVisible(false);
         pnlEngModify.setVisible(false);
         pnlModifyVisible.setVisible(false);
+        /*Login l = new Login(this, true);
+        l.setVisible(true);
+        currentUser = l.getLoginUser();
+
+        if(currentUser.isAdmin()){
+            tabCRUD.setEnabledAt(1, true);
+            tabCRUD.setEnabledAt(2, true);
+            btnModifyInsert.setVisible(true);
+            btnReadHidden.setVisible(true);
+        }*/
+        btnLogout.doClick();
     }//GEN-LAST:event_formWindowOpened
 
     private void btnReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadActionPerformed
@@ -2029,18 +2050,18 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
             visualitzar.getLblEmail().setText(espai.getEmail());
             visualitzar.getLblGestor().setText(espai.getGestor());
             visualitzar.getLblTelefon().setText(Integer.toString(espai.getTelefon()));
-            visualitzar.getLblModalitats().setText(espai.getModalitat());
+            visualitzar.getTxaModalitats().setText(espai.getModalitat());
             visualitzar.getLblTipus().setText(espai.getTipus());
             String serveis = espai.getServeis();
-            visualitzar.getLblServeis().setText(serveis);
+            visualitzar.getTxaServeis().setText(serveis);
             if(serveis == null || serveis.isBlank() || serveis.isEmpty()){
-                visualitzar.getLblServeis().setText("Aquest espai no proporciona cap servei");
+                visualitzar.getTxaServeis().setText("Aquest espai no proporciona cap servei");
             }
             visualitzar.getTxaCat().setText(espai.getDescripcions().get("\"cat\""));
             visualitzar.getTxaEsp().setText(espai.getDescripcions().get("\"esp\""));
             visualitzar.getTxaEn().setText(espai.getDescripcions().get("\"eng\""));
             visualitzar.getLblUser().setText(currentUser.getUserName() + " :");
-            visualitzar.setCurrentUser(currentUser.getUserName());
+            visualitzar.setCurrentUser(currentUser);
             visualitzar.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null,
@@ -2061,8 +2082,14 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_btnCercarActionPerformed
 
     private void btnMyProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMyProfileActionPerformed
-        MyProfile mp = new MyProfile(this, true);
-        mp.setVisible(true);
+        Profile p = new Profile(this, true);
+        p.setCurrentUser(currentUser);
+        p.getLblEmail().setText(currentUser.getEmail());
+        p.getLblUsername().setText(currentUser.getUserName());
+        p.setVisible(true);
+        if(p.isDeleted()){
+            btnLogout.doClick();
+        }
     }//GEN-LAST:event_btnMyProfileActionPerformed
 
     private void btnUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadActionPerformed
@@ -2549,6 +2576,24 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCercarMunicipiActionPerformed
 
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        tabCRUD.setEnabledAt(1, false);
+        tabCRUD.setEnabledAt(2, false);
+        btnModifyInsert.setVisible(false);
+        btnReadHidden.setVisible(false);
+
+        Login l = new Login(this, true);
+        l.setVisible(true);
+        currentUser = l.getLoginUser();
+
+        if(currentUser.isAdmin()){
+            tabCRUD.setEnabledAt(1, true);
+            tabCRUD.setEnabledAt(2, true);
+            btnModifyInsert.setVisible(true);
+            btnReadHidden.setVisible(true);
+        }
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
     private void lstEspaisMouseClicked(java.awt.event.MouseEvent evt) {                                          
         if (evt.getClickCount() == 2) {
             btnVisualitzar.doClick();
@@ -2711,6 +2756,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnConfirmModify;
     private javax.swing.JButton btnInsert;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnModify;
     private javax.swing.JButton btnModifyInsert;
     private javax.swing.JButton btnMyProfile;

@@ -217,14 +217,18 @@ public class DataAccess {
         return result;
     }
     
-    public int updatePassword(String password, String user ) throws SQLException {    
+    public int updatePassword(String password, String user ){
+        int i = 0;
         try (Connection connection = getConnection();) {
             PreparedStatement updateStatement = connection.prepareStatement("UPDATE dbo.[User] SET Password=? where Username=?"); 
             updateStatement.setString(1, password);
             updateStatement.setString(2, user);
-            int i = updateStatement.executeUpdate();
-            return i;
+            i = updateStatement.executeUpdate();
+           
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
+        return i;
     }
     
     public ArrayList<Imatge> getImatgesEspai(Espai espai){
@@ -298,7 +302,8 @@ public class DataAccess {
                         resultSet.getString("Espai"), 
                         resultSet.getString("Text"), 
                         LocalDate.parse(resultSet.getString("Data")), 
-                        resultSet.getTime("Hora").toLocalTime());
+                        resultSet.getTime("Hora").toLocalTime(),
+                        resultSet.getString("NomUsuari"));
                 comentaris.add(comentari);
             }
         } catch (SQLException ex) {
@@ -311,14 +316,15 @@ public class DataAccess {
         int result = 0;
         try ( Connection connection = getConnection();) {
             PreparedStatement insertStatement = connection.prepareStatement(
-                    "INSERT INTO dbo.[Comentari] (Usuari, Espai, Text, Data, Hora)"
-                    + "VALUES (?,?,?,?,?)");
+                    "INSERT INTO dbo.[Comentari] (Usuari, Espai, Text, Data, Hora, NomUsuari)"
+                    + "VALUES (?,?,?,?,?,?)");
             
-            insertStatement.setString(1, comentari.getUsuari());
+            insertStatement.setString(1, comentari.getEmail());
             insertStatement.setString(2, comentari.getEspai());
             insertStatement.setString(3, comentari.getText());
             insertStatement.setDate(4, Date.valueOf(comentari.getData()));
             insertStatement.setTime(5, Time.valueOf(comentari.getHora()));
+            insertStatement.setString(6, comentari.getUsuari());
             result = insertStatement.executeUpdate();
 
         } catch (SQLException ex) {
@@ -480,5 +486,37 @@ public class DataAccess {
             ex.printStackTrace();
         }
         return espais;
+    }
+    
+    public int updateUsername(User user){
+        int result = 0;
+        try (Connection connection = getConnection();) {
+            PreparedStatement updateStatement2 = connection.prepareStatement("UPDATE dbo.[Comentari] set NomUsuari=? where Usuari=?");
+            updateStatement2.setString(1, user.getUserName());
+            updateStatement2.setString(2, user.getEmail());
+            updateStatement2.executeUpdate();
+            PreparedStatement updateStatement = connection.prepareStatement("UPDATE dbo.[User] SET Username=? where Email=?"); 
+            updateStatement.setString(1, user.getUserName());
+            updateStatement.setString(2, user.getEmail());
+            result = updateStatement.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+    
+    public int deleteUser(User user){
+        int result = 0;
+        try (Connection connection = getConnection();) {
+            PreparedStatement updateStatement2 = connection.prepareStatement("DELETE dbo.[Comentari] where Usuari=?");
+            updateStatement2.setString(1, user.getEmail());
+            updateStatement2.executeUpdate();
+            PreparedStatement updateStatement = connection.prepareStatement("Delete dbo.[User] where Email=?"); 
+            updateStatement.setString(1, user.getEmail());
+            result = updateStatement.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return result;
     }
 }

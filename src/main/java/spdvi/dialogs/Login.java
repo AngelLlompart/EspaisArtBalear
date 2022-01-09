@@ -223,7 +223,6 @@ public class Login extends javax.swing.JDialog {
 
     private void lblRegistreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistreMouseClicked
         Register r = new Register((Frame) this.getParent(), true);
-        //this.setVisible(false);
         r.setVisible(true);
     }//GEN-LAST:event_lblRegistreMouseClicked
 
@@ -245,7 +244,7 @@ public class Login extends javax.swing.JDialog {
         for(User u: users){
             if(u.getUserName().equals(txtUserName.getText())){
                 userExists = true;
-                if(u.getPassword().equals(new String (txtPassword.getPassword()))){
+                if(u.getPassword().equals(encriptMD5)){
                     loginUser = u;
                     setVisible(false);
                 }else{
