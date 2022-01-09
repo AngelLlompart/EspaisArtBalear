@@ -7,6 +7,7 @@ package spdvi.pojos;
 
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  *
@@ -17,9 +18,9 @@ public class Comentari {
     private String espai;
     private String text;
     private LocalDate data;
-    private Time hora;
+    private LocalTime hora;
 
-    public Comentari(String usuari, String espai, String text, LocalDate data, Time hora) {
+    public Comentari(String usuari, String espai, String text, LocalDate data, LocalTime hora) {
         this.usuari = usuari;
         this.espai = espai;
         this.text = text;
@@ -59,17 +60,17 @@ public class Comentari {
         this.data = data;
     }
 
-    public Time getHora() {
+    public LocalTime getHora() {
         return hora;
     }
 
-    public void setHora(Time hora) {
+    public void setHora(LocalTime hora) {
         this.hora = hora;
     }
 
     @Override
     public String toString() {
-        return "Comentari{" + "usuari=" + usuari + ", espai=" + espai + ", text=" + text + ", data=" + data + ", hora=" + hora + '}';
+        return usuari + " - " + data + ", " + hora + " - " + text;
     }
     
     

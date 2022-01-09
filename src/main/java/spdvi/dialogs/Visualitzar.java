@@ -19,14 +19,24 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JTextArea;
 import spdvi.helpers.ImageHelper;
+import spdvi.pojos.Comentari;
 import spdvi.pojos.Espai;
 import spdvi.pojos.Imatge;
 
@@ -36,17 +46,21 @@ import spdvi.pojos.Imatge;
  */
 public class Visualitzar extends javax.swing.JDialog implements Runnable{
     //private ArrayList<String> blobNames = new ArrayList<>();
+    private JList<Comentari> lstComents;
     private ArrayList<Imatge> imatges = new ArrayList<>();
     private int contador = 0;
     private Espai selectedEspai;
     private Thread downloadThread;
-    private String gif = "resizedloader.gif";
+    private String gif = "resizedloaderBig.gif";
+    private String currentUser;
     /**
      * Creates new form Visualitzar
      */
     public Visualitzar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        lstComents = new JList<Comentari>();
+        scrComents.setViewportView(lstComents);
     }
 
     /**
@@ -60,10 +74,40 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
 
         lblImage = new javax.swing.JLabel();
         btnNext = new javax.swing.JButton();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        prgImage = new javax.swing.JProgressBar();
         btnPrevious = new javax.swing.JButton();
         lblTitol = new javax.swing.JLabel();
         lblRegister = new javax.swing.JLabel();
+        lblComentaris = new javax.swing.JLabel();
+        scrComents = new javax.swing.JScrollPane();
+        lblDescripcions = new javax.swing.JLabel();
+        lblCat = new javax.swing.JLabel();
+        lblEsp = new javax.swing.JLabel();
+        lblEn = new javax.swing.JLabel();
+        txtComentari = new javax.swing.JTextField();
+        btnComentar = new javax.swing.JButton();
+        lblUser = new javax.swing.JLabel();
+        lblContacte = new javax.swing.JLabel();
+        lblEmailTitle = new javax.swing.JLabel();
+        lblWebTitle = new javax.swing.JLabel();
+        lblServeisTitle = new javax.swing.JLabel();
+        lblAdreca = new javax.swing.JLabel();
+        lblTelefonTitle = new javax.swing.JLabel();
+        lblTipus = new javax.swing.JLabel();
+        lblModalitatsTitle = new javax.swing.JLabel();
+        lblGestorTitle = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        lblWeb = new javax.swing.JLabel();
+        lblGestor = new javax.swing.JLabel();
+        lblTelefon = new javax.swing.JLabel();
+        lblModalitats = new javax.swing.JLabel();
+        lblServeis = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txaEsp = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txaCat = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txaEn = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -72,68 +116,280 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
             }
         });
 
-        btnNext.setText("Next");
+        lblImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblImage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/next.png"))); // NOI18N
+        btnNext.setBorder(null);
+        btnNext.setMaximumSize(new java.awt.Dimension(80, 80));
+        btnNext.setPreferredSize(new java.awt.Dimension(80, 80));
         btnNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNextActionPerformed(evt);
             }
         });
 
-        jProgressBar1.setStringPainted(true);
+        prgImage.setStringPainted(true);
 
-        btnPrevious.setText("Previous");
+        btnPrevious.setIcon(new javax.swing.ImageIcon(getClass().getResource("/previous.png"))); // NOI18N
+        btnPrevious.setBorder(null);
+        btnPrevious.setMaximumSize(new java.awt.Dimension(80, 80));
+        btnPrevious.setPreferredSize(new java.awt.Dimension(80, 80));
         btnPrevious.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPreviousActionPerformed(evt);
             }
         });
 
-        lblTitol.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        lblTitol.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         lblTitol.setText("Titol");
 
         lblRegister.setText("Registre");
+
+        lblComentaris.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblComentaris.setText("Comentaris");
+
+        lblDescripcions.setText("Descripcions: ");
+
+        lblCat.setText("Català");
+
+        lblEsp.setText("Español");
+
+        lblEn.setText("English");
+
+        txtComentari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtComentariActionPerformed(evt);
+            }
+        });
+        txtComentari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtComentariKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtComentariKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtComentariKeyTyped(evt);
+            }
+        });
+
+        btnComentar.setText("Comentar");
+        btnComentar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComentarActionPerformed(evt);
+            }
+        });
+
+        lblUser.setText("Usuari:");
+
+        lblContacte.setText("Contacte");
+
+        lblEmailTitle.setText("Email: ");
+
+        lblWebTitle.setText("Web: ");
+
+        lblServeisTitle.setText("Serveis:");
+
+        lblAdreca.setText("Adreça");
+
+        lblTelefonTitle.setText("Telefon: ");
+
+        lblTipus.setText("Tipus");
+
+        lblModalitatsTitle.setText("Modalitats: ");
+
+        lblGestorTitle.setText("Gestor: ");
+
+        lblEmail.setText("email");
+
+        lblWeb.setText("web");
+
+        lblGestor.setText("gestor");
+
+        lblTelefon.setText("telefon");
+
+        lblModalitats.setText("Modalitats");
+
+        lblServeis.setText("Serveis");
+
+        txaEsp.setColumns(20);
+        txaEsp.setLineWrap(true);
+        txaEsp.setRows(5);
+        txaEsp.setWrapStyleWord(true);
+        jScrollPane2.setViewportView(txaEsp);
+
+        txaCat.setColumns(20);
+        txaCat.setLineWrap(true);
+        txaCat.setRows(5);
+        txaCat.setWrapStyleWord(true);
+        jScrollPane3.setViewportView(txaCat);
+
+        txaEn.setColumns(20);
+        txaEn.setLineWrap(true);
+        txaEn.setRows(5);
+        txaEn.setWrapStyleWord(true);
+        jScrollPane4.setViewportView(txaEn);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(prgImage, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(373, 373, 373))
             .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(116, 116, 116)
-                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCat)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblEsp))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblEn)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(237, 237, 237))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(lblEmailTitle)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblTelefonTitle)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblTelefon))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(lblWebTitle)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(2, 2, 2)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblServeisTitle)
+                                            .addComponent(lblModalitats)
+                                            .addComponent(lblServeis)
+                                            .addComponent(lblModalitatsTitle)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(lblGestorTitle)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(lblGestor, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(lblContacte))
                             .addComponent(lblRegister)
-                            .addComponent(lblTitol, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(98, Short.MAX_VALUE))
+                            .addComponent(lblTitol, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblComentaris)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(scrComents, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtComentari, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnComentar))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTipus)
+                            .addComponent(lblDescripcions)
+                            .addComponent(lblAdreca, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(lblRegister)
-                .addGap(18, 18, 18)
-                .addComponent(lblTitol, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(btnNext))
-                    .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(lblRegister))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(btnPrevious)))
+                        .addGap(57, 57, 57)
+                        .addComponent(lblTitol, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(3, 3, 3)
+                .addComponent(lblTipus)
+                .addGap(18, 18, 18)
+                .addComponent(lblDescripcions)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblEsp)
+                            .addComponent(lblEn)
+                            .addComponent(lblCat))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblContacte)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblEmailTitle)
+                            .addComponent(lblEmail))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTelefonTitle)
+                            .addComponent(lblTelefon))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblWebTitle)
+                            .addComponent(lblWeb))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblGestorTitle)
+                            .addComponent(lblGestor))
+                        .addGap(49, 49, 49)
+                        .addComponent(lblModalitatsTitle)
+                        .addGap(9, 9, 9)
+                        .addComponent(lblModalitats)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblServeisTitle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblServeis)
+                        .addGap(41, 41, 41))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(11, 11, 11)))
+                        .addComponent(prgImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 132, Short.MAX_VALUE)))
+                .addComponent(lblComentaris)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrComents, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lblUser))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtComentari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnComentar)))
+                .addGap(18, 18, 18)
+                .addComponent(lblAdreca)
                 .addContainerGap())
         );
 
@@ -154,14 +410,21 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        DataAccess da = new DataAccess();
         lblImage.setIcon(new ImageIcon(Visualitzar.class.getClassLoader().getResource(gif)));
         btnPrevious.setEnabled(false);
+        btnComentar.setEnabled(false);
         /*for (BlobItem blobItem : containerClient.listBlobs()) {
             blobNames.add(blobItem.getName());
         }*/
+        /*
         lblRegister.setText(selectedEspai.getRegistre());
         lblTitol.setText(selectedEspai.getNom());
-        DataAccess da = new DataAccess();
+        lblComentaris.setText();
+        */
+        
+        updateComentarisView(da);
+
         imatges = da.getImatgesEspai(selectedEspai);
         if(imatges.size() == 1){
             btnNext.setEnabled(false);
@@ -182,65 +445,183 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
         downloadThread.start();
     }//GEN-LAST:event_btnPreviousActionPerformed
 
+    private void txtComentariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtComentariActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtComentariActionPerformed
+
+    private void btnComentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComentarActionPerformed
+        Comentari comentari = new Comentari(currentUser, selectedEspai.getRegistre(), txtComentari.getText(), LocalDate.now(), LocalTime.now());
+        DataAccess da = new DataAccess();
+        da.insertComentari(comentari);
+        updateComentarisView(da);
+        txtComentari.setText("");
+        btnComentar.setEnabled(false);
+    }//GEN-LAST:event_btnComentarActionPerformed
+
+    private void txtComentariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtComentariKeyPressed
+        
+    }//GEN-LAST:event_txtComentariKeyPressed
+
+    private void txtComentariKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtComentariKeyTyped
+        
+    }//GEN-LAST:event_txtComentariKeyTyped
+
+    private void txtComentariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtComentariKeyReleased
+        if(txtComentari.getText() == null || txtComentari.getText().isBlank() || txtComentari.getText().isEmpty()){
+           btnComentar.setEnabled(false);
+        }else{
+            btnComentar.setEnabled(true);
+        }
+    }//GEN-LAST:event_txtComentariKeyReleased
+
     @Override
     public void run() {
         System.out.println(Thread.currentThread().getName());
-        downloadImage();
+        ImageHelper.downloadImage(lblImage, prgImage, imatges.get(contador).getImatge());
+        //downloadImage();
     }
-    
-    private void downloadImage() {
-    // Downloading big images in chunks of 1kB might be very slow because of the request overhead to azure. Modify the algorithm to donwload eavery image in, for instance 20 chunks.
 
-        ByteArrayOutputStream outputStream;
-        BufferedImage originalImage;
-        try {
-            BlockBlobClient blobClient = ImageHelper.getContainerClient().getBlobClient(imatges.get(contador).getImatge()).getBlockBlobClient();
-            int dataSize = (int) blobClient.getProperties().getBlobSize();
-            int numberOfBlocks = 20;
-            int numberOfBPerBlock = dataSize / numberOfBlocks;  // Split every image in 20 blocks. That is, make 20 requests to Azure.
-            System.out.println("Starting download of " + dataSize + " bytes in " + numberOfBlocks + " " + numberOfBPerBlock/1024 + "kB chunks");
-
-            
-            int i = 0;
-            outputStream = new ByteArrayOutputStream(dataSize);
-
-            while (i < numberOfBlocks) {
-                BlobRange range = new BlobRange(i * numberOfBPerBlock, (long)numberOfBPerBlock);
-                DownloadRetryOptions options = new DownloadRetryOptions().setMaxRetryRequests(5);
-
-                System.out.println(i + ": Downloading bytes " + range.getOffset() + " to " + (range.getOffset() + range.getCount()) + " with status "
-                        + blobClient.downloadStreamWithResponse(outputStream, range, options, null, false,
-                                Duration.ofSeconds(30), Context.NONE));
-                i++;
-                jProgressBar1.setValue(i * jProgressBar1.getMaximum() / (numberOfBlocks + 1));
-            }
-
-            // Download the last bytes of the image
-            BlobRange range = new BlobRange(i * numberOfBPerBlock);
-            DownloadRetryOptions options = new DownloadRetryOptions().setMaxRetryRequests(5);
-            System.out.println(i + ": Downloading bytes " + range.getOffset() + " to " + dataSize + " with status "
-                    + blobClient.downloadStreamWithResponse(outputStream, range, options, null, false,
-                            Duration.ofSeconds(30), Context.NONE));
-            i++;
-            jProgressBar1.setValue(i * jProgressBar1.getMaximum() / (numberOfBlocks + 1));
-            
-            originalImage = ImageIO.read(new ByteArrayInputStream(outputStream.toByteArray()));
-            ImageIcon icon = ImageHelper.resizeImageIcon(originalImage, lblImage.getWidth(), lblImage.getHeight());
-            lblImage.setIcon(icon);
-            outputStream.close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
+    private void updateComentarisView(DataAccess da){
+        DefaultListModel<Comentari> defaultListModel = new DefaultListModel<>();
+        for(Comentari co: da.getComentaris(selectedEspai)){
+            defaultListModel.addElement(co);
         }
+        lstComents.setModel(defaultListModel);
     }
-    
-    
-
     public Espai getSelectedEspai() {
         return selectedEspai;
     }
 
     public void setSelectedEspai(Espai selectedEspai) {
         this.selectedEspai = selectedEspai;
+    }
+
+    public JLabel getLblComentaris() {
+        return lblComentaris;
+    }
+
+    public void setLblComentaris(JLabel lblComentaris) {
+        this.lblComentaris = lblComentaris;
+    }
+
+    public JLabel getLblRegister() {
+        return lblRegister;
+    }
+
+    public void setLblRegister(JLabel lblRegister) {
+        this.lblRegister = lblRegister;
+    }
+
+    public JLabel getLblTitol() {
+        return lblTitol;
+    }
+
+    public void setLblTitol(JLabel lblTitol) {
+        this.lblTitol = lblTitol;
+    }
+
+    public JLabel getLblUser() {
+        return lblUser;
+    }
+
+    public void setLblUser(JLabel lblUser) {
+        this.lblUser = lblUser;
+    }
+    
+    public String getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(String currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public JLabel getLblAdreca() {
+        return lblAdreca;
+    }
+
+    public void setLblAdreca(JLabel lblAdreca) {
+        this.lblAdreca = lblAdreca;
+    }
+
+    public JLabel getLblEmail() {
+        return lblEmail;
+    }
+
+    public void setLblEmail(JLabel lblEmail) {
+        this.lblEmail = lblEmail;
+    }
+
+    public JLabel getLblGestor() {
+        return lblGestor;
+    }
+
+    public void setLblGestor(JLabel lblGestor) {
+        this.lblGestor = lblGestor;
+    }
+
+    public JLabel getLblWeb() {
+        return lblWeb;
+    }
+
+    public void setLblWeb(JLabel lblWeb) {
+        this.lblWeb = lblWeb;
+    }
+
+    public JLabel getLblTelefon() {
+        return lblTelefon;
+    }
+
+    public void setLblTelefon(JLabel lblTelefon) {
+        this.lblTelefon = lblTelefon;
+    }
+
+    public JLabel getLblModalitats() {
+        return lblModalitats;
+    }
+
+    public void setLblModalitats(JLabel lblModalitats) {
+        this.lblModalitats = lblModalitats;
+    }
+
+    public JLabel getLblServeis() {
+        return lblServeis;
+    }
+
+    public void setLblServeis(JLabel lblServeis) {
+        this.lblServeis = lblServeis;
+    }
+
+    public JLabel getLblTipus() {
+        return lblTipus;
+    }
+
+    public void setLblTipus(JLabel lblTipus) {
+        this.lblTipus = lblTipus;
+    }
+
+    public JTextArea getTxaCat() {
+        return txaCat;
+    }
+
+    public void setTxaCat(JTextArea txaCat) {
+        this.txaCat = txaCat;
+    }
+
+    public JTextArea getTxaEn() {
+        return txaEn;
+    }
+
+    public void setTxaEn(JTextArea txaEn) {
+        this.txaEn = txaEn;
+    }
+
+    public JTextArea getTxaEsp() {
+        return txaEsp;
+    }
+
+    public void setTxaEsp(JTextArea txaEsp) {
+        this.txaEsp = txaEsp;
     }
     
     
@@ -287,11 +668,41 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnComentar;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPrevious;
-    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel lblAdreca;
+    private javax.swing.JLabel lblCat;
+    private javax.swing.JLabel lblComentaris;
+    private javax.swing.JLabel lblContacte;
+    private javax.swing.JLabel lblDescripcions;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblEmailTitle;
+    private javax.swing.JLabel lblEn;
+    private javax.swing.JLabel lblEsp;
+    private javax.swing.JLabel lblGestor;
+    private javax.swing.JLabel lblGestorTitle;
     private javax.swing.JLabel lblImage;
+    private javax.swing.JLabel lblModalitats;
+    private javax.swing.JLabel lblModalitatsTitle;
     private javax.swing.JLabel lblRegister;
+    private javax.swing.JLabel lblServeis;
+    private javax.swing.JLabel lblServeisTitle;
+    private javax.swing.JLabel lblTelefon;
+    private javax.swing.JLabel lblTelefonTitle;
+    private javax.swing.JLabel lblTipus;
     private javax.swing.JLabel lblTitol;
+    private javax.swing.JLabel lblUser;
+    private javax.swing.JLabel lblWeb;
+    private javax.swing.JLabel lblWebTitle;
+    private javax.swing.JProgressBar prgImage;
+    private javax.swing.JScrollPane scrComents;
+    private javax.swing.JTextArea txaCat;
+    private javax.swing.JTextArea txaEn;
+    private javax.swing.JTextArea txaEsp;
+    private javax.swing.JTextField txtComentari;
     // End of variables declaration//GEN-END:variables
 }

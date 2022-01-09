@@ -13,6 +13,7 @@ import com.azure.storage.blob.models.BlobHttpHeaders;
 import com.azure.storage.blob.models.BlobRange;
 import com.azure.storage.blob.models.DownloadRetryOptions;
 import com.azure.storage.blob.specialized.BlockBlobClient;
+import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -42,6 +43,7 @@ import spdvi.helpers.ArgumentNullException;
 import spdvi.helpers.DataAccess;
 import spdvi.helpers.ImageHelper;
 import spdvi.pojos.Imatge;
+import spdvi.pojos.User;
 
 /**
  *
@@ -55,6 +57,9 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     private ArrayList<String> images = new ArrayList<>();
     private DefaultListModel imageListModel = new DefaultListModel();
     private boolean inserted = false;
+    private User currentUser;
+    private boolean threadFromInsert = false;
+    private boolean threadFromRead = false;
            
     /**
      * Creates new form MainForm
@@ -81,7 +86,17 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         chkListServeis.add(chkTallers);
         chkListServeis.add(chkVisites);
         chkListServeis.add(chkJardins);
-        chkListServeis.add(chkWifi);        
+        chkListServeis.add(chkWifi);
+        lstEspais.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lstEspaisMouseClicked(evt);
+            }
+        });
+        lstEspais.addListSelectionListener(new javax.swing.event.ListSelectionListener(){
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt){
+                lstEspaisValueChanged(evt);
+            }
+        });
     }
 
     /**
@@ -100,7 +115,12 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         btnRead = new javax.swing.JButton();
         btnVisualitzar = new javax.swing.JButton();
         btnCercar = new javax.swing.JButton();
-        btnMyProfile = new javax.swing.JButton();
+        btnPerfil = new javax.swing.JButton();
+        lblImage = new javax.swing.JLabel();
+        lblRegistre = new javax.swing.JLabel();
+        lblComentaris = new javax.swing.JLabel();
+        lblNom = new javax.swing.JLabel();
+        prgImatgeRead = new javax.swing.JProgressBar();
         pnlInsert = new javax.swing.JPanel();
         lblNomEspai = new javax.swing.JLabel();
         txtNomEspai = new javax.swing.JTextField();
@@ -131,14 +151,14 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         lblTipus = new javax.swing.JLabel();
         cmbTipus = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        chkSelectAllMod = new javax.swing.JCheckBox();
         pnlModalitats = new javax.swing.JPanel();
         chkPintura = new javax.swing.JCheckBox();
         chkEscultura = new javax.swing.JCheckBox();
         chkFotografia = new javax.swing.JCheckBox();
         chkVidre = new javax.swing.JCheckBox();
         chkVideo = new javax.swing.JCheckBox();
+        chkSelectAllMod = new javax.swing.JCheckBox();
+        jSeparator1 = new javax.swing.JSeparator();
         lblGestor = new javax.swing.JLabel();
         txtGestor = new javax.swing.JTextField();
         pnlServeis = new javax.swing.JPanel();
@@ -153,8 +173,8 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         chkConferencies = new javax.swing.JCheckBox();
         chkWifi = new javax.swing.JCheckBox();
         chkSelectAllServ = new javax.swing.JCheckBox();
-        jLabel5 = new javax.swing.JLabel();
         chkJardins = new javax.swing.JCheckBox();
+        jSeparator2 = new javax.swing.JSeparator();
         btnInsert = new javax.swing.JButton();
         lblImageIcon = new javax.swing.JLabel();
         btnUpload = new javax.swing.JButton();
@@ -162,8 +182,10 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         txtImage = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstImages = new javax.swing.JList<>();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        prgImage = new javax.swing.JProgressBar();
         btnBorrar = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         pnlModify = new javax.swing.JPanel();
 
         jButton4.setText("jButton4");
@@ -201,12 +223,24 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
             }
         });
 
-        btnMyProfile.setText("My Profile");
-        btnMyProfile.addActionListener(new java.awt.event.ActionListener() {
+        btnPerfil.setText("Perfil");
+        btnPerfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMyProfileActionPerformed(evt);
+                btnPerfilActionPerformed(evt);
             }
         });
+
+        lblImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblImage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        lblRegistre.setText("Registre");
+
+        lblComentaris.setText("Comentaris: ");
+
+        lblNom.setText("Nom");
+
+        prgImatgeRead.setStringPainted(true);
 
         javax.swing.GroupLayout pnlReadLayout = new javax.swing.GroupLayout(pnlRead);
         pnlRead.setLayout(pnlReadLayout);
@@ -214,20 +248,24 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
             pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlReadLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnVisualitzar)
+                .addComponent(scrEspais, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlReadLayout.createSequentialGroup()
-                        .addComponent(scrEspais, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
                         .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlReadLayout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(btnRead, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlReadLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCercar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(18, 18, 18)
-                .addComponent(btnMyProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-                .addGap(18, 18, 18))
+                            .addComponent(btnRead, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblRegistre)
+                            .addComponent(lblNom)
+                            .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblComentaris)
+                            .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(btnVisualitzar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnPerfil, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCercar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(pnlReadLayout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(prgImatgeRead, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 34, Short.MAX_VALUE))
         );
         pnlReadLayout.setVerticalGroup(
             pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,16 +273,27 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                 .addContainerGap()
                 .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlReadLayout.createSequentialGroup()
-                        .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnRead)
-                            .addComponent(btnMyProfile))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnVisualitzar)
-                        .addGap(18, 18, 18)
+                        .addComponent(scrEspais)
+                        .addContainerGap())
+                    .addGroup(pnlReadLayout.createSequentialGroup()
+                        .addComponent(btnRead)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCercar)
-                        .addGap(0, 439, Short.MAX_VALUE))
-                    .addComponent(scrEspais))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnVisualitzar)
+                        .addGap(41, 41, 41)
+                        .addComponent(btnPerfil)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                        .addComponent(lblRegistre)
+                        .addGap(16, 16, 16)
+                        .addComponent(lblNom)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(prgImatgeRead, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblComentaris)
+                        .addGap(23, 23, 23))))
         );
 
         tabCRUD.addTab("Read", pnlRead);
@@ -383,6 +432,12 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
 
         lblEmail.setText("Email");
 
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmailActionPerformed(evt);
+            }
+        });
+
         lblWeb.setText("Web");
 
         lblTelefon.setText("Telefon");
@@ -396,15 +451,6 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         lblTipus.setText("Tipus");
 
         cmbTipus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Museu", "Galeria", "Centre Cultural" }));
-
-        jLabel2.setText("Modalitats (selecciona al menys 1)");
-
-        chkSelectAllMod.setText("Select all");
-        chkSelectAllMod.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkSelectAllModActionPerformed(evt);
-            }
-        });
 
         pnlModalitats.setBorder(javax.swing.BorderFactory.createTitledBorder("Modalitats"));
 
@@ -443,33 +489,58 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
             }
         });
 
+        chkSelectAllMod.setText("Select all");
+        chkSelectAllMod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkSelectAllModActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlModalitatsLayout = new javax.swing.GroupLayout(pnlModalitats);
         pnlModalitats.setLayout(pnlModalitatsLayout);
         pnlModalitatsLayout.setHorizontalGroup(
             pnlModalitatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlModalitatsLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(pnlModalitatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(chkPintura)
-                    .addComponent(chkEscultura)
-                    .addComponent(chkFotografia)
-                    .addComponent(chkVidre)
-                    .addComponent(chkVideo))
-                .addContainerGap(36, Short.MAX_VALUE))
+                    .addGroup(pnlModalitatsLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnlModalitatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlModalitatsLayout.createSequentialGroup()
+                                .addGroup(pnlModalitatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(chkFotografia)
+                                    .addComponent(chkVidre)
+                                    .addComponent(chkVideo)
+                                    .addComponent(chkEscultura))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(pnlModalitatsLayout.createSequentialGroup()
+                                .addComponent(chkPintura)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlModalitatsLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSeparator1)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlModalitatsLayout.createSequentialGroup()
+                .addGap(0, 33, Short.MAX_VALUE)
+                .addComponent(chkSelectAllMod)
+                .addGap(45, 45, 45))
         );
         pnlModalitatsLayout.setVerticalGroup(
             pnlModalitatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlModalitatsLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlModalitatsLayout.createSequentialGroup()
+                .addComponent(chkSelectAllMod)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 3, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkPintura)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(chkEscultura)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(chkFotografia)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(chkVidre)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(chkVideo)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addGap(11, 11, 11))
         );
 
         lblGestor.setText("Gestor");
@@ -544,8 +615,6 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
             }
         });
 
-        jLabel5.setText("_____________________________________");
-
         chkJardins.setText("Jardins");
 
         javax.swing.GroupLayout pnlServeisLayout = new javax.swing.GroupLayout(pnlServeis);
@@ -554,35 +623,38 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
             pnlServeisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlServeisLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlServeisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(chkVisites)
-                    .addGroup(pnlServeisLayout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addComponent(chkSelectAllServ))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlServeisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2)
                     .addGroup(pnlServeisLayout.createSequentialGroup()
                         .addGroup(pnlServeisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chkAcces)
-                            .addComponent(chkCafeteria)
-                            .addComponent(chkBiblioteca)
-                            .addComponent(chkAparcament)
-                            .addComponent(chkTallers))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlServeisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chkJardins)
-                            .addComponent(chkWifi)
-                            .addComponent(chkConferencies)
-                            .addComponent(chkArxiu)
-                            .addComponent(chkConcerts))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(chkVisites)
+                            .addGroup(pnlServeisLayout.createSequentialGroup()
+                                .addGap(77, 77, 77)
+                                .addComponent(chkSelectAllServ))
+                            .addGroup(pnlServeisLayout.createSequentialGroup()
+                                .addGroup(pnlServeisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(chkAcces)
+                                    .addComponent(chkCafeteria)
+                                    .addComponent(chkBiblioteca)
+                                    .addComponent(chkAparcament)
+                                    .addComponent(chkTallers))
+                                .addGap(18, 18, 18)
+                                .addGroup(pnlServeisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(chkJardins)
+                                    .addComponent(chkWifi)
+                                    .addComponent(chkConferencies)
+                                    .addComponent(chkArxiu)
+                                    .addComponent(chkConcerts))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         pnlServeisLayout.setVerticalGroup(
             pnlServeisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlServeisLayout.createSequentialGroup()
                 .addComponent(chkSelectAllServ)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 11, Short.MAX_VALUE)
-                .addGap(7, 7, 7)
                 .addGroup(pnlServeisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chkAcces)
                     .addComponent(chkArxiu))
@@ -613,6 +685,10 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
             }
         });
 
+        lblImageIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImageIcon.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblImageIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         btnUpload.setText("Upload");
         btnUpload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -622,13 +698,12 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
 
         lblimages.setText("Images");
 
-        txtImage.setText("jTextField1");
-
-        lstImages.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        txtImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtImageActionPerformed(evt);
+            }
         });
+
         lstImages.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 lstImagesValueChanged(evt);
@@ -636,197 +711,193 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         });
         jScrollPane1.setViewportView(lstImages);
 
-        jProgressBar1.setStringPainted(true);
+        prgImage.setStringPainted(true);
 
-        btnBorrar.setText("Borrar");
+        btnBorrar.setText("Delete");
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBorrarActionPerformed(evt);
             }
         });
 
+        btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("(selecciona al menys 1)");
+
         javax.swing.GroupLayout pnlInsertLayout = new javax.swing.GroupLayout(pnlInsert);
         pnlInsert.setLayout(pnlInsertLayout);
         pnlInsertLayout.setHorizontalGroup(
             pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInsertLayout.createSequentialGroup()
+            .addGroup(pnlInsertLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlServeis, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlInsertLayout.createSequentialGroup()
-                        .addComponent(lblNomEspai)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNomEspai, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlInsertLayout.createSequentialGroup()
-                        .addComponent(lblDescripcions)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cmbDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(layeredDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlInsertLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lblTipus)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cmbTipus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlInsertLayout.createSequentialGroup()
-                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(chkSelectAllMod))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnlInsertLayout.createSequentialGroup()
-                        .addComponent(pnlModalitats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(79, 79, 79)
-                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                    .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(pnlInsertLayout.createSequentialGroup()
+                            .addComponent(btnInsert)
+                            .addGap(28, 28, 28)
+                            .addComponent(btnClear))
+                        .addGroup(pnlInsertLayout.createSequentialGroup()
+                            .addComponent(lblNomEspai)
+                            .addGap(210, 210, 210)
+                            .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(layeredDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(pnlInsertLayout.createSequentialGroup()
+                                    .addComponent(lblDescripcions)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(cmbDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInsertLayout.createSequentialGroup()
+                            .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(pnlServeis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblTipus)
+                                .addGroup(pnlInsertLayout.createSequentialGroup()
+                                    .addGap(58, 58, 58)
+                                    .addComponent(cmbTipus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(18, 18, 18)
+                            .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(pnlModalitats, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(pnlInsertLayout.createSequentialGroup()
+                                    .addGap(0, 0, Short.MAX_VALUE)
+                                    .addComponent(jLabel2)))
+                            .addGap(36, 36, 36)))
                     .addGroup(pnlInsertLayout.createSequentialGroup()
                         .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(pnlInsertLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(pnlInsertLayout.createSequentialGroup()
-                                        .addComponent(lblTelefon)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtTelefon))
-                                    .addGroup(pnlInsertLayout.createSequentialGroup()
-                                        .addComponent(lblAdreca)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtAdreca))
-                                    .addGroup(pnlInsertLayout.createSequentialGroup()
-                                        .addComponent(lblMunicipi)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtMunicipi))
-                                    .addGroup(pnlInsertLayout.createSequentialGroup()
-                                        .addComponent(lblRegistreEspai)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtRegistreEspai, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(pnlInsertLayout.createSequentialGroup()
-                                        .addComponent(lblEmail)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtEmail))
-                                    .addGroup(pnlInsertLayout.createSequentialGroup()
-                                        .addComponent(lblWeb)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(pnlInsertLayout.createSequentialGroup()
-                                .addComponent(lblGestor)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtGestor, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlInsertLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(220, 220, 220))
-                            .addGroup(pnlInsertLayout.createSequentialGroup()
-                                .addGap(142, 142, 142)
-                                .addComponent(lblimages)
-                                .addContainerGap())
-                            .addGroup(pnlInsertLayout.createSequentialGroup()
-                                .addGap(48, 48, 48)
+                                .addComponent(lblRegistreEspai)
+                                .addGap(18, 18, 18)
                                 .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnlInsertLayout.createSequentialGroup()
-                                        .addComponent(lblImageIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addContainerGap(83, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInsertLayout.createSequentialGroup()
-                                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtImage)
-                                            .addComponent(jScrollPane1))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnUpload)
-                                            .addComponent(btnBorrar))
-                                        .addGap(43, 43, 43))))))))
-            .addGroup(pnlInsertLayout.createSequentialGroup()
-                .addGap(153, 153, 153)
-                .addComponent(btnInsert)
-                .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(txtNomEspai)
+                                    .addComponent(txtRegistreEspai)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInsertLayout.createSequentialGroup()
+                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblWeb)
+                                    .addComponent(lblEmail)
+                                    .addComponent(lblAdreca)
+                                    .addComponent(lblMunicipi)
+                                    .addComponent(lblTelefon)
+                                    .addComponent(lblGestor))
+                                .addGap(21, 21, 21)
+                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtGestor)
+                                    .addComponent(txtTelefon)
+                                    .addComponent(txtWeb)
+                                    .addComponent(txtEmail)
+                                    .addComponent(txtAdreca)
+                                    .addComponent(txtMunicipi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBorrar))
+                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                        .addComponent(txtImage, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnUpload))
+                    .addComponent(lblimages)
+                    .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(prgImage, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblImageIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         pnlInsertLayout.setVerticalGroup(
             pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlInsertLayout.createSequentialGroup()
                 .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlInsertLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblRegistreEspai)
-                            .addComponent(txtRegistreEspai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblMunicipi)
-                            .addComponent(txtMunicipi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)
-                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblAdreca)
-                            .addComponent(txtAdreca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblEmail)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblWeb)
-                            .addComponent(txtWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTelefon)
-                            .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblGestor)
-                            .addComponent(txtGestor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(chkSelectAllMod)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlModalitats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInsertLayout.createSequentialGroup()
                         .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlInsertLayout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtNomEspai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblNomEspai))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblRegistreEspai)
+                                    .addComponent(txtRegistreEspai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblMunicipi)
+                                    .addComponent(txtMunicipi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblAdreca)
+                                    .addComponent(txtAdreca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblEmail)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblWeb)
+                                    .addComponent(txtWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblTelefon)
+                                    .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(8, 8, 8)
+                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblGestor)
+                                    .addComponent(txtGestor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(pnlInsertLayout.createSequentialGroup()
+                                .addContainerGap()
                                 .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pnlInsertLayout.createSequentialGroup()
-                                        .addGap(70, 70, 70)
-                                        .addComponent(layeredDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 11, Short.MAX_VALUE))
-                                    .addGroup(pnlInsertLayout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(lblNomEspai)
-                                            .addComponent(txtNomEspai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(24, 24, 24)
-                                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(lblDescripcions)
-                                            .addComponent(cmbDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(143, 143, 143)))
-                                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblTipus)
-                                    .addComponent(cmbTipus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(7, 7, 7)
+                                        .addComponent(layeredDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblDescripcions)
+                                        .addComponent(cmbDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTipus)
+                            .addComponent(cmbTipus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(13, 13, 13))
+                    .addGroup(pnlInsertLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlInsertLayout.createSequentialGroup()
-                                .addGap(23, 23, 23)
                                 .addComponent(lblimages)
-                                .addGap(16, 16, 16)
+                                .addGap(25, 25, 25)
                                 .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnUpload))
                                 .addGap(18, 18, 18)
                                 .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1)
                                     .addGroup(pnlInsertLayout.createSequentialGroup()
                                         .addComponent(btnBorrar)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane1)))
+                            .addGroup(pnlInsertLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel2)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInsertLayout.createSequentialGroup()
                         .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInsertLayout.createSequentialGroup()
-                                .addComponent(lblImageIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(pnlServeis, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(28, 28, 28)
-                .addComponent(btnInsert)
-                .addGap(60, 60, 60))
+                            .addComponent(pnlServeis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnlModalitats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInsertLayout.createSequentialGroup()
+                        .addComponent(lblImageIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(prgImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)))
+                .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnInsert)
+                    .addComponent(btnClear))
+                .addGap(20, 20, 20))
         );
+
+        pnlModalitats.getAccessibleContext().setAccessibleDescription("");
 
         tabCRUD.addTab("Insert", pnlInsert);
 
@@ -834,11 +905,11 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         pnlModify.setLayout(pnlModifyLayout);
         pnlModifyLayout.setHorizontalGroup(
             pnlModifyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 749, Short.MAX_VALUE)
+            .addGap(0, 791, Short.MAX_VALUE)
         );
         pnlModifyLayout.setVerticalGroup(
             pnlModifyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 570, Short.MAX_VALUE)
+            .addGap(0, 573, Short.MAX_VALUE)
         );
 
         tabCRUD.addTab("Modify", pnlModify);
@@ -861,7 +932,8 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         Login l = new Login(this, true);
         l.setVisible(true);
-        if(!l.getLoginUser().isAdmin()){
+        currentUser = l.getLoginUser();
+        if(!currentUser.isAdmin()){
             tabCRUD.setEnabledAt(1, false);
             tabCRUD.setEnabledAt(2, false);
         }
@@ -877,31 +949,6 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         }
         lstEspais.setModel(defaultListModel);
     }//GEN-LAST:event_btnReadActionPerformed
-
-    private void cmbDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDescActionPerformed
-        switch(cmbDesc.getSelectedItem().toString()){
-           case "Català" -> {
-               pnlCast.setVisible(false);
-               pnlEng.setVisible(false);
-           }
-           case "Español" -> {
-               pnlCast.setVisible(true);
-               pnlEng.setVisible(false);
-           }
-           case "English" -> {
-               pnlCast.setVisible(true);
-               pnlEng.setVisible(true);
-           }
-       }
-    }//GEN-LAST:event_cmbDescActionPerformed
-
-    private void cmbDescItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDescItemStateChanged
-       
-    }//GEN-LAST:event_cmbDescItemStateChanged
-
-    private void cmbDescPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cmbDescPropertyChange
-       
-    }//GEN-LAST:event_cmbDescPropertyChange
 
     private void txtAdrecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAdrecaActionPerformed
         // TODO add your handling code here:
@@ -990,11 +1037,10 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         DataAccess da = new DataAccess();
         boolean insert = true;
-        //String descripcions = "Cat: " + txaCat.getText() + ";" + " Cast: " + txaCast.getText() + ";" + " Eng: " + txaEng.getText() + ";";
         LinkedHashMap<String, String> descripcions = new LinkedHashMap<>();
-        descripcions.put("cat", txaCat.getText());
-        descripcions.put("esp", txaCast.getText());
-        descripcions.put("eng", txaEng.getText());
+        descripcions.put("\"cat\"", "\"" + txaCat.getText() + "\"");
+        descripcions.put("\"esp\"", "\"" + txaCast.getText() + "\"");
+        descripcions.put("\"eng\"", "\"" + txaEng.getText() + "\"");
         
         Pattern emailRegEx = Pattern.compile("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
         Pattern webRegEx = Pattern.compile("(www\\.)[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,4}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)|(www\\.)?(?!ww)[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,4}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)");
@@ -1055,11 +1101,11 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
             modalitats = modalitats.substring(0, modalitats.length() - 1);
             
             if(!(emailRegEx.matcher(txtEmail.getText()).matches()) || !(emailRegEx.matcher(txtGestor.getText()).matches())){
-                error += "Tant email com gestor han d'estar en un format d'email correcte";
+                error += "Tant email com gestor han d'estar en un format d'email correcte" + System.lineSeparator();
             }
             
             if(!(webRegEx.matcher(txtWeb.getText()).matches())){
-                error += "Web ha d'estar en el següent format: www.text.com";
+                error += "Web ha d'estar en el següent format: www.text.com" + System.lineSeparator();
             }
             
             if(!(error.isEmpty() || error.isBlank() || error == null)){
@@ -1112,18 +1158,38 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                 "S'ha introduït el espai correctament",
                 "Info",
                 JOptionPane.INFORMATION_MESSAGE);
-                txtRegistreEspai.setText("");
-                images.clear();
-                imageListModel.clear();
-                lstImages.setModel(imageListModel);
+                btnClear.doClick();
             }
         }
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void btnVisualitzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualitzarActionPerformed
         if(!(lstEspais.getSelectedValue() == null)){
+            //DataAccess da = new DataAccess();
+            Espai espai = lstEspais.getSelectedValue();
+            //int coments = da.getNumComentaris(espai);
             Visualitzar visualitzar = new Visualitzar(this, true);
-            visualitzar.setSelectedEspai(lstEspais.getSelectedValue());
+            visualitzar.setSelectedEspai(espai);
+            visualitzar.getLblRegister().setText(espai.getRegistre());
+            visualitzar.getLblTitol().setText(espai.getNom());
+            visualitzar.getLblComentaris().setText("Comentaris: " + numComentaris(espai));
+            visualitzar.getLblAdreca().setText(espai.getMunicipi() + ", " + espai.getAdreca());
+            visualitzar.getLblWeb().setText(espai.getWeb());
+            visualitzar.getLblEmail().setText(espai.getEmail());
+            visualitzar.getLblGestor().setText(espai.getGestor());
+            visualitzar.getLblTelefon().setText(Integer.toString(espai.getTelefon()));
+            visualitzar.getLblModalitats().setText(espai.getModalitat());
+            visualitzar.getLblTipus().setText(espai.getTipus());
+            String serveis = espai.getServeis();
+            visualitzar.getLblServeis().setText(serveis);
+            if(serveis == null || serveis.isBlank() || serveis.isEmpty()){
+                visualitzar.getLblServeis().setText("Aquest espai no proporciona cap servei");
+            }
+            visualitzar.getTxaCat().setText(espai.getDescripcions().get("\"cat\""));
+            visualitzar.getTxaEsp().setText(espai.getDescripcions().get("\"esp\""));
+            visualitzar.getTxaEn().setText(espai.getDescripcions().get("\"eng\""));
+            visualitzar.getLblUser().setText(currentUser.getUserName() + " :");
+            visualitzar.setCurrentUser(currentUser.getUserName());
             visualitzar.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null,
@@ -1137,10 +1203,10 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         
     }//GEN-LAST:event_btnCercarActionPerformed
 
-    private void btnMyProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMyProfileActionPerformed
+    private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
         MyProfile mp = new MyProfile(this, true);
         mp.setVisible(true);
-    }//GEN-LAST:event_btnMyProfileActionPerformed
+    }//GEN-LAST:event_btnPerfilActionPerformed
 
     private void btnUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadActionPerformed
         //DefaultListModel imageListModel = new DefaultListModel();
@@ -1155,6 +1221,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                ex.printStackTrace();
             }
             if(status){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 if(!(blobContainerClient.getBlobClient(fileChooser.getSelectedFile().getName()).exists())) {
                     BlobClient blobClient = blobContainerClient.getBlobClient(fileChooser.getSelectedFile().getName());
                     txtImage.setText(fileChooser.getSelectedFile().getAbsolutePath());
@@ -1186,6 +1253,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
                 }
+                this.setCursor(Cursor.getDefaultCursor());
             } else {
                 JOptionPane.showMessageDialog(null,
                 "La imatge que es vol introduïr ha d'estar en format jpg",
@@ -1199,9 +1267,12 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     
     private void lstImagesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstImagesValueChanged
         if (!evt.getValueIsAdjusting()) {  //This line prevents double events when selecting by click
-            downloadThread = new Thread(this);
-            downloadThread.start();
-            lblImageIcon.setIcon(new ImageIcon(Visualitzar.class.getClassLoader().getResource("resizedloader.gif")));
+            if(!(lstImages.getSelectedValue() == null)){
+                threadFromInsert = true;
+                downloadThread = new Thread(this);
+                downloadThread.start();
+                lblImageIcon.setIcon(new ImageIcon(Visualitzar.class.getClassLoader().getResource("resizedloader.gif")));
+            }
         }
     }//GEN-LAST:event_lstImagesValueChanged
 
@@ -1224,56 +1295,104 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         }
     }//GEN-LAST:event_btnBorrarActionPerformed
 
+    private void cmbDescPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cmbDescPropertyChange
+
+    }//GEN-LAST:event_cmbDescPropertyChange
+
+    private void cmbDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDescActionPerformed
+        switch(cmbDesc.getSelectedItem().toString()){
+            case "Català" -> {
+                pnlCast.setVisible(false);
+                pnlEng.setVisible(false);
+            }
+            case "Español" -> {
+                pnlCast.setVisible(true);
+                pnlEng.setVisible(false);
+            }
+            case "English" -> {
+                pnlCast.setVisible(true);
+                pnlEng.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_cmbDescActionPerformed
+
+    private void cmbDescItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDescItemStateChanged
+
+    }//GEN-LAST:event_cmbDescItemStateChanged
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        txtRegistreEspai.setText("");
+        txtNomEspai.setText("");
+        txtAdreca.setText("");
+        txtEmail.setText("");
+        txtGestor.setText("");
+        txtMunicipi.setText("");
+        txtTelefon.setText("");
+        txtWeb.setText("");
+        txaCast.setText("");
+        txaCat.setText("");
+        txaEng.setText("");
+        for(JCheckBox chkBox : chkListServeis){
+                chkBox.setSelected(false);
+        } 
+        for(JCheckBox chkBox : chkListModalitats){
+                chkBox.setSelected(false);
+        }
+        txtImage.setText("");
+        images.clear();
+        imageListModel.clear();
+        lstImages.setModel(imageListModel);
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void txtImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtImageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtImageActionPerformed
+
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailActionPerformed
+
+    private void lstEspaisMouseClicked(java.awt.event.MouseEvent evt) {                                          
+        if (evt.getClickCount() == 2) {
+            btnVisualitzar.doClick();
+        } 
+    }   
+    
+    private void lstEspaisValueChanged(javax.swing.event.ListSelectionEvent evt){
+        Espai selectedEspai = lstEspais.getSelectedValue();
+        if(selectedEspai != null) {
+            if (!evt.getValueIsAdjusting()) {  //This line prevents double events when selecting by click
+                lblRegistre.setText(selectedEspai.getRegistre());
+                lblNom.setText(selectedEspai.getNom());
+                lblComentaris.setText("Comentaris: " + numComentaris(selectedEspai));
+                threadFromRead = true;
+                downloadThread = new Thread(this);
+                downloadThread.start();
+                lblImage.setIcon(new ImageIcon(Visualitzar.class.getClassLoader().getResource("resizedloader.gif")));
+            }
+        }
+    }
+    
+    private int numComentaris(Espai espai){
+        DataAccess da = new DataAccess(); 
+        return da.getNumComentaris(espai);
+    }
+    
     @Override
     public void run() {
         System.out.println(Thread.currentThread().getName());
-        downloadImage();
+        if(threadFromInsert) {
+            ImageHelper.downloadImage(lblImageIcon, prgImage, lstImages.getSelectedValue());
+        }
+        if(threadFromRead) {
+            DataAccess da = new DataAccess();
+            ImageHelper.downloadImage(lblImage, prgImatgeRead, da.firstImatge(lstEspais.getSelectedValue()).getImatge());
+        }
+        threadFromInsert = false;
+        threadFromRead = false;
+        //downloadImage();
     }
     
-    private void downloadImage() {
-    // Downloading big images in chunks of 1kB might be very slow because of the request overhead to azure. Modify the algorithm to donwload eavery image in, for instance 20 chunks.
-
-        ByteArrayOutputStream outputStream;
-        BufferedImage originalImage;
-        try {
-            BlockBlobClient blobClient = ImageHelper.getContainerClient().getBlobClient(lstImages.getSelectedValue()).getBlockBlobClient();
-            int dataSize = (int) blobClient.getProperties().getBlobSize();
-            int numberOfBlocks = 20;
-            int numberOfBPerBlock = dataSize / numberOfBlocks;  // Split every image in 20 blocks. That is, make 20 requests to Azure.
-            System.out.println("Starting download of " + dataSize + " bytes in " + numberOfBlocks + " " + numberOfBPerBlock/1024 + "kB chunks");
-
-            
-            int i = 0;
-            outputStream = new ByteArrayOutputStream(dataSize);
-
-            while (i < numberOfBlocks) {
-                BlobRange range = new BlobRange(i * numberOfBPerBlock, (long)numberOfBPerBlock);
-                DownloadRetryOptions options = new DownloadRetryOptions().setMaxRetryRequests(5);
-
-                System.out.println(i + ": Downloading bytes " + range.getOffset() + " to " + (range.getOffset() + range.getCount()) + " with status "
-                        + blobClient.downloadStreamWithResponse(outputStream, range, options, null, false,
-                                Duration.ofSeconds(30), Context.NONE));
-                i++;
-                jProgressBar1.setValue(i * jProgressBar1.getMaximum() / (numberOfBlocks + 1));
-            }
-
-            // Download the last bytes of the image
-            BlobRange range = new BlobRange(i * numberOfBPerBlock);
-            DownloadRetryOptions options = new DownloadRetryOptions().setMaxRetryRequests(5);
-            System.out.println(i + ": Downloading bytes " + range.getOffset() + " to " + dataSize + " with status "
-                    + blobClient.downloadStreamWithResponse(outputStream, range, options, null, false,
-                            Duration.ofSeconds(30), Context.NONE));
-            i++;
-            jProgressBar1.setValue(i * jProgressBar1.getMaximum() / (numberOfBlocks + 1));
-            
-            originalImage = ImageIO.read(new ByteArrayInputStream(outputStream.toByteArray()));
-            ImageIcon icon = ImageHelper.resizeImageIcon(originalImage, lblImageIcon.getWidth(), lblImageIcon.getHeight());
-            lblImageIcon.setIcon(icon);
-            outputStream.close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-    }
     /**
      * @param args the command line arguments
      */
@@ -1312,8 +1431,9 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnCercar;
+    private javax.swing.JButton btnClear;
     private javax.swing.JButton btnInsert;
-    private javax.swing.JButton btnMyProfile;
+    private javax.swing.JButton btnPerfil;
     private javax.swing.JButton btnRead;
     private javax.swing.JButton btnUpload;
     private javax.swing.JButton btnVisualitzar;
@@ -1340,17 +1460,21 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     private javax.swing.Box.Filler filler1;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLayeredPane layeredDesc;
     private javax.swing.JLabel lblAdreca;
+    private javax.swing.JLabel lblComentaris;
     private javax.swing.JLabel lblDescripcions;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblGestor;
+    private javax.swing.JLabel lblImage;
     private javax.swing.JLabel lblImageIcon;
     private javax.swing.JLabel lblMunicipi;
+    private javax.swing.JLabel lblNom;
     private javax.swing.JLabel lblNomEspai;
+    private javax.swing.JLabel lblRegistre;
     private javax.swing.JLabel lblRegistreEspai;
     private javax.swing.JLabel lblTelefon;
     private javax.swing.JLabel lblTipus;
@@ -1365,6 +1489,8 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     private javax.swing.JPanel pnlModify;
     private javax.swing.JPanel pnlRead;
     private javax.swing.JPanel pnlServeis;
+    private javax.swing.JProgressBar prgImage;
+    private javax.swing.JProgressBar prgImatgeRead;
     private javax.swing.JScrollPane scrCast;
     private javax.swing.JScrollPane scrCat;
     private javax.swing.JScrollPane scrEng;
