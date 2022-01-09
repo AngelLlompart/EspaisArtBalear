@@ -312,7 +312,7 @@ public class Login extends javax.swing.JDialog {
         for(User u: users){
             if(u.getUserName().equals(txtUserName.getText())){
                 userExists = true;
-                if(u.getPassword().equals(new String (txtPassword.getPassword()))){
+                if(u.getPassword().equals(encriptMD5)){
                     loginUser = u;
                     setVisible(false);
                 }else{
