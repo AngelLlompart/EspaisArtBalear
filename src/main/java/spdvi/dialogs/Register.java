@@ -297,8 +297,8 @@ public class Register extends javax.swing.JDialog {
             txtUsername.setForeground(Color.black);
         }
         if (txtEmail.getText().equals("Ingresi correu")) {
-            txtEmail.setText("");
-            txtEmail.setForeground(Color.black);
+            txtEmail.setText("Ingresi correu");
+            txtEmail.setForeground(Color.gray);
         }
     }//GEN-LAST:event_txtUsernameMousePressed
 
@@ -308,8 +308,8 @@ public class Register extends javax.swing.JDialog {
             txtEmail.setForeground(Color.black);
         }
         if (txtUsername.getText().equals("Ingresi usuari")) {
-            txtUsername.setText("");
-            txtUsername.setForeground(Color.black);
+            txtUsername.setText("Ingresi usuari");
+            txtUsername.setForeground(Color.gray);
         }
     }//GEN-LAST:event_txtEmailMousePressed
 
