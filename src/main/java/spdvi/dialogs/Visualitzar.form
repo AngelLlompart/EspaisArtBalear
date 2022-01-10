@@ -120,19 +120,17 @@
               <Component id="lblDescripcions" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblEsp" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblCat" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                      <Component id="lblEsp" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblCat" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="lblEn" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="scrEsp" min="-2" max="-2" attributes="0"/>
-                      <Component id="scrEng" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="scrCat" min="-2" pref="96" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="scrEsp" max="32767" attributes="0"/>
+                  <Component id="scrEng" max="32767" attributes="0"/>
+                  <Component id="scrCat" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
@@ -151,7 +149,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="scrServeis" min="-2" pref="45" max="-2" attributes="0"/>
-                      <EmptySpace pref="15" max="32767" attributes="0"/>
+                      <EmptySpace pref="20" max="32767" attributes="0"/>
                       <Component id="lblComentaris" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
