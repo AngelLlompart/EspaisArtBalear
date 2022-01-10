@@ -54,8 +54,6 @@ public class Register extends javax.swing.JDialog {
         lblTextRegister = new javax.swing.JLabel();
         PanelBotoCancel = new javax.swing.JPanel();
         lblTextCancel = new javax.swing.JLabel();
-        PanelBotoUser = new javax.swing.JPanel();
-        lblTextUser = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -143,12 +141,12 @@ public class Register extends javax.swing.JDialog {
         );
         PanelBotoRegisterLayout.setVerticalGroup(
             PanelBotoRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
+            .addGap(0, 30, Short.MAX_VALUE)
             .addGroup(PanelBotoRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(lblTextRegister, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
+                .addComponent(lblTextRegister, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
         );
 
-        jPanel1.add(PanelBotoRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, 90, 20));
+        jPanel1.add(PanelBotoRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 90, 30));
 
         PanelBotoCancel.setBackground(new java.awt.Color(0, 134, 190));
 
@@ -173,50 +171,18 @@ public class Register extends javax.swing.JDialog {
         PanelBotoCancel.setLayout(PanelBotoCancelLayout);
         PanelBotoCancelLayout.setHorizontalGroup(
             PanelBotoCancelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblTextCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+            .addGap(0, 90, Short.MAX_VALUE)
+            .addGroup(PanelBotoCancelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(lblTextCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
         );
         PanelBotoCancelLayout.setVerticalGroup(
             PanelBotoCancelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblTextCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+            .addGap(0, 30, Short.MAX_VALUE)
+            .addGroup(PanelBotoCancelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(lblTextCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
         );
 
-        jPanel1.add(PanelBotoCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 90, 20));
-
-        PanelBotoUser.setBackground(new java.awt.Color(0, 134, 190));
-
-        lblTextUser.setFont(new java.awt.Font("Roboto Medium", 1, 12)); // NOI18N
-        lblTextUser.setForeground(new java.awt.Color(255, 255, 255));
-        lblTextUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTextUser.setText("Show Users");
-        lblTextUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblTextUser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblTextUserMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblTextUserMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblTextUserMouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout PanelBotoUserLayout = new javax.swing.GroupLayout(PanelBotoUser);
-        PanelBotoUser.setLayout(PanelBotoUserLayout);
-        PanelBotoUserLayout.setHorizontalGroup(
-            PanelBotoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 90, Short.MAX_VALUE)
-            .addGroup(PanelBotoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(lblTextUser, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
-        );
-        PanelBotoUserLayout.setVerticalGroup(
-            PanelBotoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
-            .addGroup(PanelBotoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(lblTextUser, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(PanelBotoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, 90, 20));
+        jPanel1.add(PanelBotoCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 90, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -322,14 +288,6 @@ public class Register extends javax.swing.JDialog {
         PanelBotoCancel.setBackground(new Color(0, 134, 190));
     }//GEN-LAST:event_lblTextCancelMouseExited
 
-    private void lblTextUserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTextUserMouseEntered
-        PanelBotoUser.setBackground(new Color(0, 156, 223));
-    }//GEN-LAST:event_lblTextUserMouseEntered
-
-    private void lblTextUserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTextUserMouseExited
-        PanelBotoUser.setBackground(new Color(0, 134, 190));
-    }//GEN-LAST:event_lblTextUserMouseExited
-
     private void PanelBotoRegisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotoRegisterMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_PanelBotoRegisterMousePressed
@@ -354,10 +312,6 @@ public class Register extends javax.swing.JDialog {
     private void lblTextCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTextCancelMouseClicked
         this.setVisible(false);
     }//GEN-LAST:event_lblTextCancelMouseClicked
-
-    private void lblTextUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTextUserMouseClicked
-        System.out.println(da.getUsers());
-    }//GEN-LAST:event_lblTextUserMouseClicked
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
         // TODO add your handling code here:
@@ -412,14 +366,12 @@ public class Register extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelBotoCancel;
     private javax.swing.JPanel PanelBotoRegister;
-    private javax.swing.JPanel PanelBotoUser;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblTextCancel;
     private javax.swing.JLabel lblTextRegister;
-    private javax.swing.JLabel lblTextUser;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtUsername;
