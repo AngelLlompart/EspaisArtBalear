@@ -136,6 +136,7 @@ public class DataAccess {
                         resultSet.getString("Gestor"),
                         resultSet.getString("Serveis")
                 );
+                espai.setVisible(resultSet.getBoolean("Visible"));
                 espais.add(espai);
             }
         } catch (SQLException ex) {

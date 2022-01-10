@@ -2426,6 +2426,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                 }
                 oldImagesModify.clear();
                 imagesModify.clear();
+                imageListModelModify.clear();
                 pnlModifyVisible.setVisible(false);
                 txtRegistreModify.setText("");
                 txtRegistreModify.setEnabled(true);
@@ -2561,6 +2562,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         oldImagesModify.clear();
         imagesModify.clear();
         deletedImages.clear();
+        imageListModelModify.clear();
         pnlModifyVisible.setVisible(false);
         txtRegistreModify.setText("");
         txtRegistreModify.setEnabled(true);
