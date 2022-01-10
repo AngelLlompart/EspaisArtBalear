@@ -92,7 +92,7 @@ public class ConfirmPassword extends javax.swing.JDialog {
                 lblCodiMouseExited(evt);
             }
         });
-        jPanel1.add(lblCodi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+        jPanel1.add(lblCodi, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
         lblConfirmContrasenya.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         lblConfirmContrasenya.setText("Confirma la contrasenya:");
@@ -101,7 +101,7 @@ public class ConfirmPassword extends javax.swing.JDialog {
                 lblConfirmContrasenyaMouseExited(evt);
             }
         });
-        jPanel1.add(lblConfirmContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+        jPanel1.add(lblConfirmContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
 
         lblContrasenya.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         lblContrasenya.setText("Introdueix nova contrasenya:");
@@ -110,7 +110,7 @@ public class ConfirmPassword extends javax.swing.JDialog {
                 lblContrasenyaMouseExited(evt);
             }
         });
-        jPanel1.add(lblContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+        jPanel1.add(lblContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
 
         txtConfirmContrasenya.setBorder(null);
         txtConfirmContrasenya.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -123,7 +123,7 @@ public class ConfirmPassword extends javax.swing.JDialog {
                 txtConfirmContrasenyaActionPerformed(evt);
             }
         });
-        jPanel1.add(txtConfirmContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 190, -1));
+        jPanel1.add(txtConfirmContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 190, -1));
 
         txtCodi.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
         txtCodi.setBorder(null);
@@ -137,7 +137,7 @@ public class ConfirmPassword extends javax.swing.JDialog {
                 txtCodiActionPerformed(evt);
             }
         });
-        jPanel1.add(txtCodi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 190, -1));
+        jPanel1.add(txtCodi, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 190, -1));
 
         txtContrasenya.setBorder(null);
         txtContrasenya.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -150,10 +150,10 @@ public class ConfirmPassword extends javax.swing.JDialog {
                 txtContrasenyaActionPerformed(evt);
             }
         });
-        jPanel1.add(txtContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 190, -1));
-        jPanel1.add(SeparatorCodi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 73, 250, 10));
-        jPanel1.add(SeparatorContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 250, -1));
-        jPanel1.add(SeparatorConfirmContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 250, 10));
+        jPanel1.add(txtContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 190, -1));
+        jPanel1.add(SeparatorCodi, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 250, 10));
+        jPanel1.add(SeparatorContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 250, -1));
+        jPanel1.add(SeparatorConfirmContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 250, 10));
 
         PanelBoto.setBackground(new java.awt.Color(0, 134, 190));
 
@@ -189,17 +189,17 @@ public class ConfirmPassword extends javax.swing.JDialog {
                 .addComponent(lblText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel1.add(PanelBoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, 120, 30));
+        jPanel1.add(PanelBoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 120, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
 
         pack();

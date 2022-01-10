@@ -65,23 +65,23 @@ public class UpdatePassword extends javax.swing.JDialog {
                 pswCurrentPasswordActionPerformed(evt);
             }
         });
-        jPanel1.add(pswCurrentPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 46, 220, 20));
+        jPanel1.add(pswCurrentPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 220, 20));
 
         lblNewPassword.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         lblNewPassword.setText("New password: ");
-        jPanel1.add(lblNewPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        jPanel1.add(lblNewPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
 
         lblCurrentPassword.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         lblCurrentPassword.setText("Current password: ");
-        jPanel1.add(lblCurrentPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        jPanel1.add(lblCurrentPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         jLabel3.setText("Confirm new password: ");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
 
         pswNewPassword.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
         pswNewPassword.setBorder(null);
-        jPanel1.add(pswNewPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 220, 20));
+        jPanel1.add(pswNewPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 220, 20));
 
         pswConfirmPassword.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
         pswConfirmPassword.setBorder(null);
@@ -90,7 +90,7 @@ public class UpdatePassword extends javax.swing.JDialog {
                 pswConfirmPasswordActionPerformed(evt);
             }
         });
-        jPanel1.add(pswConfirmPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 220, 20));
+        jPanel1.add(pswConfirmPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 220, 20));
 
         btnSave.setBackground(new java.awt.Color(0, 134, 190));
         btnSave.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
@@ -109,12 +109,13 @@ public class UpdatePassword extends javax.swing.JDialog {
                 btnSaveActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, -1, 30));
+        jPanel1.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, -1, 30));
 
         btnCancel.setBackground(new java.awt.Color(0, 134, 190));
         btnCancel.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
         btnCancel.setForeground(new java.awt.Color(255, 255, 255));
         btnCancel.setText("Cancel");
+        btnCancel.setPreferredSize(new java.awt.Dimension(80, 30));
         btnCancel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnCancelMouseEntered(evt);
@@ -128,20 +129,20 @@ public class UpdatePassword extends javax.swing.JDialog {
                 btnCancelActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, 130, 30));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 220, 30));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 220, 30));
-        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 220, 20));
+        jPanel1.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, 130, 30));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 220, 30));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 220, 30));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 220, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
 
         pack();

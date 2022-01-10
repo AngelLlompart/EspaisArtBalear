@@ -47,7 +47,7 @@ public class ConfirmDelete extends javax.swing.JDialog {
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         jLabel1.setText("Are you sure you want to delete your account?");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 330, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 330, -1));
 
         PanelBotoYes.setBackground(new java.awt.Color(0, 134, 190));
 
@@ -89,7 +89,7 @@ public class ConfirmDelete extends javax.swing.JDialog {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        jPanel1.add(PanelBotoYes, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 70, 20));
+        jPanel1.add(PanelBotoYes, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 70, 20));
 
         PanelBotoNo.setBackground(new java.awt.Color(0, 134, 190));
 
@@ -131,17 +131,17 @@ public class ConfirmDelete extends javax.swing.JDialog {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        jPanel1.add(PanelBotoNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 70, 20));
+        jPanel1.add(PanelBotoNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 70, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
 
         pack();
