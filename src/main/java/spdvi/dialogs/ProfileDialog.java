@@ -9,21 +9,21 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Frame;
 import javax.swing.JLabel;
-import spdvi.helpers.DataAccess;
+import spdvi.dataaccess.DataAccess;
 import spdvi.pojos.User;
 
 /**
  *
  * @author lawde
  */
-public class Profile extends javax.swing.JDialog {
+public class ProfileDialog extends javax.swing.JDialog {
 
     private User currentUser;
     private boolean deleted = false;
     /**
      * Creates new form Profile
      */
-    public Profile(java.awt.Frame parent, boolean modal) {
+    public ProfileDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -141,7 +141,7 @@ public class Profile extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePasswordActionPerformed
-        UpdatePassword updatePassword = new UpdatePassword((Frame) this.getParent(), true);
+        UpdatePasswordDialog updatePassword = new UpdatePasswordDialog((Frame) this.getParent(), true);
         updatePassword.setCurrentUser(currentUser);
         updatePassword.setVisible(true);
     }//GEN-LAST:event_btnChangePasswordActionPerformed
@@ -157,7 +157,7 @@ public class Profile extends javax.swing.JDialog {
     }//GEN-LAST:event_lblDeleteMouseExited
 
     private void lblDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDeleteMouseClicked
-        ConfirmDelete confirmDelete = new ConfirmDelete((Frame) this.getParent(), true);
+        ConfirmDeleteDialog confirmDelete = new ConfirmDeleteDialog((Frame) this.getParent(), true);
         confirmDelete.setVisible(true);
         if(confirmDelete.isConfirm()){
             DataAccess da = new DataAccess();
@@ -176,7 +176,7 @@ public class Profile extends javax.swing.JDialog {
     }//GEN-LAST:event_btnChangePasswordMouseExited
 
     private void btnChangeUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeUserActionPerformed
-        UpdateUsername updateUsername = new UpdateUsername((Frame) this.getParent(), true);
+        UpdateUsernameDialog updateUsername = new UpdateUsernameDialog((Frame) this.getParent(), true);
         updateUsername.setCurrentUser(currentUser);
         updateUsername.getLblOldUsername().setText(currentUser.getUserName());
         updateUsername.setVisible(true);
@@ -239,20 +239,21 @@ public class Profile extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Profile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProfileDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Profile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProfileDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Profile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProfileDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Profile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProfileDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Profile dialog = new Profile(new javax.swing.JFrame(), true);
+                ProfileDialog dialog = new ProfileDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

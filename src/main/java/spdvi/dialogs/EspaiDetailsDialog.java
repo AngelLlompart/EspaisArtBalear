@@ -5,7 +5,7 @@
  */
 package spdvi.dialogs;
 
-import spdvi.helpers.DataAccess;
+import spdvi.dataaccess.DataAccess;
 import com.azure.core.util.Context;
 import com.azure.storage.blob.BlobContainerClient;
 import com.azure.storage.blob.BlobServiceClient;
@@ -46,7 +46,7 @@ import spdvi.pojos.User;
  *
  * @author angel
  */
-public class Visualitzar extends javax.swing.JDialog implements Runnable{
+public class EspaiDetailsDialog extends javax.swing.JDialog implements Runnable{
     //private ArrayList<String> blobNames = new ArrayList<>();
     private JList<Comentari> lstComents;
     private ArrayList<Imatge> imatges = new ArrayList<>();
@@ -58,7 +58,7 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
     /**
      * Creates new form Visualitzar
      */
-    public Visualitzar(java.awt.Frame parent, boolean modal) {
+    public EspaiDetailsDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         lstComents = new JList<Comentari>();
@@ -373,7 +373,7 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
         prgImage.setBackground(new java.awt.Color(255, 255, 255));
         prgImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         prgImage.setStringPainted(true);
-        jPanel1.add(prgImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 630, 220, 30));
+        jPanel1.add(prgImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 630, 220, 30));
 
         btnNext.setBackground(new java.awt.Color(255, 255, 255));
         btnNext.setForeground(new java.awt.Color(255, 255, 255));
@@ -390,7 +390,9 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -403,7 +405,7 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
 
     
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        lblImage.setIcon(new ImageIcon(Visualitzar.class.getClassLoader().getResource(gif)));
+        lblImage.setIcon(new ImageIcon(EspaiDetailsDialog.class.getClassLoader().getResource(gif)));
         contador++;
         if(contador == imatges.size() - 1){
             btnNext.setEnabled(false);
@@ -415,7 +417,7 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         DataAccess da = new DataAccess();
-        lblImage.setIcon(new ImageIcon(Visualitzar.class.getClassLoader().getResource(gif)));
+        lblImage.setIcon(new ImageIcon(EspaiDetailsDialog.class.getClassLoader().getResource(gif)));
         btnPrevious.setEnabled(false);
         btnComentar.setEnabled(false);
  
@@ -431,7 +433,7 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
     }//GEN-LAST:event_formWindowOpened
 
     private void btnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousActionPerformed
-        lblImage.setIcon(new ImageIcon(Visualitzar.class.getClassLoader().getResource(gif)));
+        lblImage.setIcon(new ImageIcon(EspaiDetailsDialog.class.getClassLoader().getResource(gif)));
         contador--;
         if(contador == 0){
             btnPrevious.setEnabled(false);
@@ -646,20 +648,23 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Visualitzar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EspaiDetailsDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Visualitzar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EspaiDetailsDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Visualitzar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EspaiDetailsDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Visualitzar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EspaiDetailsDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Visualitzar dialog = new Visualitzar(new javax.swing.JFrame(), true);
+                EspaiDetailsDialog dialog = new EspaiDetailsDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

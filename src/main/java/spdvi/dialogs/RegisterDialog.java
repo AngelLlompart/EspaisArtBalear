@@ -7,7 +7,7 @@ package spdvi.dialogs;
 
 import java.awt.Color;
 import spdvi.pojos.User;
-import spdvi.dialogs.ConfirmPassword;
+import spdvi.dialogs.ConfirmPasswordDialog;
 import java.awt.Frame;
 import java.security.MessageDigest;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import org.apache.commons.codec.digest.DigestUtils;
-import spdvi.helpers.DataAccess;
+import spdvi.dataaccess.DataAccess;
 import spdvi.helpers.PasswordGenerator;
 import spdvi.helpers.SendEmail;
 
@@ -24,12 +24,12 @@ import spdvi.helpers.SendEmail;
  *
  * @author angel
  */
-public class Register extends javax.swing.JDialog {
+public class RegisterDialog extends javax.swing.JDialog {
 
     private static DataAccess da = new DataAccess();
     private static ArrayList<User> userlist = new ArrayList<>(da.getUsers());
 
-    public Register(java.awt.Frame parent, boolean modal) {
+    public RegisterDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -208,7 +208,7 @@ public class Register extends javax.swing.JDialog {
             SendEmail sendEmail = new SendEmail();
             String missatge = sendEmail.sendEmail(txtEmail);
 
-            ConfirmPassword cp = new ConfirmPassword((Frame) this.getParent(), true);
+            ConfirmPasswordDialog cp = new ConfirmPasswordDialog((Frame) this.getParent(), true);
             cp.setEmail(txtEmail.getText());
             cp.setCodi(missatge);
             cp.setVisible(true);
@@ -332,20 +332,21 @@ public class Register extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Register dialog = new Register(new javax.swing.JFrame(), true);
+                RegisterDialog dialog = new RegisterDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

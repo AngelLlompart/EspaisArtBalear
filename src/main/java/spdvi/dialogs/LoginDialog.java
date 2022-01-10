@@ -5,8 +5,8 @@
  */
 package spdvi.dialogs;
 
-import spdvi.dialogs.Register;
-import spdvi.helpers.DataAccess;
+import spdvi.dialogs.RegisterDialog;
+import spdvi.dataaccess.DataAccess;
 import spdvi.pojos.User;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -17,18 +17,18 @@ import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import org.apache.commons.codec.digest.DigestUtils;
-import spdvi.dialogs.ForgotPassword;
+import spdvi.dialogs.ForgotPasswordDialog;
 
 /**
  *
  * @author angel
  */
-public class Login extends javax.swing.JDialog {
+public class LoginDialog extends javax.swing.JDialog {
    private User loginUser;
     /**
      * Creates new form Login
      */
-    public Login(java.awt.Frame parent, boolean modal) {
+    public LoginDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
@@ -237,12 +237,12 @@ public class Login extends javax.swing.JDialog {
     }//GEN-LAST:event_lblForgotPasswordMouseExited
 
     private void lblRegistreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistreMouseClicked
-        Register r = new Register((Frame) this.getParent(), true);
+        RegisterDialog r = new RegisterDialog((Frame) this.getParent(), true);
         r.setVisible(true);
     }//GEN-LAST:event_lblRegistreMouseClicked
 
     private void lblForgotPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblForgotPasswordMouseClicked
-        ForgotPassword fP = new ForgotPassword((Frame) this.getParent(), true);
+        ForgotPasswordDialog fP = new ForgotPasswordDialog((Frame) this.getParent(), true);
         fP.setVisible(true);
     }//GEN-LAST:event_lblForgotPasswordMouseClicked
 
@@ -354,20 +354,21 @@ public class Login extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Login dialog = new Login(new javax.swing.JFrame(), true);
+                LoginDialog dialog = new LoginDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

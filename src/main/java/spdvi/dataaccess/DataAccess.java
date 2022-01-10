@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package spdvi.helpers;
+package spdvi.dataaccess;
 
 import spdvi.pojos.Espai;
 import spdvi.pojos.User;
@@ -448,9 +448,9 @@ public class DataAccess {
         ArrayList<Espai> espais = new ArrayList<Espai>();
         try ( Connection connection = getConnection()) {
             PreparedStatement selectStatement = connection.prepareStatement(
-                    "Select * FROM dbo.[Espai] where Municipi =?"
+                    "Select * FROM dbo.[Espai] where Municipi like ?"
             );
-            selectStatement.setString(1, municipi);
+            selectStatement.setString(1, "%" + municipi + "%");
             ResultSet resultSet = selectStatement.executeQuery();
             while (resultSet.next()) {
                 String desc = resultSet.getString("Descripcions");

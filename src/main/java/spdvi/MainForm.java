@@ -21,8 +21,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
-import spdvi.dialogs.Login;
-import spdvi.dialogs.Visualitzar;
+import spdvi.dialogs.LoginDialog;
+import spdvi.dialogs.EspaiDetailsDialog;
 import spdvi.pojos.Espai;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,9 +42,9 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.metal.MetalLookAndFeel;
-import spdvi.dialogs.Profile;
+import spdvi.dialogs.ProfileDialog;
 import spdvi.helpers.ArgumentNullException;
-import spdvi.helpers.DataAccess;
+import spdvi.dataaccess.DataAccess;
 import spdvi.helpers.ImageHelper;
 import spdvi.pojos.Imatge;
 import spdvi.pojos.User;
@@ -2053,7 +2053,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
             //DataAccess da = new DataAccess();
             Espai espai = lstEspais.getSelectedValue();
             //int coments = da.getNumComentaris(espai);
-            Visualitzar visualitzar = new Visualitzar(this, true);
+            EspaiDetailsDialog visualitzar = new EspaiDetailsDialog(this, true);
             visualitzar.setSelectedEspai(espai);
             visualitzar.getLblRegister().setText(espai.getRegistre());
             visualitzar.getLblTitol().setText(espai.getNom());
@@ -2095,7 +2095,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_btnCercarActionPerformed
 
     private void btnMyProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMyProfileActionPerformed
-        Profile p = new Profile(this, true);
+        ProfileDialog p = new ProfileDialog(this, true);
         p.setCurrentUser(currentUser);
         p.getLblEmail().setText(currentUser.getEmail());
         p.getLblUsername().setText(currentUser.getUserName());
@@ -2118,7 +2118,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                 threadFromInsert = true;
                 downloadThread = new Thread(this);
                 downloadThread.start();
-                lblImageIcon.setIcon(new ImageIcon(Visualitzar.class.getClassLoader().getResource("resizedloader.gif")));
+                lblImageIcon.setIcon(new ImageIcon(EspaiDetailsDialog.class.getClassLoader().getResource("resizedloader.gif")));
             }
         }
     }//GEN-LAST:event_lstImagesValueChanged
@@ -2453,7 +2453,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                 threadFromModify = true;
                 downloadThread = new Thread(this);
                 downloadThread.start();
-                lblImageIconModify.setIcon(new ImageIcon(Visualitzar.class.getClassLoader().getResource("resizedloader.gif")));
+                lblImageIconModify.setIcon(new ImageIcon(EspaiDetailsDialog.class.getClassLoader().getResource("resizedloader.gif")));
             }
         }
     }//GEN-LAST:event_lstImagesModifyValueChanged
@@ -2597,7 +2597,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         btnModifyInsert.setVisible(false);
         btnReadHidden.setVisible(false);
 
-        Login l = new Login(this, true);
+        LoginDialog l = new LoginDialog(this, true);
         l.setVisible(true);
         currentUser = l.getLoginUser();
 
@@ -2625,7 +2625,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                 threadFromRead = true;
                 downloadThread = new Thread(this);
                 downloadThread.start();
-                lblImage.setIcon(new ImageIcon(Visualitzar.class.getClassLoader().getResource("resizedloader.gif")));
+                lblImage.setIcon(new ImageIcon(EspaiDetailsDialog.class.getClassLoader().getResource("resizedloader.gif")));
             }
         }
     }
