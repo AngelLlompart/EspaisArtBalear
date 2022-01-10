@@ -86,7 +86,6 @@ public class ConfirmPassword extends javax.swing.JDialog {
 
         lblCodi.setBackground(new java.awt.Color(0, 0, 0));
         lblCodi.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblCodi.setForeground(new java.awt.Color(0, 0, 0));
         lblCodi.setText("Introdueix codi:");
         lblCodi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -96,7 +95,6 @@ public class ConfirmPassword extends javax.swing.JDialog {
         jPanel1.add(lblCodi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
         lblConfirmContrasenya.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblConfirmContrasenya.setForeground(new java.awt.Color(0, 0, 0));
         lblConfirmContrasenya.setText("Confirma la contrasenya:");
         lblConfirmContrasenya.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -106,7 +104,6 @@ public class ConfirmPassword extends javax.swing.JDialog {
         jPanel1.add(lblConfirmContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
         lblContrasenya.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblContrasenya.setForeground(new java.awt.Color(0, 0, 0));
         lblContrasenya.setText("Introdueix nova contrasenya:");
         lblContrasenya.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -115,8 +112,6 @@ public class ConfirmPassword extends javax.swing.JDialog {
         });
         jPanel1.add(lblContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
-        txtConfirmContrasenya.setBackground(new java.awt.Color(255, 255, 255));
-        txtConfirmContrasenya.setForeground(new java.awt.Color(0, 0, 0));
         txtConfirmContrasenya.setBorder(null);
         txtConfirmContrasenya.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -130,9 +125,7 @@ public class ConfirmPassword extends javax.swing.JDialog {
         });
         jPanel1.add(txtConfirmContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 190, -1));
 
-        txtCodi.setBackground(new java.awt.Color(255, 255, 255));
         txtCodi.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        txtCodi.setForeground(new java.awt.Color(0, 0, 0));
         txtCodi.setBorder(null);
         txtCodi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -146,8 +139,6 @@ public class ConfirmPassword extends javax.swing.JDialog {
         });
         jPanel1.add(txtCodi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 190, -1));
 
-        txtContrasenya.setBackground(new java.awt.Color(255, 255, 255));
-        txtContrasenya.setForeground(new java.awt.Color(0, 0, 0));
         txtContrasenya.setBorder(null);
         txtContrasenya.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
