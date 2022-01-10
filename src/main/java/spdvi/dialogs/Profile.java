@@ -56,24 +56,20 @@ public class Profile extends javax.swing.JDialog {
 
         lblEmailTitle.setBackground(new java.awt.Color(0, 0, 0));
         lblEmailTitle.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblEmailTitle.setForeground(new java.awt.Color(0, 0, 0));
         lblEmailTitle.setText("Email: ");
-        jPanel1.add(lblEmailTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
+        jPanel1.add(lblEmailTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
 
         lblEmail.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblEmail.setForeground(new java.awt.Color(0, 0, 0));
         lblEmail.setText("email");
-        jPanel1.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, -1, -1));
+        jPanel1.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, -1, -1));
 
         lblUsernameTitle.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblUsernameTitle.setForeground(new java.awt.Color(0, 0, 0));
         lblUsernameTitle.setText("Username: ");
-        jPanel1.add(lblUsernameTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+        jPanel1.add(lblUsernameTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
 
         lblUsername.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblUsername.setForeground(new java.awt.Color(0, 0, 0));
         lblUsername.setText("username");
-        jPanel1.add(lblUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, -1, -1));
+        jPanel1.add(lblUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, -1, -1));
 
         btnChangePassword.setBackground(new java.awt.Color(0, 134, 190));
         btnChangePassword.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
@@ -108,7 +104,7 @@ public class Profile extends javax.swing.JDialog {
                 lblDeleteMouseExited(evt);
             }
         });
-        jPanel1.add(lblDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 80, 30));
+        jPanel1.add(lblDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 90, 30));
 
         btnChangeUser.setBackground(new java.awt.Color(0, 134, 190));
         btnChangeUser.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N

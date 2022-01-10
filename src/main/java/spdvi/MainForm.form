@@ -10,6 +10,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -426,7 +427,7 @@
                                           <Group type="102" alignment="1" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="txtImage" max="32767" attributes="0"/>
-                                                  <Component id="scrImages" pref="202" max="32767" attributes="0"/>
+                                                  <Component id="scrImages" pref="201" max="32767" attributes="0"/>
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
@@ -1392,7 +1393,7 @@
                                                           <Component id="lblImageIconModify" min="-2" pref="204" max="-2" attributes="0"/>
                                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                                       </Group>
-                                                      <Component id="scrImagesModify" pref="216" max="32767" attributes="0"/>
+                                                      <Component id="scrImagesModify" pref="215" max="32767" attributes="0"/>
                                                   </Group>
                                               </Group>
                                               <Group type="102" alignment="1" attributes="0">
