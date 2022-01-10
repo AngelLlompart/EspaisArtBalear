@@ -79,8 +79,7 @@ public class ForgotPassword extends javax.swing.JDialog {
 
         txtEmail.setBackground(new java.awt.Color(255, 255, 255));
         txtEmail.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        txtEmail.setForeground(new java.awt.Color(204, 204, 204));
-        txtEmail.setText("Ingresi el correu");
+        txtEmail.setForeground(new java.awt.Color(0, 0, 0));
         txtEmail.setBorder(null);
         txtEmail.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -130,19 +129,13 @@ public class ForgotPassword extends javax.swing.JDialog {
             PanelTextLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 110, Short.MAX_VALUE)
             .addGroup(PanelTextLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PanelTextLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblText)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(lblText, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
         );
         PanelTextLayout.setVerticalGroup(
             PanelTextLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 30, Short.MAX_VALUE)
             .addGroup(PanelTextLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PanelTextLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblText)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(lblText, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
         );
 
         jPanel1.add(PanelText, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 110, 30));
@@ -258,7 +251,7 @@ public class ForgotPassword extends javax.swing.JDialog {
     }//GEN-LAST:event_lblTextMouseClicked
 
     private void txtEmailMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEmailMousePressed
-        if (txtEmail.getText().equals("Ingresi el correu")) {
+        if (txtEmail.getText().equals("")) {
             txtEmail.setText("");
             txtEmail.setForeground(Color.black);
         }

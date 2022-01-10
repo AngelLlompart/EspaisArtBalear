@@ -39,6 +39,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.metal.MetalLookAndFeel;
 import spdvi.dialogs.Profile;
 import spdvi.helpers.ArgumentNullException;
 import spdvi.helpers.DataAccess;
@@ -2742,6 +2745,11 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                try {
+                    UIManager.setLookAndFeel(new MetalLookAndFeel());
+                } catch (UnsupportedLookAndFeelException ex) {
+                    ex.printStackTrace();
+                }
                 new MainForm().setVisible(true);
             }
         });

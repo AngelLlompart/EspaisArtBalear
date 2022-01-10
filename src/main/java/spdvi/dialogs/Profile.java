@@ -37,38 +37,64 @@ public class Profile extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         lblEmailTitle = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
         lblUsernameTitle = new javax.swing.JLabel();
         lblUsername = new javax.swing.JLabel();
-        btnChangeUsername = new javax.swing.JButton();
         btnChangePassword = new javax.swing.JButton();
         lblDelete = new javax.swing.JLabel();
+        btnChangeUser = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblEmailTitle.setBackground(new java.awt.Color(0, 0, 0));
+        lblEmailTitle.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblEmailTitle.setForeground(new java.awt.Color(0, 0, 0));
         lblEmailTitle.setText("Email: ");
+        jPanel1.add(lblEmailTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
+        lblEmail.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblEmail.setForeground(new java.awt.Color(0, 0, 0));
         lblEmail.setText("email");
+        jPanel1.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, -1, -1));
 
+        lblUsernameTitle.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblUsernameTitle.setForeground(new java.awt.Color(0, 0, 0));
         lblUsernameTitle.setText("Username: ");
+        jPanel1.add(lblUsernameTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
 
+        lblUsername.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblUsername.setForeground(new java.awt.Color(0, 0, 0));
         lblUsername.setText("username");
+        jPanel1.add(lblUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, -1, -1));
 
-        btnChangeUsername.setText("Change username");
-        btnChangeUsername.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChangeUsernameActionPerformed(evt);
+        btnChangePassword.setBackground(new java.awt.Color(0, 134, 190));
+        btnChangePassword.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        btnChangePassword.setForeground(new java.awt.Color(255, 255, 255));
+        btnChangePassword.setText("Change Password");
+        btnChangePassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnChangePasswordMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnChangePasswordMouseExited(evt);
             }
         });
-
-        btnChangePassword.setText("Change Password");
         btnChangePassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChangePasswordActionPerformed(evt);
             }
         });
+        jPanel1.add(btnChangePassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 260, 30));
 
+        lblDelete.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         lblDelete.setForeground(new java.awt.Color(255, 0, 0));
         lblDelete.setText("Delete User");
         lblDelete.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -82,64 +108,41 @@ public class Profile extends javax.swing.JDialog {
                 lblDeleteMouseExited(evt);
             }
         });
+        jPanel1.add(lblDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 80, 30));
+
+        btnChangeUser.setBackground(new java.awt.Color(0, 134, 190));
+        btnChangeUser.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        btnChangeUser.setForeground(new java.awt.Color(255, 255, 255));
+        btnChangeUser.setText("Change User");
+        btnChangeUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnChangeUserMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnChangeUserMouseExited(evt);
+            }
+        });
+        btnChangeUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangeUserActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnChangeUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 260, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnChangePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnChangeUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblUsernameTitle)
-                                    .addComponent(lblEmailTitle))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-                                    .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(169, 169, 169)
-                        .addComponent(lblDelete)))
-                .addContainerGap(64, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEmailTitle)
-                    .addComponent(lblEmail))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUsernameTitle)
-                    .addComponent(lblUsername))
-                .addGap(27, 27, 27)
-                .addComponent(btnChangeUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(btnChangePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(lblDelete)
-                .addGap(19, 19, 19))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnChangeUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeUsernameActionPerformed
-        UpdateUsername updateUsername = new UpdateUsername((Frame) this.getParent(), true);
-        updateUsername.setCurrentUser(currentUser);
-        updateUsername.getLblOldUsername().setText(currentUser.getUserName());
-        updateUsername.setVisible(true);
-        if(updateUsername.isChanged()){
-            lblUsername.setText(currentUser.getUserName());
-        }
-    }//GEN-LAST:event_btnChangeUsernameActionPerformed
 
     private void btnChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePasswordActionPerformed
         UpdatePassword updatePassword = new UpdatePassword((Frame) this.getParent(), true);
@@ -167,6 +170,32 @@ public class Profile extends javax.swing.JDialog {
             this.setVisible(false);
         }
     }//GEN-LAST:event_lblDeleteMouseClicked
+
+    private void btnChangePasswordMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChangePasswordMouseEntered
+        btnChangePassword.setBackground(new Color(0, 156, 223));
+    }//GEN-LAST:event_btnChangePasswordMouseEntered
+
+    private void btnChangePasswordMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChangePasswordMouseExited
+        btnChangePassword.setBackground(new Color(0, 134, 190));
+    }//GEN-LAST:event_btnChangePasswordMouseExited
+
+    private void btnChangeUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeUserActionPerformed
+        UpdateUsername updateUsername = new UpdateUsername((Frame) this.getParent(), true);
+        updateUsername.setCurrentUser(currentUser);
+        updateUsername.getLblOldUsername().setText(currentUser.getUserName());
+        updateUsername.setVisible(true);
+        if(updateUsername.isChanged()){
+            lblUsername.setText(currentUser.getUserName());
+        }
+    }//GEN-LAST:event_btnChangeUserActionPerformed
+
+    private void btnChangeUserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChangeUserMouseEntered
+        btnChangeUser.setBackground(new Color(0, 156, 223));
+    }//GEN-LAST:event_btnChangeUserMouseEntered
+
+    private void btnChangeUserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChangeUserMouseExited
+        btnChangeUser.setBackground(new Color(0, 134, 190));
+    }//GEN-LAST:event_btnChangeUserMouseExited
 
     public User getCurrentUser() {
         return currentUser;
@@ -241,7 +270,8 @@ public class Profile extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChangePassword;
-    private javax.swing.JButton btnChangeUsername;
+    private javax.swing.JButton btnChangeUser;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblDelete;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblEmailTitle;

@@ -72,12 +72,16 @@ public class Register extends javax.swing.JDialog {
 
         txtUsername.setBackground(new java.awt.Color(255, 255, 255));
         txtUsername.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        txtUsername.setForeground(new java.awt.Color(204, 204, 204));
-        txtUsername.setText("Ingresi usuari");
+        txtUsername.setForeground(new java.awt.Color(0, 0, 0));
         txtUsername.setBorder(null);
         txtUsername.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txtUsernameMousePressed(evt);
+            }
+        });
+        txtUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsernameActionPerformed(evt);
             }
         });
         jPanel1.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 150, -1));
@@ -89,8 +93,7 @@ public class Register extends javax.swing.JDialog {
 
         txtEmail.setBackground(new java.awt.Color(255, 255, 255));
         txtEmail.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        txtEmail.setForeground(new java.awt.Color(204, 204, 204));
-        txtEmail.setText("Ingresi correu");
+        txtEmail.setForeground(new java.awt.Color(0, 0, 0));
         txtEmail.setBorder(null);
         txtEmail.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -131,19 +134,13 @@ public class Register extends javax.swing.JDialog {
             PanelBotoRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 90, Short.MAX_VALUE)
             .addGroup(PanelBotoRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PanelBotoRegisterLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblTextRegister)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(lblTextRegister, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
         );
         PanelBotoRegisterLayout.setVerticalGroup(
             PanelBotoRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 20, Short.MAX_VALUE)
             .addGroup(PanelBotoRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PanelBotoRegisterLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblTextRegister)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(lblTextRegister, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
         );
 
         jPanel1.add(PanelBotoRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, 90, 20));
@@ -171,10 +168,7 @@ public class Register extends javax.swing.JDialog {
         PanelBotoCancel.setLayout(PanelBotoCancelLayout);
         PanelBotoCancelLayout.setHorizontalGroup(
             PanelBotoCancelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelBotoCancelLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(lblTextCancel)
-                .addContainerGap(25, Short.MAX_VALUE))
+            .addComponent(lblTextCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
         );
         PanelBotoCancelLayout.setVerticalGroup(
             PanelBotoCancelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,19 +202,13 @@ public class Register extends javax.swing.JDialog {
             PanelBotoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 90, Short.MAX_VALUE)
             .addGroup(PanelBotoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PanelBotoUserLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblTextUser)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(lblTextUser, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
         );
         PanelBotoUserLayout.setVerticalGroup(
             PanelBotoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 20, Short.MAX_VALUE)
             .addGroup(PanelBotoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PanelBotoUserLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblTextUser)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(lblTextUser, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
         );
 
         jPanel1.add(PanelBotoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, 90, 20));
@@ -292,23 +280,23 @@ public class Register extends javax.swing.JDialog {
     }
 
     private void txtUsernameMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsernameMousePressed
-        if (txtUsername.getText().equals("Ingresi usuari")) {
+        if (txtUsername.getText().equals("")) {
             txtUsername.setText("");
             txtUsername.setForeground(Color.black);
         }
-        if (txtEmail.getText().equals("Ingresi correu")) {
-            txtEmail.setText("Ingresi correu");
+        if (txtEmail.getText().equals("")) {
+            txtEmail.setText("");
             txtEmail.setForeground(Color.gray);
         }
     }//GEN-LAST:event_txtUsernameMousePressed
 
     private void txtEmailMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEmailMousePressed
-        if (txtEmail.getText().equals("Ingresi correu")) {
+        if (txtEmail.getText().equals("")) {
             txtEmail.setText("");
             txtEmail.setForeground(Color.black);
         }
-        if (txtUsername.getText().equals("Ingresi usuari")) {
-            txtUsername.setText("Ingresi usuari");
+        if (txtUsername.getText().equals("")) {
+            txtUsername.setText("");
             txtUsername.setForeground(Color.gray);
         }
     }//GEN-LAST:event_txtEmailMousePressed
@@ -365,6 +353,10 @@ public class Register extends javax.swing.JDialog {
     private void lblTextUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTextUserMouseClicked
         System.out.println(da.getUsers());
     }//GEN-LAST:event_lblTextUserMouseClicked
+
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsernameActionPerformed
 
     /**
      * @param args the command line arguments

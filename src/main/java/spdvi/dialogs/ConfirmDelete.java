@@ -5,6 +5,8 @@
  */
 package spdvi.dialogs;
 
+import java.awt.Color;
+
 /**
  *
  * @author lawde
@@ -28,68 +30,150 @@ public class ConfirmDelete extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnYes = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnNo = new javax.swing.JButton();
+        PanelBotoYes = new javax.swing.JPanel();
+        lblTextYes = new javax.swing.JLabel();
+        PanelBotoNo = new javax.swing.JPanel();
+        lblTextNo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        btnYes.setText("Yes");
-        btnYes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnYesActionPerformed(evt);
-            }
-        });
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Are you sure you want to delete your account?");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
-        btnNo.setText("No");
-        btnNo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNoActionPerformed(evt);
+        PanelBotoYes.setBackground(new java.awt.Color(0, 134, 190));
+
+        lblTextYes.setFont(new java.awt.Font("Roboto Medium", 1, 12)); // NOI18N
+        lblTextYes.setForeground(new java.awt.Color(255, 255, 255));
+        lblTextYes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTextYes.setText("Yes");
+        lblTextYes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblTextYes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblTextYesMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblTextYesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblTextYesMouseExited(evt);
             }
         });
+
+        javax.swing.GroupLayout PanelBotoYesLayout = new javax.swing.GroupLayout(PanelBotoYes);
+        PanelBotoYes.setLayout(PanelBotoYesLayout);
+        PanelBotoYesLayout.setHorizontalGroup(
+            PanelBotoYesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
+            .addGroup(PanelBotoYesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelBotoYesLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(lblTextYes, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        PanelBotoYesLayout.setVerticalGroup(
+            PanelBotoYesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+            .addGroup(PanelBotoYesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelBotoYesLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(lblTextYes, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        jPanel1.add(PanelBotoYes, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 70, 20));
+
+        PanelBotoNo.setBackground(new java.awt.Color(0, 134, 190));
+
+        lblTextNo.setFont(new java.awt.Font("Roboto Medium", 1, 12)); // NOI18N
+        lblTextNo.setForeground(new java.awt.Color(255, 255, 255));
+        lblTextNo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTextNo.setText("No");
+        lblTextNo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblTextNo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblTextNoMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblTextNoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblTextNoMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelBotoNoLayout = new javax.swing.GroupLayout(PanelBotoNo);
+        PanelBotoNo.setLayout(PanelBotoNoLayout);
+        PanelBotoNoLayout.setHorizontalGroup(
+            PanelBotoNoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
+            .addGroup(PanelBotoNoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelBotoNoLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(lblTextNo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        PanelBotoNoLayout.setVerticalGroup(
+            PanelBotoNoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+            .addGroup(PanelBotoNoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelBotoNoLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(lblTextNo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        jPanel1.add(PanelBotoNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 70, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnNo)
-                .addGap(65, 65, 65)
-                .addComponent(btnYes)
-                .addGap(86, 86, 86))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(jLabel1)
-                .addContainerGap(51, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnYes)
-                    .addComponent(btnNo))
-                .addGap(32, 32, 32))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoActionPerformed
-        confirm = false;
-        this.setVisible(false);
-    }//GEN-LAST:event_btnNoActionPerformed
+    private void lblTextYesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTextYesMouseEntered
+        PanelBotoYes.setBackground(new Color(0, 156, 223));
+    }//GEN-LAST:event_lblTextYesMouseEntered
 
-    private void btnYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYesActionPerformed
+    private void lblTextYesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTextYesMouseExited
+        PanelBotoNo.setBackground(new Color(0, 134, 190));
+    }//GEN-LAST:event_lblTextYesMouseExited
+
+    private void lblTextYesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTextYesMouseClicked
         confirm = true;
         this.setVisible(false);
-    }//GEN-LAST:event_btnYesActionPerformed
+    }//GEN-LAST:event_lblTextYesMouseClicked
+
+    private void lblTextNoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTextNoMouseEntered
+        PanelBotoNo.setBackground(new Color(0, 156, 223));
+    }//GEN-LAST:event_lblTextNoMouseEntered
+
+    private void lblTextNoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTextNoMouseExited
+        PanelBotoNo.setBackground(new Color(0, 134, 190));
+    }//GEN-LAST:event_lblTextNoMouseExited
+
+    private void lblTextNoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTextNoMouseClicked
+        confirm = false;
+        this.setVisible(false);
+    }//GEN-LAST:event_lblTextNoMouseClicked
 
     public boolean isConfirm() {
         return confirm;
@@ -143,8 +227,11 @@ public class ConfirmDelete extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnNo;
-    private javax.swing.JButton btnYes;
+    private javax.swing.JPanel PanelBotoNo;
+    private javax.swing.JPanel PanelBotoYes;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblTextNo;
+    private javax.swing.JLabel lblTextYes;
     // End of variables declaration//GEN-END:variables
 }

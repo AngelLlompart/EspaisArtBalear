@@ -5,6 +5,7 @@
  */
 package spdvi.dialogs;
 
+import java.awt.Color;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -35,91 +36,121 @@ public class UpdatePassword extends javax.swing.JDialog {
     private void initComponents() {
 
         jButton2 = new javax.swing.JButton();
-        lblCurrentPassword = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         pswCurrentPassword = new javax.swing.JPasswordField();
         lblNewPassword = new javax.swing.JLabel();
+        lblCurrentPassword = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         pswNewPassword = new javax.swing.JPasswordField();
         pswConfirmPassword = new javax.swing.JPasswordField();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
 
         jButton2.setText("jButton2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        lblCurrentPassword.setText("Current password: ");
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pswCurrentPassword.setBackground(new java.awt.Color(255, 255, 255));
+        pswCurrentPassword.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
+        pswCurrentPassword.setForeground(new java.awt.Color(0, 0, 0));
+        pswCurrentPassword.setBorder(null);
+        pswCurrentPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pswCurrentPasswordActionPerformed(evt);
+            }
+        });
+        jPanel1.add(pswCurrentPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 46, 220, 20));
+
+        lblNewPassword.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblNewPassword.setForeground(new java.awt.Color(0, 0, 0));
         lblNewPassword.setText("New password: ");
+        jPanel1.add(lblNewPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
+        lblCurrentPassword.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblCurrentPassword.setForeground(new java.awt.Color(0, 0, 0));
+        lblCurrentPassword.setText("Current password: ");
+        jPanel1.add(lblCurrentPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Confirm new password: ");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
+        pswNewPassword.setBackground(new java.awt.Color(255, 255, 255));
+        pswNewPassword.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
+        pswNewPassword.setForeground(new java.awt.Color(0, 0, 0));
+        pswNewPassword.setBorder(null);
+        jPanel1.add(pswNewPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 220, 20));
+
+        pswConfirmPassword.setBackground(new java.awt.Color(255, 255, 255));
+        pswConfirmPassword.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
+        pswConfirmPassword.setForeground(new java.awt.Color(0, 0, 0));
+        pswConfirmPassword.setBorder(null);
         pswConfirmPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pswConfirmPasswordActionPerformed(evt);
             }
         });
+        jPanel1.add(pswConfirmPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 220, 20));
 
+        btnSave.setBackground(new java.awt.Color(0, 134, 190));
+        btnSave.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        btnSave.setForeground(new java.awt.Color(255, 255, 255));
         btnSave.setText("Save changes");
+        btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSaveMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSaveMouseExited(evt);
+            }
+        });
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
             }
         });
+        jPanel1.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 130, 30));
 
+        btnCancel.setBackground(new java.awt.Color(0, 134, 190));
+        btnCancel.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        btnCancel.setForeground(new java.awt.Color(255, 255, 255));
         btnCancel.setText("Cancel");
+        btnCancel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCancelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCancelMouseExited(evt);
+            }
+        });
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
             }
         });
+        jPanel1.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 130, 30));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 220, 30));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 220, 30));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 220, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnCancel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSave))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(pswConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblCurrentPassword)
-                                .addComponent(lblNewPassword))
-                            .addGap(27, 27, 27)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(pswNewPassword)
-                                .addComponent(pswCurrentPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)))))
-                .addContainerGap(65, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCurrentPassword)
-                    .addComponent(pswCurrentPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNewPassword)
-                    .addComponent(pswNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(pswConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave)
-                    .addComponent(btnCancel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
         );
 
         pack();
@@ -170,6 +201,26 @@ public class UpdatePassword extends javax.swing.JDialog {
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void pswCurrentPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswCurrentPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pswCurrentPasswordActionPerformed
+
+    private void btnCancelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseEntered
+        btnCancel.setBackground(new Color(0, 156, 223));
+    }//GEN-LAST:event_btnCancelMouseEntered
+
+    private void btnCancelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseExited
+        btnCancel.setBackground(new Color(0, 134, 190));
+    }//GEN-LAST:event_btnCancelMouseExited
+
+    private void btnSaveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseEntered
+        btnSave.setBackground(new Color(0, 156, 223));
+    }//GEN-LAST:event_btnSaveMouseEntered
+
+    private void btnSaveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseExited
+        btnSave.setBackground(new Color(0, 134, 190));
+    }//GEN-LAST:event_btnSaveMouseExited
 
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
@@ -223,6 +274,10 @@ public class UpdatePassword extends javax.swing.JDialog {
     private javax.swing.JButton btnSave;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel lblCurrentPassword;
     private javax.swing.JLabel lblNewPassword;
     private javax.swing.JPasswordField pswConfirmPassword;

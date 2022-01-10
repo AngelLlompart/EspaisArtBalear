@@ -63,8 +63,7 @@ public class Login extends javax.swing.JDialog {
         lblRegistre = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        PanelBoto = new javax.swing.JPanel();
-        lblText = new javax.swing.JLabel();
+        btnLogin = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -87,9 +86,7 @@ public class Login extends javax.swing.JDialog {
 
         txtUserName.setBackground(new java.awt.Color(255, 255, 255));
         txtUserName.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        txtUserName.setForeground(new java.awt.Color(204, 204, 204));
-        txtUserName.setText("Ingresi usuari");
-        txtUserName.setToolTipText("");
+        txtUserName.setForeground(new java.awt.Color(0, 0, 0));
         txtUserName.setBorder(null);
         txtUserName.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -115,9 +112,7 @@ public class Login extends javax.swing.JDialog {
         jPanel1.add(lblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, -1, -1));
 
         txtPassword.setBackground(new java.awt.Color(255, 255, 255));
-        txtPassword.setForeground(new java.awt.Color(204, 204, 204));
-        txtPassword.setText("********");
-        txtPassword.setToolTipText("");
+        txtPassword.setForeground(new java.awt.Color(0, 0, 0));
         txtPassword.setBorder(null);
         txtPassword.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -180,47 +175,24 @@ public class Login extends javax.swing.JDialog {
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 160, 10));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 160, 20));
 
-        PanelBoto.setBackground(new java.awt.Color(0, 134, 190));
-
-        lblText.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
-        lblText.setForeground(new java.awt.Color(255, 255, 255));
-        lblText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblText.setText("LOGIN");
-        lblText.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblTextMouseClicked(evt);
-            }
+        btnLogin.setBackground(new java.awt.Color(0, 134, 190));
+        btnLogin.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        btnLogin.setForeground(new java.awt.Color(255, 255, 255));
+        btnLogin.setText("LOGIN");
+        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblTextMouseEntered(evt);
+                btnLoginMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblTextMouseExited(evt);
+                btnLoginMouseExited(evt);
             }
         });
-
-        javax.swing.GroupLayout PanelBotoLayout = new javax.swing.GroupLayout(PanelBoto);
-        PanelBoto.setLayout(PanelBotoLayout);
-        PanelBotoLayout.setHorizontalGroup(
-            PanelBotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-            .addGroup(PanelBotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PanelBotoLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblText)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        PanelBotoLayout.setVerticalGroup(
-            PanelBotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
-            .addGroup(PanelBotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PanelBotoLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblText)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-
-        jPanel1.add(PanelBoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, -1, 30));
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 100, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -295,15 +267,29 @@ public class Login extends javax.swing.JDialog {
         enterKey(evt);
     }//GEN-LAST:event_txtPasswordKeyPressed
 
-    private void lblTextMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTextMouseEntered
-        PanelBoto.setBackground(new Color(0, 156, 223));
-    }//GEN-LAST:event_lblTextMouseEntered
+    private void txtUserNameMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserNameMousePressed
+        if (txtUserName.getText().equals("")) {
+            txtUserName.setText("");
+            txtUserName.setForeground(Color.black);
+        }
+        if (String.valueOf(txtPassword.getPassword()).isEmpty()) {
+            txtPassword.setText("");
+            txtPassword.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_txtUserNameMousePressed
 
-    private void lblTextMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTextMouseExited
-        PanelBoto.setBackground(new Color(0, 134, 190));
-    }//GEN-LAST:event_lblTextMouseExited
+    private void txtPasswordMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPasswordMousePressed
+        if (String.valueOf(txtPassword.getPassword()).equals("")) {
+            txtPassword.setText("");
+            txtPassword.setForeground(Color.black);
+        }
+        if (txtUserName.getText().isEmpty()) {
+            txtUserName.setText("");
+            txtUserName.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_txtPasswordMousePressed
 
-    private void lblTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTextMouseClicked
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DataAccess da = new DataAccess();
         ArrayList<User> users = da.getUsers();
@@ -312,7 +298,7 @@ public class Login extends javax.swing.JDialog {
         for(User u: users){
             if(u.getUserName().equals(txtUserName.getText())){
                 userExists = true;
-                if(u.getPassword().equals(new String (txtPassword.getPassword()))){
+                if(u.getPassword().equals(encriptMD5)){
                     loginUser = u;
                     setVisible(false);
                 }else{
@@ -332,32 +318,19 @@ public class Login extends javax.swing.JDialog {
             JOptionPane.ERROR_MESSAGE);
         }
         this.setCursor(Cursor.getDefaultCursor());
-    }//GEN-LAST:event_lblTextMouseClicked
+    }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void txtUserNameMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserNameMousePressed
-        if (txtUserName.getText().equals("Ingresi usuari")) {
-            txtUserName.setText("");
-            txtUserName.setForeground(Color.black);
-        }
-        if (String.valueOf(txtPassword.getPassword()).isEmpty()) {
-            txtPassword.setText("********");
-            txtPassword.setForeground(Color.gray);
-        }
-    }//GEN-LAST:event_txtUserNameMousePressed
+    private void btnLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseEntered
+         btnLogin.setBackground(new Color(0, 156, 223));
+    }//GEN-LAST:event_btnLoginMouseEntered
 
-    private void txtPasswordMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPasswordMousePressed
-        if (String.valueOf(txtPassword.getPassword()).equals("********")) {
-            txtPassword.setText("");
-            txtPassword.setForeground(Color.black);
-        }
-        if (txtUserName.getText().isEmpty()) {
-            txtUserName.setText("Ingresi usuari");
-            txtUserName.setForeground(Color.gray);
-        }
-    }//GEN-LAST:event_txtPasswordMousePressed
+    private void btnLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseExited
+         btnLogin.setBackground(new Color(0, 134, 190));
+    }//GEN-LAST:event_btnLoginMouseExited
 
     private void enterKey(java.awt.event.KeyEvent evt){
         if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER){
+            btnLogin.doClick();
         }
     }
     
@@ -412,7 +385,7 @@ public class Login extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel PanelBoto;
+    private javax.swing.JButton btnLogin;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
@@ -420,7 +393,6 @@ public class Login extends javax.swing.JDialog {
     private javax.swing.JLabel lblForgotPassword;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblRegistre;
-    private javax.swing.JLabel lblText;
     private javax.swing.JLabel lblUserName;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUserName;

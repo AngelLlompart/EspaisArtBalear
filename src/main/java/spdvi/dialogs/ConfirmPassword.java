@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import org.apache.commons.codec.digest.DigestUtils;
 import spdvi.helpers.DataAccess;
 
 /**
@@ -77,7 +78,6 @@ public class ConfirmPassword extends javax.swing.JDialog {
         lblText = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setLocationByPlatform(true);
         setSize(new java.awt.Dimension(450, 250));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -116,7 +116,7 @@ public class ConfirmPassword extends javax.swing.JDialog {
         jPanel1.add(lblContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
         txtConfirmContrasenya.setBackground(new java.awt.Color(255, 255, 255));
-        txtConfirmContrasenya.setText("********");
+        txtConfirmContrasenya.setForeground(new java.awt.Color(0, 0, 0));
         txtConfirmContrasenya.setBorder(null);
         txtConfirmContrasenya.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -132,8 +132,7 @@ public class ConfirmPassword extends javax.swing.JDialog {
 
         txtCodi.setBackground(new java.awt.Color(255, 255, 255));
         txtCodi.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        txtCodi.setForeground(new java.awt.Color(204, 204, 204));
-        txtCodi.setText("Ingresi codi");
+        txtCodi.setForeground(new java.awt.Color(0, 0, 0));
         txtCodi.setBorder(null);
         txtCodi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -148,11 +147,16 @@ public class ConfirmPassword extends javax.swing.JDialog {
         jPanel1.add(txtCodi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 190, -1));
 
         txtContrasenya.setBackground(new java.awt.Color(255, 255, 255));
-        txtContrasenya.setText("********");
+        txtContrasenya.setForeground(new java.awt.Color(0, 0, 0));
         txtContrasenya.setBorder(null);
         txtContrasenya.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txtContrasenyaMousePressed(evt);
+            }
+        });
+        txtContrasenya.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtContrasenyaActionPerformed(evt);
             }
         });
         jPanel1.add(txtContrasenya, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 190, -1));
@@ -239,31 +243,31 @@ public class ConfirmPassword extends javax.swing.JDialog {
     }//GEN-LAST:event_lblTextMouseExited
 
     private void txtCodiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCodiMousePressed
-        if (txtCodi.getText().equals("Ingresi codi")) {
+        if (txtCodi.getText().equals("")) {
             txtCodi.setText("");
             txtCodi.setForeground(Color.black);
         }
         if (String.valueOf(txtContrasenya.getPassword()).isEmpty()) {
-            txtContrasenya.setText("********");
+            txtContrasenya.setText("");
             txtContrasenya.setForeground(Color.gray);
         }
         if (String.valueOf(txtConfirmContrasenya.getPassword()).isEmpty()) {
-            txtConfirmContrasenya.setText("********");
+            txtConfirmContrasenya.setText("");
             txtConfirmContrasenya.setForeground(Color.gray);
         }
     }//GEN-LAST:event_txtCodiMousePressed
 
     private void txtContrasenyaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContrasenyaMousePressed
-        if (String.valueOf(txtContrasenya.getPassword()).equals("********")) {
+        if (String.valueOf(txtContrasenya.getPassword()).equals("")) {
             txtContrasenya.setText("");
             txtContrasenya.setForeground(Color.black);
         }
         if (txtCodi.getText().isEmpty()) {
-            txtCodi.setText("Ingresi codi");
+            txtCodi.setText("");
             txtCodi.setForeground(Color.gray);
         }
         if (String.valueOf(txtConfirmContrasenya.getPassword()).isEmpty()) {
-            txtConfirmContrasenya.setText("********");
+            txtConfirmContrasenya.setText("");
             txtConfirmContrasenya.setForeground(Color.gray);
         }
     }//GEN-LAST:event_txtContrasenyaMousePressed
@@ -272,7 +276,7 @@ public class ConfirmPassword extends javax.swing.JDialog {
         String password = new String(txtContrasenya.getPassword());
 
         Pattern passwordRegEx = Pattern.compile("^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z]).*$");
-
+        String encriptMD5 = DigestUtils.md5Hex(new String (txtContrasenya.getPassword()));
         if (codi.equals(txtCodi.getText())) {
             if (txtCodi.getText() == "") {
                 JOptionPane.showMessageDialog(null, "El codi introduit no es correcte");
@@ -286,7 +290,7 @@ public class ConfirmPassword extends javax.swing.JDialog {
                 } else {
                     for (User u : users) {
                         if (u.getEmail().equals(email)) {
-                            da.updatePassword(new String(txtContrasenya.getPassword()), u.getUserName());
+                            da.updatePassword(encriptMD5, u.getUserName());
                         }
                     }
                     setVisible(false);
@@ -308,16 +312,16 @@ public class ConfirmPassword extends javax.swing.JDialog {
     }//GEN-LAST:event_lblTextMouseClicked
 
     private void txtConfirmContrasenyaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtConfirmContrasenyaMousePressed
-        if (String.valueOf(txtConfirmContrasenya.getPassword()).equals("********")) {
+        if (String.valueOf(txtConfirmContrasenya.getPassword()).equals("")) {
             txtConfirmContrasenya.setText("");
             txtConfirmContrasenya.setForeground(Color.black);
         }
         if (txtCodi.getText().isEmpty()) {
-            txtCodi.setText("Ingresi codi");
+            txtCodi.setText("");
             txtCodi.setForeground(Color.gray);
         }
         if (String.valueOf(txtContrasenya.getPassword()).isEmpty()) {
-            txtContrasenya.setText("********");
+            txtContrasenya.setText("");
             txtContrasenya.setForeground(Color.gray);
         }
     }//GEN-LAST:event_txtConfirmContrasenyaMousePressed
@@ -325,6 +329,10 @@ public class ConfirmPassword extends javax.swing.JDialog {
     private void txtCodiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodiActionPerformed
+
+    private void txtContrasenyaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenyaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtContrasenyaActionPerformed
 
     /**
      * @param args the command line arguments
