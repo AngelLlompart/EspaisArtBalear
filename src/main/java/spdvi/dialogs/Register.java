@@ -64,13 +64,10 @@ public class Register extends javax.swing.JDialog {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblUsername.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblUsername.setForeground(new java.awt.Color(0, 0, 0));
         lblUsername.setText("Username");
-        jPanel1.add(lblUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+        jPanel1.add(lblUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
-        txtUsername.setBackground(new java.awt.Color(255, 255, 255));
         txtUsername.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        txtUsername.setForeground(new java.awt.Color(0, 0, 0));
         txtUsername.setBorder(null);
         txtUsername.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -82,16 +79,13 @@ public class Register extends javax.swing.JDialog {
                 txtUsernameActionPerformed(evt);
             }
         });
-        jPanel1.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 180, -1));
+        jPanel1.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 180, -1));
 
         lblEmail.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblEmail.setForeground(new java.awt.Color(0, 0, 0));
         lblEmail.setText("Email");
-        jPanel1.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+        jPanel1.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
 
-        txtEmail.setBackground(new java.awt.Color(255, 255, 255));
         txtEmail.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        txtEmail.setForeground(new java.awt.Color(0, 0, 0));
         txtEmail.setBorder(null);
         txtEmail.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -103,9 +97,9 @@ public class Register extends javax.swing.JDialog {
                 txtEmailActionPerformed(evt);
             }
         });
-        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 180, -1));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 180, 10));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 180, 30));
+        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 180, -1));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 180, 10));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 180, 30));
 
         PanelBotoRegister.setBackground(new java.awt.Color(0, 134, 190));
         PanelBotoRegister.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -146,7 +140,7 @@ public class Register extends javax.swing.JDialog {
                 .addComponent(lblTextRegister, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
         );
 
-        jPanel1.add(PanelBotoRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 90, 30));
+        jPanel1.add(PanelBotoRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 90, 30));
 
         PanelBotoCancel.setBackground(new java.awt.Color(0, 134, 190));
 
@@ -182,17 +176,17 @@ public class Register extends javax.swing.JDialog {
                 .addComponent(lblTextCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
         );
 
-        jPanel1.add(PanelBotoCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 90, 30));
+        jPanel1.add(PanelBotoCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, 90, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
 
         pack();
