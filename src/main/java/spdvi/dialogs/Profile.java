@@ -63,7 +63,7 @@ public class Profile extends javax.swing.JDialog {
         lblEmail.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         lblEmail.setForeground(new java.awt.Color(0, 0, 0));
         lblEmail.setText("email");
-        jPanel1.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, -1, -1));
+        jPanel1.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 290, -1));
 
         lblUsernameTitle.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         lblUsernameTitle.setForeground(new java.awt.Color(0, 0, 0));
@@ -92,7 +92,7 @@ public class Profile extends javax.swing.JDialog {
                 btnChangePasswordActionPerformed(evt);
             }
         });
-        jPanel1.add(btnChangePassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 260, 30));
+        jPanel1.add(btnChangePassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 260, 30));
 
         lblDelete.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         lblDelete.setForeground(new java.awt.Color(255, 0, 0));
@@ -127,13 +127,13 @@ public class Profile extends javax.swing.JDialog {
                 btnChangeUserActionPerformed(evt);
             }
         });
-        jPanel1.add(btnChangeUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 260, 30));
+        jPanel1.add(btnChangeUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 260, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -36,28 +36,35 @@ public class UpdateUsername extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         lblOldUsernameTitle = new javax.swing.JLabel();
         lblOldUsername = new javax.swing.JLabel();
         lblNewUsername = new javax.swing.JLabel();
         txtNewUserName = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         lblOldUsernameTitle.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         lblOldUsernameTitle.setForeground(new java.awt.Color(0, 0, 0));
         lblOldUsernameTitle.setText("Old username: ");
+        jPanel1.add(lblOldUsernameTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         lblOldUsername.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         lblOldUsername.setForeground(new java.awt.Color(0, 0, 0));
         lblOldUsername.setText("old username");
+        jPanel1.add(lblOldUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
 
         lblNewUsername.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         lblNewUsername.setForeground(new java.awt.Color(0, 0, 0));
         lblNewUsername.setText("New username: ");
+        jPanel1.add(lblNewUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         txtNewUserName.setBackground(new java.awt.Color(255, 255, 255));
         txtNewUserName.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
@@ -68,6 +75,7 @@ public class UpdateUsername extends javax.swing.JDialog {
                 txtNewUserNameKeyPressed(evt);
             }
         });
+        jPanel1.add(txtNewUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 240, -1));
 
         btnSave.setBackground(new java.awt.Color(0, 134, 190));
         btnSave.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
@@ -86,6 +94,7 @@ public class UpdateUsername extends javax.swing.JDialog {
                 btnSaveActionPerformed(evt);
             }
         });
+        jPanel1.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, -1, -1));
 
         btnCancel.setBackground(new java.awt.Color(0, 134, 190));
         btnCancel.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
@@ -104,55 +113,18 @@ public class UpdateUsername extends javax.swing.JDialog {
                 btnCancelActionPerformed(evt);
             }
         });
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, -1, -1));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 240, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNewUsername)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGap(18, 18, 18)
-                            .addComponent(btnSave))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(lblOldUsernameTitle)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(lblOldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtNewUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addContainerGap(98, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblOldUsernameTitle)
-                    .addComponent(lblOldUsername))
-                .addGap(18, 18, 18)
-                .addComponent(lblNewUsername)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtNewUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
         );
 
         pack();

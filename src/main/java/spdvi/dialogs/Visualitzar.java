@@ -14,6 +14,7 @@ import com.azure.storage.blob.models.BlobItem;
 import com.azure.storage.blob.models.BlobRange;
 import com.azure.storage.blob.models.DownloadRetryOptions;
 import com.azure.storage.blob.specialized.BlockBlobClient;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -73,31 +74,12 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         lblImage = new javax.swing.JLabel();
-        btnNext = new javax.swing.JButton();
-        prgImage = new javax.swing.JProgressBar();
-        btnPrevious = new javax.swing.JButton();
-        lblTitol = new javax.swing.JLabel();
-        lblRegister = new javax.swing.JLabel();
-        lblComentaris = new javax.swing.JLabel();
-        scrComents = new javax.swing.JScrollPane();
-        lblDescripcions = new javax.swing.JLabel();
-        lblCat = new javax.swing.JLabel();
-        lblEsp = new javax.swing.JLabel();
-        lblEn = new javax.swing.JLabel();
-        txtComentari = new javax.swing.JTextField();
-        btnComentar = new javax.swing.JButton();
-        lblUser = new javax.swing.JLabel();
-        lblServeisTitle = new javax.swing.JLabel();
-        lblAdreca = new javax.swing.JLabel();
-        lblTipus = new javax.swing.JLabel();
-        lblModalitatsTitle = new javax.swing.JLabel();
-        scrEsp = new javax.swing.JScrollPane();
-        txaEsp = new javax.swing.JTextArea();
-        scrCat = new javax.swing.JScrollPane();
-        txaCat = new javax.swing.JTextArea();
-        scrEng = new javax.swing.JScrollPane();
-        txaEn = new javax.swing.JTextArea();
+        scrServeis = new javax.swing.JScrollPane();
+        txaServeis = new javax.swing.JTextArea();
+        scrModalitats = new javax.swing.JScrollPane();
+        txaModalitats = new javax.swing.JTextArea();
         pnlContacte = new javax.swing.JPanel();
         lblContacte = new javax.swing.JLabel();
         lblEmailTitle = new javax.swing.JLabel();
@@ -105,13 +87,33 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
         lblTelefonTitle = new javax.swing.JLabel();
         lblGestorTitle = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
-        lblWeb = new javax.swing.JLabel();
         lblGestor = new javax.swing.JLabel();
         lblTelefon = new javax.swing.JLabel();
-        scrModalitats = new javax.swing.JScrollPane();
-        txaModalitats = new javax.swing.JTextArea();
-        scrServeis = new javax.swing.JScrollPane();
-        txaServeis = new javax.swing.JTextArea();
+        lblWeb = new javax.swing.JLabel();
+        scrEng = new javax.swing.JScrollPane();
+        txaEn = new javax.swing.JTextArea();
+        scrCat = new javax.swing.JScrollPane();
+        txaCat = new javax.swing.JTextArea();
+        scrEsp = new javax.swing.JScrollPane();
+        txaEsp = new javax.swing.JTextArea();
+        lblModalitatsTitle = new javax.swing.JLabel();
+        lblTipus = new javax.swing.JLabel();
+        lblAdreca = new javax.swing.JLabel();
+        lblServeisTitle = new javax.swing.JLabel();
+        lblUser = new javax.swing.JLabel();
+        btnComentar = new javax.swing.JButton();
+        txtComentari = new javax.swing.JTextField();
+        lblEn = new javax.swing.JLabel();
+        lblEsp = new javax.swing.JLabel();
+        lblCat = new javax.swing.JLabel();
+        lblDescripcions = new javax.swing.JLabel();
+        scrComents = new javax.swing.JScrollPane();
+        lblComentaris = new javax.swing.JLabel();
+        lblRegister = new javax.swing.JLabel();
+        lblTitol = new javax.swing.JLabel();
+        btnPrevious = new javax.swing.JButton();
+        prgImage = new javax.swing.JProgressBar();
+        btnNext = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -120,120 +122,75 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         lblImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblImage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(lblImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 350, 240));
 
-        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/next.png"))); // NOI18N
-        btnNext.setBorder(null);
-        btnNext.setContentAreaFilled(false);
-        btnNext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNextActionPerformed(evt);
-            }
-        });
+        txaServeis.setEditable(false);
+        txaServeis.setBackground(new java.awt.Color(255, 255, 255));
+        txaServeis.setColumns(20);
+        txaServeis.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
+        txaServeis.setForeground(new java.awt.Color(0, 0, 0));
+        txaServeis.setLineWrap(true);
+        txaServeis.setRows(5);
+        txaServeis.setWrapStyleWord(true);
+        scrServeis.setViewportView(txaServeis);
 
-        prgImage.setStringPainted(true);
+        jPanel1.add(scrServeis, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, -1, 80));
 
-        btnPrevious.setIcon(new javax.swing.ImageIcon(getClass().getResource("/previous.png"))); // NOI18N
-        btnPrevious.setBorder(null);
-        btnPrevious.setContentAreaFilled(false);
-        btnPrevious.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPreviousActionPerformed(evt);
-            }
-        });
+        txaModalitats.setEditable(false);
+        txaModalitats.setBackground(new java.awt.Color(255, 255, 255));
+        txaModalitats.setColumns(20);
+        txaModalitats.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
+        txaModalitats.setForeground(new java.awt.Color(0, 0, 0));
+        txaModalitats.setLineWrap(true);
+        txaModalitats.setRows(5);
+        txaModalitats.setWrapStyleWord(true);
+        scrModalitats.setViewportView(txaModalitats);
 
-        lblTitol.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        lblTitol.setText("Titol");
+        jPanel1.add(scrModalitats, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, -1, 80));
 
-        lblRegister.setText("Registre");
+        pnlContacte.setBackground(new java.awt.Color(255, 255, 255));
 
-        lblComentaris.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        lblComentaris.setText("Comentaris");
-
-        lblDescripcions.setText("Descripcions: ");
-
-        lblCat.setText("Català");
-
-        lblEsp.setText("Español");
-
-        lblEn.setText("English");
-
-        txtComentari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtComentariActionPerformed(evt);
-            }
-        });
-        txtComentari.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtComentariKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtComentariKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtComentariKeyTyped(evt);
-            }
-        });
-
-        btnComentar.setText("Comentar");
-        btnComentar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnComentarActionPerformed(evt);
-            }
-        });
-
-        lblUser.setText("Usuari:");
-
-        lblServeisTitle.setText("Serveis:");
-
-        lblAdreca.setText("Adreça");
-
-        lblTipus.setText("Tipus");
-
-        lblModalitatsTitle.setText("Modalitats: ");
-
-        txaEsp.setEditable(false);
-        txaEsp.setColumns(20);
-        txaEsp.setLineWrap(true);
-        txaEsp.setRows(5);
-        txaEsp.setWrapStyleWord(true);
-        scrEsp.setViewportView(txaEsp);
-
-        txaCat.setEditable(false);
-        txaCat.setColumns(20);
-        txaCat.setLineWrap(true);
-        txaCat.setRows(5);
-        txaCat.setWrapStyleWord(true);
-        txaCat.setMaximumSize(new java.awt.Dimension(164, 94));
-        txaCat.setMinimumSize(new java.awt.Dimension(164, 94));
-        scrCat.setViewportView(txaCat);
-
-        txaEn.setEditable(false);
-        txaEn.setColumns(20);
-        txaEn.setLineWrap(true);
-        txaEn.setRows(5);
-        txaEn.setWrapStyleWord(true);
-        scrEng.setViewportView(txaEn);
-
+        lblContacte.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblContacte.setForeground(new java.awt.Color(0, 0, 0));
         lblContacte.setText("Contacte");
 
+        lblEmailTitle.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblEmailTitle.setForeground(new java.awt.Color(0, 0, 0));
         lblEmailTitle.setText("Email: ");
 
+        lblWebTitle.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblWebTitle.setForeground(new java.awt.Color(0, 0, 0));
         lblWebTitle.setText("Web: ");
 
+        lblTelefonTitle.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblTelefonTitle.setForeground(new java.awt.Color(0, 0, 0));
         lblTelefonTitle.setText("Telefon: ");
 
+        lblGestorTitle.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblGestorTitle.setForeground(new java.awt.Color(0, 0, 0));
         lblGestorTitle.setText("Gestor: ");
 
+        lblEmail.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblEmail.setForeground(new java.awt.Color(0, 0, 0));
         lblEmail.setText("email");
 
-        lblWeb.setText("web");
-
+        lblGestor.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblGestor.setForeground(new java.awt.Color(0, 0, 0));
         lblGestor.setText("gestor");
 
+        lblTelefon.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblTelefon.setForeground(new java.awt.Color(0, 0, 0));
         lblTelefon.setText("telefon");
+
+        lblWeb.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblWeb.setForeground(new java.awt.Color(0, 0, 0));
+        lblWeb.setText("web");
 
         javax.swing.GroupLayout pnlContacteLayout = new javax.swing.GroupLayout(pnlContacte);
         pnlContacte.setLayout(pnlContacteLayout);
@@ -241,25 +198,26 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
             pnlContacteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlContacteLayout.createSequentialGroup()
                 .addGroup(pnlContacteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlContacteLayout.createSequentialGroup()
+                        .addComponent(lblGestorTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblGestor, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlContacteLayout.createSequentialGroup()
-                        .addComponent(lblGestorTitle)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblGestor, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlContacteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlContacteLayout.createSequentialGroup()
-                            .addComponent(lblEmailTitle)
-                            .addGap(18, 18, 18)
-                            .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(pnlContacteLayout.createSequentialGroup()
+                        .addComponent(lblContacte)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlContacteLayout.createSequentialGroup()
+                        .addComponent(lblEmailTitle)
+                        .addGap(31, 31, 31)
+                        .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlContacteLayout.createSequentialGroup()
+                        .addGroup(pnlContacteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTelefonTitle)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblTelefon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlContacteLayout.createSequentialGroup()
-                            .addComponent(lblWebTitle)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(lblContacte))
-                .addGap(0, 20, Short.MAX_VALUE))
+                            .addComponent(lblWebTitle))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlContacteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTelefon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblWeb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(78, 78, 78))
         );
         pnlContacteLayout.setVerticalGroup(
             pnlContacteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,143 +243,185 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        txaModalitats.setEditable(false);
-        txaModalitats.setColumns(20);
-        txaModalitats.setLineWrap(true);
-        txaModalitats.setRows(5);
-        txaModalitats.setWrapStyleWord(true);
-        scrModalitats.setViewportView(txaModalitats);
+        jPanel1.add(pnlContacte, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 360, -1));
 
-        txaServeis.setEditable(false);
-        txaServeis.setColumns(20);
-        txaServeis.setLineWrap(true);
-        txaServeis.setRows(5);
-        txaServeis.setWrapStyleWord(true);
-        scrServeis.setViewportView(txaServeis);
+        txaEn.setEditable(false);
+        txaEn.setBackground(new java.awt.Color(255, 255, 255));
+        txaEn.setColumns(20);
+        txaEn.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
+        txaEn.setForeground(new java.awt.Color(0, 0, 0));
+        txaEn.setLineWrap(true);
+        txaEn.setRows(5);
+        txaEn.setWrapStyleWord(true);
+        scrEng.setViewportView(txaEn);
+
+        jPanel1.add(scrEng, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, 250, -1));
+
+        txaCat.setEditable(false);
+        txaCat.setBackground(new java.awt.Color(255, 255, 255));
+        txaCat.setColumns(20);
+        txaCat.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
+        txaCat.setForeground(new java.awt.Color(0, 0, 0));
+        txaCat.setLineWrap(true);
+        txaCat.setRows(5);
+        txaCat.setWrapStyleWord(true);
+        txaCat.setMaximumSize(new java.awt.Dimension(164, 94));
+        txaCat.setMinimumSize(new java.awt.Dimension(164, 94));
+        scrCat.setViewportView(txaCat);
+
+        jPanel1.add(scrCat, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
+
+        txaEsp.setEditable(false);
+        txaEsp.setBackground(new java.awt.Color(255, 255, 255));
+        txaEsp.setColumns(20);
+        txaEsp.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
+        txaEsp.setForeground(new java.awt.Color(0, 0, 0));
+        txaEsp.setLineWrap(true);
+        txaEsp.setRows(5);
+        txaEsp.setWrapStyleWord(true);
+        scrEsp.setViewportView(txaEsp);
+
+        jPanel1.add(scrEsp, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 200, -1, -1));
+
+        lblModalitatsTitle.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblModalitatsTitle.setForeground(new java.awt.Color(0, 0, 0));
+        lblModalitatsTitle.setText("Modalitats: ");
+        jPanel1.add(lblModalitatsTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 90, -1));
+
+        lblTipus.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblTipus.setForeground(new java.awt.Color(0, 0, 0));
+        lblTipus.setText("Tipus");
+        jPanel1.add(lblTipus, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 530, -1));
+
+        lblAdreca.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblAdreca.setForeground(new java.awt.Color(0, 0, 0));
+        lblAdreca.setText("Adreça");
+        jPanel1.add(lblAdreca, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 940, -1, -1));
+
+        lblServeisTitle.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblServeisTitle.setForeground(new java.awt.Color(0, 0, 0));
+        lblServeisTitle.setText("Serveis:");
+        jPanel1.add(lblServeisTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 60, -1));
+
+        lblUser.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblUser.setForeground(new java.awt.Color(0, 0, 0));
+        lblUser.setText("Usuari:");
+        jPanel1.add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 890, 100, 30));
+
+        btnComentar.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        btnComentar.setText("Comentar");
+        btnComentar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnComentarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnComentarMouseExited(evt);
+            }
+        });
+        btnComentar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComentarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnComentar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 890, 110, 30));
+
+        txtComentari.setBackground(new java.awt.Color(255, 255, 255));
+        txtComentari.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
+        txtComentari.setForeground(new java.awt.Color(0, 0, 0));
+        txtComentari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtComentariActionPerformed(evt);
+            }
+        });
+        txtComentari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtComentariKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtComentariKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtComentariKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtComentari, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 890, 570, 30));
+
+        lblEn.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblEn.setForeground(new java.awt.Color(0, 0, 0));
+        lblEn.setText("English");
+        jPanel1.add(lblEn, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 160, -1, -1));
+
+        lblEsp.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblEsp.setForeground(new java.awt.Color(0, 0, 0));
+        lblEsp.setText("Español");
+        jPanel1.add(lblEsp, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, -1, -1));
+
+        lblCat.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblCat.setForeground(new java.awt.Color(0, 0, 0));
+        lblCat.setText("Català");
+        jPanel1.add(lblCat, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
+
+        lblDescripcions.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblDescripcions.setForeground(new java.awt.Color(0, 0, 0));
+        lblDescripcions.setText("Descripcions: ");
+        jPanel1.add(lblDescripcions, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+
+        scrComents.setBackground(new java.awt.Color(255, 255, 255));
+        scrComents.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(scrComents, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 740, 800, 140));
+
+        lblComentaris.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblComentaris.setForeground(new java.awt.Color(0, 0, 0));
+        lblComentaris.setText("Comentaris");
+        jPanel1.add(lblComentaris, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 710, 850, -1));
+
+        lblRegister.setBackground(new java.awt.Color(0, 0, 0));
+        lblRegister.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        lblRegister.setForeground(new java.awt.Color(0, 0, 0));
+        lblRegister.setText("Registre");
+        jPanel1.add(lblRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        lblTitol.setFont(new java.awt.Font("Roboto Light", 1, 24)); // NOI18N
+        lblTitol.setForeground(new java.awt.Color(0, 0, 0));
+        lblTitol.setText("Titol");
+        jPanel1.add(lblTitol, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+
+        btnPrevious.setBackground(new java.awt.Color(255, 255, 255));
+        btnPrevious.setForeground(new java.awt.Color(255, 255, 255));
+        btnPrevious.setIcon(new javax.swing.ImageIcon(getClass().getResource("/previous.png"))); // NOI18N
+        btnPrevious.setBorder(null);
+        btnPrevious.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreviousActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnPrevious, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 480, -1, -1));
+
+        prgImage.setBackground(new java.awt.Color(255, 255, 255));
+        prgImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        prgImage.setStringPainted(true);
+        jPanel1.add(prgImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 650, 220, 30));
+
+        btnNext.setBackground(new java.awt.Color(255, 255, 255));
+        btnNext.setForeground(new java.awt.Color(255, 255, 255));
+        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/next.png"))); // NOI18N
+        btnNext.setBorder(null);
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnNext, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 480, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTipus)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(scrCat, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblCat))
-                                .addGap(28, 28, 28)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(scrEsp, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblEsp)))
-                            .addComponent(lblRegister)
-                            .addComponent(lblTitol, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblComentaris)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblAdreca, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblDescripcions)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(lblUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(txtComentari, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(btnComentar))
-                                        .addComponent(scrComents, javax.swing.GroupLayout.PREFERRED_SIZE, 701, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblEn)
-                                    .addComponent(scrEng, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(scrServeis, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(pnlContacte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblModalitatsTitle)
-                                            .addComponent(lblServeisTitle)
-                                            .addComponent(scrModalitats, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnPrevious)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnNext))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(61, 61, 61)
-                                        .addComponent(prgImage, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 33, Short.MAX_VALUE))))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(lblRegister)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblTitol, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(lblTipus)
-                .addGap(18, 18, 18)
-                .addComponent(lblDescripcions)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblEsp)
-                        .addComponent(lblCat))
-                    .addComponent(lblEn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(scrEsp)
-                    .addComponent(scrEng)
-                    .addComponent(scrCat))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(pnlContacte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblModalitatsTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(scrModalitats, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblServeisTitle))
-                            .addComponent(btnPrevious))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(scrServeis, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                        .addComponent(lblComentaris)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(prgImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(46, 46, 46))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnNext)
-                                .addGap(99, 99, 99)))))
-                .addComponent(scrComents, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(lblUser))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtComentari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnComentar)))
-                .addGap(18, 18, 18)
-                .addComponent(lblAdreca)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1146, Short.MAX_VALUE)
         );
 
         pack();
@@ -496,6 +496,14 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
             btnComentar.setEnabled(true);
         }
     }//GEN-LAST:event_txtComentariKeyReleased
+
+    private void btnComentarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComentarMouseEntered
+       
+    }//GEN-LAST:event_btnComentarMouseEntered
+
+    private void btnComentarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComentarMouseExited
+       
+    }//GEN-LAST:event_btnComentarMouseExited
 
     @Override
     public void run() {
@@ -694,6 +702,7 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
     private javax.swing.JButton btnComentar;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPrevious;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblAdreca;
     private javax.swing.JLabel lblCat;
     private javax.swing.JLabel lblComentaris;
