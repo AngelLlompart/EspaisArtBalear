@@ -109,7 +109,7 @@ public class UpdatePassword extends javax.swing.JDialog {
                 btnSaveActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, -1, 30));
+        jPanel1.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, -1, 30));
 
         btnCancel.setBackground(new java.awt.Color(0, 134, 190));
         btnCancel.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
@@ -128,7 +128,7 @@ public class UpdatePassword extends javax.swing.JDialog {
                 btnCancelActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 130, 30));
+        jPanel1.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, 130, 30));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 220, 30));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 220, 30));
         jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 220, 20));

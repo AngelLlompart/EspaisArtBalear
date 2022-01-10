@@ -61,7 +61,7 @@ public class Profile extends javax.swing.JDialog {
 
         lblEmail.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         lblEmail.setText("email");
-        jPanel1.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, -1, -1));
+        jPanel1.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 240, -1));
 
         lblUsernameTitle.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         lblUsernameTitle.setText("Username: ");
@@ -69,7 +69,7 @@ public class Profile extends javax.swing.JDialog {
 
         lblUsername.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         lblUsername.setText("username");
-        jPanel1.add(lblUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, -1, -1));
+        jPanel1.add(lblUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 240, -1));
 
         btnChangePassword.setBackground(new java.awt.Color(0, 134, 190));
         btnChangePassword.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
@@ -104,7 +104,7 @@ public class Profile extends javax.swing.JDialog {
                 lblDeleteMouseExited(evt);
             }
         });
-        jPanel1.add(lblDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 90, 30));
+        jPanel1.add(lblDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 90, 30));
 
         btnChangeUser.setBackground(new java.awt.Color(0, 134, 190));
         btnChangeUser.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
@@ -129,7 +129,7 @@ public class Profile extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
