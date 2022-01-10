@@ -131,10 +131,8 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
         jPanel1.add(lblImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 350, 240));
 
         txaServeis.setEditable(false);
-        txaServeis.setBackground(new java.awt.Color(255, 255, 255));
         txaServeis.setColumns(20);
         txaServeis.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        txaServeis.setForeground(new java.awt.Color(0, 0, 0));
         txaServeis.setLineWrap(true);
         txaServeis.setRows(5);
         txaServeis.setWrapStyleWord(true);
@@ -143,10 +141,8 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
         jPanel1.add(scrServeis, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, -1, 80));
 
         txaModalitats.setEditable(false);
-        txaModalitats.setBackground(new java.awt.Color(255, 255, 255));
         txaModalitats.setColumns(20);
         txaModalitats.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        txaModalitats.setForeground(new java.awt.Color(0, 0, 0));
         txaModalitats.setLineWrap(true);
         txaModalitats.setRows(5);
         txaModalitats.setWrapStyleWord(true);
@@ -157,39 +153,30 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
         pnlContacte.setBackground(new java.awt.Color(255, 255, 255));
 
         lblContacte.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblContacte.setForeground(new java.awt.Color(0, 0, 0));
         lblContacte.setText("Contacte");
 
         lblEmailTitle.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblEmailTitle.setForeground(new java.awt.Color(0, 0, 0));
         lblEmailTitle.setText("Email: ");
 
         lblWebTitle.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblWebTitle.setForeground(new java.awt.Color(0, 0, 0));
         lblWebTitle.setText("Web: ");
 
         lblTelefonTitle.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblTelefonTitle.setForeground(new java.awt.Color(0, 0, 0));
         lblTelefonTitle.setText("Telefon: ");
 
         lblGestorTitle.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblGestorTitle.setForeground(new java.awt.Color(0, 0, 0));
         lblGestorTitle.setText("Gestor: ");
 
         lblEmail.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblEmail.setForeground(new java.awt.Color(0, 0, 0));
         lblEmail.setText("email");
 
         lblGestor.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblGestor.setForeground(new java.awt.Color(0, 0, 0));
         lblGestor.setText("gestor");
 
         lblTelefon.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblTelefon.setForeground(new java.awt.Color(0, 0, 0));
         lblTelefon.setText("telefon");
 
         lblWeb.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblWeb.setForeground(new java.awt.Color(0, 0, 0));
         lblWeb.setText("web");
 
         javax.swing.GroupLayout pnlContacteLayout = new javax.swing.GroupLayout(pnlContacte);
@@ -198,26 +185,26 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
             pnlContacteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlContacteLayout.createSequentialGroup()
                 .addGroup(pnlContacteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlContacteLayout.createSequentialGroup()
-                        .addComponent(lblGestorTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblGestor, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlContacteLayout.createSequentialGroup()
-                        .addComponent(lblContacte)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnlContacteLayout.createSequentialGroup()
-                        .addComponent(lblEmailTitle)
-                        .addGap(31, 31, 31)
-                        .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlContacteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlContacteLayout.createSequentialGroup()
+                            .addGroup(pnlContacteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblTelefonTitle)
+                                .addComponent(lblWebTitle))
+                            .addGap(18, 18, Short.MAX_VALUE))
+                        .addGroup(pnlContacteLayout.createSequentialGroup()
+                            .addComponent(lblGestorTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGap(1, 1, 1)))
                     .addGroup(pnlContacteLayout.createSequentialGroup()
                         .addGroup(pnlContacteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTelefonTitle)
-                            .addComponent(lblWebTitle))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlContacteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTelefon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblWeb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(78, 78, 78))
+                            .addComponent(lblContacte)
+                            .addComponent(lblEmailTitle))
+                        .addGap(21, 21, 21)))
+                .addGroup(pnlContacteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lblWeb, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTelefon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblGestor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlContacteLayout.setVerticalGroup(
             pnlContacteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,68 +230,64 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jPanel1.add(pnlContacte, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 360, -1));
+        jPanel1.add(pnlContacte, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 300, -1));
+
+        scrEng.setMaximumSize(new java.awt.Dimension(226, 86));
+        scrEng.setMinimumSize(new java.awt.Dimension(226, 86));
 
         txaEn.setEditable(false);
-        txaEn.setBackground(new java.awt.Color(255, 255, 255));
         txaEn.setColumns(20);
         txaEn.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        txaEn.setForeground(new java.awt.Color(0, 0, 0));
         txaEn.setLineWrap(true);
         txaEn.setRows(5);
         txaEn.setWrapStyleWord(true);
+        txaEn.setMaximumSize(new java.awt.Dimension(224, 84));
+        txaEn.setMinimumSize(new java.awt.Dimension(224, 84));
         scrEng.setViewportView(txaEn);
 
-        jPanel1.add(scrEng, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, 250, -1));
+        jPanel1.add(scrEng, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, -1, -1));
 
         txaCat.setEditable(false);
-        txaCat.setBackground(new java.awt.Color(255, 255, 255));
         txaCat.setColumns(20);
         txaCat.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        txaCat.setForeground(new java.awt.Color(0, 0, 0));
         txaCat.setLineWrap(true);
         txaCat.setRows(5);
         txaCat.setWrapStyleWord(true);
-        txaCat.setMaximumSize(new java.awt.Dimension(164, 94));
-        txaCat.setMinimumSize(new java.awt.Dimension(164, 94));
+        txaCat.setMaximumSize(new java.awt.Dimension(224, 84));
+        txaCat.setMinimumSize(new java.awt.Dimension(224, 84));
         scrCat.setViewportView(txaCat);
 
         jPanel1.add(scrCat, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
         txaEsp.setEditable(false);
-        txaEsp.setBackground(new java.awt.Color(255, 255, 255));
         txaEsp.setColumns(20);
         txaEsp.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        txaEsp.setForeground(new java.awt.Color(0, 0, 0));
         txaEsp.setLineWrap(true);
         txaEsp.setRows(5);
         txaEsp.setWrapStyleWord(true);
+        txaEsp.setMaximumSize(new java.awt.Dimension(224, 84));
+        txaEsp.setMinimumSize(new java.awt.Dimension(224, 84));
         scrEsp.setViewportView(txaEsp);
 
         jPanel1.add(scrEsp, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 200, -1, -1));
 
         lblModalitatsTitle.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblModalitatsTitle.setForeground(new java.awt.Color(0, 0, 0));
         lblModalitatsTitle.setText("Modalitats: ");
         jPanel1.add(lblModalitatsTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 90, -1));
 
         lblTipus.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblTipus.setForeground(new java.awt.Color(0, 0, 0));
         lblTipus.setText("Tipus");
-        jPanel1.add(lblTipus, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 530, -1));
+        jPanel1.add(lblTipus, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 150, -1));
 
         lblAdreca.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblAdreca.setForeground(new java.awt.Color(0, 0, 0));
         lblAdreca.setText("Adreça");
         jPanel1.add(lblAdreca, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 940, -1, -1));
 
         lblServeisTitle.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblServeisTitle.setForeground(new java.awt.Color(0, 0, 0));
         lblServeisTitle.setText("Serveis:");
         jPanel1.add(lblServeisTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 60, -1));
 
         lblUser.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblUser.setForeground(new java.awt.Color(0, 0, 0));
         lblUser.setText("Usuari:");
         jPanel1.add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 890, 100, 30));
 
@@ -325,9 +308,7 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
         });
         jPanel1.add(btnComentar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 890, 110, 30));
 
-        txtComentari.setBackground(new java.awt.Color(255, 255, 255));
         txtComentari.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        txtComentari.setForeground(new java.awt.Color(0, 0, 0));
         txtComentari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtComentariActionPerformed(evt);
@@ -347,44 +328,36 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
         jPanel1.add(txtComentari, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 890, 570, 30));
 
         lblEn.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblEn.setForeground(new java.awt.Color(0, 0, 0));
         lblEn.setText("English");
         jPanel1.add(lblEn, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 160, -1, -1));
 
         lblEsp.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblEsp.setForeground(new java.awt.Color(0, 0, 0));
         lblEsp.setText("Español");
         jPanel1.add(lblEsp, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, -1, -1));
 
         lblCat.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblCat.setForeground(new java.awt.Color(0, 0, 0));
         lblCat.setText("Català");
         jPanel1.add(lblCat, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
         lblDescripcions.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblDescripcions.setForeground(new java.awt.Color(0, 0, 0));
         lblDescripcions.setText("Descripcions: ");
-        jPanel1.add(lblDescripcions, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+        jPanel1.add(lblDescripcions, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
         scrComents.setBackground(new java.awt.Color(255, 255, 255));
-        scrComents.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(scrComents, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 740, 800, 140));
+        jPanel1.add(scrComents, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 730, 800, 150));
 
         lblComentaris.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblComentaris.setForeground(new java.awt.Color(0, 0, 0));
         lblComentaris.setText("Comentaris");
-        jPanel1.add(lblComentaris, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 710, 850, -1));
+        jPanel1.add(lblComentaris, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 710, 140, -1));
 
         lblRegister.setBackground(new java.awt.Color(0, 0, 0));
         lblRegister.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblRegister.setForeground(new java.awt.Color(0, 0, 0));
         lblRegister.setText("Registre");
-        jPanel1.add(lblRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        jPanel1.add(lblRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 150, -1));
 
         lblTitol.setFont(new java.awt.Font("Roboto Light", 1, 24)); // NOI18N
-        lblTitol.setForeground(new java.awt.Color(0, 0, 0));
         lblTitol.setText("Titol");
-        jPanel1.add(lblTitol, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+        jPanel1.add(lblTitol, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 790, -1));
 
         btnPrevious.setBackground(new java.awt.Color(255, 255, 255));
         btnPrevious.setForeground(new java.awt.Color(255, 255, 255));
@@ -400,7 +373,7 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
         prgImage.setBackground(new java.awt.Color(255, 255, 255));
         prgImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         prgImage.setStringPainted(true);
-        jPanel1.add(prgImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 650, 220, 30));
+        jPanel1.add(prgImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 630, 220, 30));
 
         btnNext.setBackground(new java.awt.Color(255, 255, 255));
         btnNext.setForeground(new java.awt.Color(255, 255, 255));
@@ -421,7 +394,7 @@ public class Visualitzar extends javax.swing.JDialog implements Runnable{
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1146, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 993, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

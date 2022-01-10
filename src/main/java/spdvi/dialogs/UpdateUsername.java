@@ -52,30 +52,25 @@ public class UpdateUsername extends javax.swing.JDialog {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblOldUsernameTitle.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblOldUsernameTitle.setForeground(new java.awt.Color(0, 0, 0));
         lblOldUsernameTitle.setText("Old username: ");
         jPanel1.add(lblOldUsernameTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         lblOldUsername.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblOldUsername.setForeground(new java.awt.Color(0, 0, 0));
         lblOldUsername.setText("old username");
         jPanel1.add(lblOldUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
 
         lblNewUsername.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblNewUsername.setForeground(new java.awt.Color(0, 0, 0));
         lblNewUsername.setText("New username: ");
         jPanel1.add(lblNewUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
-        txtNewUserName.setBackground(new java.awt.Color(255, 255, 255));
         txtNewUserName.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
-        txtNewUserName.setForeground(new java.awt.Color(0, 0, 0));
         txtNewUserName.setBorder(null);
         txtNewUserName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtNewUserNameKeyPressed(evt);
             }
         });
-        jPanel1.add(txtNewUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 240, -1));
+        jPanel1.add(txtNewUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 240, -1));
 
         btnSave.setBackground(new java.awt.Color(0, 134, 190));
         btnSave.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
@@ -94,7 +89,7 @@ public class UpdateUsername extends javax.swing.JDialog {
                 btnSaveActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, -1, -1));
+        jPanel1.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 160, 30));
 
         btnCancel.setBackground(new java.awt.Color(0, 134, 190));
         btnCancel.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
@@ -113,8 +108,8 @@ public class UpdateUsername extends javax.swing.JDialog {
                 btnCancelActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, -1, -1));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 240, 20));
+        jPanel1.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 160, 30));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 240, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

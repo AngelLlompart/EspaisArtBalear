@@ -58,9 +58,7 @@ public class UpdatePassword extends javax.swing.JDialog {
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pswCurrentPassword.setBackground(new java.awt.Color(255, 255, 255));
         pswCurrentPassword.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        pswCurrentPassword.setForeground(new java.awt.Color(0, 0, 0));
         pswCurrentPassword.setBorder(null);
         pswCurrentPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,29 +68,22 @@ public class UpdatePassword extends javax.swing.JDialog {
         jPanel1.add(pswCurrentPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 46, 220, 20));
 
         lblNewPassword.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblNewPassword.setForeground(new java.awt.Color(0, 0, 0));
         lblNewPassword.setText("New password: ");
         jPanel1.add(lblNewPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         lblCurrentPassword.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        lblCurrentPassword.setForeground(new java.awt.Color(0, 0, 0));
         lblCurrentPassword.setText("Current password: ");
         jPanel1.add(lblCurrentPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Confirm new password: ");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
-        pswNewPassword.setBackground(new java.awt.Color(255, 255, 255));
         pswNewPassword.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        pswNewPassword.setForeground(new java.awt.Color(0, 0, 0));
         pswNewPassword.setBorder(null);
         jPanel1.add(pswNewPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 220, 20));
 
-        pswConfirmPassword.setBackground(new java.awt.Color(255, 255, 255));
         pswConfirmPassword.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        pswConfirmPassword.setForeground(new java.awt.Color(0, 0, 0));
         pswConfirmPassword.setBorder(null);
         pswConfirmPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,7 +109,7 @@ public class UpdatePassword extends javax.swing.JDialog {
                 btnSaveActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 130, 30));
+        jPanel1.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, -1, 30));
 
         btnCancel.setBackground(new java.awt.Color(0, 134, 190));
         btnCancel.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
@@ -137,7 +128,7 @@ public class UpdatePassword extends javax.swing.JDialog {
                 btnCancelActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, 130, 30));
+        jPanel1.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, 130, 30));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 220, 30));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 220, 30));
         jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 220, 20));

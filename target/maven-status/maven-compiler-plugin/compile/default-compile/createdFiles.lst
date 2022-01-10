@@ -16,7 +16,6 @@ spdvi\MainForm$2.class
 spdvi\MainForm$64.class
 spdvi\MainForm$44.class
 spdvi\MainForm$54.class
-spdvi\dialogs\Visualitzar$7$1.class
 spdvi\MainForm$47.class
 spdvi\MainForm$57.class
 spdvi\MainForm$67.class
@@ -31,6 +30,7 @@ spdvi\MainForm$41.class
 spdvi\MainForm$61.class
 spdvi\dialogs\ConfirmPassword$5.class
 spdvi\dialogs\Login$5.class
+spdvi\dialogs\Visualitzar$8.class
 spdvi\dialogs\Register$8.class
 spdvi\dialogs\ConfirmPassword$2.class
 spdvi\dialogs\Login$2.class
@@ -53,7 +53,6 @@ spdvi\dialogs\Register$7.class
 spdvi\dialogs\UpdatePassword$6.class
 spdvi\MainForm$7.class
 spdvi\dialogs\Profile$3.class
-spdvi\dialogs\Register$9$1.class
 spdvi\dialogs\UpdatePassword$7.class
 spdvi\MainForm$43.class
 spdvi\dialogs\ConfirmPassword$3.class
@@ -75,7 +74,6 @@ spdvi\MainForm$38.class
 spdvi\dialogs\ForgotPassword$1.class
 spdvi\dialogs\Login.class
 spdvi\MainForm$6.class
-spdvi\dialogs\Register$9.class
 spdvi\dialogs\ConfirmPassword$4.class
 spdvi\dialogs\Profile$1.class
 spdvi\dialogs\ConfirmDelete.class
@@ -87,6 +85,7 @@ spdvi\dialogs\Login$6.class
 spdvi\dialogs\ConfirmDelete$1.class
 spdvi\pojos\User.class
 spdvi\dialogs\Login$10.class
+spdvi\dialogs\Register$8$1.class
 spdvi\MainForm$68.class
 spdvi\MainForm$33.class
 spdvi\dialogs\Visualitzar$1.class
@@ -128,6 +127,7 @@ spdvi\MainForm$52.class
 spdvi\helpers\SendEmail.class
 spdvi\MainForm$62.class
 spdvi\MainForm$22.class
+spdvi\dialogs\Visualitzar$8$1.class
 spdvi\dialogs\UpdatePassword$3.class
 spdvi\dialogs\Login$12.class
 spdvi\dialogs\Profile$6.class
