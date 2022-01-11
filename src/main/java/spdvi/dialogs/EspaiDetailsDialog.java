@@ -33,6 +33,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JTextArea;
@@ -114,6 +115,7 @@ public class EspaiDetailsDialog extends javax.swing.JDialog implements Runnable{
         btnPrevious = new javax.swing.JButton();
         prgImage = new javax.swing.JProgressBar();
         btnNext = new javax.swing.JButton();
+        btnBorrarComentari = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -386,6 +388,15 @@ public class EspaiDetailsDialog extends javax.swing.JDialog implements Runnable{
         });
         jPanel1.add(btnNext, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 480, -1, -1));
 
+        btnBorrarComentari.setFont(btnComentar.getFont());
+        btnBorrarComentari.setText("Borrar");
+        btnBorrarComentari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarComentariActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBorrarComentari, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 930, 110, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -479,6 +490,15 @@ public class EspaiDetailsDialog extends javax.swing.JDialog implements Runnable{
     private void btnComentarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComentarMouseExited
        
     }//GEN-LAST:event_btnComentarMouseExited
+
+    private void btnBorrarComentariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarComentariActionPerformed
+        if(lstComents.getSelectedValue() != null){
+            //lstComents.remove(lstComents.getSelectedIndex());
+            DataAccess da = new DataAccess();
+            da.deleteComentari(lstComents.getSelectedValue());
+            updateComentarisView(da);
+        }
+    }//GEN-LAST:event_btnBorrarComentariActionPerformed
 
     @Override
     public void run() {
@@ -629,6 +649,14 @@ public class EspaiDetailsDialog extends javax.swing.JDialog implements Runnable{
     public void setTxaEsp(JTextArea txaEsp) {
         this.txaEsp = txaEsp;
     }
+
+    public JButton getBtnBorrarComentari() {
+        return btnBorrarComentari;
+    }
+
+    public void setBtnBorrarComentari(JButton btnBorrarComentari) {
+        this.btnBorrarComentari = btnBorrarComentari;
+    }
     
     
     /**
@@ -677,6 +705,7 @@ public class EspaiDetailsDialog extends javax.swing.JDialog implements Runnable{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBorrarComentari;
     private javax.swing.JButton btnComentar;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPrevious;

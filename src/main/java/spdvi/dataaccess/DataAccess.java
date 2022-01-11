@@ -520,4 +520,19 @@ public class DataAccess {
         }
         return result;
     }
+    
+    public int deleteComentari(Comentari comentari){
+        int result = 0;
+        try (Connection connection = getConnection();) {
+            PreparedStatement updateStatement = connection.prepareStatement("DELETE dbo.[Comentari] where Usuari=? AND Espai=? AND Data=? AND Hora=?");
+            updateStatement.setString(1, comentari.getEmail());
+            updateStatement.setString(2, comentari.getEspai());
+            updateStatement.setDate(3, Date.valueOf(comentari.getData()));
+            updateStatement.setTime(4, Time.valueOf(comentari.getHora()));
+            result = updateStatement.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
 }

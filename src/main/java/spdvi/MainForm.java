@@ -73,6 +73,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
     private boolean threadFromModify = false;
     private ArrayList<String> deletedImages = new ArrayList<>();
     private Espai espaiToModify;
+    private ImageIcon gif = new ImageIcon(EspaiDetailsDialog.class.getClassLoader().getResource("resizedloader.gif"));
            
     /**
      * Creates new form MainForm
@@ -2054,6 +2055,9 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
             Espai espai = lstEspais.getSelectedValue();
             //int coments = da.getNumComentaris(espai);
             EspaiDetailsDialog visualitzar = new EspaiDetailsDialog(this, true);
+            if(!currentUser.isAdmin()) {
+                visualitzar.getBtnBorrarComentari().setVisible(false);
+            }
             visualitzar.setSelectedEspai(espai);
             visualitzar.getLblRegister().setText(espai.getRegistre());
             visualitzar.getLblTitol().setText(espai.getNom());
@@ -2118,7 +2122,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                 threadFromInsert = true;
                 downloadThread = new Thread(this);
                 downloadThread.start();
-                lblImageIcon.setIcon(new ImageIcon(EspaiDetailsDialog.class.getClassLoader().getResource("resizedloader.gif")));
+                lblImageIcon.setIcon(gif);
             }
         }
     }//GEN-LAST:event_lstImagesValueChanged
@@ -2262,9 +2266,12 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                         }
                     }
                 }
-                txaCatModify.setText(espai.getDescripcions().get("\"cat\""));
-                txaEspModify.setText(espai.getDescripcions().get("\"esp\""));
-                txaEngModify.setText(espai.getDescripcions().get("\"eng\""));
+                String catala = espai.getDescripcions().get("\"cat\"");
+                String espanyol = espai.getDescripcions().get("\"esp\"");
+                String english = espai.getDescripcions().get("\"eng\"");
+                txaCatModify.setText(catala.substring(1, catala.length() - 1));
+                txaEspModify.setText(espanyol.substring(1, espanyol.length() - 1));
+                txaEngModify.setText(english.substring(1, english.length() - 1));
                 
                 for (Imatge image : da.getImatgesEspai(espai)){
                     oldImagesModify.add(image.getImatge());
@@ -2317,9 +2324,9 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         DataAccess da = new DataAccess();
         boolean update = true;
         LinkedHashMap<String, String> descripcions = new LinkedHashMap<>();
-        descripcions.put("\"cat\"", "\"" + txaCat.getText() + "\"");
-        descripcions.put("\"esp\"", "\"" + txaCast.getText() + "\"");
-        descripcions.put("\"eng\"", "\"" + txaEng.getText() + "\"");
+        descripcions.put("\"cat\"", "\"" + txaCatModify.getText() + "\"");
+        descripcions.put("\"esp\"", "\"" + txaEspModify.getText() + "\"");
+        descripcions.put("\"eng\"", "\"" + txaEngModify.getText() + "\"");
         
         Pattern emailRegEx = Pattern.compile("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
         Pattern webRegEx = Pattern.compile("(www\\.)[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,4}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)|(www\\.)?(?!ww)[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,4}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)");
@@ -2430,6 +2437,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                 pnlModifyVisible.setVisible(false);
                 txtRegistreModify.setText("");
                 txtRegistreModify.setEnabled(true);
+                lblImageIconModify.setIcon(null);
                 JOptionPane.showMessageDialog(null,
                 "S'ha modificat el espai correctament",
                 "Info",
@@ -2453,7 +2461,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                 threadFromModify = true;
                 downloadThread = new Thread(this);
                 downloadThread.start();
-                lblImageIconModify.setIcon(new ImageIcon(EspaiDetailsDialog.class.getClassLoader().getResource("resizedloader.gif")));
+                lblImageIconModify.setIcon(gif);
             }
         }
     }//GEN-LAST:event_lstImagesModifyValueChanged
@@ -2562,6 +2570,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         oldImagesModify.clear();
         imagesModify.clear();
         deletedImages.clear();
+        lblImageIconModify.setIcon(null);
         imageListModelModify.clear();
         pnlModifyVisible.setVisible(false);
         txtRegistreModify.setText("");
