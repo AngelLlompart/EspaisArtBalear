@@ -25,16 +25,16 @@ import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import javax.mail.Session;
 import org.apache.commons.codec.digest.DigestUtils;
-import spdvi.helpers.DataAccess;
+import spdvi.dataaccess.DataAccess;
 import spdvi.helpers.PasswordGenerator;
-import spdvi.dialogs.ConfirmPassword;
+import spdvi.dialogs.ConfirmPasswordDialog;
 import spdvi.pojos.User;
 
 /**
  *
  * @author angel
  */
-public class ForgotPassword extends javax.swing.JDialog {
+public class ForgotPasswordDialog extends javax.swing.JDialog {
 
     int xMouse, yMouse;
 
@@ -44,7 +44,7 @@ public class ForgotPassword extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public ForgotPassword(java.awt.Frame parent, boolean modal) {
+    public ForgotPasswordDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -221,7 +221,7 @@ public class ForgotPassword extends javax.swing.JDialog {
 
                         JOptionPane.showMessageDialog(null, "Correu Electronic Enviat");
                         setVisible(false);
-                        ConfirmPassword cP = new ConfirmPassword((Frame) this.getParent(), true);
+                        ConfirmPasswordDialog cP = new ConfirmPasswordDialog((Frame) this.getParent(), true);
                         cP.setCodi(password);
                         cP.setEmail(correoReceptor);
                         cP.setVisible(true);
@@ -274,20 +274,21 @@ public class ForgotPassword extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ForgotPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ForgotPasswordDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ForgotPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ForgotPasswordDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ForgotPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ForgotPasswordDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ForgotPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ForgotPasswordDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ForgotPassword dialog = new ForgotPassword(new javax.swing.JFrame(), true);
+                ForgotPasswordDialog dialog = new ForgotPasswordDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -9,20 +9,20 @@ import java.awt.Color;
 import java.awt.Frame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import spdvi.helpers.DataAccess;
+import spdvi.dataaccess.DataAccess;
 import spdvi.pojos.User;
 
 /**
  *
  * @author lawde
  */
-public class UpdateUsername extends javax.swing.JDialog {
+public class UpdateUsernameDialog extends javax.swing.JDialog {
     private User currentUser;
     private boolean changed = false;
     /**
      * Creates new form UpdateUsername
      */
-    public UpdateUsername(java.awt.Frame parent, boolean modal) {
+    public UpdateUsernameDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -226,20 +226,21 @@ public class UpdateUsername extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UpdateUsername.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateUsernameDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UpdateUsername.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateUsernameDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UpdateUsername.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateUsernameDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UpdateUsername.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateUsernameDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                UpdateUsername dialog = new UpdateUsername(new javax.swing.JFrame(), true);
+                UpdateUsernameDialog dialog = new UpdateUsernameDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

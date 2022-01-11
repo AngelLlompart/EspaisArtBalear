@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package spdvi.helpers;
+package spdvi.dataaccess;
 
 import spdvi.pojos.Espai;
 import spdvi.pojos.User;
@@ -136,6 +136,7 @@ public class DataAccess {
                         resultSet.getString("Gestor"),
                         resultSet.getString("Serveis")
                 );
+                espai.setVisible(resultSet.getBoolean("Visible"));
                 espais.add(espai);
             }
         } catch (SQLException ex) {
@@ -447,9 +448,9 @@ public class DataAccess {
         ArrayList<Espai> espais = new ArrayList<Espai>();
         try ( Connection connection = getConnection()) {
             PreparedStatement selectStatement = connection.prepareStatement(
-                    "Select * FROM dbo.[Espai] where Municipi =?"
+                    "Select * FROM dbo.[Espai] where Municipi like ?"
             );
-            selectStatement.setString(1, municipi);
+            selectStatement.setString(1, "%" + municipi + "%");
             ResultSet resultSet = selectStatement.executeQuery();
             while (resultSet.next()) {
                 String desc = resultSet.getString("Descripcions");
@@ -513,6 +514,21 @@ public class DataAccess {
             updateStatement2.executeUpdate();
             PreparedStatement updateStatement = connection.prepareStatement("Delete dbo.[User] where Email=?"); 
             updateStatement.setString(1, user.getEmail());
+            result = updateStatement.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+    
+    public int deleteComentari(Comentari comentari){
+        int result = 0;
+        try (Connection connection = getConnection();) {
+            PreparedStatement updateStatement = connection.prepareStatement("DELETE dbo.[Comentari] where Usuari=? AND Espai=? AND Data=? AND Hora=?");
+            updateStatement.setString(1, comentari.getEmail());
+            updateStatement.setString(2, comentari.getEspai());
+            updateStatement.setDate(3, Date.valueOf(comentari.getData()));
+            updateStatement.setTime(4, Time.valueOf(comentari.getHora()));
             result = updateStatement.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
