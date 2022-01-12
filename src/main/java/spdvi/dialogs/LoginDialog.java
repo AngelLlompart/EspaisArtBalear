@@ -16,6 +16,9 @@ import java.awt.font.TextAttribute;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.metal.MetalLookAndFeel;
 import org.apache.commons.codec.digest.DigestUtils;
 import spdvi.dialogs.ForgotPasswordDialog;
 
@@ -30,8 +33,14 @@ public class LoginDialog extends javax.swing.JDialog {
      */
     public LoginDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        try {
+            UIManager.setLookAndFeel(new MetalLookAndFeel());
+        } catch (UnsupportedLookAndFeelException ex) {
+            ex.printStackTrace();
+        }
         initComponents();
 
+        
         
         Font font = lblForgotPassword.getFont();
         Map attributes = font.getAttributes();

@@ -224,11 +224,6 @@ public class ConfirmDeleteDialog extends javax.swing.JDialog {
                         System.exit(0);
                     }
                 });
-                try {
-                    UIManager.setLookAndFeel(new MetalLookAndFeel());
-                } catch (UnsupportedLookAndFeelException ex) {
-                    ex.printStackTrace();
-            }
                 dialog.setVisible(true);
             }
         });
