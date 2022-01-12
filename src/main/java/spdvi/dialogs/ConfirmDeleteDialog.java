@@ -6,6 +6,9 @@
 package spdvi.dialogs;
 
 import java.awt.Color;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.metal.MetalLookAndFeel;
 
 /**
  *
@@ -221,6 +224,11 @@ public class ConfirmDeleteDialog extends javax.swing.JDialog {
                         System.exit(0);
                     }
                 });
+                try {
+                    UIManager.setLookAndFeel(new MetalLookAndFeel());
+                } catch (UnsupportedLookAndFeelException ex) {
+                    ex.printStackTrace();
+            }
                 dialog.setVisible(true);
             }
         });

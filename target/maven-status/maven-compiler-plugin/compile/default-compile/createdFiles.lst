@@ -43,7 +43,6 @@ spdvi\dialogs\UpdateUsernameDialog.class
 spdvi\MainForm$39.class
 spdvi\MainForm$49.class
 spdvi\dialogs\EspaiDetailsDialog$9$1.class
-spdvi\pojos\Imatge.class
 spdvi\MainForm$42.class
 spdvi\dialogs\ForgotPasswordDialog.class
 spdvi\dialogs\LoginDialog$6.class
@@ -65,7 +64,6 @@ spdvi\dialogs\UpdateUsernameDialog$5.class
 spdvi\dialogs\EspaiDetailsDialog$6.class
 spdvi\MainForm$66.class
 spdvi\MainForm$15.class
-spdvi\pojos\Comentari.class
 spdvi\MainForm$31.class
 spdvi\dialogs\ConfirmDeleteDialog$3.class
 spdvi\dialogs\ConfirmPasswordDialog$6.class
@@ -93,7 +91,6 @@ spdvi\dialogs\UpdatePasswordDialog$7.class
 spdvi\dialogs\LoginDialog$14.class
 spdvi\dialogs\RegisterDialog$8.class
 spdvi\dataaccess\DataAccess.class
-spdvi\pojos\User.class
 spdvi\MainForm$68.class
 spdvi\dialogs\ForgotPasswordDialog$5.class
 spdvi\MainForm$33.class
@@ -136,7 +133,6 @@ spdvi\dialogs\ConfirmPasswordDialog.class
 spdvi\MainForm$22.class
 spdvi\dialogs\ForgotPasswordDialog$2.class
 spdvi\dialogs\LoginDialog$9.class
-spdvi\pojos\Espai.class
 spdvi\dialogs\LoginDialog$2.class
 spdvi\dialogs\EspaiDetailsDialog$4.class
 spdvi\MainForm$12.class

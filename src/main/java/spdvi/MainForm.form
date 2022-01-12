@@ -384,19 +384,12 @@
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkSelectAllMod" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <Component id="pnlModalitats" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
                               <Component id="prgImage" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="txtRegistreEspai" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
                                   <Component id="txtMunicipi" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
@@ -452,7 +445,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -472,7 +465,7 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                                               <Component id="layeredDesc" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -499,18 +492,8 @@
                                   </Group>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lblImageIcon" min="-2" pref="141" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="prgImage" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="filler1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="pnlServeis" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
                           </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
@@ -552,12 +535,20 @@
                                   <Component id="txtGestor" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblGestor" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="chkSelectAllMod" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="pnlModalitats" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="pnlModalitats" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lblImageIcon" min="-2" pref="141" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="prgImage" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="filler1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="pnlServeis" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -895,19 +886,6 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Modalitats (selecciona al menys 1)"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JCheckBox" name="chkSelectAllMod">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Select all"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkSelectAllModActionPerformed"/>
-              </Events>
-            </Component>
             <Container class="javax.swing.JPanel" name="pnlModalitats">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -921,21 +899,37 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="chkPintura" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="chkEscultura" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="chkFotografia" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="chkVidre" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="chkVideo" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="chkPintura" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="chkEscultura" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="chkFotografia" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="chkVidre" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="chkVideo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblModalitats" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                  <Component id="chkSelectAllMod" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace pref="36" max="32767" attributes="0"/>
+                          <EmptySpace pref="20" max="32767" attributes="0"/>
                       </Group>
+                      <Component id="sprModalitats" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
+                          <Component id="chkSelectAllMod" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="6" max="32767" attributes="0"/>
+                          <Component id="sprModalitats" min="-2" pref="10" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblModalitats" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="chkPintura" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="chkEscultura" min="-2" max="-2" attributes="0"/>
@@ -945,7 +939,6 @@
                           <Component id="chkVidre" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="chkVideo" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="8" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -991,6 +984,21 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkVideoActionPerformed"/>
                   </Events>
                 </Component>
+                <Component class="javax.swing.JCheckBox" name="chkSelectAllMod">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Select all"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkSelectAllModActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblModalitats">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="(selecciona al menys 1)"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JSeparator" name="sprModalitats">
+                </Component>
               </SubComponents>
             </Container>
             <Component class="javax.swing.JLabel" name="lblGestor">
@@ -1017,32 +1025,37 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="chkVisites" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
-                                  <Component id="chkSelectAllServ" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="chkAcces" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="chkCafeteria" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="chkBiblioteca" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="chkAparcament" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="chkTallers" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="chkVisites" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                                          <Component id="chkSelectAllServ" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="chkAcces" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="chkCafeteria" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="chkBiblioteca" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="chkAparcament" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="chkTallers" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="chkJardins" min="-2" max="-2" attributes="0"/>
+                                              <Component id="chkWifi" min="-2" max="-2" attributes="0"/>
+                                              <Component id="chkConferencies" min="-2" max="-2" attributes="0"/>
+                                              <Component id="chkArxiu" min="-2" max="-2" attributes="0"/>
+                                              <Component id="chkConcerts" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="chkJardins" min="-2" max="-2" attributes="0"/>
-                                      <Component id="chkWifi" min="-2" max="-2" attributes="0"/>
-                                      <Component id="chkConferencies" min="-2" max="-2" attributes="0"/>
-                                      <Component id="chkArxiu" min="-2" max="-2" attributes="0"/>
-                                      <Component id="chkConcerts" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
+                              <Component id="sprServeis" alignment="1" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1051,8 +1064,8 @@
                       <Group type="102" attributes="0">
                           <Component id="chkSelectAllServ" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel5" pref="11" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                          <Component id="sprServeis" min="-2" pref="11" max="-2" attributes="0"/>
+                          <EmptySpace pref="7" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="chkAcces" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="chkArxiu" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1163,15 +1176,12 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkSelectAllServActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel5">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="_____________________________________"/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JCheckBox" name="chkJardins">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Jardins"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JSeparator" name="sprServeis">
                 </Component>
               </SubComponents>
             </Container>
@@ -1335,88 +1345,85 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                          <Component id="btnModify" min="-2" pref="247" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="btnCancelModify" min="-2" pref="247" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="layeredDescModify" min="-2" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="layeredDescModify" min="-2" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Group type="102" alignment="1" attributes="0">
-                                                          <Component id="lblGestorModify" min="-2" max="-2" attributes="0"/>
-                                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                          <Component id="txtGestorModify" min="-2" pref="180" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <Group type="103" groupAlignment="0" attributes="0">
-                                                              <Group type="102" attributes="0">
-                                                                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                                      <Component id="lblAdrecaModify" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                                      <Component id="lblEmailModify" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                                      <Component id="lblMunicipiModify" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                                      <Component id="lblWebModify" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                                  </Group>
-                                                              </Group>
-                                                              <Component id="lblTelefonModify" alignment="1" min="-2" max="-2" attributes="0"/>
-                                                          </Group>
-                                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                          <Group type="103" groupAlignment="0" attributes="0">
-                                                              <Component id="txtTelefonModify" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
-                                                              <Component id="txtWebModify" min="-2" pref="178" max="-2" attributes="0"/>
-                                                              <Component id="txtMunicipiModify" min="-2" pref="178" max="-2" attributes="0"/>
-                                                              <Component id="txtEmailModify" min="-2" pref="178" max="-2" attributes="0"/>
-                                                              <Component id="txtAdrecaModify" min="-2" pref="178" max="-2" attributes="0"/>
-                                                          </Group>
-                                                      </Group>
-                                                  </Group>
-                                              </Group>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                                                  <Component id="lblNomModify" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Component id="txtNomModify" min="-2" pref="137" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Group type="102" attributes="0">
-                                                          <Component id="lblImageIconModify" min="-2" pref="204" max="-2" attributes="0"/>
-                                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                                          <Group type="103" groupAlignment="0" attributes="0">
+                                                              <Component id="lblAdrecaModify" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                              <Component id="lblEmailModify" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                              <Component id="lblMunicipiModify" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                              <Component id="lblWebModify" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                          </Group>
                                                       </Group>
-                                                      <Component id="scrImagesModify" pref="215" max="32767" attributes="0"/>
+                                                      <Component id="lblTelefonModify" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="txtTelefonModify" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
+                                                      <Component id="txtWebModify" min="-2" pref="178" max="-2" attributes="0"/>
+                                                      <Component id="txtMunicipiModify" min="-2" pref="178" max="-2" attributes="0"/>
+                                                      <Component id="txtEmailModify" min="-2" pref="178" max="-2" attributes="0"/>
+                                                      <Component id="txtAdrecaModify" min="-2" pref="178" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
                                               <Group type="102" alignment="1" attributes="0">
-                                                  <EmptySpace max="32767" attributes="0"/>
-                                                  <Component id="lblimagesModify" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+                                                  <Component id="lblGestorModify" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="txtGestorModify" min="-2" pref="180" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                                          <Component id="lblNomModify" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="txtNomModify" min="-2" pref="137" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="btnModify" min="-2" pref="247" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="190" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <Component id="lblimagesModify" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="scrImagesModify" alignment="1" min="-2" pref="214" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="263" max="-2" attributes="0"/>
+                                  <Component id="pnlModalitatsModify" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                                          <Component id="lblImageIconModify" min="-2" pref="204" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
+                                          <Component id="chkVisible" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                                          <Component id="prgImageModify" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="chkVisible" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="190" max="-2" attributes="0"/>
+                                  <Component id="btnCancelModify" min="-2" pref="247" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="prgImageModify" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -1435,27 +1442,14 @@
                                       <Component id="cmbTipusModify" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace pref="198" max="32767" attributes="0"/>
+                              <Component id="txtImageModify" min="-2" pref="212" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblModalitatsModify" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="chkSelectAllModModify" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="pnlModalitatsModify" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="285" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="188" max="-2" attributes="0"/>
-                                      <Component id="txtImageModify" max="32767" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="btnUploadModify" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="btnBorrarModify" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="btnUploadModify" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnBorrarModify" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -1510,24 +1504,33 @@
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                  <Component id="scrImagesModify" min="-2" pref="155" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                                   <Component id="layeredDescModify" min="-2" pref="121" max="-2" attributes="0"/>
                               </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                                  <Component id="scrImagesModify" min="-2" pref="138" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lblImageIconModify" min="-2" pref="141" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="prgImageModify" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                          <Component id="chkVisible" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnModify" min="-2" pref="34" max="-2" attributes="0"/>
-                              <Component id="btnCancelModify" pref="35" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                                  <Component id="pnlModalitatsModify" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                                  <Component id="lblImageIconModify" min="-2" pref="141" max="-2" attributes="0"/>
+                                  <EmptySpace pref="7" max="32767" attributes="0"/>
+                                  <Component id="prgImageModify" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="chkVisible" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="btnModify" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                                      <Component id="btnCancelModify" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -1535,41 +1538,29 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="196" pref="196" max="32767" attributes="0"/>
-                                      <Component id="lblModalitatsModify" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="chkSelectAllModModify" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="pnlModalitatsModify" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="lblDescripcionsModify" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cmbDescModify" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="lblTipusModify" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cmbTipusModify" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="lblDescripcionsModify" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="cmbDescModify" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="lblTipusModify" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="cmbTipusModify" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="txtImageModify" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="btnUploadModify" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="btnBorrarModify" min="-2" max="-2" attributes="0"/>
-                                          </Group>
+                                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="txtImageModify" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnUploadModify" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="pnlServeisModify" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="btnBorrarModify" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="pnlServeisModify" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -1584,19 +1575,6 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtNomModify">
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblModalitatsModify">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Modalitats (selecciona al menys 1)"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="chkSelectAllModModify">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Select all"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkSelectAllModModifyActionPerformed"/>
-                  </Events>
-                </Component>
                 <Container class="javax.swing.JPanel" name="pnlModalitatsModify">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -1609,22 +1587,33 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="chkPinturaModify" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkEsculturaModify" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkFotografiaModify" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkVidreModify" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkVideoModify" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="chkPinturaModify" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="chkEsculturaModify" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="chkFotografiaModify" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="chkVidreModify" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="chkVideoModify" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="chkSelectAllModModify" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="lblModalitatsModify" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="36" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
+                          <Component id="sprModalitatsModify" alignment="0" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="chkSelectAllModModify" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                              <Component id="sprModalitatsModify" min="-2" pref="10" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lblModalitatsModify" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="chkPinturaModify" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="chkEsculturaModify" min="-2" max="-2" attributes="0"/>
@@ -1634,7 +1623,6 @@
                               <Component id="chkVidreModify" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="chkVideoModify" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="8" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1679,6 +1667,21 @@
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkVideoModifyActionPerformed"/>
                       </Events>
+                    </Component>
+                    <Component class="javax.swing.JCheckBox" name="chkSelectAllModModify">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Select all"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkSelectAllModModifyActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lblModalitatsModify">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="(selecciona al menys 1)"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSeparator" name="sprModalitatsModify">
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1803,7 +1806,7 @@
                               </Group>
                               <EmptySpace pref="10" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="sprModify" alignment="1" pref="167" max="32767" attributes="0"/>
+                          <Component id="sprServeisModify" alignment="1" pref="167" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -1811,7 +1814,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="chkSelectAllServModify" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                              <Component id="sprModify" min="-2" pref="11" max="-2" attributes="0"/>
+                              <Component id="sprServeisModify" min="-2" pref="11" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="chkAccesModify" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1928,7 +1931,7 @@
                         <Property name="text" type="java.lang.String" value="Jardins"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JSeparator" name="sprModify">
+                    <Component class="javax.swing.JSeparator" name="sprServeisModify">
                     </Component>
                   </SubComponents>
                 </Container>

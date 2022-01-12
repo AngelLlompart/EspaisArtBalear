@@ -6,7 +6,7 @@
 package spdvi.dialogs;
 
 import java.awt.Color;
-import spdvi.pojos.User;
+import spdvi.models.User;
 import spdvi.dialogs.ConfirmPasswordDialog;
 import java.awt.Frame;
 import java.security.MessageDigest;

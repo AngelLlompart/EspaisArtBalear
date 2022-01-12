@@ -38,10 +38,10 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JTextArea;
 import spdvi.helpers.ImageHelper;
-import spdvi.pojos.Comentari;
-import spdvi.pojos.Espai;
-import spdvi.pojos.Imatge;
-import spdvi.pojos.User;
+import spdvi.models.Comentari;
+import spdvi.models.Espai;
+import spdvi.models.Imatge;
+import spdvi.models.User;
 
 /**
  *

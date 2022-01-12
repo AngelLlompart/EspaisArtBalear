@@ -10,7 +10,7 @@ import java.awt.Frame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import spdvi.dataaccess.DataAccess;
-import spdvi.pojos.User;
+import spdvi.models.User;
 
 /**
  *
