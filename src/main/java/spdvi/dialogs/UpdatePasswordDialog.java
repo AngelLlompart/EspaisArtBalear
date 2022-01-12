@@ -156,7 +156,8 @@ public class UpdatePasswordDialog extends javax.swing.JDialog {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         Pattern passwordRegEx = Pattern.compile("^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z]).*$");
         String contrasenyaNova = (new String (pswNewPassword.getPassword()));
-        if(currentUser.getPassword().equals(new String (pswCurrentPassword.getPassword()))){
+        String contrasenyaActual = DigestUtils.md5Hex(new String (pswCurrentPassword.getPassword()));
+        if(currentUser.getPassword().equals(contrasenyaActual)){
             if(passwordRegEx.matcher(contrasenyaNova).matches()){
                 if(contrasenyaNova.equals(new String (pswConfirmPassword.getPassword()))){
                     DataAccess da = new DataAccess();

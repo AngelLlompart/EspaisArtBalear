@@ -463,6 +463,7 @@ public class EspaiDetailsDialog extends javax.swing.JDialog implements Runnable{
         DataAccess da = new DataAccess();
         da.insertComentari(comentari);
         updateComentarisView(da);
+        updateNumComents(da);
         txtComentari.setText("");
         btnComentar.setEnabled(false);
     }//GEN-LAST:event_btnComentarActionPerformed
@@ -497,6 +498,7 @@ public class EspaiDetailsDialog extends javax.swing.JDialog implements Runnable{
             DataAccess da = new DataAccess();
             da.deleteComentari(lstComents.getSelectedValue());
             updateComentarisView(da);
+            updateNumComents(da);
         }
     }//GEN-LAST:event_btnBorrarComentariActionPerformed
 
@@ -514,6 +516,11 @@ public class EspaiDetailsDialog extends javax.swing.JDialog implements Runnable{
         }
         lstComents.setModel(defaultListModel);
     }
+    
+    private void updateNumComents(DataAccess da){
+        lblComentaris.setText("Comentaris: " + (da.getNumComentaris(selectedEspai)));
+    }
+    
     public Espai getSelectedEspai() {
         return selectedEspai;
     }

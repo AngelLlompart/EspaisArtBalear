@@ -287,17 +287,24 @@ public class RegisterDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_PanelBotoRegisterMousePressed
 
     private void lblTextRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTextRegisterMouseClicked
-        boolean createUser = true;
+        boolean createUser = false;
+        if(!(txtUsername.getText() == null || txtUsername.getText().isBlank() || txtUsername.getText().isEmpty() ||
+            txtEmail.getText() == null || txtEmail.getText().isEmpty() || txtEmail.getText().isBlank())){
+            for (User u : userlist) {
+                if (u.getUserName().equals(txtUsername.getText()) || u.getEmail().equals(txtEmail.getText())) {
+                    createUser = false;
+                    if (u.getUserName().equals(txtUsername.getText())) incorrectUsername();
+                    if (u.getEmail().equals(txtEmail.getText())) incorrectEmail();
 
-        for (User u : userlist) {
-            if (u.getUserName().equals(txtUsername.getText()) || u.getEmail().equals(txtEmail.getText())) {
-                createUser = false;
-                
-                if (u.getUserName().equals(txtUsername.getText())) incorrectUsername();
-                if (u.getEmail().equals(txtEmail.getText())) incorrectEmail();
-                
-                break;
-            } else createUser = true;
+                    break;
+                } else createUser = true;
+            }
+        } else {
+            System.err.println("Username and email cannot be null");
+            JOptionPane.showMessageDialog(null,
+            "Username and email cannot be null",
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
         }
 
         if (createUser) insertUser();

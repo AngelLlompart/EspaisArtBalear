@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 D:\Clases2\Interf\EspaisArtsBalear\src\main\java\spdvi\helpers\ArgumentNullException.java
 D:\Clases2\Interf\EspaisArtsBalear\src\main\java\spdvi\models\Comentari.java
 D:\Clases2\Interf\EspaisArtsBalear\src\main\java\spdvi\helpers\ImageHelper.java
@@ -19,25 +18,3 @@ D:\Clases2\Interf\EspaisArtsBalear\src\main\java\spdvi\dialogs\UpdatePasswordDia
 D:\Clases2\Interf\EspaisArtsBalear\src\main\java\spdvi\helpers\EncriptarPassword.java
 D:\Clases2\Interf\EspaisArtsBalear\src\main\java\spdvi\dialogs\ForgotPasswordDialog.java
 D:\Clases2\Interf\EspaisArtsBalear\src\main\java\spdvi\helpers\SendEmail.java
-=======
-C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\MainForm.java
-C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\dataaccess\DataAccess.java
-C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\models\User.java
-C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\dialogs\UpdatePasswordDialog.java
-C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\helpers\PasswordGenerator.java
-C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\dialogs\ProfileDialog.java
-C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\helpers\EncriptarPassword.java
-C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\helpers\ImageHelper.java
-C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\dialogs\ConfirmPasswordDialog.java
-C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\models\Imatge.java
-C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\dialogs\ConfirmDeleteDialog.java
-C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\dialogs\EspaiDetailsDialog.java
-C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\models\Comentari.java
-C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\dialogs\LoginDialog.java
-C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\models\Espai.java
-C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\dialogs\ForgotPasswordDialog.java
-C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\dialogs\UpdateUsernameDialog.java
-C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\helpers\SendEmail.java
-C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\dialogs\RegisterDialog.java
-C:\MEGASync\DVI\Projects\EspaisArtBalear\EspaisArtBalear\src\main\java\spdvi\helpers\ArgumentNullException.java
->>>>>>> 92167464aebceefdef3969b586831284de624e52

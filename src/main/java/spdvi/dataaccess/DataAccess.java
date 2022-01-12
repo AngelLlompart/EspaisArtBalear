@@ -58,6 +58,7 @@ public class DataAccess {
     }
 
     public int insertUser(User user) {
+        int result = 0;
         try ( Connection connection = getConnection();) {
             PreparedStatement insertStatement = connection.prepareStatement(
                     "INSERT INTO dbo.[User] (Username, Password, Email, Admin) "
@@ -67,14 +68,13 @@ public class DataAccess {
             insertStatement.setString(2, user.getPassword());
             insertStatement.setString(3, user.getEmail());
             insertStatement.setBoolean(4, user.isAdmin());
-            insertStatement.executeUpdate();
 
-            int result = insertStatement.executeUpdate();
-            return result;
+            result = insertStatement.executeUpdate();
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0;
+        return result;
     }
 
     public ArrayList<User> getUsers() {

@@ -1078,14 +1078,13 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                         .addGap(27, 27, 27)))
                 .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnlModalitats, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInsertLayout.createSequentialGroup()
-                            .addComponent(lblImageIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(prgImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(pnlServeis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInsertLayout.createSequentialGroup()
+                        .addComponent(lblImageIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(prgImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnlServeis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnInsert, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
@@ -1601,9 +1600,9 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlModifyVisibleLayout.createSequentialGroup()
                                 .addComponent(btnModify, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(190, 190, 190)))
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(pnlModifyVisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlModifyVisibleLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(lblimagesModify)
                                 .addGap(90, 90, 90))
                             .addComponent(scrImagesModify, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1985,7 +1984,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                 error += "Al menys una modalitat ha de ser seleccionada"  + System.lineSeparator();
                 //throw new ArgumentNullException(error);
             }
-            modalitats = modalitats.substring(0, modalitats.length() - 1);
+            modalitats = modalitats.substring(0, modalitats.length() - 2);
             
             if(!(emailRegEx.matcher(txtEmail.getText()).matches()) || !(emailRegEx.matcher(txtGestor.getText()).matches())){
                 error += "Tant email com gestor han d'estar en un format d'email correcte" + System.lineSeparator();
@@ -2014,7 +2013,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
             }
         }
         if(!(serveis.isBlank() || serveis.isEmpty() || serveis == null)) {
-            serveis = serveis.substring(0, serveis.length() - 1);
+            serveis = serveis.substring(0, serveis.length() - 2);
         }
 
         if(insert){
@@ -2223,6 +2222,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                 espaiToModify = espai;
                 pnlModifyVisible.setVisible(true);
                 txtRegistreModify.setEnabled(false);
+                btnConfirmModify.setEnabled(false);
                 txtNomModify.setText(espai.getNom());
                 txtMunicipiModify.setText(espai.getMunicipi());
                 txtAdrecaModify.setText(espai.getAdreca());
@@ -2373,7 +2373,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
             if(modalitats.isBlank() || modalitats.isBlank() || modalitats == null){
                 error += "Al menys una modalitat ha de ser seleccionada"  + System.lineSeparator();
             }
-            modalitats = modalitats.substring(0, modalitats.length() - 1);
+            modalitats = modalitats.substring(0, modalitats.length() - 2);
             
             if(!(emailRegEx.matcher(txtEmailModify.getText()).matches()) || !(emailRegEx.matcher(txtGestorModify.getText()).matches())){
                 error += "Tant email com gestor han d'estar en un format d'email correcte" + System.lineSeparator();
@@ -2402,7 +2402,7 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
             }
         }
         if(!(serveis.isBlank() || serveis.isEmpty() || serveis == null)) {
-            serveis = serveis.substring(0, serveis.length() - 1);
+            serveis = serveis.substring(0, serveis.length() - 2);
         }
 
         if(update){
@@ -2436,10 +2436,13 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                 oldImagesModify.clear();
                 imagesModify.clear();
                 imageListModelModify.clear();
+                clearModalitatsAndServeis();
                 pnlModifyVisible.setVisible(false);
                 txtRegistreModify.setText("");
                 txtRegistreModify.setEnabled(true);
                 lblImageIconModify.setIcon(null);
+                btnConfirmModify.setEnabled(true);
+                btnRead.doClick();
                 JOptionPane.showMessageDialog(null,
                 "S'ha modificat el espai correctament",
                 "Info",
@@ -2574,9 +2577,11 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
         deletedImages.clear();
         lblImageIconModify.setIcon(null);
         imageListModelModify.clear();
+        clearModalitatsAndServeis();
         pnlModifyVisible.setVisible(false);
         txtRegistreModify.setText("");
         txtRegistreModify.setEnabled(true);
+        btnConfirmModify.setEnabled(true);
     }//GEN-LAST:event_btnCancelModifyActionPerformed
 
     private void btnReadHiddenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadHiddenActionPerformed
@@ -2717,6 +2722,26 @@ public class MainForm extends javax.swing.JFrame implements Runnable{
                 JOptionPane.ERROR_MESSAGE);
             }
         }
+    }
+    
+    private void clearModalitatsAndServeis() {
+        chkAccesModify.setSelected(false);
+        chkCafeteriaModify.setSelected(false);
+        chkBibliotecaModify.setSelected(false);
+        chkAparcamentModify.setSelected(false);
+        chkTallersModify.setSelected(false);
+        chkVisitesModify.setSelected(false);
+        chkArxiuModify.setSelected(false);
+        chkConcertsModify.setSelected(false);
+        chkConferenciesModify.setSelected(false);
+        chkWifiModify.setSelected(false);
+        chkJardinsModify.setSelected(false);
+        
+        chkPinturaModify.setSelected(false);
+        chkEsculturaModify.setSelected(false);
+        chkFotografiaModify.setSelected(false);
+        chkVidreModify.setSelected(false);
+        chkVideoModify.setSelected(false);
     }
     
     @Override
