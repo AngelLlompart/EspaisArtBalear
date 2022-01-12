@@ -28,7 +28,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import spdvi.dataaccess.DataAccess;
 import spdvi.helpers.PasswordGenerator;
 import spdvi.dialogs.ConfirmPasswordDialog;
-import spdvi.pojos.User;
+import spdvi.models.User;
 
 /**
  *

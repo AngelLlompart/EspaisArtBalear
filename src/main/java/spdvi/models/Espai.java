@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package spdvi.pojos;
+package spdvi.models;
 
 import com.fasterxml.jackson.databind.util.TypeKey;
 import java.util.HashMap;

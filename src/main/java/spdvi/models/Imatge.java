@@ -1,4 +1,4 @@
-package spdvi.pojos;
+package spdvi.models;
 
 import java.awt.image.BufferedImage;
 import java.net.URL;

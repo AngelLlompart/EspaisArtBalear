@@ -5,8 +5,8 @@
  */
 package spdvi.dataaccess;
 
-import spdvi.pojos.Espai;
-import spdvi.pojos.User;
+import spdvi.models.Espai;
+import spdvi.models.User;
 import java.awt.Frame;
 import java.io.IOException;
 import java.sql.Connection;
@@ -33,8 +33,8 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
-import spdvi.pojos.Comentari;
-import spdvi.pojos.Imatge;
+import spdvi.models.Comentari;
+import spdvi.models.Imatge;
 
 /**
  *

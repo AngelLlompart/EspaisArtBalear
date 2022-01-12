@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package spdvi.pojos;
+package spdvi.models;
 
 import java.sql.Time;
 import java.time.LocalDate;

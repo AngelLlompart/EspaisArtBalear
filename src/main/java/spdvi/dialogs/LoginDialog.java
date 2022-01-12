@@ -7,7 +7,7 @@ package spdvi.dialogs;
 
 import spdvi.dialogs.RegisterDialog;
 import spdvi.dataaccess.DataAccess;
-import spdvi.pojos.User;
+import spdvi.models.User;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
