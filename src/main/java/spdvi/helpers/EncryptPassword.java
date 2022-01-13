@@ -3,7 +3,7 @@ package spdvi.helpers;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
 
-public class EncriptarPassword{
+public class EncryptPassword{
   public static String Md5encode(String str) {
     return DigestUtils.md5Hex(str);
   }
